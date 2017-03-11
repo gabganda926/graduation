@@ -93,7 +93,17 @@ class employeeController extends Controller
         }
         $this->pinfo->pinfo_contact = $req->emp_contact;
         $this->pinfo->pinfo_mail = $req->emp_mail;
+        if($req->hasFile('picture')) 
+        {
+            $file = $req->file('picture');
+            
+            $name = $file->getClientOriginalName();
+
+            $file->move(public_path().'/image/', $name);
+            $this->pinfo->pinfo_picture = $name;
+        }
         $this->pinfo->del_flag  = 0;
+
         if($this->pinfo->save())
         {
           return $this->add_emp($req);

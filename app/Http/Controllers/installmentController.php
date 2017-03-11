@@ -28,7 +28,7 @@ class installmentController extends Controller
       $this->instal->updated_at = $mytime;
       $this->instal->del_flag = 0;
     	$this->instal->save();
-    	return redirect('/admin/maintenance/installment');
+    	return redirect('/admin/maintenance/installment/type');
     }
 
     public function update_installment(Request $req)
@@ -39,7 +39,7 @@ class installmentController extends Controller
        $mytime = $req->atime;
        $instal->updated_at = $mytime;
        $instal->save();
-       return redirect('/admin/maintenance/installment');
+       return redirect('/admin/maintenance/installment/type');
     }
 
     public function delete_installment(Request $req)
@@ -48,6 +48,6 @@ class installmentController extends Controller
        $instal->del_flag = 1;
 
        $instal->save();
-       return redirect('/admin/maintenance/installment');
+       return redirect('/admin/maintenance/installment/type');
     }
 }

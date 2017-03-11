@@ -87,7 +87,7 @@ class courierController extends Controller
 
   public function delete_courier(Request $req)
   {
-      $courier = courierConnection::where('emp_ID', '=', $req->aemp_id)->first();
+      $courier = courierConnection::where('courier_ID', '=', $req->aemp_id)->first();
 
       $courier->del_flag = 1;
 

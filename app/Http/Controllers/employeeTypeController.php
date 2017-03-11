@@ -41,7 +41,7 @@ class employeeTypeController extends Controller
 
   public function update_emptype(Request $req)
   {
-    $emptype = employeeTypeConnection::where('employeeType_ID','=',$req->id)->first();
+    $emptype = employeeTypeConnection::where('emptype_ID','=',$req->id)->first();
 
     $emptype->emptype_Name = $req->aEmployee_type;
     $emptype->emptype_Desc = $req->aEmployeeType_desc;
@@ -54,7 +54,7 @@ class employeeTypeController extends Controller
 
   public function delete_emptype(Request $req)
   {
-    $emptype = employeeTypeConnection::where('employeeType_ID','=',$req->id)->first();
+    $emptype = employeeTypeConnection::where('emptype_ID','=',$req->id)->first();
     $emptype->del_flag = 1;
 
     $emptype->save();

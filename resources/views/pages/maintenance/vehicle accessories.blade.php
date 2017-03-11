@@ -309,8 +309,9 @@
                 </div>
             </div>
             <!-- #User Info -->
+            
             <!-- Menu -->
-            <div class="menu">
+            <div class="menu animated bounceInLeft active">
                 <ul class="list">
                     <li class="header">MAIN NAVIGATION</li>
                     <li>
@@ -320,16 +321,16 @@
                         </a>
                     </li>
 
-                    <li class = "active">
+                    <li class="active">
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">build</i>
                             <span>Maintenance</span>
                         </a>
-                        <ul class="ml-menu">
-                            <li class = "active">
+                        <ul class="ml-menu">                    
+                            <li class="active">
                                 <a href="javascript:void(0);" class="menu-toggle">
                                     <i class="material-icons">question_answer</i>
-                                    <span>Quotation</span>
+                                    <span>QUOTATION</span>
                                 </a>
                                 <ul class="ml-menu">
                                     <li>
@@ -344,7 +345,7 @@
                                             <span>Vehicle Type</span>
                                         </a>
                                     </li>
-                                    <li class = "active">
+                                    <li class="active">
                                         <a href="javascript:void(0);" class="menu-toggle">
                                             <i class="material-icons">view_comfy</i>
                                             <span>Insurance Items</span>
@@ -356,15 +357,10 @@
                                             <li>
                                                 <a href="../../maintenance/vehicle/make">Vehicle Make</a>
                                             </li>
-                                            <li  class = "active">
+                                            <li class="active">
                                                 <a href="../../maintenance/vehicle/accessories">Vehicle Accessories</a>
                                             </li>
                                         </ul>
-                                    </li>
-                                    <li>
-                                        <a href="../../maintenance/quote/status">
-                                            <i class="material-icons">menu</i>
-                                            <span>Quote Status</span></a>
                                     </li>
                                 </ul>
                             </li>
@@ -372,15 +368,9 @@
                             <li>
                                 <a href="javascript:void(0);" class="menu-toggle">
                                     <i class="material-icons">credit_card</i>
-                                    <span>Billing</span>
+                                    <span>BILLING</span>
                                 </a>
                                 <ul class="ml-menu">
-                                    <li>
-                                    <a href="../../maintenance/client">
-                                        <i class="material-icons">group</i>
-                                        <span>Client</span>
-                                    </a>
-                                    </li>
                                     <li>
                                         <a href="../../maintenance/client/type">
                                             <i class="material-icons">people_outline</i>
@@ -399,18 +389,13 @@
                                             <span>Bank</span>
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="../../maintenance/check/status">
-                                            <i class="material-icons">menu</i>
-                                            <span>Cheque Status</span></a>
-                                    </li>
                                 </ul>
                             </li>
-
+                            
                             <li>
                                 <a href="javascript:void(0);" class="menu-toggle">
                                     <i class="material-icons">view_agenda</i>
-                                    <span>Complaints & Transmittal</span>
+                                    <span>COMPLAINTS AND TRANSMITTAL</span>
                                 </a>
                                 <ul class="ml-menu">
                                     <li>
@@ -418,36 +403,40 @@
                                             <i class="material-icons">subject</i>
                                             <span>Complaint Type</span></a>
                                     </li>
-
+                                    
                                     <li>
                                         <a href="../../maintenance/courier">
                                             <i class="material-icons">person_outline</i>
                                             <span>Courier</span></a>
                                     </li>
-                                    <li>
-                                        <a href="../../maintenance/complaint/status">
-                                            <i class="material-icons">menu</i>
-                                            <span>Complaint Status</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="../../maintenance/transmittal/status">
-                                            <i class="material-icons">menu</i>
-                                            <span>Transmittal Status</span></a>
-                                    </li>
                                 </ul>
                             </li>
 
-
+                            <!-- <li>
+                                <a href="javascript:void(0);" class="menu-toggle">
+                                    <i class="material-icons">beenhere</i>
+                                    <span>STATUS MAINTENANCE</span>
+                                </a>
+                                <ul class="ml-menu">
+                                    <li>
+                                        <a href="#">
+                                            <i class="material-icons">radio_button_unchecked</i>
+                                            <span>Status Category</span></a>
+                                    </li>
+                                    
+                                    <li>
+                                        <a href="#">
+                                            <i class="material-icons">radio_button_unchecked</i>
+                                            <span>Status</span></a>
+                                    </li>
+                                </ul>
+                            </li> -->
+                            
+                            
                             <li>
                                 <a href="../../maintenance/policyno">
                                     <i class="material-icons">confirmation_number</i>
                                     <span>Policy Number</span></a>
-                            </li>
-                            <li>
-                                <a href="../../maintenance/policyno/status">
-                                    <i class="material-icons">menu</i>
-                                    <span>Policy Number Status</span>
-                                </a>
                             </li>
                             <li>
                                 <a href="../../maintenance/insurance/company">
@@ -474,166 +463,190 @@
                             </li>
                         </ul>
                     </li>
-
-                   <li class="header">TRANSACTIONS</li>
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">assignment</i>
-                            <span>Underwrite</span>
+                            <i class="material-icons">work</i>
+                            <span>Transactions</span>
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="../../pages/transaction/insure-client.php">Insure Client</a>
+                                <a href="pages/transactions/admin/insurance.php">
+                                    <i class="material-icons">account_balance_wallet</i>
+                                    <span>Insurance Accounts</span>
+                                </a>
+                            </li>                    
+                            <li>
+                                <a href="pages/transactions/admin/claims.php">
+                                    <i class="material-icons">queue</i>
+                                    <span>Claims</span>
+                                </a>
                             </li>
                             <li>
-                                <a href="../../pages/transaction/renew-client.php">Renew Client</a>
+                                <a href="pages/transactions/admin/tally.php">
+                                    <i class="material-icons">multiline_chart</i>
+                                    <span>Tally</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="pages/transactions/admin/transmittal.php">
+                                    <i class="material-icons">folder_shared</i>
+                                    <span>Transmittal</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="pages/transactions/admin/complaint.php">
+                                    <i class="material-icons">error_outline</i>
+                                    <span>Complaint</span>
+                                </a>
                             </li>
                         </ul>
                     </li>
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">payment</i>
-                            <span>Payment</span>
+                            <i class="material-icons">library_books</i>
+                            <span>Archives</span>
                         </a>
-                        <ul class="ml-menu">
+                        <ul class="ml-menu">                    
                             <li>
-                                <a href="../../pages/transaction/breakdown.php">Create Breakdown</a>
+                                <a href="javascript:void(0);" class="menu-toggle">
+                                    <i class="material-icons">question_answer</i>
+                                    <span>QUOTATION</span>
+                                </a>
+                                <ul class="ml-menu">
+                                    <li>
+                                        <a href="pages/archives/sender.php">
+                                            <i class="material-icons">person</i>
+                                            <span>Sender</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="pages/archives/vehicle type.php">
+                                            <i class="material-icons">directions_car</i>
+                                            <span>Vehicle Type</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);" class="menu-toggle">
+                                            <i class="material-icons">view_comfy</i>
+                                            <span>Insurance Items</span>
+                                        </a>
+                                        <ul class="ml-menu">
+                                            <li>
+                                                <a href="pages/archives/vehicle model.php">Vehicle Model</a>
+                                            </li>
+                                            <li>
+                                                <a href="pages/archives/vehicle make.php">Vehicle Make</a>
+                                            </li>
+                                            <li>
+                                                <a href="pages/archives/vehicle accessories.php">Vehicle Accessories</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
                             </li>
-                            <li>
-                                <a href="../../pages/transaction/installment.php">Installment</a>
-                            </li>
-                            <li>
-                                <a href="../../pages/transaction/tally.php">Tally</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">track_changes</i>
-                            <span>Tracking</span>
-                        </a>
-                        <ul class="ml-menu">
-                            <li>
-                                <a href="../../pages/transaction/transmit.php">Transmit documents</a>
-                            </li>
-                            <li>
-                                <a href="../../pages/transaction/claims.php">Claims</a>
-                            </li>
-                        </ul>
-                    </li>
 
-                    <li class="header">QUERIES</li>
+                            <li>
+                                <a href="javascript:void(0);" class="menu-toggle">
+                                    <i class="material-icons">credit_card</i>
+                                    <span>BILLING</span>
+                                </a>
+                                <ul class="ml-menu">
+                                    <li>
+                                        <a href="pages/archives/clientType.php">
+                                            <i class="material-icons">people_outline</i>
+                                            <span>Client Type</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="pages/archives/installment.php">
+                                            <i class="material-icons">dns</i>
+                                            <span>Installment Type</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="pages/archives/bank.php">
+                                            <i class="material-icons">account_balance</i>
+                                            <span>Bank</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            
+                            <li>
+                                <a href="javascript:void(0);" class="menu-toggle">
+                                    <i class="material-icons">view_agenda</i>
+                                    <span>COMPLAINTS AND TRANSMITTAL</span>
+                                </a>
+                                <ul class="ml-menu">
+                                    <li>
+                                        <a href="pages/archives/complaintType.php">
+                                            <i class="material-icons">subject</i>
+                                            <span>Complaint Type</span></a>
+                                    </li>
+                                    
+                                    <li>
+                                        <a href="pages/archives/courier.php">
+                                            <i class="material-icons">person_outline</i>
+                                            <span>Courier</span></a>
+                                    </li>
+                                </ul>
+                            </li>
 
-                    <li>
-                        <a href="../../pages/queries/sales-agent.php">
-                            <i class="material-icons">perm_identity</i>
-                            <span>Sales Agent</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="../../pages/queries/insurance-accounts.php">
-                            <i class="material-icons">account_box</i>
-                            <span>Insurance Accounts</span>
-                        </a>
-                        <ul class="ml-menu">
                             <li>
-                                <a href="../../pages/queries/new-accounts.php">New Accounts</a>
+                                <a href="javascript:void(0);" class="menu-toggle">
+                                    <i class="material-icons">beenhere</i>
+                                    <span>STATUS MAINTENANCE</span>
+                                </a>
+                                <ul class="ml-menu">
+                                    <li>
+                                        <a href="pages/archives/categoryStatus.php">
+                                            <i class="material-icons">radio_button_unchecked</i>
+                                            <span>Status Category</span></a>
+                                    </li>
+                                    
+                                    <li>
+                                        <a href="pages/archives/courier.php">
+                                            <i class="material-icons">radio_button_unchecked</i>
+                                            <span>Status</span></a>
+                                    </li>
+                                </ul>
+                            </li>
+                            
+                            
+                            <li>
+                                <a href="pages/archives/policy numbers.php">
+                                    <i class="material-icons">confirmation_number</i>
+                                    <span>Policy Number</span></a>
                             </li>
                             <li>
-                                <a href="../../pages/queries/active-accounts.php">Active Accounts</a>
+                                <a href="pages/archives/insurance company.php">
+                                    <i class="material-icons">business</i>
+                                    <span>Insurance Company</span></a>
                             </li>
                             <li>
-                                <a href="../../pages/queries/renewed-accounts.php">Renewed Accounts</a>
+                                <a href="pages/archives/salesAgent.php">
+                                    <i class="material-icons">perm_identity</i>
+                                    <span>Sales Agent</span>
+                                </a>
                             </li>
                             <li>
-                                <a href="../../pages/queries/expiring-accounts.php">Expiring Accounts</a>
+                                <a href="pages/archives/employee.php">
+                                    <i class="material-icons">supervisor_account</i>
+                                    <span>Employee</span>
+                                </a>
                             </li>
                             <li>
-                                <a href="../../pages/queries/expired-accounts.php">Expired Accounts</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">history</i>
-                            <span>History</span>
-                        </a>
-                        <ul class="ml-menu">
-                            <li>
-                                <a href="../../pages/queries/payments.php">Payments</a>
-                            </li>
-                            <li>
-                                <a href="../../pages/queries/claims.php">Claims</a>
-                            </li>
-                            <li>
-                                <a href="../../pages/queries/cheque.php">Updating of Cheque</a>
-                            </li>
-                            <li>
-                                <a href="../../pages/queries/accounts.php">Accounts</a> <!-- Naka sort by new, renewed, expired, saka expiring -->
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li class="header">REPORTS</li>
-                    <li>
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">group</i>
-                            <span>Client Report</span>
-                        </a>
-                        <ul class="ml-menu">
-                            <li>
-                                <a href="../../pages/reports/new-clients.php">New Clients</a>
-                            </li>
-                            <li>
-                                <a href="../../pages/reports/renewed-clients.php">Renewed Clients</a>
-                            </li>
-                            <li>
-                                <a href="../../pages/reports/inactive-clients.php">Inactive Clients</a>
-                            </li>
-                            <li>
-                                <a href="../../pages/reports/expiring-clients.php">Client's Expiring Accounts</a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        <a href="../../pages/reports/sales-agent.php">
-                            <i class="material-icons">perm_identity</i>
-                            <span>Sales Agent Report</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="../../pages/reports/insurance-company.php">
-                            <i class="material-icons">compare_arrows</i>
-                            <span>Insurance Company Report</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="../../pages/reports/claims.php">
-                            <i class="material-icons">donut_small</i>
-                            <span>Claims Report</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">assessment</i>
-                            <span>Sales Report</span>
-                        </a>
-                        <ul class="ml-menu">
-                            <li>
-                                <a href="../../pages/reports/company-sales.php">Insurance Company's Sales</a>
-                            </li>
-                            <li>
-                                <a href="../../pages/reports/compreline-sales.php">Compreline's Sales</a>
+                                <a href="pages/archives/employeeType.php">
+                                    <i class="material-icons">person_outline</i>
+                                    <span>Employee Type</span>
+                                </a>
                             </li>
                         </ul>
                     </li>
                 </ul>
             </div>
             <!-- #Menu -->
+            
             <!-- Footer -->
             <div class="legal">
                 <div class="copyright">

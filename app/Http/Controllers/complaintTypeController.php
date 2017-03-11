@@ -52,6 +52,8 @@ class complaintTypeController extends Controller
 
     $comp->del_flag = 1;
 
+    $comp->save();
+
     return redirect('/admin/maintenance/complaint/type');
   }
 }

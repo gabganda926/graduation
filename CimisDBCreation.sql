@@ -26,10 +26,12 @@ SELECT * from tb_company_info;
 
 SELECT * from tb_employee_type;
 
-SELECT * from tb_contact_person;
+SELECT * from tb_complaint_type;
 
 DELETE FROM tb_address;
 
 DELETE FROM tb_employee_type;
 
 SELECT * FROM tb_address WHERE add_ID = 1;
+
+INSERT INTO tb_policy_status VALUES('Used','asd',0,'01-31-2017','01-31-2017');

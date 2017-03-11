@@ -10,6 +10,8 @@ use App\addressConnection;
 
 use App\contactPersonConnection;
 
+use App\policynoConnection;
+
 use App\personalInfoConnection;
 
 class icompController extends Controller
@@ -19,7 +21,7 @@ class icompController extends Controller
     {
         $this->company = $comp;
         $this->address = $add;
-				$this->cPerson = $comPerson;
+		$this->cPerson = $comPerson;
         $this->pinfo = $personalinfo;
     }
 
@@ -28,7 +30,8 @@ class icompController extends Controller
     {
       return view('/pages/maintenance/insurance company')
       ->with('cmp',inscompanyConnection::all())
-			->with('cpr',contactPersonConnection::all())
+      ->with('pnm',policynoConnection::all())
+	  ->with('cpr',contactPersonConnection::all())
       ->with('pInfo',personalInfoConnection::all())
       ->with('add',addressConnection::all());
     }

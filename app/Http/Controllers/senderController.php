@@ -87,7 +87,7 @@ class senderController extends Controller
 
   public function delete_sender(Request $req)
   {
-      $sender = senderConnection::where('emp_ID', '=', $req->aemp_id)->first();
+      $sender = senderConnection::where('sender_ID', '=', $req->aemp_id)->first();
 
       $sender->del_flag = 1;
 

@@ -323,7 +323,7 @@
                         </a>
                     </li>
 
-                    <li class = "active">
+                    <li class="active">
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">build</i>
                             <span>Maintenance</span>
