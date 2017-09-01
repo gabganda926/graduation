@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class quoteConnection extends Model
 {
-  protected $table = 'tb_quote_status';
+  protected $table = 'tbl_quote_status';
   protected $primaryKey = 'quoteStatus_ID';
   public $timestamps = false;
 }

@@ -1,0 +1,4 @@
+MySender41N@gmail.com
+parasacapstone12
+mklqzhmfbxfkrsjr
+php artisan config:cache

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class salesAgentConnection extends Model
 {
-    protected $table = 'tb_salesagent';
+    protected $table = 'tbl_salesagent';
     protected $primaryKey = "agent_ID";
     public $timestamps = false;
 }

@@ -67,12 +67,12 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => App\clientsAuthentication::class,
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
+        // 'clients' => [
+        //     'driver' => 'Cimis',
+        //     'table' => 'tbl_client_account',
         // ],
     ],
 
