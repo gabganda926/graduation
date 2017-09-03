@@ -752,7 +752,8 @@ Route::get('/manager/transaction/transmittal-details', function (){
 Route::get('/pdf/quotation-proposal', 'trans_quotationProposalController@generatePDF');
 Route::get('/pdf/breakdown-payment', 'trans_breakdownOfPaymentController@generatePDF');
 Route::get('/pdf/transmittal-form', 'trans_TransmittalFormController@generatePDF');
-Route::get('/pdf/payment-receipt', 'trans_NewPaymentController@generatePDF');
+Route::get('/pdf/payment-receipt/{or_number}/{pinfo_ID}/{account_ID}/', 'AccStaffControllers\trans_paymentListController@generatePDF');
+Route::get('/pdf/payment-receipt-comp/{or_number}/{comp_ID}/{account_ID}/', 'AccStaffControllers\trans_paymentListController@generatePDFcomp');
 
 
 //////////////WEB PAGE///////////////////

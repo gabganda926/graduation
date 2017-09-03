@@ -166,11 +166,11 @@
                                 </a>
                                 <ul class="ml-menu">
 
-                                    <li class = "@yield('emprole')">
+                                    <!--<li class = "@yield('emprole')">
                                         <a href="/admin/maintenance/employee/role">
                                             <span>Employee Role</span>
                                         </a>
-                                    </li>
+                                    </li>-->
                                     <li class = "@yield('employee')">
                                         <a href="/admin/maintenance/employee">
                                             <span>Employee Profile</span>
@@ -222,10 +222,10 @@
                                     <span>INSURANCE</span>
                                 </a>
                                 <ul class="ml-menu">
-                                    <li class = "@yield('company')">
+                                    <!--<li class = "@yield('company')">
                                         <a href="/admin/maintenance/insurance/company">
                                             <span>Insurance Company</span></a>
-                                    </li>
+                                    </li>-->
 
                                     <!--<li class = "@yield('forms')">
                                         <a href="/admin/maintenance/insurance/forms">

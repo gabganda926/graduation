@@ -69,20 +69,33 @@
                         <h3 style="text-align: center;"><img src="{{ URL::asset ('images/icons/view-bill.png')}}" style="height: 50px; width: 50px;"> <b> Payments </b></h3>
                         <div class="divider" style="margin-bottom:20px;"></div>
                         </div>
+                        <form id = "display" action = "/pdf/payment-receipt" method = "POST" style = "display: none;">
+                              <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                              <div class="col-md-4" style = "display: none;">
+                                 <input id = "or" name = "or" type="text" class="form-control">
+                             </div>
+                              <div class="col-md-4" style = "display: none;">
+                                 <input id = "acc_id" name = "acc_id" type="text" class="form-control">
+                             </div>
+                              <div class="col-md-4" style = "display: none;">
+                                 <input id = "info_id" name = "info_id" type="text" class="form-control">
+                             </div>
+                        </form>
                         <div class="body">
                             <div class="table-responsive">
                             <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                 <thead>
                                     <tr>
-                                        <th>OR No.</th>
                                         <th>Remittance Date</th>
+                                        <th>OR No.</th>
                                         <th>Policy No.</th>
                                         <th>Client</th>
                                         <th>Bank</th>
                                         <th>BOP No.</th>
-                                        <th>BOP Voucher No.</th>
+                                        <th>Bill No.</th>
                                         <th>Amount Due</th>
                                         <th>Amount Paid</th>
+                                        <th>Change</th>
                                         <th class="col-md-1">Action</th>
                                     </tr>
                                 </thead>
@@ -92,14 +105,16 @@
                                     @if($list->check_voucher == $vouch->cv_ID)
                                     @if($list->status == 0)
                                     <tr>
-                                        <td>{{ $list->or_number }}</td>
+
                                         <td>{{ $list->paid_date }}</td>
+                                        <td>{{ $list->or_number }} <script> var ornum = ""+ {{ $list->or_number }}; console.log(ornum); </script></td>
                                         <td>
                                         @foreach($pdet as $paydet)
                                             @if($vouch->pay_ID == $paydet->payment_ID)
                                                 @foreach($cliacc as $insacc)
                                                     @if($insacc->account_ID == $paydet->account_ID)
                                                         {{ $insacc->policy_number }}
+                                                        <script> var ins_id = "ins = " +{{ $insacc->account_ID }}; console.log(ins_id); </script>
                                                     @endif
                                                 @endforeach
                                         </td>
@@ -107,17 +122,30 @@
                                                 @foreach($cliacc as $insacc)
                                                     @if($insacc->account_ID == $paydet->account_ID)
                                                         @foreach($clist as $clients)
-                                                            @foreach($cli as $cname)
-                                                                @foreach($pinfo as $info)
-                                                                    @if($clients->client_ID == $cname->client_ID)
-                                                                        @if($clients->client_ID == $cname->client_ID)
-                                                                            @if($cname->personal_info_ID == $info->pinfo_ID)
-                                                                                {{ $info->pinfo_last_name }}, {{ $info->pinfo_first_name }} {{ $info->pinfo_middle_name }}
+                                                            @if($clients->client_type == 1)
+                                                            @if($insacc->client_ID == $clients->client_ID)
+                                                                @foreach($cli as $client)
+                                                                    @if($clients->client_ID == $client->client_ID)
+                                                                        @foreach($pinfo as $pInfo)
+                                                                            @if($client->personal_info_ID == $pInfo->pinfo_ID)
+                                                                            {{ $pInfo->pinfo_last_name}}, {{$pInfo->pinfo_first_name}} {{$pInfo->pinfo_middle_name }}
+                                                                            <script> var pi_id = "pi = " + {{ $pInfo->pinfo_ID }}; console.log(pi_id); </script>
                                                                             @endif
-                                                                        @endif
+                                                                        @endforeach
                                                                     @endif
                                                                 @endforeach
-                                                            @endforeach
+                                                            @endif
+                                                            @endif
+                                                            @if($clients->client_type == 2)
+                                                            @if($insacc->client_ID == $clients->client_ID)
+                                                                @foreach($company as $comp)
+                                                                    @if($clients->client_ID == $comp->comp_ID)
+                                                                        {{ $comp->comp_name }}
+                                                                        <script> var pi_id = "pi = " + {{ $pInfo->pinfo_ID }}; console.log(pi_id); </script>
+                                                                    @endif
+                                                                @endforeach
+                                                            @endif
+                                                            @endif
                                                         @endforeach
                                                     @endif
                                                 @endforeach</td>
@@ -132,8 +160,8 @@
                                                 @endforeach
                                             @endif
                                         @endforeach</td>
-                                        <td>CN000{{ $list->payment_ID }}</td>
-                                        <td>CV000{{ $list->check_voucher }}</td>
+                                        <td>BOP000{{ $list->payment_ID }}</td>
+                                        <td>BILL000{{ $list->check_voucher }}</td>
                                         <td>
                                             <script>
                                             var data = numberWithCommas({{ $list->amount }}); document.write("₱ " + data);
@@ -141,12 +169,52 @@
                                         </td>
                                         <td>
                                             <script>
-                                            var data = numberWithCommas({{ $list->amount }}); document.write("₱ " + data);
+                                            var data = numberWithCommas({{ $list->amount_paid }}); document.write("₱ " + data);
                                             </script>
                                         </td>
-                                        <td><button type="button" class="btn bg-orange waves-effect" onclick="window.open('{{ URL::asset('/pdf/payment-receipt') }}')" style="position: right;"  data-toggle="tooltip" data-placement="left" title="Generate Receipt">
+                                        <td>
+                                            ₱{{ round($list->amount_paid,2) - round($list->amount,2) }}
+                                        </td>
+                                        <td>
+                                    @foreach($pdet as $paydet)
+                                        @if($vouch->pay_ID == $paydet->payment_ID)
+                                        @foreach($cliacc as $insacc)
+                                            @if($insacc->account_ID == $paydet->account_ID)
+                                            @if($insacc->account_ID == $paydet->account_ID)
+                                                @foreach($clist as $clients)
+                                                    @if($clients->client_type == 1)
+                                                    @if($insacc->client_ID == $clients->client_ID)
+                                                        @foreach($cli as $client)
+                                                            @if($clients->client_ID == $client->client_ID)
+                                                                @foreach($pinfo as $pInfo)
+                                                                    @if($client->personal_info_ID == $pInfo->pinfo_ID)
+                                                                    <button type="button" id="gen" data-or=" {{ $list->or_number }} " data-pinf=" {{$pInfo->pinfo_ID}} " data-acc="{{ $insacc->account_ID }}" onclick="window.open('{{ URL ('/pdf/payment-receipt/' .$list->or_number. '/' .$pInfo->pinfo_ID. '/' .$insacc->account_ID) }}')" class="btn bg-orange waves-effect" style="position: right;" data-toggle="tooltip" data-placement="left" title="Generate Receipt">
                                             <i class="material-icons">picture_as_pdf</i><span style="font-size: 15px;"></span>
-                                            </button></td>
+                                            </button>
+                                                                    @endif
+                                                                @endforeach
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+                                                    @endif
+                                                    @if($clients->client_type == 2)
+                                                    @if($insacc->client_ID == $clients->client_ID)
+                                                        @foreach($company as $comp)
+                                                            @if($clients->client_ID == $comp->comp_ID)
+                                                                <button type="button" id="gen" data-or=" {{ $list->or_number }} " data-pinf=" {{$pInfo->pinfoID}} " data-acc="{{ $insacc->account_ID }}" onclick="window.open('{{ URL ('/pdf/payment-receipt-comp/' .$list->or_number. '/' .$comp->comp_ID. '/' .$insacc->account_ID) }}')" class="btn bg-orange waves-effect" style="position: right;" data-toggle="tooltip" data-placement="left" title="Generate Receipt">
+                                            <i class="material-icons">picture_as_pdf</i><span style="font-size: 15px;"></span>
+                                            </button>
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+                                                    @endif
+                                                @endforeach
+                                            @endif
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                    @endforeach
+                                        </td>
                                     </tr>
                                     @endif
                                     @endif

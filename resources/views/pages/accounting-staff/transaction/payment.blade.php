@@ -66,7 +66,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
-                        <h3 style="text-align: center;"><img src="{{ URL::asset ('images/icons/view-bill.png')}}" style="height: 50px; width: 50px;"> <b> Breakdown of Payment Vouchers </b></h3>
+                        <h3 style="text-align: center;"><img src="{{ URL::asset ('images/icons/view-bill.png')}}" style="height: 50px; width: 50px;"> <b> Bills </b></h3>
                         <div class="divider" style="margin-bottom:20px;"></div>
                         </div>
                         <div class="body">
@@ -92,7 +92,7 @@
                                         @endforeach
                                       </div>
                                     <tr>
-                                        <td>CV000{{ $cv->cv_ID }}</td>
+                                        <td>BILL000{{ $cv->cv_ID }}</td>
                                         <td>@foreach($payDet as $pdet)
                                                 @if($cv->pay_ID == $pdet->payment_ID)
                                                     @foreach($cliacc as $insacc)
@@ -134,7 +134,7 @@
                                         </td>
                                         <td><span class="label bg-orange">on payment</td>
                                         <td><button type="button" class="btn bg-blue waves-effect" style="position: right;"  data-toggle="modal" data-target="#details">
-                                            <i class="material-icons" data-toggle="tooltip" data-placement="left" title="View Breakdown">chrome_reader_mode</i><span style="font-size: 15px;">
+                                            <i class="material-icons" data-toggle="tooltip" data-placement="left" title="View Payment Breakdown">chrome_reader_mode</i><span style="font-size: 15px;">
                                         </button>
                                         <button type="button" class="btn bg-orange waves-effect" onclick="window.open('{{ URL::asset('/pdf/breakdown-payment') }}')" style="position: right;"  data-toggle="tooltip" data-placement="left" title="Generate PDF">
                                             <i class="material-icons">picture_as_pdf</i><span style="font-size: 15px;"></span>

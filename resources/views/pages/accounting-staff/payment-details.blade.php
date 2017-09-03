@@ -216,10 +216,10 @@
                                 if('{{$insurance_company}}' == 4)
                                     aon = coverage * 0.005;
 
-                                odt = (coverage * 0.013);
+                                odt = Math.abs((((aon + parseFloat(pd.replace(/[^0-9\.]/g,'')) + parseFloat(bi.replace(/[^0-9\.]/g,'')) + parseFloat(pa.replace(/[^0-9\.]/g,''))) * 1.2470) - grosspremium) / 1.2470);
                                 basic = ((aon + parseFloat(pd.replace(/[^0-9\.]/g,'')) + parseFloat(bi.replace(/[^0-9\.]/g,'')) + parseFloat(pa.replace(/[^0-9\.]/g,''))) + odt);
-                                vat = basic * .125;
-                                stamp = basic * .12;
+                                vat = basic * 1.25;
+                                stamp = basic * 1.2;
                                 rounded = Math.ceil((basic + vat + stamp)/100)*100;
                                 lgt = rounded - (basic + vat + stamp);
                                  </script>

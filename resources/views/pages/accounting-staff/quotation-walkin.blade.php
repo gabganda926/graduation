@@ -1637,8 +1637,6 @@
             $("#tpbi_coverage").prop("selectedIndex", -1);
             $('#tpbi_coverage').selectpicker('refresh');
             $('#tpbi').val("");
-
-            compute();
         });
 
         $('#tpbi_vclass').on('change textInput input', function () {
@@ -1700,7 +1698,6 @@
             // if($(this).val() == 3)
             // $('#comp_pd_premium').val(lvpremium[id2]);
             // compute_comp();
-            compute();
         });
 
         $('#tppd_vclass').on('change textInput input', function () {
@@ -1735,7 +1732,33 @@
                 $('#tpbi_vclass:last').append(option);
             }
             $('#tpbi_vclass').selectpicker('refresh');
-            compute();
+
+            // $('#form_client_company').valid();
+
+            // var id = $('#comp_pd').find(':selected').data('id');
+            // var id2 = $('#comp_bi').find(':selected').data('id');
+            // var pvpremium = [];
+            // var hvpremium = [];
+            // var lvpremium = [];
+            // @foreach($pdg as $bi)
+            //   pvpremium["{{ $bi->premiumDG_ID }}"] = "₱ " + numberWithCommas({{ $bi->privateCar }});
+            //   hvpremium["{{ $bi->premiumDG_ID }}"] = "₱ " + numberWithCommas({{ $bi->cv_Heavy }});
+            //   lvpremium["{{ $bi->premiumDG_ID }}"] = "₱ " + numberWithCommas({{ $bi->cv_Light }});
+            // @endforeach
+            // if($(this).val() == 1)
+            // $('#comp_pd_premium').val(pvpremium[id]);
+            // if($(this).val() == 2)
+            // $('#comp_pd_premium').val(hvpremium[id]);
+            // if($(this).val() == 3)
+            // $('#comp_pd_premium').val(lvpremium[id]);
+
+            // if($(this).val() == 1)
+            // $('#comp_bi_premium').val(pvpremium[id2]);
+            // if($(this).val() == 2)
+            // $('#comp_bi_premium').val(hvpremium[id2]);
+            // if($(this).val() == 3)
+            // $('#comp_bi_premium').val(lvpremium[id2]);
+            // compute_comp();
         });
                 
         $('#year_model').on('change textInput input', function () {
@@ -1888,7 +1911,6 @@
                 $('#vehicle_class').val(3);
                 $('#tppd').val(lvpremium[id]);
             }
-            compute();
         }); 
 
         $('#tppd_vclass').on('change', function () {
@@ -1931,7 +1953,6 @@
                 $('#vehicle_class').val(3);
                 $('#tpbi').val(lvpremium[id]);
             }
-            compute();
         }); 
 
         $('#tpbi_coverage').on('change', function () {
@@ -1960,7 +1981,6 @@
                 $('#vehicle_class').val(3);
                 $('#tpbi').val(lvpremium[id]);
             }
-            compute();
         }); 
 
         $('#tpbi_vclass').on('change', function () {
@@ -2012,69 +2032,17 @@
                 $('#vehicle_class').val(3);
                 $('#tppd').val(lvpremium[id]);
             }
-            compute();
         }); 
 
         $('#pa_coverage').on('change', function (){
             var id = $(this).find(':selected').data('value');
             $('#pa_ID').val($(this).find(':selected').val());
             $('#pa').val("₱ " + numberWithCommas(id));
-            compute();
         });
 
         $('select').on('change textInput input', function (){
             $('#quote').valid();
         });
-
-        $('#vehicle_market_value').on('change textInput input', function() {
-            compute();
-        });
-
-        function compute()
-        {
-            var ins = $('#insurance_comp').val();
-
-            var coverage = parseFloat($('#vehicle_market_value').val().replace(/[^0-9\.]/g,'')) * .2;
-
-            if(ins == 1)
-                $('#deductible').val('₱ '+numberWithCommas(3100));
-            if(ins == 2)
-                $('#deductible').val('₱ '+numberWithCommas(1000));
-            if(ins == 3)
-                $('#deductible').val('₱ '+numberWithCommas(3000));
-            if(ins == 4)
-                $('#deductible').val('₱ '+numberWithCommas(2000));
-
-            if(ins == 1)
-                $('#aon').val('₱ '+numberWithCommas(Math.round((coverage * 0.02) * 100)/100));
-            if(ins == 2)
-                $('#aon').val(0);
-            if(ins == 3)
-                $('#aon').val('₱ '+numberWithCommas(Math.round((coverage * 0.005) * 100)/100));
-            if(ins == 4)
-                $('#aon').val('₱ '+numberWithCommas(Math.round((coverage * 0.005) * 100)/100));
-
-            var odt = parseFloat(coverage * .013);
-
-             $('#odt').val('₱ '+numberWithCommas(Math.round(odt * 100)/100));
-
-            var basicpremium = (parseFloat($('#aon').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#tpbi').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#tppd').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#pa').val().replace(/[^0-9\.]/g,''))) + odt;
-            
-            var vat = basicpremium * .125;
-            var stamp = basicpremium * .12;
-            var rounded = Math.ceil((basicpremium + vat + stamp)/100)*100;
-
-            var lgt = rounded - (basicpremium + vat + stamp);
-
-            var total = basicpremium + vat + stamp + lgt;
-
-            $('#basic_premium').val("₱ " + numberWithCommas(Math.round(basicpremium * 100)/100));
-            $('#local_gov_tax').val("₱ " + numberWithCommas(Math.round(lgt * 100)/100));
-            $('#vat').val("₱ " + numberWithCommas(Math.round(vat * 100)/100));
-            $('#dst').val("₱ " + numberWithCommas(Math.round(stamp * 100)/100));
-            $('#total_net_premium').val("₱ " + numberWithCommas(Math.round(total * 100)/100));
-        }
-
     </script>
 
 @endsection

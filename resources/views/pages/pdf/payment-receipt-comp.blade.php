@@ -79,7 +79,7 @@
     echo $today; 
     ?></b></p><br/><br/> <!-- DATE KUNG KAILAN INISSUE TONG OR -->
 
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Received from: <b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ $inf->pinfo_last_name }}, {{ $inf->pinfo_first_name }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </b></p><br/>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Received from: <b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ $inf->comp_name }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </b></p><br/>
 
         <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; with &nbsp;&nbsp;  Policy Number &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b> {{ $pno->policy_number}} </b>&nbsp;&nbsp;&nbsp; the sum of &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b> &nbsp;&nbsp;&nbsp;₱&nbsp;&nbsp;&nbsp;<b> {{ round($or->amount_paid,2) }}</b> &nbsp;&nbsp; </b> &nbsp;&nbsp;&nbsp;&nbsp;</p><br/>
 

@@ -1595,30 +1595,27 @@
 
             var coverage = parseFloat($('#indi_vmodel_value').val().replace(/[^0-9\.]/g,'')) * .2;
 
-            // var grosspremium = parseFloat($('#indi_vmodel_value').val().replace(/[^0-9\.]/g,'')) * .013;
+            var grosspremium = parseFloat($('#indi_vmodel_value').val().replace(/[^0-9\.]/g,'')) * .013;
 
             $('#indi_coverage_aon').val('₱ '+numberWithCommas(Math.round(coverage * 100)/100));
             $('#indi_coverage_odt').val('₱ '+numberWithCommas(Math.round(coverage * 100)/100));
 
             if(ins == 1)
                 $('#indi_aon').val('₱ '+numberWithCommas(coverage * 0.02));
-            if(ins == 2){
-            $('#indi_coverage_aon').val('');
-            $('#indi_aon').val('');
-            }
+            if(ins == 2)
+                $('#indi_aon').val(0);
             if(ins == 3)
                 $('#indi_aon').val('₱ '+numberWithCommas(coverage * 0.005));
             if(ins == 4)
                 $('#indi_aon').val('₱ '+numberWithCommas(coverage * 0.005));
 
-            var odt = parseFloat(coverage * .013);
-            // Math.abs((((parseFloat($('#indi_aon').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#indi_bi_premium').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#indi_pd_premium').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#indi_pa_premium').val().replace(/[^0-9\.]/g,''))) * 1.2470) - grosspremium) / 1.2470)
+            var odt = Math.abs((((parseFloat($('#indi_aon').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#indi_bi_premium').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#indi_pd_premium').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#indi_pa_premium').val().replace(/[^0-9\.]/g,''))) * 1.2470) - grosspremium) / 1.2470)
 
              $('#indi_odt').val('₱ '+numberWithCommas(Math.round(odt * 100)/100));
 
             var basicpremium = (parseFloat($('#indi_aon').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#indi_bi_premium').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#indi_pd_premium').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#indi_pa_premium').val().replace(/[^0-9\.]/g,''))) + odt;
-            var vat = basicpremium * .125;
-            var stamp = basicpremium * .12;
+            var vat = basicpremium * 1.25;
+            var stamp = basicpremium * 1.2;
             var rounded = Math.ceil((basicpremium + vat + stamp)/100)*100;
 
             var lgt = rounded - (basicpremium + vat + stamp);
@@ -1640,23 +1637,20 @@
 
             if(ins == 1)
                 $('#comp_aon').val('₱ '+numberWithCommas(coverage * 0.02));
-            if(ins == 2){
-            $('#comp_coverage_aon').val('');
-            $('#comp_aon').val('');
-            }
+            if(ins == 2)
+                $('#comp_aon').val(0);
             if(ins == 3)
                 $('#comp_aon').val('₱ '+numberWithCommas(coverage * 0.005));
             if(ins == 4)
                 $('#comp_aon').val('₱ '+numberWithCommas(coverage * 0.005));
 
-            var odt = parseFloat(coverage * .013);
-            // Math.abs((((parseFloat($('#comp_aon').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#comp_bi_premium').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#comp_pd_premium').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#comp_pa_premium').val().replace(/[^0-9\.]/g,''))) * 1.2470) - grosspremium) / 1.2470)
+            var odt = Math.abs((((parseFloat($('#comp_aon').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#comp_bi_premium').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#comp_pd_premium').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#comp_pa_premium').val().replace(/[^0-9\.]/g,''))) * 1.2470) - grosspremium) / 1.2470)
 
              $('#comp_odt').val('₱ '+numberWithCommas(Math.round(odt * 100)/100));
 
             var basicpremium = (parseFloat($('#comp_aon').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#comp_bi_premium').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#comp_pd_premium').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#comp_pa_premium').val().replace(/[^0-9\.]/g,''))) + odt;
-            var vat = basicpremium * .125;
-            var stamp = basicpremium * .12;
+            var vat = basicpremium * 1.25;
+            var stamp = basicpremium * 1.2;
             var rounded = Math.ceil((basicpremium + vat + stamp)/100)*100;
 
             var lgt = rounded - (basicpremium + vat + stamp);
@@ -1734,7 +1728,7 @@
             $('#indi_bi_premium').val("");
 
             if(ins == 1)
-                $('#indi_deductible').val('₱ '+numberWithCommas(3100));
+                $('#indi_deductible').val('₱ '+numberWithCommas(3000));
             if(ins == 2)
                 $('#indi_deductible').val('₱ '+numberWithCommas(1000));
             if(ins == 3)
@@ -1755,22 +1749,20 @@
 
             if(ins == 1)
                 $('#indi_aon').val('₱ '+numberWithCommas(coverage * 0.02));
-            if(ins == 2){
-            $('#indi_coverage_aon').val('');
-            $('#indi_aon').val('');
-            }
+            if(ins == 2)
+                $('#indi_aon').val(0);
             if(ins == 3)
                 $('#indi_aon').val('₱ '+numberWithCommas(coverage * 0.005));
             if(ins == 4)
                 $('#indi_aon').val('₱ '+numberWithCommas(coverage * 0.005));
 
-            var odt = parseFloat(coverage * .013);
+            var odt = Math.abs((((parseFloat($('#indi_aon').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#indi_bi_premium').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#indi_pd_premium').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#indi_pa_premium').val().replace(/[^0-9\.]/g,''))) * 1.2470) - grosspremium) / 1.2470)
 
              $('#indi_odt').val('₱ '+numberWithCommas(Math.round(odt * 100)/100));
 
             var basicpremium = (parseFloat($('#indi_aon').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#indi_bi_premium').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#indi_pd_premium').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#indi_pa_premium').val().replace(/[^0-9\.]/g,''))) + odt;
-            var vat = basicpremium * .125;
-            var stamp = basicpremium * .12;
+            var vat = basicpremium * 1.25;
+            var stamp = basicpremium * 1.2;
             var rounded = Math.ceil((basicpremium + vat + stamp)/100)*100;
 
             var lgt = rounded - (basicpremium + vat + stamp);
@@ -1849,19 +1841,6 @@
             $('#comp_bi').selectpicker('refresh');
             $('#comp_bi_premium').val("");
 
-            if(ins == 1)
-                $('#comp_deductible').val('₱ '+numberWithCommas(3100));
-            if(ins == 2)
-                $('#comp_deductible').val('₱ '+numberWithCommas(1000));
-            if(ins == 3)
-                $('#comp_deductible').val('₱ '+numberWithCommas(3000));
-            if(ins == 4)
-                $('#comp_deductible').val('₱ '+numberWithCommas(2000));
-
-            $('#comp_towing').val('₱ '+numberWithCommas(100));
-
-            $('#comp_arl').val('₱ '+numberWithCommas(parseFloat($('#comp_deductible').val().replace(/[^0-9\.]/g,''))+parseFloat($('#comp_towing').val().replace(/[^0-9\.]/g,''))))
-
             var coverage = parseFloat($('#comp_vmodel_value').val().replace(/[^0-9\.]/g,'')) * .2;
 
             var grosspremium = parseFloat($('#comp_vmodel_value').val().replace(/[^0-9\.]/g,'')) * .013;
@@ -1872,22 +1851,19 @@
             if(ins == 1)
                 $('#comp_aon').val('₱ '+numberWithCommas(coverage * 0.02));
             if(ins == 2)
-                {
-            $('#comp_coverage_aon').val('');
-            $('#comp_aon').val('');
-            }
+                $('#comp_aon').val(0);
             if(ins == 3)
                 $('#comp_aon').val('₱ '+numberWithCommas(coverage * 0.005));
             if(ins == 4)
                 $('#comp_aon').val('₱ '+numberWithCommas(coverage * 0.005));
 
-            var odt = parseFloat(coverage * .013);
+            var odt = Math.abs((((parseFloat($('#comp_aon').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#comp_bi_premium').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#comp_pd_premium').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#comp_pa_premium').val().replace(/[^0-9\.]/g,''))) * 1.2470) - grosspremium) / 1.2470)
 
              $('#comp_odt').val('₱ '+numberWithCommas(Math.round(odt * 100)/100));
 
             var basicpremium = (parseFloat($('#comp_aon').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#comp_bi_premium').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#comp_pd_premium').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#comp_pa_premium').val().replace(/[^0-9\.]/g,''))) + odt;
-            var vat = basicpremium * .125;
-            var stamp = basicpremium * .12;
+            var vat = basicpremium * 1.25;
+            var stamp = basicpremium * 1.2;
             var rounded = Math.ceil((basicpremium + vat + stamp)/100)*100;
 
             var lgt = rounded - (basicpremium + vat + stamp);

@@ -191,8 +191,8 @@
                         <div class="body">
                             <div class="form-group">
                                 <div class="form-line">
-                                    <label for="date_created"><small>BOP Voucher No: </small></label> <!-- AUTO GENERATED -->
-                                    <small><input type="text" id="date_created" class="form-control" readonly="true"></small>
+                                    <label for="vounum"><small>Bill No: </small></label> <!-- AUTO GENERATED -->
+                                    <small><b><input type="text" id="vounum" class="form-control" readonly="true"></b></small>
                                 </div>
                             </div>
                             
@@ -205,8 +205,6 @@
                                             <th>Due Date</th>
                                             <th>Amount Due</th>
                                             <th>Status</th>
-                                            <!-- <th>OR Number</th> -->
-                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -373,7 +371,7 @@
             $.each(newOptions, function(key,value) {
               if(value)
               {
-                var option = '<option value="'+value.check_num+'" data-amount="'+value.amount+'">CN'+pad(value.check_num, 4)+'</option>';
+                var option = '<option value="'+value.check_num+'" data-amount="'+value.amount+'">BOP'+pad(value.check_num, 4)+'</option>';
                 $('#checknum:last').append(option);
               }
             });
@@ -411,14 +409,14 @@
               if((parseDate(value.due_date).addDays(7).getTime() < parseDate(today).getTime()) && lapse == 0 && value.status == 1)
                 lapse = 1;
               if(value.status == 0)
-              var option = '<tr><td>CN'+pad(value.checknum, 4)+'</td><td>'+bank+'</td><td>'+formatDate2(value.due_date)+'</td><td>₱'+numberWithCommas(Math.round(value.amount * 100) / 100)+'</td><td><span class="label bg-green">paid</span></td><td><button type="button" class="btn bg-orange waves-effect" onclick="window.open({{ URL::asset("/pdf/payment-receipt") }})" style="position: right;"  data-toggle="tooltip" data-placement="left" title="Generate Receipt"><i class="material-icons">picture_as_pdf</i><span style="font-size: 15px;"></span></button></td></tr>';
+              var option = '<tr><td>BOP'+pad(value.checknum, 4)+'</td><td>'+bank+'</td><td>'+formatDate2(value.due_date)+'</td><td>₱'+numberWithCommas(Math.round(value.amount * 100) / 100)+'</td><td><span class="label bg-green">paid</span></td></tr>';
               if(value.status == 1)
-              var option = '<tr><td>CN'+pad(value.checknum, 4)+'</td><td>'+bank+'</td><td>'+formatDate2(value.due_date)+'</td><td>₱'+numberWithCommas(Math.round(value.amount * 100) / 100)+'</td><td><span class="label bg-blue">to be paid</span></td></tr>';
+              var option = '<tr><td>BOP'+pad(value.checknum, 4)+'</td><td>'+bank+'</td><td>'+formatDate2(value.due_date)+'</td><td>₱'+numberWithCommas(Math.round(value.amount * 100) / 100)+'</td><td><span class="label bg-blue">to be paid</span></td></tr>';
               if(value.status == 3)
-              var option = '<tr><td>CN'+pad(value.checknum, 4)+'</td><td>'+bank+'</td><td>'+formatDate2(value.due_date)+'</td><td>₱'+numberWithCommas(Math.round(value.amount * 100) / 100)+'</td><td><span class="label bg-red">late</span><td><button type="button" class="btn bg-orange waves-effect" onclick="window.open({{ URL::asset("/pdf/payment-receipt") }})" style="position: right;"  data-toggle="tooltip" data-placement="left" title="Generate Receipt"><i class="material-icons">picture_as_pdf</i><span style="font-size: 15px;"></span></button></td></tr>';
+              var option = '<tr><td>BOP'+pad(value.checknum, 4)+'</td><td>'+bank+'</td><td>'+formatDate2(value.due_date)+'</td><td>₱'+numberWithCommas(Math.round(value.amount * 100) / 100)+'</td><td><span class="label bg-red">late</span></tr>';
               if(lapse == 1)
               {
-                var option = '<tr><td>CN'+pad(value.checknum, 4)+'</td><td>'+bank+'</td><td>'+formatDate2(value.due_date)+'</td><td>₱'+numberWithCommas(Math.round(value.amount * 100) / 100)+'</td><td><span class="label bg-red">lapse</span><td><button type="button" class="btn bg-orange waves-effect generate" data-id = "'+value.checknum+'" style="position: right;"  data-toggle="tooltip" data-placement="left" title="Generate Receipt"><i class="material-icons">picture_as_pdf</i><span style="font-size: 15px;"></span></button></td></tr>';
+                var option = '<tr><td>BOP'+pad(value.checknum, 4)+'</td><td>'+bank+'</td><td>'+formatDate2(value.due_date)+'</td><td>₱'+numberWithCommas(Math.round(value.amount * 100) / 100)+'</td><td><span class="label bg-red">lapse</span></tr>';
               }
                 
               $('#checks tbody').append(option);
