@@ -282,75 +282,7 @@
 
                             <div class="row clearfix">
                                 <div class="col-md-12">
-                                    <h4>Possible Comprehensive Insurance Quotation</h4>
-                                </div>
-                            </div>
-
-                            <div class="row clearfix">
-                                <div class="col-md-12">
-                                    <div class="form-group form-float">
-                                        <div class="form-line">
-                                            <label><small>Total Net Premium:</small></label>
-                                            <b><input id = "total_net_premium" name = "total_net_premium" type="text" class="form-control" pattern="[A-Za-z'-]" readonly ></b>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row clearfix">
-                                <div class="col-md-12">
-                                    <div class="form-group form-float">
-                                        <div class="form-line">
-                                            <label><small>Basic Premium:</small></label>
-                                            <input id = "basic_premium" name = "basic_premium" type="text" class="form-control" pattern="[A-Za-z'-]" readonly >
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row clearfix">
-                                <div class="col-md-6">
-                                    <div class="form-group form-float">
-                                        <div class="form-line">
-                                            <label><small>Value Added Tax (VAT):</small></label>
-                                            <input id = "vat" name = "vat" type="text" class="form-control" pattern="[A-Za-z'-]" readonly >
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="form-group form-float">
-                                        <div class="form-line">
-                                            <label><small>Documentary Stamp Tax (DST):</small></label>
-                                            <input id = "dst" name = "dst" type="text" class="form-control" pattern="[A-Za-z'-]" readonly >
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row clearfix">
-                                <div class="col-md-6">
-                                    <div class="form-group form-float">
-                                        <div class="form-line">
-                                            <label><small>Local Government Tax:</small></label>
-                                            <input id = "local_gov_tax" name = "local_gov_tax" type="text" class="form-control" pattern="[A-Za-z'-]" readonly >
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="form-group form-float">
-                                        <div class="form-line">
-                                            <label><small>Deductible:</small></label>
-                                            <input id = "deductible" name = "deductible" type="text" class="form-control" pattern="[A-Za-z'-]" readonly >
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row clearfix">
-                                <div class="col-md-12">
-                                    <h4>Comprehensive Insurance Policy Benefits <button style="float: right;" type="button" id="next1"  class="btn bg-green waves-effect left" data-toggle="modal" data-target="#editt"> EDIT</button></h4>
+                                    <h4>Comprehensive Insurance Policy Premiums <button style="float: right;" type="button" id="next1"  class="btn bg-green waves-effect left" data-toggle="modal" data-target="#editt"> EDIT</button></h4>
                                 </div>
                             </div>
 
@@ -399,7 +331,69 @@
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <label><small>Acts of Nature:</small></label>
-                                            <b><input id = "aon" name = "aon" type="text" class="form-control" pattern="[A-Za-z'-]" readonly ></b>
+                                            <input id = "aon" name = "aon" type="text" class="form-control" pattern="[A-Za-z'-]" readonly >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row clearfix">
+                                <div class="col-md-12">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <label><small>Basic Premium:</small></label>
+                                            <b><input id = "basic_premium" name = "basic_premium" type="text" class="form-control" pattern="[A-Za-z'-]" readonly ></b>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row clearfix">
+                                <div class="col-md-6">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <label><small>Value Added Tax (VAT):</small></label>
+                                            <input id = "vat" name = "vat" type="text" class="form-control" pattern="[A-Za-z'-]" readonly >
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <label><small>Documentary Stamp Tax (DST):</small></label>
+                                            <input id = "dst" name = "dst" type="text" class="form-control" pattern="[A-Za-z'-]" readonly >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row clearfix">
+                                <div class="col-md-6">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <label><small>Local Government Tax:</small></label>
+                                            <input id = "local_gov_tax" name = "local_gov_tax" type="text" class="form-control" pattern="[A-Za-z'-]" readonly >
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <label><small>Deductible:</small></label>
+                                            <input id = "deductible" name = "deductible" type="text" class="form-control" pattern="[A-Za-z'-]" readonly >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row clearfix">
+                                <div class="col-md-12">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <label><small>Total Net Premium:</small></label>
+                                            <b><input id = "total_net_premium" name = "total_net_premium" type="text" class="form-control" pattern="[A-Za-z'-]" style="font-size: 20px; color: red;" readonly ></b>
                                         </div>
                                     </div>
                                 </div>

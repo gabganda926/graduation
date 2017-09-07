@@ -225,7 +225,7 @@
                             </li>
                             <li class="@yield('transListPay')">
                                 <a href="/accounting-staff/transaction/payment-list">
-                                    <span>List of Payments</span>
+                                    <span>List of Collection of Payments</span>
                                 </a>
                             </li>
                             <li class="@yield('transPaymentList')">

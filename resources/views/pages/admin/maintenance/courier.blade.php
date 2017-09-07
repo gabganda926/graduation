@@ -28,7 +28,7 @@
                                             <div>
                                                 <div class="body" align="center">
                                                     <div class="fallback">
-                                                        <img id="addImg" src="#" alt="your image" style="height: 210px; width: 215px; border-style: solid; border-width: 2px;">
+                                                        <img id="addImg" src="{{ URL::asset('image/default-image.png') }}" alt="your image" style="height: 210px; width: 215px; border-style: solid; border-width: 2px;">
                                                     </div><br/>
                                                         <input id = "picture" name = "picture" type="file" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|images/*">
                                                 </div>
@@ -84,10 +84,12 @@
                                             </div>
                                             <div class="col-md-3">
                                                   <div class="form-group form-float">
+                                                    <div class="form-line">
                                                         <label><small>Birthdate:</small></label>
                                                         <div class="form-row show-inputbtns">
-                                                                <input id = "pinfo_bday" name = "pinfo_bday" type="date" data-date-inline-picker="false" data-date-open-on-focus="true" />
+                                                                <input id = "pinfo_bday" class="form-control" name = "pinfo_bday" type="date" data-date-inline-picker="false" data-date-open-on-focus="true" />
                                                         </div>
+                                                    </div>
                                                   </div>
                                             </div>                      
                                         </div> <!-- end of rowclearfix -->
@@ -235,6 +237,9 @@
                         </div>
                         <div class="modal-footer js-sweetalert">
                             <button class="btn btn-primary waves-effect" type="button" onclick = "
+                            $('body,html').animate({
+                                                                        scrollTop: 0
+                                                                    }, 500);
                             document.getElementById('time').value = formatDate(new Date());
                             if($('#add').valid())
                             {
@@ -268,6 +273,9 @@
                               });
                             }">SUBMIT</button>
                             <button type="button" class="btn btn-link waves-effect" data-toggle="collapse" data-target="#addEmpModal"  onclick="
+                            $('body,html').animate({
+                                                                        scrollTop: 0
+                                                                    }, 500);
                             $('#add')[0].reset();
                             $('#addbtn').show();">CLOSE</button>
                         </div>
@@ -407,7 +415,7 @@
                                             <div>
                                                 <div class="body" align="center">
                                                     <div class="fallback">
-                                                        <img id="editImg" src="#" alt="your image" style="height: 210px; width: 215px; border-style: solid; border-width: 2px;">
+                                                        <img id="editImg" src="{{ URL::asset('image/default-image.png') }}" alt="your image" style="height: 210px; width: 215px; border-style: solid; border-width: 2px;">
                                                     </div><br/>
                                                         <input id = "apicture" name = "apicture" type="file" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|images/*" readonly="true">
                                                 </div>
@@ -464,10 +472,12 @@
                                             </div>
                                             <div class="col-md-3">
                                                   <div class="form-group form-float">
+                                                    <div class="form-line">
                                                         <label><small>Birthdate:</small></label>
                                                         <div class="form-row show-inputbtns">
-                                                                <input id = "apinfo_bday" name = "apinfo_bday" type="date" data-date-inline-picker="false" data-date-open-on-focus="true" />
+                                                                <input id = "apinfo_bday" class="form-control" name = "apinfo_bday" type="date" data-date-inline-picker="false" data-date-open-on-focus="true" />
                                                         </div>
+                                                    </div>
                                                   </div>
                                             </div>                           
                                         </div> <!-- end of rowclearfix -->
@@ -618,6 +628,9 @@
                         </div>
                         <div class="modal-footer js-sweetalert">
                           <button id = "schange" class="btn btn-primary waves-effect" style = "display: none;" type="button" onclick = "
+                          $('body,html').animate({
+                                                                        scrollTop: 0
+                                                                    }, 500);
                           document.getElementById('atime').value = formatDate(new Date());
                           if($('#view').valid())
                           {
@@ -645,6 +658,9 @@
                             });
                           }">SAVE CHANGES</button>
                           <button type="button" class="btn btn-link waves-effect" data-toggle="collapse" data-target="#largeModal" onclick="
+                          $('body,html').animate({
+                                                                        scrollTop: 0
+                                                                    }, 500);
                             $('#Edit').prop('disabled', false);
                             $('#Delete').prop('disabled', false);
                             $('#schange').hide();
@@ -686,6 +702,9 @@
                             <ul class="header-dropdown m-r--5">
                                 <li>
                                 <button id = "addbtn" form="add" type="submit" class="btn bg-blue waves-effect" data-toggle="collapse" data-target="#addEmpModal"  onclick="
+                                $('body,html').animate({
+                                                                        scrollTop: 0
+                                                                    }, 500);
                                     $('#addbtn').hide();">
                                     <i class="material-icons">group_add</i>
                                     <span>Add Courier</span>
@@ -966,6 +985,9 @@
                                                     document.getElementById('aage').value = 'Invalid Input';
                                                 }
 
+                                                $('body,html').animate({
+                                                                        scrollTop: 0
+                                                                    }, 500);
                                                 ">
                                                     <i class="material-icons">remove_red_eye</i>
                                                     <span>View</span>

@@ -222,10 +222,10 @@
                                     <span>INSURANCE</span>
                                 </a>
                                 <ul class="ml-menu">
-                                    <!--<li class = "@yield('company')">
+                                    <li class = "@yield('company')">
                                         <a href="/admin/maintenance/insurance/company">
                                             <span>Insurance Company</span></a>
-                                    </li>-->
+                                    </li>
 
                                     <!--<li class = "@yield('forms')">
                                         <a href="/admin/maintenance/insurance/forms">

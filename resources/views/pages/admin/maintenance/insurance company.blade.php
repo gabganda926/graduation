@@ -172,7 +172,7 @@
                                             <div>
                                                 <div class="body" align="center">
                                                     <div class="fallback">
-                                                        <img id="addImg" src="#" alt="your image" style="height: 210px; width: 215px; border-style: solid; border-width: 2px;">
+                                                        <img id="addImg" src="{{ URL::asset('image/default-image.png') }}" alt="your image" style="height: 210px; width: 215px; border-style: solid; border-width: 2px;">
                                                     </div><br/>
                                                         <input id = "picture" name = "picture" type="file" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|images/*">
                                                 </div>
@@ -229,10 +229,12 @@
                                             </div>
                                             <div class="col-md-3">
                                                   <div class="form-group form-float">
+                                                    <div class="form-line">
                                                         <label><small>Birthdate:</small></label>
                                                         <div class="form-row show-inputbtns">
-                                                                <input id = "pinfo_bday" name = "pinfo_bday" type="date" data-date-inline-picker="false" data-date-open-on-focus="true" />
+                                                                <input id = "pinfo_bday" class="form-control" name = "pinfo_bday" type="date" data-date-inline-picker="false" data-date-open-on-focus="true" />
                                                         </div>
+                                                    </div>
                                                   </div>
                                             </div>                           
                                         </div> <!-- end of rowclearfix -->
@@ -620,7 +622,7 @@
                                             <div>
                                                 <div class="body" align="center">
                                                     <div class="fallback">
-                                                        <img id="editImg" src="#" alt="your image" style="height: 210px; width: 215px; border-style: solid; border-width: 2px;">
+                                                        <img id="editImg" src="{{ URL::asset('image/default-image.png') }}" alt="your image" style="height: 210px; width: 215px; border-style: solid; border-width: 2px;">
                                                     </div><br/>
                                                         <input id = "apicture" name = "apicture" type="file" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|images/*" readonly="true">
                                                 </div>
@@ -677,10 +679,12 @@
                                             </div>
                                             <div class="col-md-3">
                                                   <div class="form-group form-float">
+                                                    <div class="form-line">
                                                         <label><small>Birthdate:</small></label>
                                                         <div class="form-row show-inputbtns">
-                                                                <input id = "apinfo_bday" name = "apinfo_bday" type="date" data-date-inline-picker="false" data-date-open-on-focus="true" />
+                                                                <input id = "apinfo_bday" class="form-control" name = "apinfo_bday" type="date" data-date-inline-picker="false" data-date-open-on-focus="true" />
                                                         </div>
+                                                    </div>
                                                   </div>
                                             </div>                        
                                         </div> <!-- end of rowclearfix -->

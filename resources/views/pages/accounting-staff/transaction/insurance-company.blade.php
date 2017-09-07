@@ -186,7 +186,6 @@
                                             <td>
                                               @foreach($paydetails as $spay)
                                                @if($spay->account_ID == $iacc->account_ID)
-                                               {{$spay->account_ID}}
                                                <button form = "display" type="submit" type="button" class="btn bg-light-blue waves-effect" data-id = "{{ $ccompany->comp_ID }}" data-acc = "{{$iacc->account_ID}}" data-pay = "{{$pay->payment_ID}}" onclick="
                                                 $('#id').val($(this).data('id')); $('#acc_id').val($(this).data('acc')); $('#pay_id').val($(this).data('pay'));" data-toggle="tooltip" data-placement="left" title="View account details."><i class="material-icons">remove_red_eye</i>
                                                </button>

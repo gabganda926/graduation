@@ -23,8 +23,10 @@
                         <li role="presentation"><a href="#vehicle" data-toggle="tab">VEHICLE</a></li>
                         <li role="presentation"><a href="#insurance" data-toggle="tab">INSURANCE</a></li>
                         <li role="presentation"><a href="#premiums" data-toggle="tab">PREMIUMS</a></li>
+                        <li role="presentation"><a href="#claims" data-toggle="tab">CLAIMS</a></li>
                         <li role="presentation"><a href="#bank" data-toggle="tab">BANK</a></li>
                         <li role="presentation"><a href="#complaint" data-toggle="tab">COMPLAINT</a></li>
+                        <li role="presentation"><a href="#transmittal" data-toggle="tab">TRANSMITTAL DOCUMENTS</a></li>
                     </ul>
 
                     <!-- Tab panes -->
@@ -2020,6 +2022,191 @@
                             </p>
                         </div>
                         <!-- END OF COMPLAINT ARCHIVE -->
+
+                        <!-- CLAIMS ARCHIVE -->
+                        <div role="tabpanel" class="tab-pane fade" id="claims"> 
+                            <p>
+                                <div class="header">
+                                    <h2><b>
+                                        CLAIM TYPE
+                                    </b></h2>
+                                        <ul class="header-dropdown m-r--5">
+                                            <li class="dropdown">
+                                                <li>
+                                            <button id = "ct_reactivate" type="button" class="btn btn-lg bg-green waves-effect" data-toggle="modal" data-target="#Reactivate">
+                                                <span>Reactivate</span>
+                                            </button>
+                                            </li>
+                                            </li>
+                                        </ul>
+                                </div>
+                                <div class="body">
+                                  <div class="body table-responsive">
+                                      <table class="table table-bordered table-striped table-hover dataTable js-basic-example animated lightSpeedIn active">
+                                          <thead>
+                                              <tr class="bg-blue-grey">
+                                                  <th class="col-md-1"> </th>
+                                                  <th class="col-md-2">Claim Type</th>
+                                                  <th>Description</th>
+                                                  <th class="col-md-1">Action</th>
+                                              </tr>
+                                          </thead>
+                                          <tbody>
+                                              <tr>
+                                                <td><input type="checkbox" id="aaa" class="filled-in chk-col-red checkCheckbox"/>
+                                                <label for="aaa"></label></td>
+                                                <td>
+                                                </td>
+                                                <td>
+                                                </td>
+                                                <td>
+                                                <div class="icon-button-demo">
+                                                    <button type="button" class="btn bg-light-blue waves-effect" data-toggle="collapse" data-target="#largeModal"
+
+                                                    onclick= "
+                                                    document.getElementById('id').value = $(this).data('id');
+                                                    document.getElementById('aclaimType').value = $(this).data('name');
+                                                    document.getElementById('aclaimType_desc').value = $(this).data('desc');
+
+                                                    document.getElementById('date_created').value = $(this).data('created');
+                                                    document.getElementById('last_update').value = $(this).data('updated'); 
+                                                    ">
+                                                        <i class="material-icons">remove_red_eye</i>
+                                                        <span>View</span>
+                                                    </button>
+                                                </div>
+                                                </td>
+                                              </tr>
+                                          </tbody>
+                                      </table>
+                                      </div>
+                                  </div>
+
+                                  <div class="header">
+                                    <h2><b>
+                                        CLAIM REQUIREMENT
+                                    </b></h2>
+                                        <ul class="header-dropdown m-r--5">
+                                            <li class="dropdown">
+                                                <li>
+                                            <button id = "ct_reactivate" type="button" class="btn btn-lg bg-green waves-effect" data-toggle="modal" data-target="#Reactivate">
+                                                <span>Reactivate</span>
+                                            </button>
+                                            </li>
+                                            </li>
+                                        </ul>
+                                </div>
+                                <div class="body">
+                                  <div class="body table-responsive">
+                                    <table class="table table-bordered table-striped table-hover dataTable js-basic-example animated lightSpeedIn active">
+                                        <thead>
+                                            <tr class="bg-blue-grey">
+                                                <th class="col-md-1"> </th>
+                                                <th>Claim Type</th>
+                                                <th class="col-md-7">Claim Requirement</th>
+                                                <th class="col-md-1">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                  <tr>
+                                                    <td><input type="checkbox" id="bbb" class="filled-in chk-col-red checkCheckbox"/>
+                                                    <label for="bbb"></label></td>
+                                                    <td>
+                                                     
+                                                    </td>
+                                                    <td>
+                                                      
+                                                    </td>
+                                                    <td>
+                                                    <div class="icon-button-demo">
+                                                        <button type="button" class="btn bg-light-blue waves-effect" data-toggle="collapse" data-target="#largeModal"
+            
+
+                                                        onclick= "
+                                                        $('#id').val($(this).data('id'));
+                                                        $('#aclaimReq_Type').val($(this).data('type')).change();
+                                                        $('#aclaimRequirement').val($(this).data('name'));
+                                
+                                document.getElementById('aclaimReq_Type').disabled=true;    
+
+                                                        document.getElementById('date_created').value = $(this).data('created');
+                                                        document.getElementById('last_update').value = $(this).data('updated'); 
+                                                        ">
+                                                            <i class="material-icons">remove_red_eye</i>
+                                                            <span>View</span>
+                                                        </button>
+                                                    </div>
+                                                    </td>
+                                                  </tr>
+                                        </tbody>
+                                    </table>
+                                    </div>
+                                  </div>
+                            </p>
+                        </div>
+                        <!-- END OF CLAIMS ARCHIVE -->
+
+                        <!-- TRANSMITTAL ARCHIVE -->
+                        <div role="tabpanel" class="tab-pane fade" id="transmittal"> 
+                            <p>
+                                <div class="header">
+                                    <h2><b>
+                                        TRANSMITTAL DOCUMENTS
+                                    </b></h2>
+                                        <ul class="header-dropdown m-r--5">
+                                            <li class="dropdown">
+                                                <li>
+                                            <button id = "ct_reactivate" type="button" class="btn btn-lg bg-green waves-effect" data-toggle="modal" data-target="#Reactivate">
+                                                <span>Reactivate</span>
+                                            </button>
+                                            </li>
+                                            </li>
+                                        </ul>
+                                </div>
+                                <div class="body">
+                                <div class="body table-responsive">
+                                  <table class="table table-bordered table-striped table-hover dataTable js-basic-example animated lightSpeedIn active">
+                                      <thead>
+                                          <tr class="bg-blue-grey">
+                                              <th class="col-md-1"> </th>
+                                              <th class="col-md-2">Document Name</th>
+                                              <th>Description</th>
+                                              <th class="col-md-1">Action</th>
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                          <tr>
+                                            <td><input type="checkbox" id="ppp" class="filled-in chk-col-red checkCheckbox"/>
+                                            <label for="ppp"></label></td>
+                                            <td>
+                                            </td>
+                                            <td>
+                                            </td>
+                                            <td>
+                                            <div class="icon-button-demo">
+                                                <button type="button" class="btn bg-light-blue waves-effect" data-toggle="collapse" data-target="#largeModal"
+
+                                                onclick= "
+                                                document.getElementById('id').value = $(this).data('id');
+                                                document.getElementById('atransRec').value = $(this).data('name');
+                                                document.getElementById('atransRec_desc').value = $(this).data('desc');
+
+                                                document.getElementById('date_created').value = $(this).data('created');
+                                                document.getElementById('last_update').value = $(this).data('updated'); 
+                                                ">
+                                                    <i class="material-icons">remove_red_eye</i>
+                                                    <span>View</span>
+                                                </button>
+                                            </div>
+                                            </td>
+                                          </tr>
+                                      </tbody>
+                                  </table>
+                                  </div>
+                                </div>
+                            </p>
+                        </div>
+                        <!-- END OF TRANSMITTAL ARCHIVE -->
 
 
                         <!-- View INST MODAL-->

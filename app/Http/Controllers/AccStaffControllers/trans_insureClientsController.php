@@ -397,7 +397,9 @@ class trans_insureClientsController extends Controller
         $pay->check_voucher = $id->cv_ID;
         $pay->or_number = str_pad(rand(0,'9'.round(microtime(true))),11, "0", STR_PAD_LEFT);
         $pay->amount = $req->data_amount;
-        $pay->due_date = $date;
+        $pay->due_date = $date." 23:59:59";
+
+        \Log::info($pay->due_date);
         $pay->status = 1;
         $tdate = strtotime( '-1 month' , strtotime ($date));
         $date = date('Y-m-d', $tdate);

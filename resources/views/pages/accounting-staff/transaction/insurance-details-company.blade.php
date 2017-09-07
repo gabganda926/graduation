@@ -402,19 +402,6 @@
                                     <div class="body">
                                     <h3> <small><b>INSURANCE DETAILS</b></small></h3>
                                     <div class="row clearfix">
-                                        <div class="col-md-12" align="center">
-                                            <button type="button" class="btn bg-light-blue waves-effect" data-toggle="collapse" data-target="#formImage">View attached form</button> <!-- PAG NAKA VIEW NA, Magiging "Hide attached form" yung nakalagay-->
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="collapse fade" role="dialog" id="formImage" align="center">
-                                                <div class="fallback">
-                                                    <img src="#" alt="your image" style="height: 500px; width: 500px; border-style: solid; border-width: 2px;">
-                                                </div>
-                                            </div> 
-                                        </div>
-                                        
-                                    </div> <!-- END OF ROW CLEARFIX -->
-                                    <div class="row clearfix">
                                         <br/><br/>
                                         <div class="col-md-6">
                                             <div class="form-group form-float">
@@ -457,7 +444,7 @@
                                     <h3> <small><b>PREMIUMS</b></small></h3>
                                     <div class="row clearfix">
                                         <br/><br/>
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <div class="form-group form-float">
                                                 <div class="form-line">
                                                 <label><small>Deductible: </small></label>
@@ -466,11 +453,20 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <div class="form-group form-float">
                                                 <div class="form-line">
                                                 <label><small>Authorized Repair Limit: </small></label>
                                                     <input id = "arlimit" name = "arlimit" type="text" class="form-control" readonly="true" value="">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group form-float">
+                                                <div class="form-line">
+                                                <label><small>Towing: </small></label>
+                                                    <input id = "towing" name = "towing" type="text" class="form-control" readonly="true" value="">
                                                 </div>
                                             </div>
                                         </div>
@@ -480,16 +476,15 @@
                                         <div class="col-md-6">
                                             <div class="form-group form-float">
                                                 <div class="form-line">
-                                                <label><small>Towing: </small></label>
-                                                    <input id = "towing" name = "towing" type="text" class="form-control" readonly="true" value="">
+                                                <label><small>Bodily Injury Coverage: </small></label>
+                                                    <input id = "bi" name = "bi" type="text" class="form-control" readonly="true" value="">
                                                 </div>
                                             </div>
-                                        </div>
-
+                                        </div> 
                                         <div class="col-md-6">
                                             <div class="form-group form-float">
                                                 <div class="form-line">
-                                                <label><small>Bodily Injury: </small></label>
+                                                <label><small>Premium: </small></label>
                                                     <input id = "bi" name = "bi" type="text" class="form-control" readonly="true" value="">
                                                 </div>
                                             </div>
@@ -500,7 +495,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group form-float">
                                                 <div class="form-line">
-                                                <label><small>Property Damage: </small></label>
+                                                <label><small>Property Damage Coverage: </small></label>
                                                     <input id = "pd" name = "pd" type="text" class="form-control" readonly="true" value="">
                                                 </div>
                                             </div>
@@ -509,11 +504,31 @@
                                         <div class="col-md-6">
                                             <div class="form-group form-float">
                                                 <div class="form-line">
+                                                <label><small>Premium: </small></label>
+                                                    <input id = "bi" name = "bi" type="text" class="form-control" readonly="true" value="">
+                                                </div>
+                                            </div>
+                                        </div> 
+                                    </div>
+
+                                    <div class="row clearfix">
+                                        <div class="col-md-6">
+                                            <div class="form-group form-float">
+                                                <div class="form-line">
                                                 <label><small>Personal Accident: </small></label>
                                                     <input id = "pa" name = "pa" type="text" class="form-control" readonly="true" value="">
                                                 </div>
                                             </div>
-                                        </div>                     
+                                        </div>   
+
+                                        <div class="col-md-6">
+                                            <div class="form-group form-float">
+                                                <div class="form-line">
+                                                <label><small>Premium: </small></label>
+                                                    <input id = "bi" name = "bi" type="text" class="form-control" readonly="true" value="">
+                                                </div>
+                                            </div>
+                                        </div>           
                                     </div> <!-- end of rowclearfix --> 
 
                                     <div class="row clearfix">
@@ -521,7 +536,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group form-float">
                                                 <div class="form-line">
-                                                    <label><small>Writing Code: </small></label>
+                                                    <label><small>Own Damage/Theft Coverage: </small></label>
                                                         <input id = "wcode" name = "wcode" type="text" class="form-control" readonly="true" value="">
                                                 </div>
                                             </div>
@@ -530,12 +545,32 @@
                                         <div class="col-md-6">
                                             <div class="form-group form-float">
                                                 <div class="form-line">
+                                                <label><small>Premium: </small></label>
+                                                    <input id = "bi" name = "bi" type="text" class="form-control" readonly="true" value="">
+                                                </div>
+                                            </div>
+                                        </div> 
+                                    </div>
+
+                                    <div class="row clearfix">
+                                        <div class="col-md-6">
+                                            <div class="form-group form-float">
+                                                <div class="form-line">
                                                 <label><small>Act of Nature: </small></label>
                                                     <input id = "aon" name = "aon" type="text" class="form-control" readonly="true" value="">
                                                 </div>
                                             </div>
                                         </div> 
-                                    </div> 
+
+                                        <div class="col-md-6">
+                                            <div class="form-group form-float">
+                                                <div class="form-line">
+                                                <label><small>Premium: </small></label>
+                                                    <input id = "bi" name = "bi" type="text" class="form-control" readonly="true" value="">
+                                                </div>
+                                            </div>
+                                        </div> 
+                                    </div>
 
                                     <div class="row clearfix">
                                         <div class="col-md-4">

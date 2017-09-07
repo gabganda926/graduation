@@ -117,19 +117,6 @@
                                         </div>
 
                                         <h3> <small><b>INSURANCE DETAILS</b></small></h3>
-                                            <div class="row clearfix">
-                                                <div class="col-md-12" align="center">
-                                                    <button type="button" class="btn bg-light-blue waves-effect" data-toggle="collapse" data-target="#indi_formImage">Click to attach form</button> <!-- PAG NAKA VIEW NA, Magiging "Hide attached form" yung nakalagay-->
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="collapse fade" role="dialog" id="indi_formImage" align="center">
-                                                        <div class="fallback">
-                                                            <img id="indi_image" src="#" alt="your image" style="height: 500px; width: 500px; border-style: solid; border-width: 2px;"><br/><br/>
-                                                                <input id = "indi_picture" name = "indi_picture" type="file" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|images/*">
-                                                        </div>
-                                                    </div> 
-                                                </div>
-                                            </div> <!-- END OF ROW CLEARFIX -->
                                         <div class="row clearfix">
                                             <div class="col-md-6">
                                                 <div class="form-group form-float">
@@ -498,20 +485,6 @@
                                         </div>
 
                                         <h3> <small><b>INSURANCE DETAILS</b></small></h3>
-                                            <div class="row clearfix">
-                                                <div class="col-md-12" align="center">
-                                                    <button type="button" class="btn bg-light-blue waves-effect" data-toggle="collapse" data-target="#comp_formImage">Click to attach form</button> <!-- PAG NAKA VIEW NA, Magiging "Hide attached form" yung nakalagay-->
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="collapse fade" role="dialog" id="comp_formImage" align="center">
-                                                        <div class="fallback">
-                                                            <img id="comp_image" src="#" alt="your image" style="height: 500px; width: 500px; border-style: solid; border-width: 2px;"><br/><br/>
-                                                                <input id = "comp_picture" name = "comp_picture" type="file" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|images/*">
-                                                        </div>
-                                                    </div> 
-                                                </div>
-                                                
-                                            </div> <!-- END OF ROW CLEARFIX -->
                                         <div class="col-md-6">
                                                 <div class="form-group form-float">
                                                 <label><small>Insurance Company: </small></label>

@@ -4,7 +4,6 @@ CREATE DATABASE Cimis;
 
 USE CIMIS;	
 
-SELECT * FROM tbl_payments;
 
 CREATE TABLE tbl_address
 (
@@ -317,10 +316,10 @@ CREATE TABLE tbl_payments
 	payment_ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	or_number VARCHAR(20) UNIQUE,
 	check_voucher INT NOT NULL,
-	amount_paid FLOAT NOT NULL,
+	amount_paid FLOAT,
 	amount FLOAT NOT NULL,
-	paid_date DATE,
-	due_date DATE NOT NULL,
+	paid_date datetime,
+	due_date DATETIME NOT NULL,
 	status INT NOT NULL,
 	FOREIGN KEY (check_voucher) REFERENCES tbl_check_voucher(cv_ID),
 );

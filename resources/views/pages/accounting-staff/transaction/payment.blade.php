@@ -54,6 +54,100 @@
         </script>
     </h2>
     <br/>
+    <!-- View INST MODAL-->
+              <div class="modal fade" id="div_details" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg animated zoomInRight active" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header modal-header-view">
+                            <h4 style="text-align: center;"><img src="{{ URL::asset ('images/icons/view-bill.png')}}" style="height: 50px; width: 50px;"> <br/><br/> Breakdown of Payment </h4>
+                        </div><br/>
+                        <div class="modal-body">
+                            <h4 >Payment Progress</h4><br/>
+                            <div class="row clearfix">
+                                <div class="col-md-12">
+                                    <div class="progress">
+                                        <div id="prog" class="progress-bar progress-bar-success" role="progressbar" aria-valuemax="100" style="width: 20%;">
+                                            <label id="lblprog" for="prog"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><br/>
+                            <div class="body table-responsive">
+                                <table id="details" class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Remittance Date/Time</th>
+                                            <th>BOP No.</th>
+                                            <th>Bank</th>
+                                            <th>Due Date</th>
+                                            <th>Amount Due</th>
+                                            <th class="col-md-1">Status</th>
+                                            <th class="col-md-1">Action</th>
+                                            <th>vouchid</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($plist as $list)
+                                        @foreach($cvouch as $vouch)
+                                            @if($list->check_voucher == $vouch->cv_ID)
+                                        <tr>
+                                            <td>@if($list->status == 0)
+                                                    {{ \Carbon\Carbon::parse($list->paid_date)->format("M-d-Y") }} {{ "(".\Carbon\Carbon::parse($list->paid_date)->format("l, h:i:s A").")" }}
+                                                @endif
+                                                @if($list->status == 1)
+                                                    ----
+                                                @endif
+                                                @if($list->status == 3)
+                                                    {{ \Carbon\Carbon::parse($list->paid_date)->format("M-d-Y") }} {{ "(".\Carbon\Carbon::parse($list->paid_date)->format("l, h:i:s A").")" }}
+                                                @endif</td>
+                                            <td>BOP000{{ $list->payment_ID }}</td>
+                                            <td>@foreach($payDet as $paydet)
+                                                    @if($vouch->pay_ID == $paydet->payment_ID)
+                                                        @foreach($bank as $bnk)
+                                                            @foreach($address as $addr)
+                                                                @if($paydet->bank_ID == $bnk->bank_ID)
+                                                                    @if($bnk->bank_add_ID == $addr->add_ID)
+                                                                        {{ $bnk->bank_name_alt }} {{ $addr->add_city }}
+                                                                    @endif
+                                                                @endif
+                                                            @endforeach
+                                                        @endforeach
+                                                    @endif
+                                                @endforeach</td>
+                                            <td>{{ \Carbon\Carbon::parse($list->due_date)->format("M-d-Y") }}</td>
+                                            <td>
+                                                <script>
+                                                    var data = numberWithCommas({{ $list->amount }}); document.write("₱ " + data);
+                                                </script>
+                                            </td>
+                                            <td>@if($list->status == 0)
+                                                    <span class="label bg-green">paid</span>
+                                                @endif
+                                                @if($list->status == 1)
+                                                    <span class="label bg-blue">to be paid</span>
+                                                @endif
+                                                @if($list->status == 3)
+                                                    <span class="label bg-red">late</span>
+                                                @endif</td>
+                                            <td><button type="button" class="btn bg-orange waves-effect" onclick="window.open('{{ URL::asset('/pdf/payment-receipt') }}')" style="position: right;"  data-toggle="tooltip" data-placement="left" title="Generate Receipt">
+                                            <i class="material-icons">picture_as_pdf</i><span style="font-size: 15px;"></span>
+                                            </button></td>
+                                            <td>{{ $vouch->cv_ID }}</th>
+                                        </tr>
+                                            @endif
+                                        @endforeach
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="modal-footer js-sweetalert">
+                            <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# VIEW INST MODAL -->
         <div class="container-fluid">
             <div class="row clearfix">
                 <div class="col-md-12">
@@ -68,6 +162,11 @@
                         <div class="header">
                         <h3 style="text-align: center;"><img src="{{ URL::asset ('images/icons/view-bill.png')}}" style="height: 50px; width: 50px;"> <b> Bills </b></h3>
                         <div class="divider" style="margin-bottom:20px;"></div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-md-4" style = "display: none;">
+                                <input id = "cvid" name = "cvid" type="text" class="form-control" readonly="true">
+                            </div>
                         </div>
                         <div class="body">
                             <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
@@ -133,7 +232,33 @@
                                          </script>
                                         </td>
                                         <td><span class="label bg-orange">on payment</td>
-                                        <td><button type="button" class="btn bg-blue waves-effect" style="position: right;"  data-toggle="modal" data-target="#details">
+                                        <td><button type="button" class="btn bg-blue waves-effect" style="position: right;"  data-toggle="modal" data-target="#div_details" onclick = "
+                                            var table = $('#details').DataTable();
+                                            table.column(7).search({{ $cv->cv_ID }}).draw();
+
+                                            var i = 0;
+                                            var paid = 0;
+                                            var total = 0;
+                                                @foreach($plist as $list)
+                                                    @if($list->check_voucher == $cv->cv_ID)
+                                                        @if($list->status == 0)
+                                                            paid++;
+                                                            total++;
+                                                            console.log(paid);
+                                                        @endif
+                                                        @if($list->status == 1)
+                                                            i++;
+                                                            total++;
+                                                        @endif
+                                                        @if($list->status == 3)
+                                                            paid++;
+                                                            total++;
+                                                        @endif
+                                                    @endif
+                                                @endforeach
+                                            var per = Math.round((paid/total)*100) +'%';
+                                            $('#prog').css({ width : per });   
+                                            document.getElementById('lblprog').innerText = per;">
                                             <i class="material-icons" data-toggle="tooltip" data-placement="left" title="View Payment Breakdown">chrome_reader_mode</i><span style="font-size: 15px;">
                                         </button>
                                         <button type="button" class="btn bg-orange waves-effect" onclick="window.open('{{ URL::asset('/pdf/breakdown-payment') }}')" style="position: right;"  data-toggle="tooltip" data-placement="left" title="Generate PDF">
@@ -148,87 +273,13 @@
                 </div>
             </div>
         </div>
-
-         <!-- View INST MODAL-->
-              <div class="modal fade" id="details" tabindex="-1" role="dialog">
-                <div class="modal-dialog modal-lg animated zoomInRight active" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header modal-header-view">
-                            <h4 style="text-align: center;"><img src="{{ URL::asset ('images/icons/view-bill.png')}}" style="height: 50px; width: 50px;"> <br/><br/> Breakdown of Payment </h4>
-                        </div><br/>
-                        <div class="modal-body">
-                            <h4 >Payment Progress</h4><br/>
-                            <div class="row clearfix">
-                                <div class="col-md-12">
-                                    <div class="progress">
-                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;">
-                                            75%
-                                        </div>
-                                    </div>
-                                </div>
-                            </div><br/>
-                            <div class="body table-responsive">
-                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
-                                    <thead>
-                                        <tr>
-                                            <th>BOP No.</th>
-                                            <th>Bank</th>
-                                            <th>Due Date</th>
-                                            <th>Amount Due</th>
-                                            <th>Status</th>
-                                            <th>Remittance Date/Time</th>
-                                            <th class="col-md-1">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>003234543</td>
-                                            <td>Banco De Oro - Antipolo City</td>
-                                            <td>July 13, 2017</td>
-                                            <td>5, 000.00</td>
-                                            <td><span class="label bg-green">paid</span></td>
-                                            <td>July 13, 2017</td>
-                                            <td><button type="button" class="btn bg-orange waves-effect" onclick="window.open('{{ URL::asset('/pdf/payment-receipt') }}')" style="position: right;"  data-toggle="tooltip" data-placement="left" title="Generate Receipt">
-                                            <i class="material-icons">picture_as_pdf</i><span style="font-size: 15px;"></span>
-                                            </button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>003234543</td>
-                                            <td>Banco De Oro - Antipolo City</td>
-                                            <td>August 13, 2017</td>
-                                            <td>5, 000.00</td>
-                                            <td><span class="label bg-red">late</span></td>
-                                            <td>August 15, 2017 11:09PM</td>
-                                            <td><button type="button" class="btn bg-orange waves-effect" onclick="window.open('{{ URL::asset('/pdf/payment-receipt') }}')" style="position: right;"  data-toggle="tooltip" data-placement="left" title="Generate Receipt">
-                                            <i class="material-icons">picture_as_pdf</i><span style="font-size: 15px;"></span>
-                                            </button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>003234543</td>
-                                            <td>Banco De Oro - Antipolo City</td>
-                                            <td>September 13, 2017</td>
-                                            <td>5, 000.00</td>
-                                            <td><span class="label bg-blue">to be paid</span></td>
-                                        </tr>
-                                        <tr></tr>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td><b style="color: red">15, 000.00</b></td>
-                                            <td></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="modal-footer js-sweetalert">
-                            <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- #END# VIEW INST MODAL -->
     </section>
+
+    <script>
+        var table = $('#details').DataTable();
+        table.column( 7 ).visible( false );
+        $('#details').css('width', '100%');
+
+    </script>
 
 @endsection

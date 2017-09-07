@@ -64,8 +64,8 @@
                                 <div class="col-md-12">
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                        <label><small>Remittance Date:</small></label>
-                                            <input id = "remittance_date" name = "remittance_date" type="date" class="form-control" readonly required>
+                                        <label><small>Remittance Date/Time:</small></label>
+                                            <input id = "remittance_date" name = "remittance_date" type="datetime" class="form-control" readonly required>
                                         </div>
                                     </div>
                                 </div>
@@ -242,6 +242,7 @@
         var mm = today.getMonth()+1;
         var yyyy = today.getFullYear();
 
+
         function parseDate(input) {
           var parts = input.match(/(\d+)/g);
           // new Date(year, month [, date [, hours[, minutes[, seconds[, ms]]]]])
@@ -261,7 +262,15 @@
 
         if(dd<10){dd='0'+dd} if(mm<10){mm='0'+mm} today = yyyy+'-'+mm+'-'+dd;
 
-        $('#remittance_date').val(today);
+        var myVar1=setInterval(function(){myTimer1()},1000);
+
+        function myTimer1() {
+            var f = new Date();
+           $('#remittance_date').val(today+ " " +f.toLocaleTimeString());
+        }
+
+
+        
 
         function numberWithCommas(x) {
             x = x + '';
@@ -356,7 +365,7 @@
                  @if($vouch->cv_ID == $pay->check_voucher)
                   @if($pay->status == 1)
                    if('{{$acc->policy_number}}' == $('#policy_number option:selected').val())
-                   newOptions[data] = { check_num : "{{ $pay->payment_ID }}", due_date : "{{$pay->due_date}}", amount : "{{$pay->amount}}" };
+                   newOptions[data] = { check_num : "{{ $pay->payment_ID }}", due_date : "{{\Carbon\Carbon::parse($pay->due_date)->format('Y-m-d')}}", amount : "{{$pay->amount}}" };
                    data += 1; 
                   @endif
                  @endif
@@ -392,7 +401,7 @@
                 @foreach($payments as $pay)
                  @if($vouch->cv_ID == $pay->check_voucher)
                  if('{{$acc->policy_number}}' == $('#policy_number option:selected').val())
-                 newOptions[data] = { checknum : "{{ $pay->payment_ID }}", due_date : "{{$pay->due_date}}", amount : "{{$pay->amount}}", status : "{{$pay->status}}" };
+                 newOptions[data] = { checknum : "{{ $pay->payment_ID }}", due_date : "{{\Carbon\Carbon::parse($pay->due_date)->format('Y-m-d')}}", amount : "{{$pay->amount}}", status : "{{$pay->status}}" };
                  data += 1;
                  @endif
                 @endforeach

@@ -29,6 +29,8 @@ use App\premiumDGConnection;
 
 use App\premiumPAConnection;
 
+use App\paymentListConnection;
+
 use Redirect;
 
 use Alert;
@@ -38,6 +40,7 @@ class trans_listBreakdownController extends Controller
     public function index()
   {
     return view('pages/accounting-staff/transaction/payment')
+    ->with('plist', paymentListConnection::all())
     ->with('payments', paymentConnection::all())
     ->with('cvouch', checkVoucherConnection::all())
     ->with('payDet', paymentDetailConnection::all())
