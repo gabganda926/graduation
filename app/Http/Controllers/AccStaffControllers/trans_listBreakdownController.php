@@ -35,6 +35,8 @@ use Redirect;
 
 use Alert;
 
+use PDF;
+
 class trans_listBreakdownController extends Controller
 {
     public function index()
@@ -54,4 +56,31 @@ class trans_listBreakdownController extends Controller
     ->with('ppa'  , premiumPAConnection::all())
     ->with('address', addressConnection::all());
   }
+
+  public function generateBOP(Request $request, $cv_ID, $pinfo_ID, $account_ID) 
+    {
+        $cv = checkVoucherConnection::where('cv_ID',$cv_ID)->first();
+        $pno = clientAccountsConnection::where('account_ID',$account_ID)->first();
+        $inf = personalInfoConnection::where('pinfo_ID',$pinfo_ID)->first();
+        
+
+        $pdf = PDF::loadView('pages.pdf.breakdown-payment',
+                compact('cv', 'pno', 'inf'))
+            ->setPaper('Letter');
+
+        return $pdf->stream();
+    }//generates the pdf
+
+    public function generateBOPcomp(Request $request, $cv_ID, $comp_ID, $account_ID) 
+    {
+        $cv = checkVoucherConnection::where('cv_ID',$cv_ID)->first();
+        $pno = clientAccountsConnection::where('account_ID',$account_ID)->first();
+        $inf = inscompanyConnection::where('comp_ID',$comp_ID)->first();
+
+        $pdf = PDF::loadView('pages.pdf.breakdown-payment-comp',
+                compact('cv', 'pno', 'inf'))
+            ->setPaper('Letter');
+
+        return $pdf->stream();
+    }//generates the pdf
 }

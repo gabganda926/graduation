@@ -57,7 +57,7 @@
 		</div>
         <div class="col s12"><div class="divider" style="height:3px; background-color:teal"></div></div><br/>
         <p style="color:black; text-align: center; font-size:15px;"><b>BREAKDOWN OF PAYMENT</b></p><br/><br/>
-        <p><strong><input type="text" style="border: none; font-size: 15px; width: 400px;" value="Client:  {{ $inf->pinfo_last_name }}, {{ $inf->pinfo_first_name }}"></strong><b><input type="text" style="border: none; font-size: 15px; width: 400px;" value="Bill Number:  BILL000{{ $cv->cv_ID }}"></b></p>
+        <p><strong><input type="text" style="border: none; font-size: 15px; width: 400px;" value="Client:  {{ $inf->comp_name }}"></strong><b><input type="text" style="border: none; font-size: 15px; width: 400px;" value="Bill Number:  BILL000{{ $cv->cv_ID }}"></b></p>
         <p><strong><input type="text" style="border: none; font-size: 15px; width: 400px;" value="Policy Number:  {{ $pno->policy_number}}"> </strong><b><input type="text" style="border: none; font-size: 15px; width: 400px;" value="Insurance Company:   FPG Insurance"></b></label></p>
         <p>Date: <b><script>
         var today = new Date();

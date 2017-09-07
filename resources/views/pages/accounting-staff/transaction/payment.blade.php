@@ -129,9 +129,48 @@
                                                 @if($list->status == 3)
                                                     <span class="label bg-red">late</span>
                                                 @endif</td>
-                                            <td><button type="button" class="btn bg-orange waves-effect" onclick="window.open('{{ URL::asset('/pdf/payment-receipt') }}')" style="position: right;"  data-toggle="tooltip" data-placement="left" title="Generate Receipt">
-                                            <i class="material-icons">picture_as_pdf</i><span style="font-size: 15px;"></span>
-                                            </button></td>
+                                            <td>
+                                                @if($list->status == 0 || $list->status == 3)
+                                                @foreach($payDet as $pdet)
+                                                    @if($vouch->pay_ID == $pdet->payment_ID)
+                                                    @foreach($cliacc as $insacc)
+                                                        @if($insacc->account_ID == $pdet->account_ID)
+                                                        @if($insacc->account_ID == $pdet->account_ID)
+                                                            @foreach($clilist as $clients)
+                                                                @if($clients->client_type == 1)
+                                                                @if($insacc->client_ID == $clients->client_ID)
+                                                                    @foreach($client as $cli)
+                                                                        @if($clients->client_ID == $cli->client_ID)
+                                                                            @foreach($pInfo as $pinfo)
+                                                                                @if($cli->personal_info_ID == $pinfo->pinfo_ID)
+                                                                                <button type="button" id="gen" data-or=" {{ $list->or_number }} " data-pinf=" {{$pinfo->pinfo_ID}} " data-acc="{{ $insacc->account_ID }}" onclick="window.open('{{ URL ('/pdf/payment-receipt/' .$list->or_number. '/' .$pinfo->pinfo_ID. '/' .$insacc->account_ID) }}')" class="btn bg-orange waves-effect" style="position: right;" data-toggle="tooltip" data-placement="left" title="Generate Receipt">
+                                                        <i class="material-icons">picture_as_pdf</i><span style="font-size: 15px;"></span>
+                                                        </button>
+                                                                                @endif
+                                                                            @endforeach
+                                                                        @endif
+                                                                    @endforeach
+                                                                @endif
+                                                                @endif
+                                                                @if($clients->client_type == 2)
+                                                                @if($insacc->client_ID == $clients->client_ID)
+                                                                    @foreach($company as $comp)
+                                                                        @if($clients->client_ID == $comp->comp_ID)
+                                                                            <button type="button" id="gen" data-or=" {{ $list->or_number }} " data-pinf=" {{$pinfo->pinfo_ID}} " data-acc="{{ $insacc->account_ID }}" onclick="window.open('{{ URL ('/pdf/payment-receipt-comp/' .$list->or_number. '/' .$comp->comp_ID. '/' .$insacc->account_ID) }}')" class="btn bg-orange waves-effect" style="position: right;" data-toggle="tooltip" data-placement="left" title="Generate Receipt">
+                                                        <i class="material-icons">picture_as_pdf</i><span style="font-size: 15px;"></span>
+                                                        </button>
+                                                                        @endif
+                                                                    @endforeach
+                                                                @endif
+                                                                @endif
+                                                            @endforeach
+                                                        @endif
+                                                        @endif
+                                                    @endforeach
+                                                @endif
+                                                @endforeach
+                                                @endif
+                                            </td>
                                             <td>{{ $vouch->cv_ID }}</th>
                                         </tr>
                                             @endif
@@ -261,9 +300,44 @@
                                             document.getElementById('lblprog').innerText = per;">
                                             <i class="material-icons" data-toggle="tooltip" data-placement="left" title="View Payment Breakdown">chrome_reader_mode</i><span style="font-size: 15px;">
                                         </button>
-                                        <button type="button" class="btn bg-orange waves-effect" onclick="window.open('{{ URL::asset('/pdf/breakdown-payment') }}')" style="position: right;"  data-toggle="tooltip" data-placement="left" title="Generate PDF">
-                                            <i class="material-icons">picture_as_pdf</i><span style="font-size: 15px;"></span>
-                                            </button></td>
+                                            @foreach($payDet as $pdet)
+                                                @if($cv->pay_ID == $pdet->payment_ID)
+                                                    @foreach($cliacc as $insacc)
+                                                        @if($pdet->account_ID == $insacc->account_ID)
+                                                            @foreach($clilist as $clist)
+                                                                @if($clist->client_type == 1)
+                                                                @if($insacc->client_ID == $clist->client_ID)
+                                                                    @foreach($client as $cli)
+                                                                        @if($clist->client_ID == $cli->client_ID)
+                                                                            @foreach($pInfo as $pinfo)
+                                                                                @if($cli->personal_info_ID == $pinfo->pinfo_ID)
+                                                                                <button type="button" class="btn bg-orange waves-effect" data-cv=" {{ $cv->cv_ID }} " data-pinf=" {{$pinfo->pinfo_ID}} " data-acc="{{ $insacc->account_ID }}" onclick="window.open('{{ URL ('/pdf/breakdown-payment/' .$cv->cv_ID. '/' .$pinfo->pinfo_ID. '/' .$insacc->account_ID) }}')" style="position: right;"  data-toggle="tooltip" data-placement="left" title="Generate PDF">
+                                                                                <i class="material-icons">picture_as_pdf</i><span style="font-size: 15px;"></span>
+                                                                                </button>
+                                                                                @endif
+                                                                            @endforeach
+                                                                        @endif
+                                                                    @endforeach
+                                                                @endif
+                                                                @endif
+                                                                @if($clist->client_type == 2)
+                                                                @if($insacc->client_ID == $clist->client_ID)
+                                                                    @foreach($company as $comp)
+                                                                        @if($clist->client_ID == $comp->comp_ID)
+                                                                            <button type="button" id="gen" data-or=" {{ $cv->cv_ID }} " data-pinf=" {{$pinfo->pinfo_ID}} " data-acc="{{ $insacc->account_ID }}" onclick="window.open('{{ URL ('/pdf/breakdown-payment-comp/' .$cv->cv_ID. '/' .$comp->comp_ID. '/' .$insacc->account_ID) }}')" class="btn bg-orange waves-effect" style="position: right;" data-toggle="tooltip" data-placement="left" title="Generate Receipt">
+                                                                            <i class="material-icons">picture_as_pdf</i><span style="font-size: 15px;"></span>
+                                                                            </button>
+                                                                        @endif
+                                                                    @endforeach
+                                                                @endif
+                                                                @endif
+                                                            @endforeach    
+                                                        @endif
+                                                    @endforeach
+                                                @endif
+                                            @endforeach
+
+                                        </td>
                                     </tr>              
                                     @endforeach
                                 </tbody>

@@ -280,7 +280,7 @@
                                             <div class="form-group form-float">
                                                 <div class="form-line">
                                                 <label><small>Vehicle Make:</small></label>
-                                                    <input id = "vehicle_make" name = "apinfo_tpnum" type="text" class="form-control"  readonly="true" ">
+                                                    <input id = "vehicle_make" name = "vehicle_make" type="text" class="form-control"  readonly="true" ">
                                                 </div>
                                             </div>
                                         </div>
@@ -422,7 +422,7 @@
                                             <div class="form-group form-float">
                                                 <div class="form-line">
                                                 <label><small>Authorized Repair Limit: </small></label>
-                                                    <input id = "arlimit" name = "arlimit" type="text" class="form-control" readonly="true" value="">
+                                                    <input id = "arl" name = "arl" type="text" class="form-control" readonly="true" value="">
                                                 </div>
                                             </div>
                                         </div>
@@ -450,7 +450,7 @@
                                             <div class="form-group form-float">
                                                 <div class="form-line">
                                                 <label><small>Premium: </small></label>
-                                                    <input id = "bi" name = "bi" type="text" class="form-control" readonly="true" value="">
+                                                    <input id = "bi_premium" name = "bi_premium" type="text" class="form-control" readonly="true" value="">
                                                 </div>
                                             </div>
                                         </div> 
@@ -470,7 +470,7 @@
                                             <div class="form-group form-float">
                                                 <div class="form-line">
                                                 <label><small>Premium: </small></label>
-                                                    <input id = "bi" name = "bi" type="text" class="form-control" readonly="true" value="">
+                                                    <input id = "pd_premium" name = "pd_premium" type="text" class="form-control" readonly="true" value="">
                                                 </div>
                                             </div>
                                         </div> 
@@ -490,7 +490,7 @@
                                             <div class="form-group form-float">
                                                 <div class="form-line">
                                                 <label><small>Premium: </small></label>
-                                                    <input id = "bi" name = "bi" type="text" class="form-control" readonly="true" value="">
+                                                    <input id = "pa_premium" name = "pa_premium" type="text" class="form-control" readonly="true" value="">
                                                 </div>
                                             </div>
                                         </div>           
@@ -502,7 +502,7 @@
                                             <div class="form-group form-float">
                                                 <div class="form-line">
                                                     <label><small>Own Damage/Theft Coverage: </small></label>
-                                                        <input id = "wcode" name = "wcode" type="text" class="form-control" readonly="true" value="">
+                                                        <input id = "odt" name = "odt" type="text" class="form-control" readonly="true" value="">
                                                 </div>
                                             </div>
                                         </div>
@@ -511,7 +511,7 @@
                                             <div class="form-group form-float">
                                                 <div class="form-line">
                                                 <label><small>Premium: </small></label>
-                                                    <input id = "bi" name = "bi" type="text" class="form-control" readonly="true" value="">
+                                                    <input id = "odt_premium" name = "odt_premium" type="text" class="form-control" readonly="true" value="">
                                                 </div>
                                             </div>
                                         </div> 
@@ -531,7 +531,7 @@
                                             <div class="form-group form-float">
                                                 <div class="form-line">
                                                 <label><small>Premium: </small></label>
-                                                    <input id = "bi" name = "bi" type="text" class="form-control" readonly="true" value="">
+                                                    <input id = "aon_premium" name = "aon_premium" type="text" class="form-control" readonly="true" value="">
                                                 </div>
                                             </div>
                                         </div> 
@@ -747,8 +747,55 @@
             {
                 data = data + parseFloat($('#pd').val().replace(/[^0-9\.]/g,'')); 
             }
-            $('#total').html("<b>Total Net Premium: ₱ " + numberWithCommas(data) + "</b>");
             
+            var ins = $('#insurance_company').val();
+
+            if(ins == 1)
+                $('#deductible').val('₱ '+numberWithCommas(3100));
+            if(ins == 2)
+                $('#deductible').val('₱ '+numberWithCommas(1000));
+            if(ins == 3)
+                $('#deductible').val('₱ '+numberWithCommas(3000));
+            if(ins == 4)
+                $('#deductible').val('₱ '+numberWithCommas(2000));
+
+            $('#towing').val('₱ '+numberWithCommas(100));
+
+            $('#arl').val('₱ '+numberWithCommas(parseFloat($('#deductible').val().replace(/[^0-9\.]/g,''))+parseFloat($('#towing').val().replace(/[^0-9\.]/g,''))))
+
+            var coverage = parseFloat($('#vehicle_model_value').val().replace(/[^0-9\.]/g,'')) * .2;
+
+            // var grosspremium = parseFloat($('#indi_vmodel_value').val().replace(/[^0-9\.]/g,'')) * .013;
+
+            $('#aon').val('₱ '+numberWithCommas(Math.round(coverage * 100)/100));
+            $('#odt').val('₱ '+numberWithCommas(Math.round(coverage * 100)/100));
+
+            if(ins == 1)
+                $('#aon_premium').val('₱ '+numberWithCommas(coverage * 0.02));
+            if(ins == 2)
+            {
+                $('#aon').val('₱ 0');
+                $('#aon_premium').val('₱ 0');
+            }
+            if(ins == 3)
+                $('#aon_premium').val('₱ '+numberWithCommas(coverage * 0.005));
+            if(ins == 4)
+                $('#aon_premium').val('₱ '+numberWithCommas(coverage * 0.005));
+
+            var odt = parseFloat(coverage * .013);
+            // Math.abs((((parseFloat($('#indi_aon').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#indi_bi_premium').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#indi_pd_premium').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#indi_pa_premium').val().replace(/[^0-9\.]/g,''))) * 1.2470) - grosspremium) / 1.2470)
+
+             $('#odt_premium').val('₱ '+numberWithCommas(Math.round(odt * 100)/100));
+
+            var basicpremium = (parseFloat($('#aon_premium').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#bi_premium').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#pd_premium').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#pa_premium').val().replace(/[^0-9\.]/g,''))) + odt;
+            var vat = basicpremium * .125;
+            var stamp = basicpremium * .12;
+            var rounded = Math.ceil((basicpremium + vat + stamp)/100)*100;
+
+            var lgt = rounded - (basicpremium + vat + stamp);
+
+            var total = basicpremium + vat + stamp + lgt;
+            $('#total').html("<b>Total Net Premium: ₱ " + numberWithCommas(total) + "</b>");
         });
     </script>
 
