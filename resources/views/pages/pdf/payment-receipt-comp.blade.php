@@ -74,25 +74,48 @@
         } 
 
         today = mm+'/'+dd+'/'+yyyy+</script><?php 
-    $today = date("D M j Y");  
+    $today = date("D - M j, Y");  
 
     echo $today; 
-    ?></b></p><br/><br/> <!-- DATE KUNG KAILAN INISSUE TONG OR -->
+    ?></b></p><br/> <!-- DATE KUNG KAILAN INISSUE TONG OR -->
 
         <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Received from: <b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ $inf->comp_name }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </b></p><br/>
 
-        <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; with &nbsp;&nbsp;  Policy Number &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b> {{ $pno->policy_number}} </b>&nbsp;&nbsp;&nbsp; the sum of &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b> &nbsp;&nbsp;&nbsp;₱&nbsp;&nbsp;&nbsp;<b> {{ round($or->amount_paid,2) }}</b> &nbsp;&nbsp; </b> &nbsp;&nbsp;&nbsp;&nbsp;</p><br/>
+        <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; with &nbsp;&nbsp;  Policy Number &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b> {{ $pno->policy_number}} </b>&nbsp;&nbsp;&nbsp; the sum of &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b> &nbsp;&nbsp;&nbsp;₱&nbsp;&nbsp;&nbsp;<b> <?php $number = round($or->amount_paid,2); echo number_format($number, 2, '.', ','); ?></b> &nbsp;&nbsp; </b> &nbsp;&nbsp;&nbsp;&nbsp;</p><br/>
 
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; in full/partial payment for BOP No. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b> BOP000{{ $or->payment_ID }} </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; from Bill No. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b> BILL000{{ $or->check_voucher }}. </b>  </p><br/><br/>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; in full/partial payment for BOP No. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b> @if($or->payment_ID >= 10)
+                                        BOP00{{ $or->payment_ID }}
+                                    @endif
+                                    @if($or->payment_ID < 10)
+                                        BOP000{{ $or->payment_ID }}
+                                    @endif
+                                    @if($or->payment_ID >= 100)
+                                        BOP0{{ $or->payment_ID }}
+                                    @endif
+                                    @if($or->payment_ID >= 1000)
+                                        BOP{{ $or->payment_ID }}
+                                    @endif </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; from Bill No. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b> @if($or->check_voucher >= 10)
+	                                        BILL00{{ $or->check_voucher }}.
+	                                    @endif
+	                                    @if($or->check_voucher < 10)
+	                                        BILL000{{ $or->check_voucher }}.
+	                                    @endif
+	                                    @if($or->check_voucher >= 100)
+	                                        BILL0{{ $or->check_voucher }}.
+	                                    @endif
+	                                    @if($or->check_voucher >= 1000)
+	                                        BILL{{ $or->check_voucher }}.
+	                                    @endif </b>  </p><br/>
 
 
-        <p style="color:black; text-align: right; font-size:12px;">Remittance Date:<b> {{ $or->paid_date }}</b></p><br/>
-        <p style="color:black; text-align: right; font-size:12px;">Due Date:<b> {{ $or->due_date}}</b></p>
-        <p style="color:black; text-align: right; font-size:12px;">Amount Due:<b> ₱{{ round($or->amount,2) }}</b></p>
-        <p style="color:black; text-align: right; font-size:12px;">Amount Paid:<b> ₱{{ round($or->amount_paid,2) }}</b></p>
-        <p style="color:black; text-align: right; font-size:12px;">Change:<b> ₱{{ round($or->amount_paid,2) - round($or->amount,2) }} </b></p><br/>
+        <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Received &nbsp;&nbsp;&nbsp; at &nbsp;&nbsp;&nbsp;&nbsp; <b> {{ \Carbon\Carbon::parse($or->paid_date)->format('g:ia \o\n l jS F Y')}}.</p><br/>
 
-        <p style="color:black; text-align: left; font-size:15px;"><b>Maria Gabriella Tan Rola</b></p>
+        <p style="color:black; text-align: right; font-size:12px;">Due Date:<b> {{ \Carbon\Carbon::parse($or->due_date)->format('M d, Y')}} </b></p>
+        <p style="color:black; text-align: right; font-size:12px;">Amount Due:<b> ₱ <?php $number = round($or->amount,2); echo number_format($number, 2, '.', ','); ?></b></p>
+        <p style="color:black; text-align: right; font-size:12px;">Amount Paid:<b> ₱ <?php $number = round($or->amount_paid,2); echo number_format($number, 2, '.', ','); ?></b></p>
+        <p style="color:black; text-align: right; font-size:12px;">Change:<b> ₱ <?php $number = round($or->amount_paid,2) - round($or->amount,2); echo number_format($number, 2, '.', ','); ?></b></p><br/><br/>
+
+        <p style="color:black; text-align: left; font-size:15px;"><b>Maria Gabriella Tan Rola</b></p><br/>
         <p style="color:black; text-align: left; font-size:12px;"><b>Accounting Staff</b></p>
 
 	</body>

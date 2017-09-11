@@ -1,6 +1,6 @@
 @extends('pages.accounting-staff.master')
 
-@section('title','Insurance Accounts - Transaction| i-Insure')
+@section('title','Insurance Accounts - Transaction | i-Insure')
 
 @section('transIns','active')
 

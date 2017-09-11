@@ -1,6 +1,6 @@
 @extends('pages.admin.master')
 
-@section('title','Claims - Transaction| i-Insure')
+@section('title','Claims - Transaction | i-Insure')
 
 @section('trans','active')
 
@@ -79,11 +79,11 @@
                         <div class="body">
                             <div class="row clearfix">
                                 <div class="col-md-2">
-                                    <input name="group1" type="radio" id="radio_1" onclick="
+                                    <input name="group1" type="radio" id="radio_1" disabled="disable" onclick="
                                     $('#individualClient').show(800);
                                     $('#companyClient').hide(800);"/>
                                     <label for="radio_1">Individual</label>
-                                    <input name="group1" type="radio" id="radio_2" onclick="
+                                    <input name="group1" type="radio" id="radio_2" disabled="disable" onclick="
                                     $('#companyClient').show(800);
                                     $('#individualClient').hide(800);" />
                                     <label for="radio_2">Company</label>
@@ -93,6 +93,14 @@
                                         <div class="form-line">
                                             <label><small>Policy Number:</small></label>
                                             <input id = "aadd_blcknum" name = "aadd_blcknum" type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <label><small>Account Status:</small></label>
+                                            <input id = "aadd_blcknum" name = "aadd_blcknum" type="text" class="form-control" disabled="disable">
                                         </div>
                                     </div>
                                 </div>
@@ -916,11 +924,11 @@
                 <div class="modal-dialog animated zoomInLeft active" role="document">
                     <div class="modal-content">
                         <div class="modal-body">
-                            <form id="add" name = "add" action = "type/submit" method="POST">
+                            <form id="add" name = "add" method="POST">
                               <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <div class="row clearfix">
                                     <br/><br/><label>Choose claim type first</label>
-                                    <select id = "vehicle_type" name = "vehicle_type" class="form-control show-tick" data-live-search="true" required="">
+                                    <select id = "vehicle_type" name = "vehicle_type" class="form-control show-tick" data-live-search="true" required>
                                     <option selected value = "" style = "display: none;">---</option>
                                     <option>Total Loss</option>
                                     <option>Carnap</option>

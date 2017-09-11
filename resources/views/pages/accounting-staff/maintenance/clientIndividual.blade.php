@@ -1,6 +1,6 @@
 @extends('pages.accounting-staff.master')
 
-@section('title','New Client - Individual | CIMIS')
+@section('title','New Client - Individual | i-Insure')
 
 @section('transIns','active')
 
@@ -848,49 +848,65 @@
 
                                         @foreach($add as $addata)
                                           @if($addata->add_ID == $cli->client_add_ID)
-                                          {{ $addata->add_street }}
+                                          @if($addata->add_street != null)
+                                          {{ $addata->add_street }},
+                                          @endif
                                           @endif
                                         @endforeach
 
                                         @foreach($add as $addata)
                                           @if($addata->add_ID == $cli->client_add_ID)
-                                          {{ $addata->add_subdivision }}
+                                          @if($addata->add_subdivision != null)
+                                          {{ $addata->add_subdivision }},
+                                          @endif
                                           @endif
                                         @endforeach
 
                                         @foreach($add as $addata)
                                           @if($addata->add_ID == $cli->client_add_ID)
-                                          {{ $addata->add_brngy }}
+                                          @if($addata->add_brngy != null)
+                                          {{ $addata->add_brngy }},
+                                          @endif
                                           @endif
                                         @endforeach
 
                                         @foreach($add as $addata)
                                           @if($addata->add_ID == $cli->client_add_ID)
-                                          {{ $addata->add_district }}
+                                          @if($addata->add_district != null)
+                                          {{ $addata->add_district }},
+                                          @endif
                                           @endif
                                         @endforeach
 
                                         @foreach($add as $addata)
                                           @if($addata->add_ID == $cli->client_add_ID)
-                                          {{ $addata->add_city }}
+                                          @if($addata->add_city != null)
+                                          {{ $addata->add_city }},
+                                          @endif
                                           @endif
                                         @endforeach
 
                                         @foreach($add as $addata)
                                           @if($addata->add_ID == $cli->client_add_ID)
+                                          @if($addata->add_province != null)
                                           {{ $addata->add_province }}
                                           @endif
-                                        @endforeach
-
-                                        @foreach($add as $addata)
-                                          @if($addata->add_ID == $cli->client_add_ID)
-                                          {{ 'Region '.$addata->add_region }}
                                           @endif
                                         @endforeach
 
                                         @foreach($add as $addata)
                                           @if($addata->add_ID == $cli->client_add_ID)
+                                          @if($addata->add_region != null)
+                                          {{ 'Region '.$addata->add_region }}
+                                          @endif
+                                          @endif
+                                        @endforeach
+
+                                        @foreach($add as $addata)
+                                          @if($addata->add_ID == $cli->client_add_ID)
+                                          @if($addata->add_zipcode != null)
                                           {{ 'Zip Code: '.$addata->add_zipcode }}
+                                          @endif
                                           @endif
                                         @endforeach
                                       </td>

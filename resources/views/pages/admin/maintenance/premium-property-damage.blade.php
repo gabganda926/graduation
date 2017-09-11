@@ -96,6 +96,10 @@
                             </div>
                         <div class="modal-footer js-sweetalert">
                             <button class="btn btn-primary waves-effect" type="button" onclick = "
+                            $('body,html').animate({
+                                                                        scrollTop: 0
+                                                                    }, 500);
+                            document.getElementById('time').value = formatDate(new Date());
                                 document.getElementById('time').value = formatDate(new Date());
                                 if($('#add').valid())
                                 {
@@ -123,6 +127,10 @@
                                   });
                                 }">SUBMIT</button>
                                 <button type="button" class="btn btn-link waves-effect" data-toggle="collapse" data-target="#addCTypeModal" onclick="
+                                $('body,html').animate({
+                                                                        scrollTop: 0
+                                                                    }, 500);
+                            document.getElementById('time').value = formatDate(new Date());
                                     $('#add')[0].reset();
                                     $('#addbtn').show();">CLOSE</button>
                         </div>
@@ -196,7 +204,7 @@
                                     <div class="col-md-5">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <small><input type="text" id="date_created" class="form-control" readonly="true"></small>
+                                                <small><input type="text" id="date_created" class="form-control" readonly="true" style="font-size: 12px;"></small>
                                             </div>
                                         </div>
                                     </div>
@@ -206,7 +214,7 @@
                                     <div class="col-md-5">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <small><input type="text" id="last_update" class="form-control" readonly="true"></small>
+                                                <small><input type="text" id="last_update" class="form-control" readonly="true" style="font-size: 12px;"></small>
                                             </div>
                                         </div>
                                     </div>
@@ -282,6 +290,10 @@
                             </div>
                         <div class="modal-footer js-sweetalert">
                             <button id = "schange" class="btn btn-primary waves-effect" style = "display: none;" type="button" onclick = "
+                            $('body,html').animate({
+                                                                        scrollTop: 0
+                                                                    }, 500);
+                            document.getElementById('time').value = formatDate(new Date());
                             document.getElementById('atime').value = formatDate(new Date());
                             if($('#view').valid())
                             {
@@ -309,6 +321,10 @@
                               });
                             }">SAVE CHANGES</button>
                             <button type="button" class="btn btn-link waves-effect" data-toggle="collapse" data-target="#largeModal" onclick="
+                            $('body,html').animate({
+                                                                        scrollTop: 0
+                                                                    }, 500);
+                            document.getElementById('time').value = formatDate(new Date());
                             $('#Edit').prop('disabled', false);
                             $('#Delete').prop('disabled', false);
                             $('#schange').hide();
@@ -336,6 +352,10 @@
                                 <li class="dropdown">
                                     <li>
                                 <button id = "addbtn" form = "add" type="submit" class="btn bg-blue waves-effect" data-toggle="collapse" data-target="#addCTypeModal" onclick="
+                                $('body,html').animate({
+                                                                        scrollTop: 0
+                                                                    }, 500);
+                            document.getElementById('time').value = formatDate(new Date());
                                     $('#addbtn').hide();">
                                     <i class="material-icons">contacts</i>
                                     <span>Add New Premium Cover</span>
@@ -376,22 +396,22 @@
                                         <td>{{ $company->comp_name }}</td>
                                         <td>
                                             <script>
-                                                var data = numberWithCommas({{ $bi->insuranceLimit }}); document.write("₱ " + data);
+                                                var data = numberWithCommas({{ $bi->insuranceLimit }}); document.write("₱" + data);
                                             </script>
                                         </td>
                                         <td>
                                             <script>
-                                                var data = numberWithCommas({{ $bi->privateCar }}); document.write("₱ " + data);
+                                                var data = numberWithCommas({{ $bi->privateCar }}); document.write("₱" + data);
                                             </script>
                                         </td>
                                         <td>
                                             <script>
-                                                var data = numberWithCommas({{ $bi->cv_Light }}); document.write("₱ " + data);
+                                                var data = numberWithCommas({{ $bi->cv_Light }}); document.write("₱" + data);
                                             </script>
                                         </td>
                                         <td>
                                             <script>
-                                                var data = numberWithCommas({{ $bi->cv_Heavy }}); document.write("₱ " + data);
+                                                var data = numberWithCommas({{ $bi->cv_Heavy }}); document.write("₱" + data);
                                             </script>
                                         </td>
                                         <td><button type="button" class="btn bg-light-blue waves-effect" data-toggle="collapse" data-target="#largeModal"
@@ -407,6 +427,10 @@
                                               data-updated = '{{ \Carbon\Carbon::parse($bi->updated_at)->format("M-d-Y") }} {{ "(".\Carbon\Carbon::parse($bi->updated_at)->format("l, h:i:s A").")" }}'
 
                                               onclick= "
+                                              $('body,html').animate({
+                                                                        scrollTop: 0
+                                                                    }, 500);
+                            document.getElementById('time').value = formatDate(new Date());
                                               document.getElementById('ainsurance_compID').disabled=true;
 
                                               document.getElementById('id').value = $(this).data('id');

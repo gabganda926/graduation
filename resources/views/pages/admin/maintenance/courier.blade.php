@@ -724,10 +724,10 @@
                                 <thead>
                                     <tr class="bg-blue-grey">
                                         <th class="col-md-1"></th>
-                                        <th>Courier Number</th>
-                                        <th>Name</th>
+                                        <th class="col-md-1">Courier Number</th>
+                                        <th class="col-md-2">Name</th>
                                         <th>Address</th>
-                                        <th>Contact Details</th>
+                                        <th class="col-md-3">Contact Details</th>
                                         <th class="col-md-1">Action</th>
                                     </tr>
                                 </thead>
@@ -742,7 +742,7 @@
                                                 <td><input type="checkbox" id="{{ $cdata->courier_ID }}" name = "del_check" class="filled-in chk-col-red checkCheckbox" data-id = "{{ $cdata->courier_ID }}"/>
                                                 <label for="{{ $cdata->courier_ID }}"></label></td>
                                                 <td>
-                                                    {{$cdata->courier_ID}}
+                                                    COUR000{{$cdata->courier_ID}}
                                                 </td>
                                                 <td>
                                                   @if($pnfo->pinfo_middle_name == null)
@@ -760,49 +760,65 @@
 
                                                 @foreach($address as $addata)
                                                   @if($addata->add_ID == $cdata->courier_add_ID)
-                                                  {{ $addata->add_street }}
+                                                  @if($addata->add_street != null)
+                                                  {{ $addata->add_street }},
+                                                  @endif
                                                   @endif
                                                 @endforeach
 
                                                 @foreach($address as $addata)
                                                   @if($addata->add_ID == $cdata->courier_add_ID)
-                                                  {{ $addata->add_subdivision }}
+                                                  @if($addata->add_subdivision != null)
+                                                  {{ $addata->add_subdivision }},
+                                                  @endif
                                                   @endif
                                                 @endforeach
 
                                                 @foreach($address as $addata)
                                                   @if($addata->add_ID == $cdata->courier_add_ID)
-                                                  {{ $addata->add_brngy }}
+                                                  @if($addata->add_brngy != null)
+                                                  {{ $addata->add_brngy }},
+                                                  @endif
                                                   @endif
                                                 @endforeach
 
                                                 @foreach($address as $addata)
                                                   @if($addata->add_ID == $cdata->courier_add_ID)
-                                                  {{ $addata->add_district }}
+                                                  @if($addata->add_district != null)
+                                                  {{ $addata->add_district }},
+                                                  @endif
                                                   @endif
                                                 @endforeach
 
                                                 @foreach($address as $addata)
                                                   @if($addata->add_ID == $cdata->courier_add_ID)
-                                                  {{ $addata->add_city }}
+                                                  @if($addata->add_city != null)
+                                                  {{ $addata->add_city }},
+                                                  @endif
                                                   @endif
                                                 @endforeach
 
                                                 @foreach($address as $addata)
                                                   @if($addata->add_ID == $cdata->courier_add_ID)
-                                                  {{ $addata->add_province }}
+                                                  @if($addata->add_province != null)
+                                                  {{ $addata->add_province }},
+                                                  @endif
                                                   @endif
                                                 @endforeach
 
                                                 @foreach($address as $addata)
                                                   @if($addata->add_ID == $cdata->courier_add_ID)
+                                                  @if($addata->add_region != null)
                                                   {{ 'Region '.$addata->add_region }}
                                                   @endif
+                                                  @endif
                                                 @endforeach
 
                                                 @foreach($address as $addata)
                                                   @if($addata->add_ID == $cdata->courier_add_ID)
+                                                  @if($addata->add_zipcode != null)
                                                   {{ 'Zipcode: '.$addata->add_zipcode }}
+                                                  @endif
                                                   @endif
                                                 @endforeach
                                                 </td>
@@ -965,7 +981,9 @@
                                                 document.getElementById('date_created').value = created;
                                                 document.getElementById('last_update').value = updated; 
                                                 $('#aadd_region').val(reg).change();
-                                                document.getElementById('add_zipcode').value = zipcode;
+                                                document.getElementById('aadd_zipcode').value = zipcode;
+                                                document.getElementById('aadd_province').value = prov;
+                                                document.getElementById('apinfo_tpnum').value = telnum;
                                                 $('#editImg').attr('src', src);
                                                 var bday = document.getElementById('apinfo_bday').value.split('-');
                                                 var today = new Date();

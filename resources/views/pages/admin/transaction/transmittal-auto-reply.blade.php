@@ -1,6 +1,6 @@
 @extends('pages.admin.master')
 
-@section('title','Quotation | Auto Reply Settings - Transaction | i-Insure')
+@section('title','Transmittal | Auto Reply Settings - Transaction | i-Insure')
 
 @section('trans','active')
 

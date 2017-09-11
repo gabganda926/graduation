@@ -83,12 +83,12 @@
                         </form>
                         <div class="body">
                             <div class="table-responsive">
-                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                            <table id="ex" class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                 <thead>
                                     <tr>
                                         <th>Remittance Date</th>
-                                        <th>OR No.</th>
-                                        <th>Policy No.</th>
+                                        <th class="col-md-1">OR No.</th>
+                                        <th class="col-md-1">Policy No.</th>
                                         <th>Client</th>
                                         <th>Bank</th>
                                         <th>BOP No.</th>
@@ -160,20 +160,42 @@
                                                 @endforeach
                                             @endif
                                         @endforeach</td>
-                                        <td>BOP000{{ $list->payment_ID }}</td>
-                                        <td>BILL000{{ $list->check_voucher }}</td>
+                                        <td>@if($list->payment_ID >= 10)
+                                                BOP00{{ $list->payment_ID }}
+                                            @endif
+                                            @if($list->payment_ID < 10)
+                                                BOP000{{ $list->payment_ID }}
+                                            @endif
+                                            @if($list->payment_ID >= 100)
+                                                BOP0{{ $list->payment_ID }}
+                                            @endif
+                                            @if($list->payment_ID >= 1000)
+                                                BOP{{ $list->payment_ID }}
+                                            @endif</td>
+                                        <td>@if($list->check_voucher >= 10)
+                                                BILL00{{ $list->check_voucher }}
+                                            @endif
+                                            @if($list->check_voucher < 10)
+                                                BILL000{{ $list->check_voucher }}
+                                            @endif
+                                            @if($list->check_voucher >= 100)
+                                                BILL0{{ $list->check_voucher }}
+                                            @endif
+                                            @if($list->check_voucher >= 1000)
+                                                BILL{{ $list->check_voucher }}
+                                            @endif</td>
                                         <td>
                                             <script>
-                                            var data = numberWithCommas({{ $list->amount }}); document.write("₱ " + data);
+                                            var data = numberWithCommas({{ $list->amount }}); document.write("₱" + data);
                                             </script>
                                         </td>
                                         <td>
                                             <script>
-                                            var data = numberWithCommas({{ $list->amount_paid }}); document.write("₱ " + data);
+                                            var data = numberWithCommas({{ $list->amount_paid }}); document.write("₱" + data);
                                             </script>
                                         </td>
                                         <td>
-                                            ₱{{ round($list->amount_paid,2) - round($list->amount,2) }}
+                                            ₱<?php $number = round($list->amount_paid,2) - round($list->amount,2); echo number_format($number, 2, '.', ','); ?>
                                         </td>
                                         <td>
                                     @foreach($pdet as $paydet)
@@ -229,5 +251,11 @@
             </div>
         </div>
     </section>
+
+    <script>
+        $('#ex').DataTable( {
+            "order": [[ 0, "desc" ]]
+        } );
+    </script>
 
 @endsection

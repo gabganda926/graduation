@@ -163,12 +163,17 @@ class trans_insureClientsController extends Controller
 
     public function save_insurance_account(Request $req)
     {
+        $type = vTypeConnection::where('vehicle_type_ID', '=', $req->data_vehicle_type)->first();
+        $make = vMakeConnection::where('vehicle_make_ID', '=', $req->data_vehicle_make)->first();
+        $model = vModelConnection::where('vehicle_model_ID', '=', $req->data_vehicle_model)->first();
         $this->cacc->client_ID = $req->data_client_ID;
         $this->cacc->insurance_company = $req->data_insurance_company;
         $this->cacc->policy_number = $req->policy_number;
-        $this->cacc->vehicle_type = $req->data_vehicle_type;
-        $this->cacc->vehicle_make = $req->data_vehicle_make;
-        $this->cacc->vehicle_model = $req->data_vehicle_model;
+        $this->cacc->vehicle_make_name = $make->vehicle_make_name;
+        $this->cacc->vehicle_type_name = $type->vehicle_type_name;
+        $this->cacc->vehicle_model_name = $model->vehicle_model_name;
+        $this->cacc->vehicle_year = $model->vehicle_year;
+        $this->cacc->vehicle_value = $model->vehicle_value;
         $this->cacc->plate_number = $req->data_plate_number;
         $this->cacc->serial_chassis = $req->data_serial_chassis;
         $this->cacc->motor_engine = $req->data_motor_engine;
@@ -176,7 +181,6 @@ class trans_insureClientsController extends Controller
         $this->cacc->seat_capacity = $req->data_seat_capacity;
         $this->cacc->color = $req->data_color;
         $this->cacc->inception_date = $req->data_inception_date;
-        $this->cacc->form_picture = $req->data_form_picture;
         $this->cacc->del_flag = 0;
         $this->cacc->created_at = $req->data_created_at;
         $this->cacc->updated_at = $req->data_created_at;
@@ -259,13 +263,50 @@ class trans_insureClientsController extends Controller
 
     public function save_payment_details($req)
     {
+        $pa = premiumPAConnection::where('premiumPA_ID', '=', $req->data_personal_accident_ID)->first();
+        $pd = premiumDGConnection::where('premiumDG_ID', '=', $req->data_property_damage_ID)->first();
+        $bi = premiumDGConnection::where('premiumDG_ID', '=', $req->data_bodily_injury_ID)->first();
+        $it = installmentConnection::where('installment_ID','=', $req->data_installment_ID)->first();
         $id = clientAccountsConnection::where('client_ID', '=', $req->data_client_ID)->orderBy('account_ID','desc')->first();
-        $this->ptail->account_ID = $id->account_ID;
-        $this->ptail->personal_accident_ID = $req->data_personal_accident_ID;
-        $this->ptail->bodily_injury_ID = $req->data_bodily_injury_ID;
         $this->ptail->vehicle_class = $req->data_bodily_injury_class;
-        $this->ptail->property_damage_ID = $req->data_property_damage_ID;
+
+        $this->ptail->account_ID = $id->account_ID;
+        $this->ptail->deductible = $req->deductible;
+        $this->ptail->towing = $req->towing;
+        $this->ptail->arl = $req->arl;
+        $this->ptail->coverage = $req->coverage;
+        $this->ptail->aon_cover = $req->aon;
+        $this->ptail->aon_premium = $req->aon_premium;
+        $this->ptail->odt_cover = $req->odt;
+        $this->ptail->odt_premium = $req->odt_premium;
+        $this->ptail->pa_cover = $pa->insuranceLimit;
+        $this->ptail->pa_premium = $pa->insuranceCover+$pa->passengerCover+$pa->mrCover;
+        $this->ptail->bi_cover = $bi->insuranceLimit;
+
+        if($req->data_bodily_injury_class == 1)
+        $this->ptail->bi_premium = $bi->privateCar;
+        if($req->data_bodily_injury_class == 2)
+        $this->ptail->bi_premium = $bi->cv_Light;
+        if($req->data_bodily_injury_class == 3)
+        $this->ptail->bi_premium = $bi->cv_Heavy;
+
+        $this->ptail->pd_cover = $pd->insuranceLimit;
+        
+        if($req->data_bodily_injury_class == 1)
+        $this->ptail->pd_premium = $pd->privateCar;
+        if($req->data_bodily_injury_class == 2)
+        $this->ptail->pd_premium = $pd->cv_Light;
+        if($req->data_bodily_injury_class == 3)
+        $this->ptail->pd_premium = $pd->cv_Heavy;
+
+        $this->ptail->basicpremium = $req->basic;
+        $this->ptail->vat = $req->vat;
+        $this->ptail->dst = $req->stamp;
+        $this->ptail->lgt = $req->lgt;
+        $this->ptail->total = $req->total;
+        $this->ptail->vehicle_class = $req->data_property_damage_class;
         $this->ptail->payment_type = $req->payment_type;
+
         if($req->payment_type == 1)
         {
           $this->ptail->payment_status = 1;
@@ -309,7 +350,7 @@ class trans_insureClientsController extends Controller
         {
           $this->ptail->payment_status = 0;
           $this->ptail->bank_ID = $req->data_bank_ID;
-          $this->ptail->installment_type = $req->data_installment_ID;
+          $this->ptail->installment_type = $it->installment_desc;
           try
           {
             $this->ptail->save();
@@ -390,14 +431,28 @@ class trans_insureClientsController extends Controller
     {
       $id = checkVoucherConnection::orderBy('cv_ID','desc')->first();
       $installment = installmentConnection::where('installment_ID','=', $req->data_installment_ID)->first();
+      $total = 0;
       $date = $req->data_inception_date;
       for ($x = 0; $x != $installment->installment_desc; $x++)
       {
         $pay = new paymentsConnection;
         $pay->check_voucher = $id->cv_ID;
         $pay->or_number = str_pad(rand(0,'9'.round(microtime(true))),11, "0", STR_PAD_LEFT);
-        $pay->amount = $req->data_amount;
+        $total += $req->data_amount;
+        if($x == ($installment->installment_desc - 1))
+        {
+          if($total < $req->total)
+          {
+            $pay->amount = $req->data_amount + ($req->total - $total);
+          }
+          else
+            $pay->amount = $req->data_amount;
+        }
+        else
+          $pay->amount = $req->data_amount;
+
         $pay->due_date = $date." 23:59:59";
+
 
         \Log::info($pay->due_date);
         $pay->status = 1;

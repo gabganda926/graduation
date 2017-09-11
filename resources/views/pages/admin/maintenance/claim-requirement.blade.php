@@ -22,7 +22,7 @@
                             <form id="add" name = "add" action = "claim-requirement/submit" method="POST">
                               <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <div class="row clearfix">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-12">
                                         <div class="form-group form-float">
                                         <label><small>Claim Type :</small></label>
                                             <select id = "claimReq_Type" name = "claimReq_Type" class="form-control show-tick" data-live-search="true" >
@@ -40,7 +40,7 @@
                                     <div class="col-md-12">
                                       <div class="form-group form-float">
                                           <div class="form-line">
-                                              <textarea id = "claimRequirement" name = "claimRequirement" rows="5" class="form-control no-resize auto-growth"></textarea>
+                                              <input id = "claimRequirement" name = "claimRequirement" class="form-control">
                                               <label class="form-label">Claim Requirement </label>
                                           </div>
                                       </div>
@@ -53,6 +53,10 @@
                         </div>
                         <div class="modal-footer js-sweetalert">
                             <button class="btn btn-primary waves-effect" type="button" onclick = "
+                            $('body,html').animate({
+                                                                        scrollTop: 0
+                                                                    }, 500);
+                            document.getElementById('time').value = formatDate(new Date());
                             document.getElementById('time').value = formatDate(new Date());
                             if($('#add').valid())
                             {
@@ -82,6 +86,10 @@
                               });
                             }">SUBMIT</button>
                             <button type="button" class="btn btn-link waves-effect" data-toggle="collapse" data-target="#addVTypeModal" onclick="
+                            $('body,html').animate({
+                                                                        scrollTop: 0
+                                                                    }, 500);
+                            document.getElementById('time').value = formatDate(new Date());
                             $('#add')[0].reset();
                             $('#addbtn').show();">CLOSE</button>
                         </div>
@@ -150,7 +158,7 @@
                                 <div class="col-md-5">
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <small><input type="text" id="date_created" class="form-control" readonly="true"></small>
+                                            <small><input type="text" id="date_created" class="form-control" readonly="true" style="font-size: 12px;"></small>
                                         </div>
                                     </div>
                                 </div>
@@ -160,7 +168,7 @@
                                 <div class="col-md-5">
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <small><input type="text" id="last_update" class="form-control" readonly="true"></small>
+                                            <small><input type="text" id="last_update" class="form-control" readonly="true" style="font-size: 12px;"></small>
                                         </div>
                                     </div>
                                 </div>
@@ -187,9 +195,9 @@
                                 <div class="row clearfix">
                                     <div class="col-md-12">
                                       <div class="form-group form-float">
+                                      <label><small>Claim Requirement :</small></label>
                                           <div class="form-line">
-                                              <textarea id = "aclaimRequirement" name = "aclaimRequirement" rows="5" class="form-control no-resize auto-growth" readonly></textarea>
-                                              <label class="form-label">Claim Requirement </label>
+                                              <input id = "aclaimRequirement" name = "aclaimRequirement" class="form-control" readonly>
                                           </div>
                                       </div>
                                     </div>
@@ -201,6 +209,10 @@
                         </div>
                         <div class="modal-footer js-sweetalert">
                           <button id = "schange" class="btn btn-primary waves-effect" style = "display: none;" type="button" onclick = "
+                          $('body,html').animate({
+                                                                        scrollTop: 0
+                                                                    }, 500);
+                            document.getElementById('time').value = formatDate(new Date());
                           document.getElementById('atime').value = formatDate(new Date());
                           if($('#view').valid())
                           {
@@ -228,6 +240,10 @@
                             });
                           }">SAVE CHANGES</button>
                           <button type="button" class="btn btn-link waves-effect" data-toggle="collapse" data-target="#largeModal" onclick="
+                          $('body,html').animate({
+                                                                        scrollTop: 0
+                                                                    }, 500);
+                            document.getElementById('time').value = formatDate(new Date());
                           $('#Edit').prop('disabled', false);
                           $('#Delete').prop('disabled', false);
                           $('#schange').hide();
@@ -250,7 +266,12 @@
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
                                     <li>
-                                <button id = "addbtn" form = "add" type="submit" class="btn bg-blue waves-effect" data-toggle="collapse" data-target="#addVTypeModal" onclick="$('#addbtn').hide();">
+                                <button id = "addbtn" form = "add" type="submit" class="btn bg-blue waves-effect" data-toggle="collapse" data-target="#addVTypeModal" onclick="
+                                $('body,html').animate({
+                                                                        scrollTop: 0
+                                                                    }, 500);
+                            document.getElementById('time').value = formatDate(new Date());
+                                $('#addbtn').hide();">
                                     <i class="material-icons">add_circle_outline</i>
                                     <span>Add Claim Requirement</span>
                                 </button>
@@ -301,6 +322,10 @@
                                                 data-updated = '{{ \Carbon\Carbon::parse($creq->updated_at)->format("M-d-Y") }} {{ "(".\Carbon\Carbon::parse($creq->updated_at)->format("l, h:i:s A").")" }}'
 
                                                 onclick= "
+                                                $('body,html').animate({
+                                                                        scrollTop: 0
+                                                                    }, 500);
+                            document.getElementById('time').value = formatDate(new Date());
                                                 $('#id').val($(this).data('id'));
                                                 $('#aclaimReq_Type').val($(this).data('type')).change();
                                                 $('#aclaimRequirement').val($(this).data('name'));
@@ -358,6 +383,7 @@
                     maxlength: 20
                   },
                   claimRequirement:{
+                    required: true,
                     maxlength: 100
                   }
                 },
@@ -379,7 +405,8 @@
                     maxlength: 20
                   },
                   aclaimRequirement:{
-                    maxlength: 50
+                    required: true,
+                    maxlength: 100
                   }
                 },
                 // Make sure the form is submitted to the destination defined

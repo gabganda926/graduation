@@ -801,7 +801,7 @@
                                         <th>Name</th>
                                         <th>Clients</th>
                                         <th>Address</th>
-                                        <th>Contact Details</th>
+                                        <th class="col-md-3">Contact Details</th>
                                         <th class="col-md-1">Action</th>
                                     </tr>
                                 </thead>
@@ -846,49 +846,65 @@
 
                                         @foreach($add as $addata)
                                           @if($addata->add_ID == $agentdata->agent_add_ID)
-                                          {{ $addata->add_street }}
+                                          @if($addata->add_street != null)
+                                          {{ $addata->add_street }},
+                                          @endif
                                           @endif
                                         @endforeach
 
                                         @foreach($add as $addata)
                                           @if($addata->add_ID == $agentdata->agent_add_ID)
-                                          {{ $addata->add_subdivision }}
+                                          @if($addata->add_subdivision != null)
+                                          {{ $addata->add_subdivision }},
+                                          @endif
                                           @endif
                                         @endforeach
 
                                         @foreach($add as $addata)
                                           @if($addata->add_ID == $agentdata->agent_add_ID)
-                                          {{ $addata->add_brngy }}
+                                          @if($addata->add_brngy != null)
+                                          {{ $addata->add_brngy }},
+                                          @endif
                                           @endif
                                         @endforeach
 
                                         @foreach($add as $addata)
                                           @if($addata->add_ID == $agentdata->agent_add_ID)
-                                          {{ $addata->add_district }}
+                                          @if($addata->add_district != null)
+                                          {{ $addata->add_district }},
+                                          @endif
                                           @endif
                                         @endforeach
 
                                         @foreach($add as $addata)
                                           @if($addata->add_ID == $agentdata->agent_add_ID)
-                                          {{ $addata->add_city }}
+                                          @if($addata->add_city != null)
+                                          {{ $addata->add_city }},
+                                          @endif
                                           @endif
                                         @endforeach
 
                                         @foreach($add as $addata)
                                           @if($addata->add_ID == $agentdata->agent_add_ID)
-                                          {{ $addata->add_province }}
+                                          @if($addata->add_province != null)
+                                          {{ $addata->add_province }},
+                                          @endif
                                           @endif
                                         @endforeach
 
                                         @foreach($add as $addata)
                                           @if($addata->add_ID == $agentdata->agent_add_ID)
+                                          @if($addata->add_region != null)
                                           {{ 'Region '.$addata->add_region }}
                                           @endif
+                                          @endif
                                         @endforeach
 
                                         @foreach($add as $addata)
                                           @if($addata->add_ID == $agentdata->agent_add_ID)
+                                          @if($addata->add_zipcode != null)
                                           {{ 'Zipcode: '.$addata->add_zipcode }}
+                                          @endif
                                           @endif
                                         @endforeach
                                       </td>
@@ -1037,6 +1053,7 @@
                                         document.getElementById('apinfo_cpnum_1').value = contact1;
                                         document.getElementById('apinfo_cpnum_2').value = contact2;
                                         document.getElementById('apinfo_mail').value = mail;
+                                        document.getElementById('apinfo_tpnum').value = telnum;
                                         document.getElementById('apinfo_bday').value = bday;
                                         $('#apinfo_gender').val(gender).change();
                                         document.getElementById('aadd_id').value = add;
@@ -1050,7 +1067,8 @@
                                         document.getElementById('date_created').value = created;
                                         document.getElementById('last_update').value = updated; 
                                         $('#aadd_region').val(reg).change();
-                                        document.getElementById('add_zipcode').value = zipcode;
+                                        document.getElementById('aadd_zipcode').value = zipcode;
+                                        document.getElementById('aadd_province').value = prov;
                                         $('#editImg').attr('src', src);
                                         var bday = document.getElementById('apinfo_bday').value.split('-');
                                         var today = new Date();

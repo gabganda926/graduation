@@ -24,9 +24,9 @@
                                 <div class="row clearfix">
                                     <div class="col-md-12">
                                         <div class="form-group form-float">
+                                          <label><small>Installment Type :</small></label>
                                             <div class="form-line">
                                                 <input id = "installment_type" name = "installment_type" type="text" class="form-control" pattern="[A-Za-z'-]" readonly required>
-                                                <label class="form-label">Installment Type</label>
                                             </div>
                                         </div>
                                     </div>
@@ -145,20 +145,20 @@
                                 <div class="col-md-1">
                                    <label for="date_created"><small><small>Date Created</small></small></label>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-5">
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <small><input type="text" id="date_created" class="form-control" readonly="true"></small>
+                                            <small><input type="text" id="date_created" class="form-control" readonly="true" style="font-size: 12px;"></small>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-1">
                                     <label for="last_update"><small><small>Last Update</small></small></label>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-5">
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <small><input type="text" id="last_update" class="form-control" readonly="true"></small>
+                                            <small><input type="text" id="last_update" class="form-control" readonly="true" style="font-size: 12px;"></small>
                                         </div>
                                     </div>
                                 </div>
@@ -294,6 +294,10 @@
                                           data-updated = '{{ \Carbon\Carbon::parse($install->updated_at)->format("M-d-Y") }} {{ "(".\Carbon\Carbon::parse($install->updated_at)->format("l, h:i:s A").")" }}'
 
                                           onclick= "
+                                          $('body,html').animate({
+                                                                        scrollTop: 0
+                                                                    }, 500);
+                            document.getElementById('time').value = formatDate(new Date());
 
                                           document.getElementById('instid').value = $(this).data('id');
                                           document.getElementById('ainstallment_type').value = $(this).data('type');

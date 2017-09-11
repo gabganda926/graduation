@@ -1,6 +1,6 @@
 @extends('pages.accounting-staff.master')
 
-@section('title','Insure Client - Transaction| i-Insure')
+@section('title','Insure Client - Transaction | i-Insure')
 
 @section('transIns','active')
 
@@ -216,10 +216,10 @@
                                 if('{{$insurance_company}}' == 4)
                                     aon = coverage * 0.005;
 
-                                odt = Math.abs((((aon + parseFloat(pd.replace(/[^0-9\.]/g,'')) + parseFloat(bi.replace(/[^0-9\.]/g,'')) + parseFloat(pa.replace(/[^0-9\.]/g,''))) * 1.2470) - grosspremium) / 1.2470);
+                                odt = (coverage * 0.013);
                                 basic = ((aon + parseFloat(pd.replace(/[^0-9\.]/g,'')) + parseFloat(bi.replace(/[^0-9\.]/g,'')) + parseFloat(pa.replace(/[^0-9\.]/g,''))) + odt);
-                                vat = basic * 1.25;
-                                stamp = basic * 1.2;
+                                vat = basic * .125;
+                                stamp = basic * .12;
                                 rounded = Math.ceil((basic + vat + stamp)/100)*100;
                                 lgt = rounded - (basic + vat + stamp);
                                  </script>
@@ -604,7 +604,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-4">
+                                        <div class="col-md-8">
                                             <div class="form-group form-float">
                                                 <div class="form-line focused success">
                                                 <label><small>Inception Date: </small></label>

@@ -44,7 +44,7 @@ class trans_listBreakdownController extends Controller
     return view('pages/accounting-staff/transaction/payment')
     ->with('plist', paymentListConnection::all())
     ->with('payments', paymentConnection::all())
-    ->with('cvouch', checkVoucherConnection::all())
+    ->with('cvouch', checkVoucherConnection::orderBy('cv_ID', 'DESC')->get())
     ->with('payDet', paymentDetailConnection::all())
     ->with('cliacc', clientAccountsConnection::all())
     ->with('clilist', clientListConnection::all())
@@ -62,10 +62,15 @@ class trans_listBreakdownController extends Controller
         $cv = checkVoucherConnection::where('cv_ID',$cv_ID)->first();
         $pno = clientAccountsConnection::where('account_ID',$account_ID)->first();
         $inf = personalInfoConnection::where('pinfo_ID',$pinfo_ID)->first();
+        $list = paymentConnection::all();
+        $payDet = paymentDetailConnection::all();
+        $bank = bankConnection::all();
+        $address = addressConnection::all();
+        $inscomp = insCompanyConnection::all();
         
 
         $pdf = PDF::loadView('pages.pdf.breakdown-payment',
-                compact('cv', 'pno', 'inf'))
+                compact('cv', 'pno', 'inf', 'list', 'payDet', 'bank', 'address', 'inscomp'))
             ->setPaper('Letter');
 
         return $pdf->stream();
@@ -76,9 +81,14 @@ class trans_listBreakdownController extends Controller
         $cv = checkVoucherConnection::where('cv_ID',$cv_ID)->first();
         $pno = clientAccountsConnection::where('account_ID',$account_ID)->first();
         $inf = inscompanyConnection::where('comp_ID',$comp_ID)->first();
+        $list = paymentConnection::all();
+        $payDet = paymentDetailConnection::all();
+        $bank = bankConnection::all();
+        $address = addressConnection::all();
+        $inscomp = insCompanyConnection::all();
 
         $pdf = PDF::loadView('pages.pdf.breakdown-payment-comp',
-                compact('cv', 'pno', 'inf'))
+                compact('cv', 'pno', 'inf', 'list', 'payDet', 'bank', 'address', 'inscomp'))
             ->setPaper('Letter');
 
         return $pdf->stream();

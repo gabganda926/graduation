@@ -148,7 +148,7 @@
                                     <div class="col-md-5">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <small><input type="text" id="date_created" class="form-control" readonly="true"></small>
+                                                <small><input type="text" id="date_created" class="form-control" readonly="true" style="font-size: 12px;"></small>
                                             </div>
                                         </div>
                                     </div>
@@ -158,7 +158,7 @@
                                     <div class="col-md-5">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <small><input type="text" id="last_update" class="form-control" readonly="true"></small>
+                                                <small><input type="text" id="last_update" class="form-control" readonly="true" style="font-size: 12px;"></small>
                                             </div>
                                         </div>
                                     </div>

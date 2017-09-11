@@ -1,6 +1,6 @@
 @extends('pages.accounting-staff.master')
 
-@section('title','New Client - Company | CIMIS')
+@section('title','New Client - Company | i-Insure')
 
 @section('transIns','active')
 
@@ -482,7 +482,7 @@
                                     <div class="col-md-1">
                                        <label for="date_created"><small><small>Date Created</small></small></label>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-5">
                                         <div class="form-group">
                                             <div class="form-line">
                                                 <small><input type="text" id="date_created" class="form-control" readonly="true"></small>
@@ -492,7 +492,7 @@
                                     <div class="col-md-1">
                                         <label for="last_update"><small><small>Last Update</small></small></label>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-5">
                                         <div class="form-group">
                                             <div class="form-line">
                                                 <small><input type="text" id="last_update" class="form-control" readonly="true"></small>
@@ -928,45 +928,67 @@
 
                                                 @foreach($add as $addata)
                                                   @if($addata->add_ID == $comp->comp_add_ID)
-                                                  {{ $addata->add_street }}
+                                                  @if($addata->add_street != null)
+                                                  {{ $addata->add_street }},
+                                                  @endif
                                                   @endif
                                                 @endforeach
 
                                                 @foreach($add as $addata)
                                                   @if($addata->add_ID == $comp->comp_add_ID)
-                                                  {{ $addata->add_subdivision }}
+                                                  @if($addata->add_subdivision != null)
+                                                  {{ $addata->add_subdivision }},
+                                                  @endif
                                                   @endif
                                                 @endforeach
 
                                                 @foreach($add as $addata)
                                                   @if($addata->add_ID == $comp->comp_add_ID)
-                                                  {{ $addata->add_brngy }}
+                                                  @if($addata->add_brngy != null)
+                                                  {{ $addata->add_brngy }},
+                                                  @endif
                                                   @endif
                                                 @endforeach
 
                                                 @foreach($add as $addata)
                                                   @if($addata->add_ID == $comp->comp_add_ID)
-                                                  {{ $addata->add_district }}
+                                                  @if($addata->add_district != null)
+                                                  {{ $addata->add_district }},
+                                                  @endif
                                                   @endif
                                                 @endforeach
 
                                                 @foreach($add as $addata)
                                                   @if($addata->add_ID == $comp->comp_add_ID)
-                                                  {{ $addata->add_city }}
+                                                  @if($addata->add_city != null)
+                                                  {{ $addata->add_city }},
+                                                  @endif
                                                   @endif
                                                 @endforeach
 
                                                 @foreach($add as $addata)
                                                   @if($addata->add_ID == $comp->comp_add_ID)
-                                                  {{ $addata->add_province }}
+                                                  @if($addata->add_province != null)
+                                                  {{ $addata->add_province }},
+                                                  @endif
                                                   @endif
                                                 @endforeach
 
                                                 @foreach($add as $addata)
                                                   @if($addata->add_ID == $comp->comp_add_ID)
+                                                  @if($addata->add_region != null)
                                                   {{ 'Region '.$addata->add_region }}
-                                          @endif
-                                        @endforeach
+                                                  @endif
+                                                  @endif
+                                                @endforeach
+
+                                                @foreach($add as $addata)
+                                                  @if($addata->add_ID == $comp->comp_add_ID)
+                                                  @if($addata->add_zipcode != null)
+                                                  {{ 'Zipcode: '.$addata->add_zipcode }}
+                                                  @endif
+                                                  @endif
+                                                @endforeach
                                         </td>
                                         <td>
                                         @foreach($cpr as $cperson)

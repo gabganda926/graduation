@@ -346,9 +346,7 @@ Route::get('/admin/transaction/insurance-settings-company', function (){
 });
 
 //Claims - walkin
-Route::get('/admin/transaction/claim-request-walkin', function (){
-   return view('pages.admin.transaction.claim-request-walkin');
-});
+Route::get('/admin/transaction/claim-request-walkin', 'AdminControllers\trans_claimsController@index');
 
 //Claims - online
 Route::get('/admin/transaction/claim-request-online', function (){

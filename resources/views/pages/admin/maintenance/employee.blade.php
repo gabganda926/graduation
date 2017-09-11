@@ -866,7 +866,7 @@
                                         <th>Name</th>
                                         <th>Employee Role</th>
                                         <th>Address</th>
-                                        <th>Contact Details</th>
+                                        <th class="col-md-3">Contact Details</th>
                                         <th class="col-md-1">Action</th>
                                     </tr>
                                 </thead>
@@ -900,43 +900,65 @@
 
                                         @foreach($add as $addata)
                                           @if($addata->add_ID == $agent->agent_add_ID)
-                                          {{ $addata->add_street }}
+                                          @if($addata->add_street != null)
+                                          {{ $addata->add_street }},
+                                          @endif
                                           @endif
                                         @endforeach
 
                                         @foreach($add as $addata)
                                           @if($addata->add_ID == $agent->agent_add_ID)
-                                          {{ $addata->add_subdivision }}
+                                          @if($addata->add_subdivision != null)
+                                          {{ $addata->add_subdivision }},
+                                          @endif
                                           @endif
                                         @endforeach
 
                                         @foreach($add as $addata)
                                           @if($addata->add_ID == $agent->agent_add_ID)
-                                          {{ $addata->add_brngy }}
+                                          @if($addata->add_brngy != null)
+                                          {{ $addata->add_brngy }},
+                                          @endif
                                           @endif
                                         @endforeach
 
                                         @foreach($add as $addata)
                                           @if($addata->add_ID == $agent->agent_add_ID)
-                                          {{ $addata->add_district }}
+                                          @if($addata->add_district != null)
+                                          {{ $addata->add_district }},
+                                          @endif
                                           @endif
                                         @endforeach
 
                                         @foreach($add as $addata)
                                           @if($addata->add_ID == $agent->agent_add_ID)
-                                          {{ $addata->add_city }}
+                                          @if($addata->add_city != null)
+                                          {{ $addata->add_city }},
+                                          @endif
                                           @endif
                                         @endforeach
 
                                         @foreach($add as $addata)
                                           @if($addata->add_ID == $agent->agent_add_ID)
-                                          {{ $addata->add_province }}
+                                          @if($addata->add_province != null)
+                                          {{ $addata->add_province }},
+                                          @endif
                                           @endif
                                         @endforeach
 
                                         @foreach($add as $addata)
                                           @if($addata->add_ID == $agent->agent_add_ID)
+                                          @if($addata->add_region != null)
                                           {{ 'Region '.$addata->add_region }}
+                                          @endif
+                                          @endif
+                                        @endforeach
+
+                                        @foreach($add as $addata)
+                                          @if($addata->add_ID == $agent->agent_add_ID)
+                                          @if($addata->add_zipcode != null)
+                                          {{ 'Zipcode: '.$addata->add_zipcode }}
+                                          @endif
                                           @endif
                                         @endforeach
                                       </td>
@@ -1130,6 +1152,7 @@
                                         document.getElementById('aadd_city').value = city;
                                         document.getElementById('aadd_province').value = prov;
                                         document.getElementById('aadd_region').value = reg;
+                                        document.getElementById('aadd_zipcode').value = zipcode;
                                         $('#aadd_region').val(reg).change();
                                         document.getElementById('aadd_zipcode').value = zipcode;
                                         $('#aemp_type').val($(this).data('emptype')).change();
@@ -1316,7 +1339,7 @@
                   add_subdivision:
                   {
                       alphanumeric: true,
-                      maxlength: 5020
+                      maxlength: 50
                   },
                   add_brngy:
                   {
@@ -1435,7 +1458,7 @@
                   aadd_subdivision:
                   {
                       alphanumeric: true,
-                      maxlength: 20
+                      maxlength: 50
                   },
                   aadd_brngy:
                   {

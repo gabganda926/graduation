@@ -36,7 +36,7 @@ class trans_paymentListController extends Controller
     public function index()
     {
     	return view('pages.accounting-staff.transaction.payment-list')
-		->with('plist', paymentListConnection::all())
+		->with('plist', paymentListConnection::orderBy('paid_date', 'DESC')->get())
 		->with('cvouch', checkVoucherConnection::all())
 		->with('pdet', paymentDetailConnection::all())
 		->with('cliacc', clientAccountsConnection::all())

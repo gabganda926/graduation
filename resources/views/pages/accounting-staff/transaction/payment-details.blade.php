@@ -187,6 +187,59 @@
                                  <div class="col-md-4" style = "display: none;">
                                     <input id = "data_amount" name = "data_amount" type="text" class="form-control" >
                                  </div>
+
+                                 <div class="col-md-4" style = "display: none;">
+                                    <input id = "aon" name = "aon" type="text" class="form-control" >
+                                 </div>
+
+                                 <div class="col-md-4" style = "display: none;">
+                                    <input id = "aon_premium" name = "aon_premium" type="text" class="form-control" >
+                                 </div>
+
+                                 <div class="col-md-4" style = "display: none;">
+                                    <input id = "odt" name = "odt" type="text" class="form-control" >
+                                 </div>
+
+                                 <div class="col-md-4" style = "display: none;">
+                                    <input id = "odt_premium" name = "odt_premium" type="text" class="form-control" >
+                                 </div>
+
+                                 <div class="col-md-4" style = "display: none;">
+                                    <input id = "deductible" name = "deductible" type="text" class="form-control" >
+                                 </div>
+
+                                 <div class="col-md-4" style = "display: none;">
+                                    <input id = "towing" name = "towing" type="text" class="form-control" >
+                                 </div>
+
+                                 <div class="col-md-4" style = "display: none;">
+                                    <input id = "arl" name = "arl" type="text" class="form-control" >
+                                 </div>
+
+                                 <div class="col-md-4" style = "display: none;">
+                                    <input id = "lgt" name = "lgt" type="text" class="form-control" >
+                                 </div>
+
+                                 <div class="col-md-4" style = "display: none;">
+                                    <input id = "vat" name = "vat" type="text" class="form-control" >
+                                 </div>
+
+                                 <div class="col-md-4" style = "display: none;">
+                                    <input id = "stamp" name = "stamp" type="text" class="form-control" >
+                                 </div>
+
+                                 <div class="col-md-4" style = "display: none;">
+                                    <input id = "basic" name = "basic" type="text" class="form-control" >
+                                 </div>
+
+                                 <div class="col-md-4" style = "display: none;">
+                                    <input id = "coverage" name = "coverage" type="text" class="form-control" >
+                                 </div>
+
+                                 <div class="col-md-4" style = "display: none;">
+                                    <input id = "total" name = "total" type="text" class="form-control" >
+                                 </div>
+
                                  <script>
                                     var value;
                                     var aon;
@@ -196,6 +249,9 @@
                                     var stamp;
                                     var rounded;
                                     var lgt;
+                                    var deductible;
+                                    var towing;
+                                    var arl;
                                     var pd = '{{ $details->indi_pd_premium }}{{ $details->comp_pd_premium }}';
                                     var bi = '{{ $details->indi_bi_premium }}{{ $details->comp_bi_premium }}';
                                     var pa = '{{ $details->indi_pa_premium }}{{ $details->comp_pa_premium }}';
@@ -208,6 +264,24 @@
                                     var grosspremium = value * .013;
 
                                 if('{{$insurance_company}}' == 1)
+                                    deductible = 3100;
+                                if('{{$insurance_company}}' == 2)
+                                    deductible = 1000;
+                                if('{{$insurance_company}}' == 3)
+                                    deductible = 3000;
+                                if('{{$insurance_company}}' == 4)
+                                    deductible = 2000;
+
+                                $('#coverage').val(coverage);
+                                $('#deductible').val(deductible);
+
+                                towing = 100;
+                                arl = deductible + towing;
+
+                                $('#towing').val(towing);
+                                $('#arl').val(arl);
+
+                                if('{{$insurance_company}}' == 1)
                                     aon = coverage * 0.02;
                                 if('{{$insurance_company}}' == 2)
                                     aon = 0;
@@ -216,12 +290,29 @@
                                 if('{{$insurance_company}}' == 4)
                                     aon = coverage * 0.005;
 
+                                $('#aon').val(coverage);
+                                $('#odt').val(coverage);
+                                $('#aon_premium').val(aon);
+
                                 odt = (coverage * 0.013);
+
+                                $('#odt_premium').val(odt);
+
                                 basic = ((aon + parseFloat(pd.replace(/[^0-9\.]/g,'')) + parseFloat(bi.replace(/[^0-9\.]/g,'')) + parseFloat(pa.replace(/[^0-9\.]/g,''))) + odt);
+                                $('#basic').val(basic);
+
                                 vat = basic * .125;
+                                $('#vat').val(vat);
+
                                 stamp = basic * .12;
+                                $('#stamp').val(stamp);
+
                                 rounded = Math.ceil((basic + vat + stamp)/100)*100;
                                 lgt = rounded - (basic + vat + stamp);
+                                $('#lgt').val(lgt);
+
+                                var tot = (basic + vat + stamp + lgt);
+                                $('#total').val(tot);
                                  </script>
                                 <section>
                                     <div class="body table-responsive">

@@ -1,6 +1,6 @@
 @extends('pages.accounting-staff.master')
 
-@section('title','Payment - Transaction| i-Insure')
+@section('title','Payment - Transaction | i-Insure')
 
 @section('transPayment','active')
 
@@ -208,7 +208,7 @@
                             </div>
                         </div>
                         <div class="body">
-                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                            <table id="ex" class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                 <thead>
                                     <tr>
                                         <th>BOP Voucher Number</th>
@@ -230,7 +230,19 @@
                                         @endforeach
                                       </div>
                                     <tr>
-                                        <td>BILL000{{ $cv->cv_ID }}</td>
+                                        <td>@if($cv->cv_ID >= 10)
+                                                BILL00{{ $cv->cv_ID }}
+                                            @endif
+                                            @if($cv->cv_ID < 10)
+                                                BILL000{{ $cv->cv_ID }}
+                                            @endif
+                                            @if($cv->cv_ID >= 100)
+                                                BILL0{{ $cv->cv_ID }}
+                                            @endif
+                                            @if($cv->cv_ID >= 1000)
+                                                BILL{{ $cv->cv_ID }}
+                                            @endif
+                                        </td>
                                         <td>@foreach($payDet as $pdet)
                                                 @if($cv->pay_ID == $pdet->payment_ID)
                                                     @foreach($cliacc as $insacc)
@@ -350,10 +362,15 @@
     </section>
 
     <script>
-        var table = $('#details').DataTable();
+        var table = $('#details').DataTable( {
+            "order": [[ 0, "desc" ]]
+        } );        
         table.column( 7 ).visible( false );
         $('#details').css('width', '100%');
-
+        
+        $('#ex').DataTable( {
+            "order": [[ 0, "desc" ]]
+        } );
     </script>
 
 @endsection

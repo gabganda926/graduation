@@ -1,6 +1,6 @@
 @extends('pages.accounting-staff.master')
 
-@section('title','Payment - Transaction| i-Insure')
+@section('title','Payment - Transaction | i-Insure')
 
 @section('transPayment','active')
 
@@ -192,7 +192,7 @@
                             <div class="form-group">
                                 <div class="form-line">
                                     <label for="vounum"><small>Bill No: </small></label> <!-- AUTO GENERATED -->
-                                    <small><b><input type="text" id="vounum" class="form-control" readonly="true"></b></small>
+                                    <small><b><input type="text" id="billnum" class="form-control" readonly="true" style="font-size: 20px"></b></small>
                                 </div>
                             </div>
                             
@@ -319,6 +319,18 @@
             @foreach($voucher as $vouch)
              @foreach($ptail as $dtail)
               @if($vouch->pay_ID == $dtail->payment_ID)
+                @if($vouch->pay_ID >= 10)   
+                  $('#billnum').val('BILL00{{$vouch->pay_ID}}');
+                @endif
+                @if($vouch->pay_ID < 10)
+                    $('#billnum').val('BILL000{{$vouch->pay_ID}}');
+                @endif
+                @if($vouch->pay_ID >= 100)
+                    $('#billnum').val('BILL0{{$vouch->pay_ID}}');
+                @endif
+                @if($vouch->pay_ID >= 1000)
+                    $('#billnum').val('BILL{{$vouch->pay_ID}}');
+                @endif
               @foreach($insacc as $acc)
                @if($dtail->account_ID == $acc->account_ID)
                 if('{{$acc->policy_number}}' == $('#policy_number option:selected').val())
