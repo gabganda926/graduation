@@ -896,7 +896,7 @@
                                         <th>Company Name</th>
                                         <th>Company Address</th>
                                         <th>Contact Person</th>
-                                        <th>Contact Details</th>
+                                        <th class="col-md-3">Contact Details</th>
                                         <th>Image</th>
                                         <th class="col-md-1">Action</th>
                                     </tr>

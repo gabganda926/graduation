@@ -1,6 +1,6 @@
-@extends('webmaster')
+@extends('pages.webpage.webmaster-1')
 
-@section('title','Monitor Complaint | i-Insure')
+@section('title','Monitor Payment | i-Insure')
 
 @section('monitor','active')
 
@@ -10,11 +10,11 @@
     <div class="container">
         <ol class="breadcrumb">
           <li><a href="/home">Home</a></li>
-          <li class="active">Monitor Complaint</li>
+          <li class="active">Monitor Payment</li>
         </ol>
         
         <div class="row">
-            <h1><b>MONITOR YOUR COMPLAINT</b></h1><br/>
+            <h1><b>MONITOR YOUR PAYMENT</b></h1><br/>
                 <div style="float: left; width: 43%;" >
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3860.6420020230535!2d121.08669821407172!3d14.619458389790465!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397b8236cdbddf1%3A0x512e36886ed20edf!2sNutriix+%2F+Compreline+Insurance+Services!5e0!3m2!1sen!2sph!4v1501403179768" width="450" height="450" frameborder="0" style="border:0" allowfullscreen></iframe><br/><br/>
 

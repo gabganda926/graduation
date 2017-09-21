@@ -820,7 +820,7 @@
                                         <th>Image</th>
                                         <th>Name</th>
                                         <th>Address</th>
-                                        <th>Contact Details</th>
+                                        <th class="col-md-3">Contact Details</th>
                                         <th class="col-md-1">Action</th>
                                     </tr>
                                 </thead>

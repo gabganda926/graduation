@@ -11,6 +11,8 @@ use App\AccountsConnection;
 
 use App\employeeConnection;
 
+use App\clientNotificationConnection;
+
 use Auth;
 
 use Redirect;
@@ -62,9 +64,12 @@ class clientAccessController extends Controller
         {
             if(Hash::check($req['password'],$account->password))
             {
+                $count = clientNotificationConnection::where(['account_ID'=>$account->account_ID])->count();
+                \Log::info($count);
                 session()->put('accountID', $account->account_ID);
                 session()->put('username', $req['username']);
                 session()->put('password', $req['password']);
+                session()->put('notif', $count);
                 return redirect('/user/home');
             }
             else

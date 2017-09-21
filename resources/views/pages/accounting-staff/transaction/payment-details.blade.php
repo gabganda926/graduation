@@ -695,7 +695,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-4">
+                                        <div class="col-md-8">
                                             <div class="form-group form-float">
                                                 <div class="form-line focused success">
                                                 <label><small>Inception Date: </small></label>

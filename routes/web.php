@@ -346,7 +346,9 @@ Route::get('/admin/transaction/insurance-settings-company', function (){
 });
 
 //Claims - walkin
-Route::get('/admin/transaction/claim-request-walkin', 'AdminControllers\trans_claimsController@index');
+Route::get('/admin/transaction/claim-request-walkin', function (){
+   return view('pages.admin.transaction.claim-request-walkin');
+});
 
 //Claims - online
 Route::get('/admin/transaction/claim-request-online', function (){
@@ -354,9 +356,8 @@ Route::get('/admin/transaction/claim-request-online', function (){
 });
 
 //Claims - CREATE REQ walkin
-Route::get('/admin/transaction/claim-create-request-walkin', function (){
-   return view('pages.admin.transaction.claim-create-request-walkin');
-});
+Route::get('/admin/transaction/claim-create-request-walkin', 'AdminControllers\trans_claimsController@index');
+Route::post('/admin/transaction/claim-create-request-walkin/submit', 'AdminControllers\trans_claimsController@new_claim');
 
 //Claims details walkin
 Route::get('/admin/transaction/claim-details-walkin', function (){
@@ -764,62 +765,37 @@ Route::get('/pdf/breakdown-payment-comp/{cv_ID}/{comp_ID}/{account_ID}/', 'AccSt
 /////////////NOT SIGNED IN
 //HOME
 Route::get('/home', function (){
-   return view('pages.webpage.home');
+   return view('pages.webpage.not-signed-in.home');
 });
 
 //QUOTATION
 Route::get('/quotation', function (){
-   return view('pages.webpage.quotation');
+   return view('pages.webpage.not-signed-in.quotation');
 });
 
 //CLAIMS
-Route::get('/claims', function (){
-   return view('pages.webpage.claims');
+Route::get('/claims/sign-in', function (){
+   return view('pages.webpage.not-signed-in.claims');
 });
 
 //CLAIMS
 Route::get('/claim/requirements', function (){
-   return view('pages.webpage.claim-requirements');
-});
-
-//TRANSMITTAL
-Route::get('/transmittal/signin', function (){
-   return view('pages.webpage.transmittal-signin');
-});
-
-//ENDORSEMENT
-Route::get('/endorsement/signin', function (){
-   return view('pages.webpage.endorsement-signin');
+   return view('pages.webpage.not-signed-in.claim-requirements');
 });
 
 //MONITOR PAYMENT
-Route::get('/monitor/payment/signin', function (){
-   return view('pages.webpage.monitor-payment-signin');
+Route::get('/payment/sign-in', function (){
+   return view('pages.webpage.not-signed-in.monitor-payment-sign-in');
 });
 
 //MONITOR transmittal
-Route::get('/monitor/transmittal/signin', function (){
-   return view('pages.webpage.monitor-transmittal-signin');
-});
-
-//MONITOR claims
-Route::get('/monitor/claims/signin', function (){
-   return view('pages.webpage.monitor-claims-signin');
+Route::get('/transmittal/sign-in', function (){
+   return view('pages.webpage.not-signed-in.transmittal-signin');
 });
 
 //MONITOR complaint
-Route::get('/monitor/complaint/signin', function (){
-   return view('pages.webpage.monitor-complaint-signin');
-});
-
-//MONITOR endorsement
-Route::get('/monitor/endorsement/signin', function (){
-   return view('pages.webpage.monitor-endorsement-signin');
-});
-
-//MONITOR quotation
-Route::get('/monitor/quotation/signin', function (){
-   return view('pages.webpage.monitor-quotation-signin');
+Route::get('/complaint/sign-in', function (){
+   return view('pages.webpage.not-signed-in.complaint-signin');
 });
 //////////////////////NOT SIGNED IN
 

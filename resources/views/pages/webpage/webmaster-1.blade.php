@@ -136,13 +136,9 @@
                     </ul>
                 </div>
                 <div class="top_left">
-                    <ul>
-                        <li class="top_link"><a id = 'client_name'>Welcome!, {{Session::get('username')}}</a></li>|                  
-                    </ul>
                     <div class="social">
                         <ul>
-                            <li class="@yield('inbox')"><a href="/user/notifications">NOTIFICATIONS <span class="label label-info">{{Session::get('notif')}}</span></a></li>| 
-                            <li><a href="/user/logout">LOG OUT</a></li>                                     
+                            <li><a href="/sign-in">SIGN IN</a></li>                                     
                         </ul>
                     </div>
                 </div>
@@ -158,12 +154,12 @@
              <!-- start header menu -->
              <ul class="megamenu skyblue">
                 <li><a href="/home"><img src="{{ URL::asset('web/images/weblogo.png') }}" alt=""/></a></li>
-                <li class="@yield('home')"><a class="color1" href="/user/home">Home</a></li>
-                <li class="@yield('quote')"><a class="color2" href="/user/quotation">Quotation</a></li>
-                <li class="@yield('payment')"><a class="color7" href="/user/payment">Payment</a></li>
-                <li class="@yield('claims')"><a class="color3" href="/user/claims">Claims</a></li>               
-                <li class="@yield('transmittal')"><a class="color4" href="/user/transmittal">Transmittal</a></li>
-                <li class="@yield('complaint')"><a class="color5" href="/user/complaint">Complaint</a></li>
+                <li class="@yield('home')"><a class="color1" href="/home">Home</a></li>
+                <li class="@yield('quote')"><a class="color2" href="/quotation">Quotation</a></li>
+                <li class="@yield('payment')"><a class="color7" href="/payment/sign-in">Payment</a></li>
+                <li class="@yield('claims')"><a class="color3" href="/claims/sign-in">Claims</a></li>               
+                <li class="@yield('transmittal')"><a class="color4" href="/transmittal/sign-in">Transmittal</a></li>
+                <li class="@yield('complaint')"><a class="color5" href="/complaint/sign-in">Complaint</a></li>
                 </ul>
                  <div class="clearfix"></div>
              </div>

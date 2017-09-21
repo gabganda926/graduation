@@ -209,7 +209,7 @@ class trans_quotationListController extends Controller
         }
      
 
-        return $this->check_exist_make($req, null);
+        return $this->check_exist_make($req, $type->vehicle_type_ID);
     }
 
     public function check_exist_make($req, $type)
@@ -254,7 +254,7 @@ class trans_quotationListController extends Controller
             }
         }
 
-        return $this->check_exist_model($req, $type, null);
+        return $this->check_exist_model($req, $type, $make->vehicle_make_ID);
     }
 
     public function check_exist_model($req, $type, $make)
@@ -335,7 +335,7 @@ class trans_quotationListController extends Controller
             }
         }
 
-        return $this->update_quote($req, $type, $make, null);
+        return $this->update_quote($req, $type, $make, $model->vehicle_model_ID);
     }
 
     public function update_quote($req, $type, $make, $model)
@@ -404,7 +404,7 @@ class trans_quotationListController extends Controller
             }
         }
 
-        return $this->save_client_details($req, null);
+        return $this->save_client_details($req,$eyedee);
     }
 
     public function save_client_details($req,$id)
@@ -633,47 +633,22 @@ class trans_quotationListController extends Controller
 
     public function details_only_sent($req)
     {
-        $id = quotationCompanyConnection::where("quote_comp_ID", "=", $req->ID)->first();
-        if($id)
-        {
-            return view('pages.accounting-staff.transaction.insure-quote')
-            ->with('id', -1)
-            ->with('details',$id)
-            ->with('type', -1)
-            ->with('address',addressConnection::all())
-            ->with('pInfo',personalInfoConnection::all())
-            ->with('cperson',contactPersonConnection::all())
-            ->with('company',inscompanyConnection::all())
-            ->with('salesA',salesAgentConnection::all())
-            ->with('client',clientConnection::all())
-            ->with('policy',policynoConnection::all())
-            ->with('vModel',vModelConnection::all())
-            ->with('vMake',vMakeConnection::all())
-            ->with('vType',vTypeConnection::all())
-            ->with('ppa',premiumPAConnection::orderBy('insuranceLimit')->get())
-            ->with('pdg',premiumDGConnection::orderBy('insuranceLimit')->get())->render();
-
-        }
-        else
-        {
-            $id = quotationIndividualConnection::where("quote_indi_ID", "=", $req->ID)->first();
-            return view('pages.accounting-staff.transaction.insure-quote')
-            ->with('id', -1)
-            ->with('details',$id)
-            ->with('type', -1)
-            ->with('address',addressConnection::all())
-            ->with('pInfo',personalInfoConnection::all())
-            ->with('cperson',contactPersonConnection::all())
-            ->with('company',inscompanyConnection::all())
-            ->with('salesA',salesAgentConnection::all())
-            ->with('client',clientConnection::all())
-            ->with('policy',policynoConnection::all())
-            ->with('vModel',vModelConnection::all())
-            ->with('vMake',vMakeConnection::all())
-            ->with('vType',vTypeConnection::all())
-            ->with('ppa',premiumPAConnection::orderBy('insuranceLimit')->get())
-            ->with('pdg',premiumDGConnection::orderBy('insuranceLimit')->get())->render();
-        }
+        return view('pages.accounting-staff.transaction.insure-quote')
+        ->with('id', -1)
+        ->with('details',$req)
+        ->with('type', -1)
+        ->with('address',addressConnection::all())
+        ->with('pInfo',personalInfoConnection::all())
+        ->with('cperson',contactPersonConnection::all())
+        ->with('company',inscompanyConnection::all())
+        ->with('salesA',salesAgentConnection::all())
+        ->with('client',clientConnection::all())
+        ->with('policy',policynoConnection::all())
+        ->with('vModel',vModelConnection::all())
+        ->with('vMake',vMakeConnection::all())
+        ->with('vType',vTypeConnection::all())
+        ->with('ppa',premiumPAConnection::orderBy('insuranceLimit')->get())
+        ->with('pdg',premiumDGConnection::orderBy('insuranceLimit')->get())->render();
     }
 
     public function view_indi_details(Request $req)

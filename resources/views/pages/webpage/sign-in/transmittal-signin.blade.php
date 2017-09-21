@@ -9,7 +9,7 @@
 <div class="content">
     <div class="container">
         <ol class="breadcrumb">
-          <li><a href="/home">Home</a></li>
+          <li><a href="/user/home">Home</a></li>
           <li class="active">Transmittal</li>
         </ol>
         
@@ -30,63 +30,75 @@
                 <div style="float: right; width: 57%">
                     <h3><b>Online Transmittal Request</b></h3><br/>
                     <label><small>Welcome to the Online Transmittal Request of Compreline Insurance! Please complete the form below to facilitate your request. Our Representative will immediately get in touch with you regarding this request. Thank you.</small></label><br/><br/>
-                    
+                    <form id="add" name = "add" action = "transmittal/send" method="POST">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div>
                         <div class="row">
                             <div class="col-xs-12">
                                 <label for="1"><small>Insurance Company: </small></label>
-                                <select id="1" class="selectpicker" data-size="10" data-live-search="true" data-width="100%">
-                                    <option value="1">Company1</option>
-                                    <option value="2">Company2</option>
-                                    <option value="3">Company3</option>
+                                <select id="1" class="selectpicker" data-size="10" data-live-search="true" name="insurance" data-width="100%">
+                                    @foreach($comp as $insc)
+                                     @if($insc->del_flag == 0)
+                                      @if($insc->comp_type == 0)
+                                       <option value = "{{ $insc->comp_ID }}">{{ $insc->comp_name }}</option>
+                                      @endif
+                                     @endif
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-xs-12">
                                 <br/><label for="1"><small>Policy Number: </small></label>
-                                <input type="text" name="plate" style="width: 100%">
+                                <input type="text" name="policy_number" style="width: 100%">
                             </div><br/>
 
                             <!-- AUTPMATIC NA DIDISPLAY TO -->
                             <div class="col-xs-12">
                                 <br/><label><small>Name: </small></label>
-                                <input type="text" name="" style="width: 100%">
+                                <input type="text" name="name" style="width: 100%">
                             </div>
                             <div class="col-xs-12">
                                 <br/><label><small>Cellphone Number: </small></label>
-                                <input type="text" name="" style="width: 100%">
+                                <input type="text" name="cp1" style="width: 100%">
                             </div>
                             <div class="col-xs-12">
                                 <br/><label><small>Cellphone Number (Alternate): </small></label>
-                                <input type="text" name="" style="width: 100%">
+                                <input type="text" name="cp2" style="width: 100%">
                             </div>
                             <div class="col-xs-12">
                                 <br/><label><small>Telephone: </small></label>
-                                <input type="text" name="" style="width: 100%">
+                                <input type="text" name="tpnum" style="width: 100%">
                             </div>
                             <div class="col-xs-12">
                                 <br/><label><small>Email: </small></label>
-                                <input type="email" name="" style="width: 100%">
+                                <input type="email" name="email" style="width: 100%">
                             </div>
                             <div class="col-xs-12">
                                 <br/><label for="1"><small>Address: </small></label>
-                                <textarea style="resize: none;" rows="4" cols="74"></textarea>
+                                <textarea style="resize: none;" rows="4" cols="74" name="address"></textarea>
                             </div>
                             <!-- HANGGANG DITO -->
 
                             <div class="col-xs-12">
                                 <br/><label><small>Request Documents: </small></label>
                                 <div style="margin-left: 8%">
-                                    <br/><label class="checkbox"><input type="checkbox" name="checkbox" >Document1</label>
-                                    <br/><label class="checkbox"><input type="checkbox" name="checkbox" >Document2</label>
-                                    <br/><label class="checkbox"><input type="checkbox" name="checkbox" >Document3</label>
-                                    <br/><label class="checkbox"><input type="checkbox" name="checkbox" >Lahat ng nasa Maintenance</label>
+                                    @foreach($trec as $rec)
+                                     @if($rec->del_flag == 0)
+                                        <br/><label class="checkbox"><input type="checkbox" class = "document" name = "document[]" value = "{{$rec->transRec_ID}}" >{{$rec->transRec}}</label>
+                                     @endif
+                                    @endforeach
                                 </div>
                             </div>
-
+                            <div id = "error"></div>
+    
                             <div class="col-xs-12">
-                                <br/><br/><button type="button" class="btn btn-block btn-success">Submit</button>
+                                <br/><br/><button type="button" class="btn btn-block btn-success" onclick="
+                                if($('#add').valid())
+                                {
+                                    $('#add').submit();
+                                }
+                                ">Submit</button>
                             </div>
-
+                    </form>
                             <div class="col-xs-12">
                                 <br/><br/>
                             </div>
@@ -139,5 +151,79 @@ $(document).ready(function()
     
     return false;
 });
+</script>
+
+<script>
+
+    jQuery.validator.setDefaults({
+        errorPlacement: function(error, element) {
+            if (element.attr("name") == "document[]" )  
+                $("#error").append(error)
+            else 
+                error.insertAfter(element);
+        }
+    });
+
+    $.validator.addMethod("documents", function(value, elem, param) {
+        if($(".document:checkbox:checked").length > 0){
+           return true;
+       }else {
+           return false;
+       }
+    },"You must select at least one document!");
+
+    $.validator.addMethod("alphanumeric", function(value, element) {
+        return this.optional(element) || /^[A-Za-z][A-Za-z0-9 '-.]*$/i.test(value);
+     }, "This field must contain only letters, numbers, dashes, space, apostrophe or dot.");
+    $.validator.addMethod("alpha", function(value, element) {
+        return this.optional(element) || /^[A-Za-z][A-Za-z '-.]*$/i.test(value);
+     }, "This field must contain only letters, space, dash, apostrophe or dot.");
+    $.validator.addMethod("blcknumber", function(value, element) {
+        return this.optional(element) || /^[A-Za-z0-9][A-Za-z0-9 '-.]*$/i.test(value);
+     }, "This field must contain only letters, numbers, space, dash, apostrophe or dot.");
+
+
+// Wait for the DOM to be ready
+    $(function() {
+      // Initialize form validation on the registration form.
+      // It has the name attribute "registration"
+      $("form[name='add']").validate({
+        // Specify validation rules
+        rules: {
+          // The key name on the left side is the name attribute
+          // of an input field. Validation rules are defined
+          // on the right side
+          insurance:{
+            required: true,
+          },
+          policy_number:{
+            required: true,
+          },
+          name:{
+            required: true,
+          },
+          cp1:{
+            required: true,
+          },
+          tpnum:{
+            required: true,
+          },
+          email:{
+            required: true,
+          },
+          address:{
+            required: true,
+          },
+          document[]:{
+            documents: true
+          }
+        },
+        // Make sure the form is submitted to the destination defined
+        // in the "action" attribute of the form when valid
+        submitHandler: function(form) {
+          form.submit();
+        }
+      });
+    });
 </script>
 @endsection

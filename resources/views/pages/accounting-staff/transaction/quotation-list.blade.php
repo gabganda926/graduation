@@ -398,6 +398,9 @@
       <div class="col-md-4" style = "display: none;">
        <input id = "ID" name = "ID" type="text" class="form-control">
       </div>
+      <div class="col-md-4" style = "display: none;">
+       <input id = "code" name = "code" type="text" class="form-control">
+      </div>
     </form>
     <script>
         $('.forward_manager').click(function(event){
@@ -458,8 +461,145 @@
         });
 
         $('.insure').click(function(event){
-          $('#ID').val($(this).data('id'));
-          $('#quote').submit();
+            $('#ID').val($(this).data('id'));
+            swal({
+              title: 'Include Client Information?',
+              type: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#DD6B55',
+              confirmButtonText: 'Continue',
+              cancelButtonText: 'Cancel',
+              closeOnConfirm: false,
+              closeOnCancel: false
+            },
+            function(isConfirm){
+              if (isConfirm) {
+                swal({
+                    title: 'Include Vehicle Information?',
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#DD6B55',
+                    confirmButtonText: 'Continue',
+                    cancelButtonText: 'Cancel',
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                  },
+                  function(isConfirm){
+                    if (isConfirm) {
+                      $('#code').val(1);// include both
+                      swal({
+                        title: 'Continue? (All Details)',
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#DD6B55',
+                        confirmButtonText: 'Continue',
+                        cancelButtonText: 'Cancel',
+                        closeOnConfirm: false,
+                        closeOnCancel: false
+                      },
+                      function(isConfirm){
+                        if (isConfirm) {
+                          $('#quote').submit();
+                        } else {
+                            swal({
+                            title: 'Cancelled',
+                            type: 'warning',
+                            timer: 500,
+                            showConfirmButton: false
+                            });
+                        }
+                      });
+                    } else {
+                      $('#code').val(2);//client only
+                      swal({
+                        title: 'Continue? (Client Details only)',
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#DD6B55',
+                        confirmButtonText: 'Continue',
+                        cancelButtonText: 'Cancel',
+                        closeOnConfirm: false,
+                        closeOnCancel: false
+                      },
+                      function(isConfirm){
+                        if (isConfirm) {
+                          $('#quote').submit();
+                        } else {
+                            swal({
+                            title: 'Cancelled',
+                            type: 'warning',
+                            timer: 500,
+                            showConfirmButton: false
+                            });
+                        }
+                      });
+                    }
+                  });
+              } 
+              else {
+                  swal({
+                    title: 'Include Vehicle Information?',
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#DD6B55',
+                    confirmButtonText: 'Continue',
+                    cancelButtonText: 'Cancel',
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                  },
+                  function(isConfirm){
+                    if (isConfirm) {
+                      $('#code').val(3);// vehicle only
+                      swal({
+                        title: 'Continue? (Vehicle Details only)',
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#DD6B55',
+                        confirmButtonText: 'Continue',
+                        cancelButtonText: 'Cancel',
+                        closeOnConfirm: false,
+                        closeOnCancel: false
+                      },
+                      function(isConfirm){
+                        if (isConfirm) {
+                          $('#quote').submit();
+                        } else {
+                            swal({
+                            title: 'Cancelled',
+                            type: 'warning',
+                            timer: 500,
+                            showConfirmButton: false
+                            });
+                        }
+                      });
+                    } else {
+                      $('#code').val(0);// none
+                      swal({
+                        title: 'Continue? (Insurance Details only)',
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#DD6B55',
+                        confirmButtonText: 'Continue',
+                        cancelButtonText: 'Cancel',
+                        closeOnConfirm: false,
+                        closeOnCancel: false
+                      },
+                      function(isConfirm){
+                        if (isConfirm) {
+                          $('#quote').submit();
+                        } else {
+                            swal({
+                            title: 'Cancelled',
+                            type: 'warning',
+                            timer: 500,
+                            showConfirmButton: false
+                            });
+                        }
+                      });
+                    }
+                  });
+              }
+            });
         });
     </script>
 @endsection

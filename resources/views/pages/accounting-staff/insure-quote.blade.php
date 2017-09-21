@@ -1,6 +1,6 @@
 @extends('pages.accounting-staff.master')
 
-@section('title','Insure Client - Transaction| i-Insure')
+@section('title','Insure Client - Transaction | i-Insure')
 
 @section('transIns','active')
 
@@ -19,7 +19,6 @@
             }
             return output;
         }
-        console.log('{{$details->plate_number}}');
     </script>
     <section class="content">
     <h2 style="text-align: center"> Welcome to <b style="color: orange;"> i-Insure </b><br/>
@@ -228,7 +227,7 @@
                                                 <div class="form-group form-float">
                                                     <div class="form-line">
                                                     <label><small>Plate Number:</small></label>
-                                                        <input id = "indi_plate_number" name = "indi_plate_number" type="text" class="form-control" value = "{{$details->plate_number}}">
+                                                        <input id = "indi_plate_number" name = "indi_plate_number" type="text" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>

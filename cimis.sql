@@ -129,6 +129,38 @@ CREATE TABLE tbl_company_info
 	FOREIGN KEY	(comp_add_ID) REFERENCES tbl_address(add_ID),
 );
 
+INSERT INTO tbl_address(add_city,add_region) VALUES('Pasig City','NCR');
+INSERT INTO tbl_personal_info(pinfo_first_name,pinfo_last_name,pinfo_gender,pinfo_age,pinfo_cpnum_1,pinfo_mail) 
+  VALUES('Person','Contact','0','1990-01-22','09012345678','cperson@yahoo.com');
+INSERT INTO tbl_contact_person(personal_info_ID) VALUES('1');
+INSERT INTO tbl_client_list(client_type,client_flag,created_at,updated_at,del_flag) VALUES('0','0','2017-08-30','2017-08-30','0');
+INSERT INTO tbl_company_info(comp_ID,comp_name,comp_add_ID,comp_cperson_ID,comp_telnum,comp_type,comp_email)
+  VALUES('1','FPG Insurance','1','1','1234567','0','insuranceEmail@yahoo.com');
+
+INSERT INTO tbl_address(add_city,add_region) VALUES('Pasig City','NCR');
+INSERT INTO tbl_personal_info(pinfo_first_name,pinfo_last_name,pinfo_gender,pinfo_age,pinfo_cpnum_1,pinfo_mail) 
+  VALUES('Person','Contact','0','1990-01-22','09012345678','cperson@yahoo.com');
+INSERT INTO tbl_contact_person(personal_info_ID) VALUES('2');
+INSERT INTO tbl_client_list(client_type,client_flag,created_at,updated_at,del_flag) VALUES('0','0','2017-08-30','2017-08-30','0');
+INSERT INTO tbl_company_info(comp_ID,comp_name,comp_add_ID,comp_cperson_ID,comp_telnum,comp_type,comp_email)
+  VALUES('2','Commonwealth Insurance','2','2','1234567','0','insuranceEmail@yahoo.com');
+
+  INSERT INTO tbl_address(add_city,add_region) VALUES('Pasig City','NCR');
+INSERT INTO tbl_personal_info(pinfo_first_name,pinfo_last_name,pinfo_gender,pinfo_age,pinfo_cpnum_1,pinfo_mail) 
+  VALUES('Person','Contact','0','1990-01-22','09012345678','cperson@yahoo.com');
+INSERT INTO tbl_contact_person(personal_info_ID) VALUES('3');
+INSERT INTO tbl_client_list(client_type,client_flag,created_at,updated_at,del_flag) VALUES('0','0','2017-08-30','2017-08-30','0');
+INSERT INTO tbl_company_info(comp_ID,comp_name,comp_add_ID,comp_cperson_ID,comp_telnum,comp_type,comp_email)
+  VALUES('3','Standard Insurance','3','3','1234567','0','insuranceEmail@yahoo.com');
+
+  INSERT INTO tbl_address(add_city,add_region) VALUES('Pasig City','NCR');
+INSERT INTO tbl_personal_info(pinfo_first_name,pinfo_last_name,pinfo_gender,pinfo_age,pinfo_cpnum_1,pinfo_mail) 
+  VALUES('Person','Contact','0','1990-01-22','09012345678','cperson@yahoo.com');
+INSERT INTO tbl_contact_person(personal_info_ID) VALUES('4');
+INSERT INTO tbl_client_list(client_type,client_flag,created_at,updated_at,del_flag) VALUES('0','0','2017-08-30','2017-08-30','0');
+INSERT INTO tbl_company_info(comp_ID,comp_name,comp_add_ID,comp_cperson_ID,comp_telnum,comp_type,comp_email)
+  VALUES('4','People''s General Insurance','4','4','1234567','0','insuranceEmail@yahoo.com');
+
 CREATE TABLE tbl_user_accounts
 (
 	user_ID INT NOT NULL PRIMARY KEY,
@@ -296,8 +328,6 @@ CREATE TABLE tbl_payment_details
 	bi_premium FLOAT NOT NULL,
 	pd_cover FLOAT NOT NULL,
 	pd_premium FLOAT NOT NULL,
-	aon_cover FLOAT NOT NULL,
-	aon_premium FLOAT NOT NULL,
 	odt_cover FLOAT NOT NULL,
 	odt_premium FLOAT NOT NULL,
 	basicpremium FLOAT NOT NULL,
@@ -566,6 +596,46 @@ CREATE TABLE tbl_claimRequirements_Files
 	claimReq_picture varchar(50),
 	FOREIGN KEY (claim_ID) REFERENCES tbl_claimRequest(claim_ID),
 	FOREIGN KEY (claimReq_ID) REFERENCES tbl_claim_requirements(claimReq_ID),
+);
+
+CREATE TABLE tbl_transmittal_request
+(
+	req_ID VARCHAR(50) NOT NULL PRIMARY KEY,
+	account_ID INT NOT NULL,
+	date_recieved DATETIME NOT NULL,
+	date_update DATETIME,
+	status INT NOT NULL,
+	FOREIGN KEY (account_ID) REFERENCES tbl_client_account(account_ID),
+);
+
+CREATE TABLE tbl_transmittal_documents
+(
+	req_ID VARCHAR(50) NOT NULL,
+	document VARCHAR(50) NOT NULL,
+	document_desc VARCHAR(100),
+	FOREIGN KEY (req_ID) REFERENCES tbl_transmittal_request(req_ID),
+);
+
+CREATE TABLE tbl_transmittal_details
+(
+	insurance_company INT NOT NULL,
+	policy_number VARCHAR(20) NOT NULL,
+	req_ID VARCHAR(50) NOT NULL,
+	name VARCHAR(50) NOT NULL,
+	cp_1 VARCHAR(15) NOT NULL,
+	cp_2 VARCHAR(15),	
+	tp_num VARCHAR(15) NOT NULL,
+	email VARCHAR(50) NOT NULL,
+	address VARCHAR(100) NOT NULL,
+	FOREIGN KEY (req_ID) REFERENCES tbl_transmittal_request(req_ID),
+);
+
+CREATE TABLE tbl_transmittal_process
+(
+	process_ID INT NOT NULL IDENTITY(1,1),
+	courier_ID INT NOT NULL,
+	request_ID VARCHAR(50) NOT NULL,
+	FOREIGN KEY (request_ID) REFERENCES tbl_transmittal_request(req_ID),
 );
 
 --SELECT * FROM tbl_payment_details;

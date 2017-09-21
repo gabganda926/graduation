@@ -115,7 +115,6 @@
                                         <div class="form-line">
                                         <label><small>Payment for BOP Number:</small></label>
                                             <select id = "checknum" name = "checknum" class="form-control show-tick" data-live-search="true" readonly="true">
-                                                  <option selected value = "" style = "display: none;">-- Select BOP Number --</option>
                                             </select>
                                         </div>
                                     </div>

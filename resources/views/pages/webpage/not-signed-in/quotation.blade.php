@@ -1,4 +1,4 @@
-@extends('webmaster')
+@extends('pages.webpage.webmaster-1')
 
 @section('title','Quotation | i-Insure')
 
