@@ -100,7 +100,18 @@
                                                 @if($list->status == 3)
                                                     {{ \Carbon\Carbon::parse($list->paid_date)->format("M-d-Y") }} {{ "(".\Carbon\Carbon::parse($list->paid_date)->format("l, h:i:s A").")" }}
                                                 @endif</td>
-                                            <td>BOP000{{ $list->payment_ID }}</td>
+                                            <td>@if($list->payment_ID >= 10)
+                                                    BOP00{{ $list->payment_ID }}
+                                                @endif
+                                                @if($list->payment_ID < 10)
+                                                    BOP000{{ $list->payment_ID }}
+                                                @endif
+                                                @if($list->payment_ID >= 100)
+                                                    BOP0{{ $list->payment_ID }}
+                                                @endif
+                                                @if($list->payment_ID >= 1000)
+                                                    BOP{{ $list->payment_ID }}
+                                                @endif</td>
                                             <td>@foreach($payDet as $paydet)
                                                     @if($vouch->pay_ID == $paydet->payment_ID)
                                                         @foreach($bank as $bnk)

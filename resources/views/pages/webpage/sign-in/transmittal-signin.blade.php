@@ -94,7 +94,34 @@
                                 <br/><br/><button type="button" class="btn btn-block btn-success" onclick="
                                 if($('#add').valid())
                                 {
-                                    $('#add').submit();
+                                  swal({
+                                    title: 'Are you sure?',
+                                    type: 'warning',
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#DD6B55',
+                                    confirmButtonText: 'Continue',
+                                    cancelButtonText: 'Cancel',
+                                    closeOnConfirm: false,
+                                    closeOnCancel: false
+                                  },
+                                  function(isConfirm){
+                                    if (isConfirm) {
+                                      $('#add').submit();
+
+                                        document.getElementById('emp_first_name').value = '';
+                                        document.getElementById('emp_middle_name').value = '';
+                                        document.getElementById('emp_last_name').value = '';
+                                        document.getElementById('emp_contact').value = '';
+                                        document.getElementById('emp_mail').value = '';
+                                    } else {
+                                        swal({
+                                        title: 'Cancelled',
+                                        type: 'warning',
+                                        timer: 500,
+                                        showConfirmButton: false
+                                        });
+                                    }
+                                  });
                                 }
                                 ">Submit</button>
                             </div>
@@ -172,6 +199,12 @@ $(document).ready(function()
        }
     },"You must select at least one document!");
 
+    $.validator.addMethod("cpValidator", function(value, element) {
+        return this.optional(element) || /^((\+63)|0)\d{10}$/i.test(value);
+     }, "Invalid Cellphone Format");
+    $.validator.addMethod("email", function(value, element) {
+        return this.optional(element) || /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i.test(value);
+     }, "Invalid Email Address Format");
     $.validator.addMethod("alphanumeric", function(value, element) {
         return this.optional(element) || /^[A-Za-z][A-Za-z0-9 '-.]*$/i.test(value);
      }, "This field must contain only letters, numbers, dashes, space, apostrophe or dot.");
@@ -204,9 +237,18 @@ $(document).ready(function()
           },
           cp1:{
             required: true,
+            cpValidator: true
+          },
+          cp2:{
+            cpValidator: true
           },
           tpnum:{
             required: true,
+            maxlength: 7
+          },
+          email:{
+            required: true,
+            email: true
           },
           email:{
             required: true,

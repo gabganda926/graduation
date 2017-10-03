@@ -1,6 +1,6 @@
 @extends('pages.admin.master')
 
-@section('title','Complaint - Transaction | i-Insure')
+@section('title','Complaint Details - Transaction | i-Insure')
 
 @section('trans','active')
 
@@ -81,7 +81,7 @@
                                                 <div class="form-group form-float">
                                                     <div class="form-line">
                                                         <label><small>Complainant:</small></label>
-                                                        <input id = "aadd_blcknum" name = "aadd_blcknum" type="text" class="form-control" readonly="true">
+                                                        <input id = "aadd_blcknum" name = "aadd_blcknum" type="text" class="form-control" readonly value = "{{$complaint->name}}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -91,7 +91,7 @@
                                                 <div class="form-group form-float">
                                                     <div class="form-line">
                                                         <label><small>Contact Details:</small></label>
-                                                        <input id = "aadd_blcknum" name = "aadd_blcknum" type="text" class="form-control" placeholder="Telephone" readonly="true">
+                                                        <input id = "aadd_blcknum" name = "aadd_blcknum" type="text" class="form-control" placeholder="Telephone" readonly value = "{{$complaint->tp_num}}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -100,7 +100,7 @@
                                                 <div class="form-group form-float">
                                                     <div class="form-line">
                                                         <label><small>-</small></label>
-                                                        <input id = "aadd_blcknum" name = "aadd_blcknum" type="text" class="form-control" placeholder="Cellphone Number" readonly="true">
+                                                        <input id = "aadd_blcknum" name = "aadd_blcknum" type="text" class="form-control" placeholder="Cellphone Number" readonly value = "{{$complaint->cp_1}}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -110,7 +110,7 @@
                                                 <div class="form-group form-float">
                                                     <div class="form-line">
                                                     <label><small>-</small></label>
-                                                        <input id = "aadd_blcknum" name = "aadd_blcknum" type="text" class="form-control" placeholder="Cellphone Number (Alternate)" readonly="true">
+                                                        <input id = "aadd_blcknum" name = "aadd_blcknum" type="text" class="form-control" placeholder="Cellphone Number (Alternate)" readonly value = "{{$complaint->cp_2}}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -119,7 +119,7 @@
                                                 <div class="form-group form-float">
                                                     <div class="form-line">
                                                     <label><small>-</small></label>
-                                                        <input id = "aadd_blcknum" name = "aadd_blcknum" type="email" class="form-control" placeholder="Email" readonly="true">
+                                                        <input id = "aadd_blcknum" name = "aadd_blcknum" type="email" class="form-control" placeholder="Email" readonly value = "{{$complaint->email}}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -129,7 +129,7 @@
                                                 <div class="form-group form-float">
                                                     <div class="form-line">
                                                         <label><small>Address:</small></label>
-                                                        <textarea id = "aadd_blcknum" name = "aadd_blcknum" type="text" class="form-control" readonly="true" />COMPLETE ADDRESS</textarea>
+                                                        <textarea id = "address" name = "address" type="text" class="form-control" readonly value="{{$complaint->address}}"/></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -139,9 +139,7 @@
                                                 <div class="form-group form-float">
                                                     <div class="form-line">
                                                         <label><small>Policy Number:</small></label>
-                                                        <select id = "vehicle_type" name = "vehicle_type" class="form-control show-tick" data-live-search="true" >
-                                                                  <option selected value = "" style = "display: none;">---</option>
-                                                                </select>
+                                                        <input id = "aadd_blcknum" name = "aadd_blcknum" type="email" class="form-control" placeholder="Email" readonly value = "{{$complaint->policy_number}}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -150,27 +148,17 @@
                                                 <div class="form-group form-float">
                                                     <div class="form-line">
                                                         <label><small>Insurance Company:</small></label>
-                                                        <select id = "vehicle_type" name = "vehicle_type" class="form-control show-tick" data-live-search="true" >
-                                                                  <option selected value = "" style = "display: none;">---</option>
-                                                                </select>
+                                                        <input id = "aadd_blcknum" name = "aadd_blcknum" type="email" class="form-control" placeholder="Email" readonly value = "{{$inscomp}}">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row clearfix">
                                             <div class="col-md-6">
-                                                <label><small>Complaint Type :</small></label>
-                                                    <select id = "vehicle_type" name = "vehicle_type" class="form-control show-tick" data-live-search="true" >
-                                                      <option selected value = "" style = "display: none;">-- Select Complaint Type --</option>
-                                                        <option value = "asd">Asddd</option>
-                                                        <option value = "ass">Others (Please specify)</option>
-                                                    </select>
-                                            </div>
-                                            <div class="col-md-6">
                                                 <div class="form-group form-float">
                                                     <div class="form-line">
-                                                        <label><small>Specific Complaint Type: </small></label>
-                                                        <input type="text" name="asd" class="form-control" readonly="true"> <!-- MAG EENABLE PAG OTHERS -->
+                                                    <label><small>Complaint Type :</small></label>
+                                                        <input type="text" name="asd" class="form-control" readonly value = "{{$complaint->complaintType_name}}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -180,7 +168,7 @@
                                                 <div class="form-group form-float">
                                                     <div class="form-line">
                                                         <label><small>Complaint Details:</small></label>
-                                                        <textarea id = "vehicle_type_desc" name = "vehicle_type_desc" rows="10" class="form-control no-resize auto-growth" disabled=""></textarea>
+                                                        <textarea id = "complaint" name = "complaint" rows="10" class="form-control no-resize auto-growth" readonly></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -194,5 +182,10 @@
             </div> 
         </div>
     </section>
+
+    <script>
+        $('#address').val('{{$complaint->address}}');
+        $('#complaint').val('{{$complaint->complaint}}');
+    </script>
 
 @endsection

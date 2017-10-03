@@ -41,7 +41,7 @@ class transmittalRequestController extends Controller
       date_default_timezone_set('Asia/Manila');
       $id = str_pad(rand(0,'9'.round(microtime(true))),11, "0", STR_PAD_LEFT);
     	$this->request->req_ID = $id;
-      $this->request->account_ID = Session::get('accountID') ;
+      $this->request->account_ID = Session::get('accountID');
     	$this->request->date_recieved = date("Y-m-d H:i:s");
     	$this->request->status = 0;
       

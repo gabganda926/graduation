@@ -97,6 +97,18 @@
                                     <i class="material-icons">feedback</i><span style="font-size: 15px;"></span>
                                 </button></li>
                             </ul>
+                        <form id = "display" action = "/admin/transaction/insurance-details-company" method = "POST" style = "display: none;">
+                              <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                              <div class="col-md-4" style = "display: none;">
+                                 <input id = "id" name = "id" type="text" class="form-control">
+                             </div>
+                              <div class="col-md-4" style = "display: none;">
+                                 <input id = "acc_id" name = "acc_id" type="text" class="form-control">
+                             </div>
+                              <div class="col-md-4" style = "display: none;">
+                                 <input id = "pay_id" name = "pay_id" type="text" class="form-control">
+                             </div>
+                        </form>
                         <div class="divider" style="margin-bottom:20px;"></div>
                         </div>
                         <div class="body">
@@ -179,7 +191,6 @@
                                             <td>
                                               @foreach($paydetails as $spay)
                                                @if($spay->account_ID == $iacc->account_ID)
-                                               {{$spay->account_ID}}
                                                <button form = "display" type="submit" type="button" class="btn bg-light-blue waves-effect" data-id = "{{ $ccompany->comp_ID }}" data-acc = "{{$iacc->account_ID}}" data-pay = "{{$pay->payment_ID}}" onclick="
                                                 $('#id').val($(this).data('id')); $('#acc_id').val($(this).data('acc')); $('#pay_id').val($(this).data('pay'));" data-toggle="tooltip" data-placement="left" title="View account details."><i class="material-icons">remove_red_eye</i>
                                                </button>

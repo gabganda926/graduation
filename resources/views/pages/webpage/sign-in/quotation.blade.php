@@ -64,7 +64,7 @@
                                 <div class="row">
                                     <div class="col col-xs-4">
                                     <label for="1">Vehicle Type: </label>
-                                        <select id="1" class="selectpicker show-tick" data-size="10" data-live-search="true" data-width="80%">
+                                        <select id="1" class="selectpicker" data-size="10" data-width="85%">
                                             <option value="1">AAAAAAAAA</option>
                                             <option value="2">2AAAAAAAA</option>
                                             <option value="3">3AAAAAAAAAAAA</option>
@@ -85,7 +85,7 @@
                                 <div class="row">
                                     <div class="col-xs-4">
                                     <label for="1">Year Model: </label>
-                                        <select id="1" class="selectpicker" data-size="10" data-live-search="true" data-width="80%">
+                                        <select id="1" class="selectpicker" data-size="10" data-width="85%">
                                             <option value="1">1</option>
                                             <option value="2">2</option>
                                             <option value="3">3</option>
@@ -106,7 +106,7 @@
                                 <div class="row">
                                     <div class="col-xs-4">
                                     <label for="1">Make: </label>
-                                        <select id="1" class="selectpicker" data-size="10" data-live-search="true" data-width="80%">
+                                        <select id="1" class="selectpicker" data-size="10" data-width="85%">
                                             <option value="1">1</option>
                                             <option value="2">2</option>
                                             <option value="3">3</option>
@@ -127,7 +127,7 @@
                                 <div class="row">
                                     <div class="col-xs-4">
                                     <label for="1">Model: </label>
-                                        <select id="1" class="selectpicker" data-size="10" data-live-search="true" data-width="80%">
+                                        <select id="1" class="selectpicker" data-size="10" data-width="85%">
                                             <option value="1">1</option>
                                             <option value="2">2</option>
                                             <option value="3">3</option>
@@ -142,6 +142,19 @@
                                     <div class="col-xs-4">
                                         <label for="1">Color: </label>
                                             <input type="text" name="plate" style="width: 80%; border-color: #9e9e9e;">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-xs-4">
+                                        <label for="1">Seating Capacity: </label>
+                                            <input type="text" name="plate" style="width: 85%; border-color: #9e9e9e;">
+                                    </div>                             
+                                
+                                    <div class="col-xs-6">
+                                        <label for="1">Vehicle Market Value: </label>
+                                            <b><input type="text" name="plate" style="width: 80%; border-color: #9e9e9e;"></b>
                                     </div>
                                 </div>
                             </div>
@@ -159,7 +172,7 @@
                                 <div class="row">
                                     <div class="col-xs-12">
                                         <label for="1">Insurance Company: </label>
-                                        <select id="1" class="selectpicker" data-size="10" data-live-search="true" data-width="100%">
+                                        <select id="1" class="selectpicker" data-size="10" data-width="100%">
                                             <option value="1">Company1</option>
                                             <option value="2">Company2</option>
                                             <option value="3">Company3</option>
@@ -333,7 +346,7 @@
                                 <div class="row">
                                 <h4><b>Sales Agent</b></h4><br/>
                                     <div class="col-xs-5">
-                                        <select id="1" class="selectpicker" data-size="10" data-live-search="true" data-width="100%">
+                                        <select id="1" class="selectpicker" data-size="10" data-width="85%">
                                             <option value="1">1</option>
                                             <option value="2">2</option>
                                             <option value="3">3</option>
@@ -556,7 +569,7 @@
                                 <div class="row">
                                 <h4><b>Sales Agent</b></h4><br/>
                                     <div class="col-xs-5">
-                                        <select id="1" class="selectpicker" data-size="10" data-live-search="true" data-width="100%">
+                                        <select id="1" class="selectpicker" data-size="10" data-width="85%">
                                             <option value="1">1</option>
                                             <option value="2">2</option>
                                             <option value="3">3</option>
@@ -724,13 +737,13 @@
         };
     </script>
 
-    <script>
+    <!-- <script>
         $(document).ready(function(){
             $("#ugh").modal('show');
         });
 
         $('#ugh').modal({backdrop: 'static', keyboard: false})  
-    </script>
+    </script> -->
 
     <script type="text/javascript">
         $(document).ready(function(){

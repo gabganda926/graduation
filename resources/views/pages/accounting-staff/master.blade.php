@@ -179,11 +179,11 @@
                             <span>INSURANCE ACCOUNTS</span>
                         </a>
                         <ul class="ml-menu">
-                            <li class = "@yield('transNew')">
+                            <!-- <li class = "@yield('transNew')">
                                 <a href="/accounting-staff/transaction/insure-client">
                                     <span>Insure Client</span>
                                 </a>
-                            </li>
+                            </li> -->
                             <li class = "@yield('transInsInd')">
                                 <a href="/accounting-staff/transaction/insurance-individual">
                                     <span>Insurance Accounts - Individual</span>

@@ -63,7 +63,7 @@ class trans_expireAccountController extends Controller
 
   public function display_info_comp(Request $req)
   {
-    return view('pages/admin/transaction/insurance-details-company')
+    return view('pages/admin/transaction/insurance-details-company-expiring')
     ->with('client', inscompanyConnection::where('comp_ID', $req->id)->first())
     ->with('contact', contactPersonConnection::all())
     ->with('payments', paymentConnection::all())
@@ -99,7 +99,7 @@ class trans_expireAccountController extends Controller
 
   public function display_info_ind(Request $req)
   {
-    return view('pages/admin/transaction/insurance-details-individual')
+    return view('pages/admin/transaction/insurance-details-individual-expiring')
     ->with('client', clientConnection::where('client_ID', $req->id)->first())
     ->with('payments', paymentConnection::all())
     ->with('paydetails', paymentDetailConnection::where('payment_ID', $req->pay_id)->first())

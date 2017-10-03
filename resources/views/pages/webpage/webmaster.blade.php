@@ -15,6 +15,7 @@
     <link href="{{ URL::asset('assets/css/lib/bootstrap.min.css') }}" rel="stylesheet">
     <link rel="icon" href="{{ URL::asset('images/favicon.ico') }}" type="image/x-icon">
     <title>@yield('title')</title>
+
     <!-- Bootstrap -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="{{ URL::asset('web/css/bootstrap.css') }}" rel='stylesheet' type='text/css' />   

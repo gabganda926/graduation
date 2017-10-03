@@ -310,19 +310,11 @@ Route::post('/admin/transaction/insurance-details-company', 'AdminControllers\tr
 
 //Insurance - Expiring Accounts - Company
 Route::get('/admin/transaction/insurance-expiring-accounts-company', 'AdminControllers\trans_expireAccountController@list_comp');
+Route::post('/admin/transaction/insurance-details-company-expiring', 'AdminControllers\trans_expireAccountController@display_info_comp');
 
 //Insurance - Expiring Accounts - Individual
 Route::get('/admin/transaction/insurance-expiring-accounts-individual', 'AdminControllers\trans_expireAccountController@list_ind');
-
-//Insurance - individual
-Route::get('/admin/transaction/insurance-individual', 'AdminControllers\trans_insIndividualController@index');
-
-Route::post('/admin/transaction/insurance-details-individual', 'AdminControllers\trans_insIndividualController@display_info');
-
-//Insurance - company
-Route::get('/admin/transaction/insurance-company', 'AdminControllers\trans_insCompanyController@index');
-
-Route::post('/admin/transaction/insurance-details-company', 'AdminControllers\trans_insCompanyController@display_info');
+Route::post('/admin/transaction/insurance-details-individual-expiring', 'AdminControllers\trans_expireAccountController@display_info');
 
 
 //Insurance - Sent notifications - Company
@@ -346,9 +338,8 @@ Route::get('/admin/transaction/insurance-settings-company', function (){
 });
 
 //Claims - walkin
-Route::get('/admin/transaction/claim-request-walkin', function (){
-   return view('pages.admin.transaction.claim-request-walkin');
-});
+Route::get('/admin/transaction/claim-request-walkin', 'AdminControllers\trans_claimsController@claims_list');
+Route::post('/admin/transaction/claim-request-walkin/forward-manager', 'AdminControllers\trans_claimsController@forward_manager');
 
 //Claims - online
 Route::get('/admin/transaction/claim-request-online', function (){
@@ -360,9 +351,7 @@ Route::get('/admin/transaction/claim-create-request-walkin', 'AdminControllers\t
 Route::post('/admin/transaction/claim-create-request-walkin/submit', 'AdminControllers\trans_claimsController@new_claim');
 
 //Claims details walkin
-Route::get('/admin/transaction/claim-details-walkin', function (){
-   return view('pages.admin.transaction.claim-details-walkin');
-});
+Route::get('/admin/transaction/claim-details-walkin', 'AdminControllers\trans_claimsController@view_claim_details');
 
 //Claims details online
 Route::get('/admin/transaction/claim-details-online', function (){
@@ -376,28 +365,30 @@ Route::get('/admin/transaction/complaint-online', function (){
 });
 
 //Complaint - new
-Route::get('/admin/transaction/complaint-new', function (){
-   return view('pages.admin.transaction.complaint-new');
-});
+Route::get('/admin/transaction/complaint-new', 'AdminControllers\trans_complaintActionController@view_complaint_new');
+
+Route::post('/admin/transaction/complaint-new/action', 'AdminControllers\trans_complaintActionController@act_complaint');
 
 //Complaint - ended
-Route::get('/admin/transaction/complaint-ended', function (){
-   return view('pages.admin.transaction.complaint-ended');
-});
+Route::get('/admin/transaction/complaint-ended', 'AdminControllers\trans_complaintEndController@index');
+
+//Complaint-pending
+Route::get('/admin/transaction/complaint-pending', 'AdminControllers\trans_complaintPendingController@index');
+
+Route::post('/admin/transaction/complaint-pending/update', 'AdminControllers\trans_complaintPendingController@act_complaint');
+
+Route::post('/admin/transaction/complaint-pending/view', 'AdminControllers\trans_complaintPendingController@view');
+
+//Complaint-list
+Route::get('/admin/transaction/complaint-list', 'AdminControllers\trans_complaintListController@index');
+
+Route::post('/admin/transaction/complaint-list/update', 'AdminControllers\trans_complaintListController@update_complaint');
+
+Route::get('/admin/transaction/complaint-list/view', 'AdminControllers\trans_complaintListController@view');
 
 //Complaint-info
 Route::get('/admin/transaction/complaint-details', function (){
    return view('pages.admin.transaction.complaint-details');
-});
-
-//Complaint-pending
-Route::get('/admin/transaction/complaint-pending', function (){
-   return view('pages.admin.transaction.complaint-pending');
-});
-
-//Complaint-list
-Route::get('/admin/transaction/complaint-list', function (){
-   return view('pages.admin.transaction.complaint-list');
 });
 
 //Complaint-auto-reply
@@ -411,9 +402,11 @@ Route::get('/admin/transaction/transmittal-home', function (){
 });
 
 //Transmittal
-Route::get('/admin/transaction/transmittal', function (){
-   return view('pages.admin.transaction.transmittal');
-});
+Route::get('/admin/transaction/transmittal', 'AdminControllers\trans_transmittedController@index');
+
+Route::post('/admin/transaction/transmittal/update', 'AdminControllers\trans_transmittedController@update');
+
+Route::get('/admin/transaction/transmittal/view', 'AdminControllers\trans_transmittedController@view');
 
 //Transmittal - progress
 Route::get('/admin/transaction/transmittal-progress', function (){
@@ -421,14 +414,23 @@ Route::get('/admin/transaction/transmittal-progress', function (){
 });
 
 //Transmittal - documents
-Route::get('/admin/transaction/transmittal-documents', function (){
-   return view('pages.admin.transaction.transmittal-documents');
-});
+Route::get('/admin/transaction/transmittal-documents', 'AdminControllers\trans_transmitDocumentController@index');
+
+Route::post('/admin/transaction/transmittal-documents/transmit', 'AdminControllers\trans_transmitDocumentController@transmit');
 
 //Transmittal - request
-Route::get('/admin/transaction/transmittal-request', function (){
-   return view('pages.admin.transaction.transmittal-request');
-});
+Route::get('/admin/transaction/transmittal-request', 'AdminControllers\trans_transmittalRequestController@index');
+
+Route::post('/admin/transaction/transmittal-request/approve', 'AdminControllers\trans_transmittalRequestController@approve');
+
+Route::post('/admin/transaction/transmittal-request/disapprove', 'AdminControllers\trans_transmittalRequestController@disapprove');
+
+Route::get('/admin/transaction/transmittal-request/view', 'AdminControllers\trans_transmittalRequestController@view');
+
+Route::get('/admin/transaction/transmittal-request/transmit', 'AdminControllers\trans_transmittalRequestController@transmit');
+
+//Transmittal - ended
+Route::get('/admin/transaction/transmittal-ended', 'AdminControllers\trans_transmittalEndController@index');
 
 //Transmittal - validate
 Route::get('/admin/transaction/transmittal-info-request', function (){
@@ -438,11 +440,6 @@ Route::get('/admin/transaction/transmittal-info-request', function (){
 //Transmittal - info
 Route::get('/admin/transaction/transmittal-info-approved', function (){
    return view('pages.admin.transaction.transmittal-info-approved');
-});
-
-//Transmittal - ended
-Route::get('/admin/transaction/transmittal-ended', function (){
-   return view('pages.admin.transaction.transmittal-ended');
 });
 
 //Transmittal - auto-reply
@@ -641,6 +638,10 @@ Route::post('/accounting-staff/transaction/quotation-list/forward-client', 'AccS
 
 Route::post('/accounting-staff/transaction/quotation-list/insure-client', 'AccStaffControllers\trans_quotationListController@insure_client');
 
+Route::post('/accounting-staff/transaction/quotation-list/proceed', 'AccStaffControllers\trans_quoteInsureController@send_data_individual');
+
+Route::post('/accounting-staff/transaction/quotation-list/submit', 'AccStaffControllers\trans_quoteInsureController@save_insurance_account');
+
 //Quotation ONLINE AUTO REPLY
 Route::get('/accounting-staff/transaction/quotation-online-auto-reply', function (){
    return view('pages.accounting-staff.transaction.quotation-online-auto-reply');
@@ -719,19 +720,15 @@ Route::get('/manager/transaction/payment-list', function (){
    return view('pages.manager.transaction.payment-list');   
 });
 
-//claims
-Route::get('/manager/transaction/claims', function (){
-   return view('pages.manager.transaction.claims');   
-});
+//Claims - walkin
+Route::get('/manager/transaction/claims', 'ManagerControllers\walkin_claimApprovalController@claims_list');
+//Claims details walkin
+Route::get('/manager/transaction/claim-details', 'ManagerControllers\walkin_claimApprovalController@view_claim_details');
+
 
 //claims-settings
 Route::get('/manager/transaction/claims-settings', function (){
    return view('pages.manager.transaction.claims-settings');   
-});
-
-//claims details
-Route::get('/manager/transaction/claim-details', function (){
-   return view('pages.manager.transaction.claim-details');   
 });
 
 //transmittal
@@ -822,14 +819,13 @@ Route::get('/user/claim/requirements', function (){
 })->middleware('clientAuth');
 
 //TRANSMITTAL
-Route::get('/user/transmittal/', function (){
-   return view('pages.webpage.sign-in.transmittal-signin');
-})->middleware('clientAuth');
+Route::get('/user/transmittal/', 'WebControllers\transmittalRequestController@index')->middleware('clientAuth');
+Route::post('/user/transmittal/send', 'WebControllers\transmittalRequestController@send_request')->middleware('clientAuth');
 
 //COMPLAINT
-Route::get('/user/complaint', function (){
-   return view('pages.webpage.sign-in.complaint-signin');
-})->middleware('clientAuth');
+Route::get('/user/complaint', 'WebControllers\sendComplaintsController@index')->middleware('clientAuth');
+
+Route::post('/user/complaint/send', 'WebControllers\sendComplaintsController@send')->middleware('clientAuth');
 
 //PAYMENT
 Route::get('/user/payment/', function (){

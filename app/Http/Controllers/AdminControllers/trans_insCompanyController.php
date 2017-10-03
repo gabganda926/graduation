@@ -47,7 +47,7 @@ class trans_insCompanyController extends Controller
 {
   public function index()
   {
-    return view('pages/accounting-staff/transaction/insurance-company')
+    return view('pages/admin/transaction/insurance-company')
     ->with('paydetails', paymentDetailConnection::all())
     ->with('contact', contactPersonConnection::all())
     ->with('clist', clientListConnection::all())
@@ -60,7 +60,7 @@ class trans_insCompanyController extends Controller
 
   public function display_info(Request $req)
   {
-    return view('pages/accounting-staff/transaction/insurance-details-company')
+    return view('pages/admin/transaction/insurance-details-company')
     ->with('client', inscompanyConnection::where('comp_ID', $req->id)->first())
     ->with('contact', contactPersonConnection::all())
     ->with('payments', paymentConnection::all())

@@ -154,6 +154,8 @@
                                                      <span class="label bg-orange">pending - client
                                                     @elseif($list->quote_status == 7)
                                                      <span class="label bg-red">rejected - client
+                                                    @elseif($list->quote_status == 8)
+                                                     <span class="label bg-green">Insured Client
                                                     @endif
                                                 </td>
                                                 <td>{{\Carbon\Carbon::parse($list->created_at)->format("F d, Y")}}</td>
@@ -203,7 +205,7 @@
                                                 </button>
                                                 @endif
                                                 @if($list->quote_status == 2)
-                                                <button type="button" class="btn bg-orange waves-effect forward_client" data-id = "{{$indi->quote_indi_ID}}"data-toggle="tooltip" data-placement="left" title="Ask for client's confirmartion"><i class="material-icons">question_answer</i>
+                                                <button type="button" class="btn bg-orange waves-effect forward_client" data-id = "{{$indi->quote_indi_ID}}"data-toggle="tooltip" data-placement="left" title="Ask for client's confirmation"><i class="material-icons">question_answer</i>
                                                 <button type="button" class="btn bg-red waves-effect delete" data-id = "{{$indi->quote_indi_ID}}"data-toggle="tooltip" data-placement="left" title="Delete this quotation"><i class="material-icons">delete</i>
                                                 </button>
                                                 </button>
@@ -311,6 +313,8 @@
                                                      <span class="label bg-orange">pending - client
                                                     @elseif($list->quote_status == 7)
                                                      <span class="label bg-red">rejected - client
+                                                    @elseif($list->quote_status == 8)
+                                                     <span class="label bg-green">Insured Client
                                                     @endif
                                                 </td>
                                                 <td>{{\Carbon\Carbon::parse($list->created_at)->format("F d, Y")}}</td>
@@ -363,7 +367,7 @@
                                                 </button>
                                                 @endif
                                                 @if($list->quote_status == 2)
-                                                <button type="button" class="btn bg-orange waves-effect forward_client" data-id = "{{$comp->quote_comp_ID}}"data-toggle="tooltip" data-placement="left" title="Ask for client's confirmartion"><i class="material-icons">question_answer</i>
+                                                <button type="button" class="btn bg-orange waves-effect forward_client" data-id = "{{$comp->quote_comp_ID}}"data-toggle="tooltip" data-placement="left" title="Ask for client's confirmation"><i class="material-icons">question_answer</i>
                                                 <button type="button" class="btn bg-red waves-effect delete" data-id = "{{$comp->quote_comp_ID}}"data-toggle="tooltip" data-placement="left" title="Delete this quotation"><i class="material-icons">delete</i>
                                                 </button>
                                                 </button>

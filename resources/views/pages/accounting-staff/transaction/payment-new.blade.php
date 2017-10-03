@@ -53,9 +53,204 @@
             <div class="row clearfix">
                 <!-- PAYMENT DETAILS -->
                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                    <div class="card">
+                    <div class="card" id = "mainz">
                         <div class="header">
-                            <h2>PAYMENT DETAILS</h2>
+                            <h2>CHOOSE PAYMENT TYPE</h2>
+                        </div>
+                        <div class="body">
+                         <form id = "payment" action = "/accounting-staff/transaction/payment-new/submit" method = "POST">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <div class="row clearfix">
+                                <div class="col-md-12">
+                                    <button type="button" class="btn btn-default btn-lg btn-block waves-effect" style="border: 2px solid #102027;color: #102027; padding: 1em; font-size: 20px;" data-toggle="tooltip" data-placement="bottom" title="Pay using cash." onclick="
+                                    $('#cashPay').show(800);
+                                    $('#breakdown').show(800);
+                                    $('#backCash').show(800);
+                                    $('#checkPay').hide(800);
+                                    $(this).parents('#mainz').hide(800);"><img src="{{ URL::asset ('images/icons/view-bill.png')}}" style="height: 50px; width: 50px;"> CASH</button>
+                                </div>
+                            </div>
+                            
+                            <div class="row clearfix">
+                                <div class="col-md-12">
+                                    <button type="button" class="btn btn-default btn-lg btn-block waves-effect" style="border: 2px solid #102027;color: #102027; padding: 1em; font-size: 20px;" data-toggle="tooltip" data-placement="bottom" title="Pay using check." onclick="
+                                    $('#cashPay').hide(800);
+                                    $('#breakdown').show(800);
+                                    $('#backCheck').show(800);
+                                    $('#checkPay').show(800);
+                                    $(this).parents('#mainz').hide(800);"><img src="{{ URL::asset ('images/icons/payment.png')}}" style="height: 50px; width: 50px;"> CHECK</button>
+                                </div>
+                            </div>
+                          </div>
+                    </div><!--end of card-->
+                    <div id="backCheck">
+                      <div class="row clearfix">
+                        <div class="col-md-12">
+                          <button type="button" class="btn btn-block bg-orange waves-effect left" onclick="
+                            $('#mainz').show(800);
+                            $('#checkPay').hide(800);
+                            $('#breakdown').hide(800);
+                            $(this).parents('#backCheck').hide(800);
+                          "><span style="font-size: 15px;"> BACK</span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card" id = "checkPay">
+                        <div class="header">
+                            <h2>PAYMENT DETAILS - CHECK</h2>
+                        </div>
+                        <div class="body">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <div class="row clearfix">
+                                <div class="col-md-12">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                        <label><small>Remittance Date:</small></label>
+                                            <input id = "remittance_date_check" name = "remittance_date_check" type="datetime" class="form-control" readonly required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 
+                                <div class="col-md-12">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                        <label><small>Remittance Time:</small></label>
+                                            <input id = "remittance_time" name = "remittance_time" type="time" class="form-control" required>
+                                        </div>
+                                    </div>
+                                </div> -->
+
+                                <div class="col-md-12">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <label><small>Policy Number:</small></label>
+                                            <select id = "policy_number_check" name = "policy_number_check" class="form-control show-tick" data-live-search="true" readonly="true">
+                                                  <option selected value = "" style = "display: none;">-- Select Policy Number --</option>
+                                                  @foreach($voucher as $vouch)
+                                                   @foreach($ptail as $dtail)
+                                                    @if($vouch->pay_ID == $dtail->payment_ID)
+                                                    @foreach($insacc as $acc)
+                                                     @if($dtail->account_ID == $acc->account_ID)
+                                                    <option value = "{{$acc->policy_number}}">{{$acc->policy_number}}</option>
+                                                     @endif
+                                                    @endforeach
+                                                    @endif
+                                                   @endforeach
+                                                  @endforeach
+                                                </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                        <label><small>Client:</small></label>
+                                            <input id = "client_check" name = "client_check" type="text" class="form-control" pattern="[A-Za-z'-]" disabled="disable" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                        <label><small>Bank:</small></label>
+                                            <select id = "checknum_check" name = "checknum_check" class="form-control show-tick" data-live-search="true" readonly="true">
+                                                  <option selected value = "" style = "display: none;">-- Select Bank --</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                        <label><small>Check Number:</small></label>
+                                            <input id = "ch_check" name = "ch_check" type="text" class="form-control" pattern="[A-Za-z'-]" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                        <label><small>Amount:</small></label>
+                                            <input id = "ch_check" name = "ch_check" type="text" class="form-control" pattern="[A-Za-z'-]" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                        <label><small>Payment for BOP Number:</small></label>
+                                            <select id = "checknum_check" name = "checknum_check" class="form-control show-tick" data-live-search="true" readonly="true">
+                                                  <option selected value = "" style = "display: none;">-- Select BOP Number --</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- <div class="col-md-12">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                        <label><small>Amount Paid:</small></label>
+                                            <input id = "amount_paid" name = "amount_paid" type="number" min="1" class="form-control" pattern="[A-Za-z'-]" required>
+                                        </div>
+                                    </div>
+                                </div> -->
+
+                                <div class="col-md-12">
+                                    <button type="button" class="btn btn-block bg-green waves-effect left" onclick = "
+                                    $('#cashPay').hide(800);
+                                    $(this).parents('#checkPay').hide(800);
+                                    $('#mainz').show(800);
+                                    swal({
+                                      title: 'Are you sure?',
+                                      type: 'warning',
+                                      showCancelButton: true,
+                                      confirmButtonColor: '#DD6B55',
+                                      confirmButtonText: 'Continue',
+                                      cancelButtonText: 'Cancel',
+                                      closeOnConfirm: false,
+                                      closeOnCancel: false
+                                    },
+                                    function(isConfirm){
+                                      if (isConfirm) {
+                                        $('#payment').submit();
+                                      } else {
+                                          swal({
+                                          title: 'Cancelled',
+                                          type: 'warning',
+                                          timer: 500,
+                                          showConfirmButton: false
+                                          });
+                                      }
+                                    });
+                                    ">
+                                        <span style="font-size: 15px;"> UPDATE BOP VOUCHER</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- END OF CARD -->
+                    <div id="backCash">
+                      <div class="row clearfix">
+                        <div class="col-md-12">
+                          <button type="button" class="btn btn-block bg-orange waves-effect left" onclick="
+                            $('#mainz').show(800);
+                            $('#cashPay').hide(800);
+                            $('#breakdown').hide(800);
+                            $(this).parents('#backCash').hide(800);
+                          "><span style="font-size: 15px;"> BACK</span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card" id="cashPay">
+                        <div class="header">
+                            <h2>PAYMENT DETAILS - CASH</h2>
                         </div>
                         <div class="body">
                          <form id = "payment" action = "/accounting-staff/transaction/payment-new/submit" method = "POST">
@@ -183,7 +378,7 @@
                 <!-- END PAYMENT DETAILS -->
                 <!-- BREAKDOWN -->
                 <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                    <div class="card">
+                    <div class="card" id="breakdown">
                         <div class="header">
                             <h2>BREAKDOWN OF PAYMENT VOUCHER</h2>
                         </div>
@@ -234,6 +429,16 @@
         </form>
     </section>
 
+    <script type="text/javascript">
+        window.onload = function() {
+          document.getElementById('cashPay').style.display = 'none';
+          document.getElementById('checkPay').style.display = 'none';
+          document.getElementById('backCash').style.display = 'none';
+          document.getElementById('backCheck').style.display = 'none';
+          document.getElementById('breakdown').style.display = 'none';
+        };
+    </script>
+
     <script>
         $('#update').attr('disabled', true);
         var today = new Date();
@@ -268,6 +473,12 @@
            $('#remittance_date').val(today+ " " +f.toLocaleTimeString());
         }
 
+        var myVar2=setInterval(function(){myTimer2()},1000);
+
+        function myTimer2() {
+            var f = new Date();
+           $('#remittance_date_check').val(today+ " " +f.toLocaleTimeString());
+        }
 
         
 

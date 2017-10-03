@@ -105,9 +105,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-2" style = "display: none;">
-                                   <input id = "insid" name = "insid" type="text" class="form-control">
-                                </div>
                             </div>
                             
                             <div id="individualClient">
@@ -227,19 +224,11 @@
                                 </div>
 
                                 <div class="row clearfix">
-                                    <div class="col-md-12">
-                                        <label><b>Sales Agent</b></label>
-                                    </div>
-
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
                                         <div class="form-group form-float">
                                             <div class="form-line">
-                                                <select id = "agent" name = "agent" class="form-control show-tick" data-live-search="true" readonly="true">
-                                                      <option selected value = "" style = "display: none;">-- Select Sales Agent --</option>
-                                                            <option value = "I">12345</option>
-                                                            <option value = "II">67890</option>
-                                                            <option value = "III">111111</option>
-                                                    </select>
+                                                <label><small>Sales Agent:</small></label>
+                                                <input id = "agent" name = "agent" type="text" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
                                             </div>
                                         </div>
                                     </div>
@@ -325,12 +314,7 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label><small>Region:</small></label>
-                                                <select id = "region" name = "region" class="form-control show-tick" data-live-search="true" readonly="true">
-                                                      <option selected value = "" style = "display: none;">-- Select Region --</option>
-                                                            <option value = "I">12345</option>
-                                                            <option value = "II">67890</option>
-                                                            <option value = "III">111111</option>
-                                                    </select>
+                                                <input id = "region" name = "region" type="text" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
                                             </div>
                                         </div>
                                     </div>
@@ -349,6 +333,7 @@
                             </div> <!-- END OF INDIVIDUAL -->
 
                             <div id="companyClient">
+
                                 <div class="row clearfix">
                                     <div class="col-md-12">
                                         <label><b>Company Details</b></label>
@@ -356,28 +341,11 @@
                                 </div>
 
                                 <div class="row clearfix">
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label><small>Company Name:</small></label>
                                                 <input id = "compname" name = "compname" type="text" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row clearfix">
-                                    <div class="col-md-12">
-                                        <label><b>Company Contact Details</b></label>
-                                    </div>
-                                </div>
-
-                                <div class="row clearfix">
-                                    <div class="col-md-6">
-                                        <div class="form-group form-float">
-                                            <div class="form-line">
-                                                <label><small>Cellphone Number:</small></label>
-                                                <input id = "comp_cpno" name = "comp_cpno" type="text" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
                                             </div>
                                         </div>
                                     </div>
@@ -492,12 +460,7 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label><small>Region:</small></label>
-                                                <select id = "comp_region" name = "comp_region" class="form-control show-tick" data-live-search="true" readonly="true">
-                                                      <option selected value = "" style = "display: none;">-- Select Region --</option>
-                                                            <option value = "I">12345</option>
-                                                            <option value = "II">67890</option>
-                                                            <option value = "III">111111</option>
-                                                    </select>
+                                                <input id = "comp_region" name = "comp_region" type="text" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
                                             </div>
                                         </div>
                                     </div>
@@ -630,19 +593,11 @@
                                 </div>
 
                                 <div class="row clearfix">
-                                    <div class="col-md-12">
-                                        <label><b>Sales Agent</b></label>
-                                    </div>
-
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
                                         <div class="form-group form-float">
                                             <div class="form-line">
-                                                <select id = "comp_agent" name = "comp_agent" class="form-control show-tick" data-live-search="true" readonly="true">
-                                                      <option selected value = "" style = "display: none;">-- Select Sales Agent --</option>
-                                                            <option value = "I">12345</option>
-                                                            <option value = "II">67890</option>
-                                                            <option value = "III">111111</option>
-                                                    </select>
+                                                <label><small>Sales Agent:</small></label>
+                                                <input id = "comp_agent" name = "comp_agent" type="text" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
                                             </div>
                                         </div>
                                     </div>
@@ -675,7 +630,7 @@
                         <div class="divider" style="margin-bottom:20px;"></div>
                         </div>
                         <div class="body">
-                        <form id = "claimrequest" action = "/admin/transaction/claim-create-request-walkin/submit" method = "POST">
+                        <form name = "claimrequest" id = "claimrequest" action = "/admin/transaction/claim-create-request-walkin/submit" method = "POST">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <div class="row clearfix">
                                 <div class="col-md-4">
@@ -722,6 +677,16 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-2" style = "display: none;">
+                                   <input id = "insid" name = "insid" type="text" class="form-control">
+                                </div>
+                                
+                            <div class="col-md-2" style = "display: none;">
+                               <input id = "claimid" name = "claimid" type="text" class="form-control">
+                            </div>
+                            <div class="col-md-2" style = "display: none;">
+                               <input id = "reqc" name = "reqc" type="text" class="form-control">
+                            </div>
                             <div class="row clearfix">
                                 <div class="col-md-6">
                                     <button type="button" id="next2"  class="btn btn-block bg-blue waves-effect left" onclick=" 
@@ -739,6 +704,8 @@
                                 </div>
                                 <div class="col-md-6">
                                     <button type="button" id="claimDetNext"  class="btn btn-block bg-teal waves-effect left" disabled onclick=" 
+                                    if($('#claimrequest').valid())
+                                    {
                                     $(this).parents('#clDet').hide(800);
                                     $('#notifBy').show(800);
                                     $('#clDetails').removeClass('active');
@@ -748,7 +715,7 @@
                                                                 scrollTop: 0
                                                             }, 500);
                                                             return false;
-                                    ">
+                                    }">
                                         <span style="font-size: 15px;"> NEXT</span>
                                     </button>
                                 </div>
@@ -775,6 +742,12 @@
                                 </div>
                                 <div class="col-md-4" style = "display: none;">
                                    <input id = "notby" name = "notby" type="text" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="row clearfix">
+                                <div class="col-md-2" style = "display: none;">
+                                   <input id = "notifby_check" name = "notifby_check" type="text" class="form-control">
                                 </div>
                             </div>
 
@@ -856,7 +829,9 @@
                                     </button>
                                 </div>
                                 <div class="col-md-6">
-                                    <button type="button" id="notifNext"  class="btn btn-block bg-teal waves-effect left" disabled onclick=" 
+                                    <button type="button" id="notifNext"  class="btn btn-block bg-teal waves-effect left" disabled onclick="
+                                    if($('#claimrequest').valid())
+                                    { 
                                     buttonAddMore();
                                     $(this).parents('#notifBy').hide(800);
                                     $('#upDoc').show(800);
@@ -867,7 +842,7 @@
                                                                 scrollTop: 0
                                                             }, 500);
                                                             return false;
-                                    ">
+                                    }">
                                         <span style="font-size: 15px;"> NEXT</span>
                                     </button>
                                 </div>
@@ -929,6 +904,9 @@
                                 <div class="col-md-6">
                                     <button type="button" id="subm" type="button"  class="btn btn-block bg-green waves-effect left" onclick = "
                                     document.getElementById('time').value = formatDate(new Date());
+                                    document.getElementById('insid').value = getInsId();
+                                    document.getElementById('claimid').value = getClaimId();
+                                    document.getElementById('reqc').value = getReqCount();
                                     swal({
                                       title: 'Are you sure?',
                                       type: 'warning',
@@ -989,6 +967,7 @@
                         </div>
                         <div class="modal-footer js-sweetalert">
                             <button id="continue" class="btn btn-primary btn-block waves-effect" data-dismiss="modal" disabled>CONTINUE</button>
+                            <a href="{{ URL::asset('admin/transaction/claim-request-walkin') }}" id="canc" class="btn bg-orange btn-block waves-effect">CANCEL</a>
                         </div>
                     </form>
                     </div>
@@ -1008,6 +987,13 @@
     </script>
 
     <script>
+        function addZero(i) {
+                    if (i < 10) {
+                        i = "0" + i;
+                    }
+                    return i;
+                }
+
         function formatDate(date)
         {
           var monthNames = [
@@ -1112,6 +1098,21 @@
             });  
         }
 
+        function getInsId(inid){
+           inid = $('#insid').val();
+           return inid;
+        }
+
+        function getClaimId(clid){
+           clid = $('#claimid').val();
+           return clid;
+        } 
+
+        function getReqCount(rc){
+           rc = $('#reqc').val();
+           return rc;
+        }            
+
 
          $('#policyno').on('change textInput input', function () {
             var lapse = 0;
@@ -1165,7 +1166,6 @@
                                                                 @endif
                                                             @endif
                                                         @endforeach
-                                                        $('#insid').val('{{ $insacc->acccount_ID }}');
                                                     }
                                                 }
                                             @endif
@@ -1202,13 +1202,16 @@
                     show_Ind();
 
                     @foreach($cliacc as $ins)
-                        if('{{$insacc->policy_number}}' == $('#policyno').val()){
+                        if('{{$ins->policy_number}}' == $('#policyno').val()){
+                            console.log("POLICYNUMBER: " + '{{$ins->policy_number}}');
                             @foreach($clist as $list)
                                 @if($ins->client_ID == $list->client_ID)
                                     @foreach($cli as $client)
                                         @if($list->client_ID == $client->client_ID)
                                             @foreach($pinfo as $inf)
                                                 @if($client->personal_info_ID == $inf->pinfo_ID)
+                                                    $('#insid').val('{{ $ins->account_ID }}');
+                                                    console.log("INSURANCE ACC ID: " + $('#insid').val());
                                                     $('#fname').val('{{ $inf->pinfo_first_name }}');
                                                     $('#bday').val('{{ $inf->pinfo_age }}');
                                                     $('#mname').val('{{ $inf->pinfo_middle_name }}');
@@ -1223,9 +1226,34 @@
                                                     $('#cpno_1').val('{{ $inf->pinfo_cpnum_2 }}');
                                                     $('#telno').val('{{ $inf->pinfo_tpnum }}');
                                                     $('#email').val('{{ $inf->pinfo_mail}}');
+                                                    @foreach($sales as $agent)
+                                                        @if($client->client_sales_ID == $agent->agent_ID)
+                                                            @foreach($pinfo as $info)
+                                                                @if($agent->personal_info_ID == $info->pinfo_ID)
+                                                                    $('#agent').val('{{ $info->pinfo_last_name }}' +", "+'{{ $info->pinfo_first_name }}' +" "+'{{ $info->pinfo_middle_name }}');
+                                                                @endif
+                                                            @endforeach
+                                                        @endif
+                                                    @endforeach
+                                                    var bday = document.getElementById('bday').value.split('-');
+                                                    var today = new Date();
+                                                    if(bday[0] != 0)
+                                                    {
+                                                        if((today.getMonth() + 1) < bday[1])
+                                                        {
+                                                          document.getElementById('age').value = today.getFullYear() - bday[0] - 1;
+                                                        }
+                                                        else
+                                                        {
+                                                          document.getElementById('age').value = today.getFullYear() - bday[0];
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        document.getElementById('age').value = 'Invalid Input';
+                                                    }
                                                     @foreach($addr as $add)
                                                         @if($client->client_add_ID == $add->add_ID)
-                                                        console.log("AYS PREHH");
                                                             $('#blk').val('{{ $add->add_blcknum}}');
                                                             $('#dist').val('{{ $add->add_district}}');
                                                             $('#street').val('{{ $add->add_street}}');
@@ -1233,7 +1261,7 @@
                                                             $('#subd').val('{{ $add->add_subdivision}}');
                                                             $('#prov').val('{{ $add->add_province}}');
                                                             $('#brgy').val('{{ $add->add_brngy}}');
-                                                            $('#region').val('{{ $add->add_region}}').change();
+                                                            $('#region').val('{{ $add->add_region}}');
                                                             $('#zipcode').val('{{ $add->add_zipcode}}');
                                                         @endif
                                                     @endforeach
@@ -1248,9 +1276,91 @@
                 }
                 if(comp == 1){
                     show_Comp();
+                    @foreach($cliacc as $ins)
+                        if('{{$ins->policy_number}}' == $('#policyno').val()){
+                            console.log("POLICYNUMBER: " + '{{$ins->policy_number}}');
+                            @foreach($clist as $list)
+                                @if($ins->client_ID == $list->client_ID)
+                                    @foreach($comp as $client)
+                                        @if($list->client_ID == $client->comp_ID)
+                                            $('#insid').val('{{ $ins->account_ID }}');
+                                            console.log("INSURANCE ACC ID: " + $('#insid').val());
+                                            $('#compname').val('{{ $client->comp_telnum }}');
+                                            $('#comp_telnum').val('{{ $client->comp_name }}');
+                                            $('#comp_fax').val('{{ $client->comp_faxnum }}');
+                                            $('#comp_email').val('{{ $client->comp_email }}');
+                                            @foreach($sales as $agent)
+                                                @if($client->comp_sales_agent == $agent->agent_ID)
+                                                    @foreach($pinfo as $info)
+                                                        @if($agent->personal_info_ID == $info->pinfo_ID)
+                                                            $('#comp_agent').val('{{ $info->pinfo_last_name }}' +", "+'{{ $info->pinfo_first_name }}' +" "+'{{ $info->pinfo_middle_name }}');
+                                                        @endif
+                                                    @endforeach
+                                                @endif
+                                            @endforeach
+                                            @foreach($addr as $add)
+                                                @if($client->comp_add_ID == $add->add_ID)
+                                                    $('#comp_blk').val('{{ $add->add_blcknum}}');
+                                                    $('#comp_dist').val('{{ $add->add_district}}');
+                                                    $('#comp_street').val('{{ $add->add_street}}');
+                                                    $('#comp_city').val('{{ $add->add_city}}');
+                                                    $('#comp_subd').val('{{ $add->add_subdivision}}');
+                                                    $('#comp_prov').val('{{ $add->add_province}}');
+                                                    $('#comp_brgy').val('{{ $add->add_brngy}}');
+                                                    $('#comp_region').val('{{ $add->add_region}}');
+                                                    $('#comp_zipcode').val('{{ $add->add_zipcode}}');
+                                                @endif
+                                            @endforeach
+                                            @foreach($cont as $cper)
+                                                @if($client->comp_cperson_ID == $cper->cPerson_ID)
+                                                    @foreach($pinfo as $inf)
+                                                        @if($cper->personal_info_ID == $inf->pinfo_ID)
+                                                            $('#cont_fname').val('{{ $inf->pinfo_first_name }}');
+                                                            $('#cont_bday').val('{{ $inf->pinfo_age }}');
+                                                            $('#cont_mname').val('{{ $inf->pinfo_middle_name }}');
+                                                            $('#cont_lname').val('{{ $inf->pinfo_last_name }}');
+                                                            @if($inf->pinfo_gender == 0)
+                                                            $("#cont_male").prop("checked", true);
+                                                            @endif
+                                                            @if($inf->pinfo_gender == 1)
+                                                            $("#cont_fem").prop("checked", true);
+                                                            @endif
+                                                            $('#cont_cpno').val('{{ $inf->pinfo_cpnum_1 }}');
+                                                            $('#cont_cpno_1').val('{{ $inf->pinfo_cpnum_2 }}');
+                                                            $('#cont_telno').val('{{ $inf->pinfo_tpnum }}');
+                                                            $('#cont_email').val('{{ $inf->pinfo_mail}}');
+                                                            var bday = document.getElementById('cont_bday').value.split('-');
+                                                            var today = new Date();
+                                                            if(bday[0] != 0)
+                                                            {
+                                                                if((today.getMonth() + 1) < bday[1])
+                                                                {
+                                                                  document.getElementById('cont_age').value = today.getFullYear() - bday[0] - 1;
+                                                                }
+                                                                else
+                                                                {
+                                                                  document.getElementById('cont_age').value = today.getFullYear() - bday[0];
+                                                                }
+                                                            }
+                                                            else
+                                                            {
+                                                                document.getElementById('cont_age').value = 'Invalid Input';
+                                                            }
+                                                        @endif
+                                                    @endforeach
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                    @endforeach
+                                @endif
+                            @endforeach
+                        }
+                    @endforeach
                 }
             }
          });
+
+        var reqcount = 0;
 
         $('#claim_type').on('change textInput input', function () {
             $('#continue').attr('disabled', false);
@@ -1258,11 +1368,16 @@
                 @if($type->del_flag == 0)
                 if('{{$type->claimType_ID}}' == $('#claim_type option:selected').val()){
                     $('#claimtypez').val('{{ $type->claimType }}');
+                    $('#claimid').val('{{ $type->claimType_ID }}');
+                    console.log("CLAIM ID " + $('#claimid').val());
                     @foreach ($creq as $req)
                         @if($req->del_flag == 0)
                         @if($req->claimReq_Type == $type->claimType_ID)
                             var option = '<tr><td>{{ $req->claimRequirement }}</td><td><form class="input-append"><div id="field"><input autocomplete="off" class="input" id="field1" name="prof1" type="file"/><button id="b1" class="btn add-more" type="button">+ Add more File</button><br/></div></form></td></tr>';
                             $('#files tbody').append(option);
+                            reqcount += 1;
+                            $('#claimid').val(reqcount);
+                            console.log("REQCOUNT " + $('#reqc').val());
                         @endif
                         @endif
                     @endforeach
@@ -1429,9 +1544,10 @@
                 $('#rep_cpno_1').val("");
                 $('#rep_email').val("");
                 $('#rep_telno').val("");
-                console.log("nacheck po");
+                $('#notifby_check').val(1);
             }
             else {
+                $('#notifby_check').val(2);
                 $("#notifNext").prop("disabled", true);
 
                 $('#rep_name').on('change textInput input', function () {
@@ -1589,8 +1705,94 @@
         });
 
         $('#ugh').modal({backdrop: 'static', keyboard: false})  
+    </script>
 
+    <script>
+    $.validator.addMethod("cpValidator", function(value, element) {
+        return this.optional(element) || /^((\+63)|0)\d{10}$/i.test(value);
+     }, "Invalid Cellphone Format");
+    $.validator.addMethod("email", function(value, element) {
+        return this.optional(element) || /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i.test(value);
+     }, "Invalid Email Address Format");
+    $.validator.addMethod("alphanumeric", function(value, element) {
+        return this.optional(element) || /^[A-Za-z][A-Za-z0-9 '-.]*$/i.test(value);
+     }, "This field must contain only letters, numbers, dashes, space, apostrophe or dot.");
+    $.validator.addMethod("alpha", function(value, element) {
+        return this.optional(element) || /^[A-Za-z][A-Za-z '-.]*$/i.test(value);
+     }, "This field must contain only letters, space, dash, apostrophe or dot.");
+    $.validator.addMethod("blcknumber", function(value, element) {
+        return this.optional(element) || /^[A-Za-z0-9][A-Za-z0-9 '-.]*$/i.test(value);
+     }, "This field must contain only letters, numbers, space, dash, apostrophe or dot.");
 
+    // Wait for the DOM to be ready
+        $(function() {
+          // Initialize form validation on the registration form.
+          // It has the name attribute "registration"
+          $("form[name='claimrequest']").validate({
+            // Specify validation rules
+            rules: {
+              // The key name on the left side is the name attribute
+              // of an input field. Validation rules are defined
+              // on the right side
+              date_incident:
+              {
+                required: true
+              },
+              time_incident:
+              {
+                required: true
+              },
+              place_incident:
+              {
+                  alphanumeric: true,
+                  maxlength: 80
+              },
+              desc_incident:
+              {
+                alphanumeric: true,
+                  maxlength: 7900
+              },
+              rep_name:
+              {
+                alpha: true,
+                maxlength: 200
+              },
+              rep_rel:
+              {
+                alpha: true,
+                maxlength: 50
+              },
+              rep_telno:
+              {
+                digits: true,
+                minlength: 7,
+                maxlength: 7
+              },
+              rep_email:
+              {
+                email: true,
+                maxlength: 50
+              },
+              rep_cpno:
+              {
+                cpValidator: true
+              },
+              rep_cpno_1:
+              {
+                cpValidator: true
+              }
+            },
+            // Specify validation error messages
+            messages: {
+
+            },
+            // Make sure the form is submitted to the destination defined
+            // in the "action" attribute of the form when valid
+            submitHandler: function(form) {
+              form.submit();
+            }
+          });
+        });
     </script>
 
 @endsection

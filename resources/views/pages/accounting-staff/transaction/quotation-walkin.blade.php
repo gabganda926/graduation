@@ -226,6 +226,14 @@
                                 <div class="col-md-4">
                                     <div class="form-group form-float">
                                         <div class="form-line">
+                                            <label><small>Seat Capacity:</small></label>
+                                            <input id = "seat_capacity" name = "seat_capacity" type="text" class="form-control" pattern="[A-Za-z'-]" >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
                                             <label><small>Color:</small></label>
                                             <input id = "color" name = "color" type="text" class="form-control" pattern="[A-Za-z'-]" >
                                         </div>
@@ -1110,7 +1118,7 @@
                             </div><br/><br/>
 
                             <div class="row clearfix">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <button type="button" id="next1"  class="btn btn-block bg-blue waves-effect left" onclick=" 
                                     $(this).parents('#tos').hide(800);
                                     $('#cDet').show(800);
@@ -1124,7 +1132,11 @@
                                         <span style="font-size: 15px;"> PREVIOUS</span>
                                     </button>
                                 </div>
-                                <div class="col-md-6">
+
+                                <div class="col-md-4">
+                                    <button type="button" id="next1" class="btn btn-block bg-orange waves-effect left"> <span style="font-size: 15px;" onclick=" window.open('{{ URL::asset ('/admin/pdf/quotation-proposal') }}')"> GENERATE PDF</span></button>
+                                </div>
+                                <div class="col-md-4">
                                     <button type="button" id="finish"  class="btn btn-block bg-green waves-effect left">
                                         <span style="font-size: 15px;"> FINISH</span>
                                     </button>
@@ -1162,6 +1174,7 @@
                                                     <div class="col col-xs-4">
                                                         <label for="tppd_vclass">Vehicle Class: </label>
                                                         <select id="tppd_vclass" class="selectpicker" data-size="10" data-live-search="true" data-width="100%">
+                                                          <option value="1">Private Car</option>
                                                           <option value="2">Commercial Vehicle (Light & Medium)</option>
                                                           <option value="3">Commercial Vehicle (Heavy)</option>
                                                         </select>
@@ -1181,6 +1194,7 @@
                                                     <div class="col col-xs-4">
                                                         <label for="tpbi_vclass">Vehicle Class: </label>
                                                         <select id="tpbi_vclass" class="selectpicker" data-size="10" data-live-search="true" data-width="100%">
+                                                          <option value="1">Private Car</option>
                                                           <option value="2">Commercial Vehicle (Light & Medium)</option>
                                                           <option value="3">Commercial Vehicle (Heavy)</option>
                                                         </select>
@@ -1304,19 +1318,15 @@
                     required: true
                   },
                   plate_number:{
-                    required: true,
                     maxlength: 20
                   },
                   engine_number:{
-                    required: true,
                     maxlength: 50
                   },
                   chassis_number:{
-                    required: true,
                     maxlength: 50
                   },
                   mvfile_number:{
-                    required: true,
                     maxlength: 50
                   },
                   vehicle_market_value:{
@@ -1324,7 +1334,6 @@
                     maxlength: 50
                   },
                   color:{
-                    required: true,
                     maxlength: 50
                   },
                   insurance_comp:{

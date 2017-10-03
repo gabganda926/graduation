@@ -568,7 +568,7 @@ class maint_employeeController extends Controller
     {
         $user = userAccountsConnection::where('user_ID', '=', $req->aemp_id)->first();
         $user->user_name = $req->auname;
-        $user->user_password = $req->apass;
+        $user->user_password = bcrypt($req->apass);
 
         $mytime = $req->atime;
         $user->updated_at = $mytime;

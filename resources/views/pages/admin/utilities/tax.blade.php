@@ -1,6 +1,6 @@
 @extends('pages.admin.master')
 
-@section('title','Archives - Utilities | i-Insure')
+@section('title','Tax Settings - Utilities | i-Insure')
 
 @section('utilities','active')
 

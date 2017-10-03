@@ -296,7 +296,7 @@ CREATE TABLE tbl_insurance_account
 	vehicle_make_name varchar(20) NOT NULL,
 	vehicle_type_name varchar(20) NOT NULL,
 	vehicle_year varchar(4) NOT NULL,
-	vehicle_value FLOAT NOT NULL
+	vehicle_value FLOAT NOT NULL,
 	plate_number VARCHAR(20) NOT NULL,
 	serial_chassis VARCHAR(50) NOT NULL,
 	motor_engine VARCHAR(50) NOT NULL,
@@ -559,6 +559,56 @@ CREATE TABLE tbl_client_notif
 	FOREIGN KEY (account_ID) REFERENCES tbl_client_account(account_ID),
 );
 
+CREATE TABLE tbl_transmittal_request
+(
+	req_ID VARCHAR(50) NOT NULL PRIMARY KEY,
+	account_ID INT NOT NULL,
+	date_recieved DATETIME NOT NULL,
+	date_update DATETIME,
+	status INT NOT NULL,
+	FOREIGN KEY (account_ID) REFERENCES tbl_client_account(account_ID),
+);
+
+CREATE TABLE tbl_transmittal_documents
+(
+	req_ID VARCHAR(50) NOT NULL,
+	document VARCHAR(50) NOT NULL,
+	document_desc VARCHAR(100),
+	FOREIGN KEY (req_ID) REFERENCES tbl_transmittal_request(req_ID),
+);
+
+CREATE TABLE tbl_transmittal_details
+(
+	req_ID VARCHAR(50) NOT NULL,
+	insurance_company INT NOT NULL,
+	policy_number VARCHAR(20) NOT NULL,
+	name VARCHAR(50) NOT NULL,
+	cp_1 VARCHAR(15) NOT NULL,
+	cp_2 VARCHAR(15),	
+	tp_num VARCHAR(15) NOT NULL,
+	email VARCHAR(50) NOT NULL,
+	address VARCHAR(100) NOT NULL,
+	FOREIGN KEY (insurance_company) REFERENCES tbl_company_info(comp_ID),
+	FOREIGN KEY (req_ID) REFERENCES tbl_transmittal_request(req_ID),
+);
+
+CREATE TABLE tbl_transmittal_process
+(
+	process_ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	courier_ID INT NOT NULL,
+	request_ID VARCHAR(50) NOT NULL,
+	last_update DATETIME NOT NULL,
+	FOREIGN KEY (request_ID) REFERENCES tbl_transmittal_request(req_ID),
+);
+
+CREATE TABLE tbl_transmit_documents
+(
+	process_ID INT NOT NULL,
+	document VARCHAR(50) NOT NULL,
+	document_desc VARCHAR(100),
+	FOREIGN KEY (process_ID) REFERENCES tbl_transmittal_process(process_ID),
+);
+
 CREATE TABLE tbl_claimNotifiedByRepresentative
 (
 	notifier_ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
@@ -580,6 +630,7 @@ CREATE TABLE tbl_claimRequest
 	description VARCHAR (8000) NOT NULL,
 	notifiedByType INT NOT NULL, --1 kapag policyholder, 2 kapag representative
 	notifier_ID INT,
+	status INT NOT NULL, --0 kapag new; determine kung incomplete/complete na ung requirements, 1 kapag nasa manager na, 2 kapag forwarded na sa ins company
 	del_flag INT NOT NULL,
 	created_at datetime NOT NULL,
 	updated_at datetime NOT NULL,
@@ -594,58 +645,77 @@ CREATE TABLE tbl_claimRequirements_Files
 	claim_ID INT NOT NULL,
 	claimReq_ID INT NOT NULL,
 	claimReq_picture varchar(50),
+	created_at datetime NOT NULL,
+	updated_at datetime NOT NULL,
 	FOREIGN KEY (claim_ID) REFERENCES tbl_claimRequest(claim_ID),
 	FOREIGN KEY (claimReq_ID) REFERENCES tbl_claim_requirements(claimReq_ID),
 );
 
-CREATE TABLE tbl_transmittal_request
+CREATE TABLE tbl_complaint_sents
 (
-	req_ID VARCHAR(50) NOT NULL PRIMARY KEY,
+	complaint_ID INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
 	account_ID INT NOT NULL,
-	date_recieved DATETIME NOT NULL,
-	date_update DATETIME,
-	status INT NOT NULL,
-	FOREIGN KEY (account_ID) REFERENCES tbl_client_account(account_ID),
-);
-
-CREATE TABLE tbl_transmittal_documents
-(
-	req_ID VARCHAR(50) NOT NULL,
-	document VARCHAR(50) NOT NULL,
-	document_desc VARCHAR(100),
-	FOREIGN KEY (req_ID) REFERENCES tbl_transmittal_request(req_ID),
-);
-
-CREATE TABLE tbl_transmittal_details
-(
 	insurance_company INT NOT NULL,
 	policy_number VARCHAR(20) NOT NULL,
-	req_ID VARCHAR(50) NOT NULL,
 	name VARCHAR(50) NOT NULL,
 	cp_1 VARCHAR(15) NOT NULL,
 	cp_2 VARCHAR(15),	
 	tp_num VARCHAR(15) NOT NULL,
 	email VARCHAR(50) NOT NULL,
 	address VARCHAR(100) NOT NULL,
-	FOREIGN KEY (req_ID) REFERENCES tbl_transmittal_request(req_ID),
+	complaintType_name varchar(20) NOT NULL,
+	complaintType_desc varchar(50),
+	complaint varchar(500),
+	status INT NOT NULL,
+	date_sent DATETIME NOT NULL,
+	date_updated DATETIME,
+	FOREIGN KEY (insurance_company) REFERENCES tbl_company_info(comp_ID),
+	FOREIGN KEY (account_ID) REFERENCES tbl_client_account(account_ID),
 );
 
-CREATE TABLE tbl_transmittal_process
+CREATE TABLE tbl_complaint_action
 (
-	process_ID INT NOT NULL IDENTITY(1,1),
-	courier_ID INT NOT NULL,
-	request_ID VARCHAR(50) NOT NULL,
-	FOREIGN KEY (request_ID) REFERENCES tbl_transmittal_request(req_ID),
+	comp_action_ID INT IDENTITY(1,1) NOT NULL,
+	complaint_ID INT NOT NULL,
+	emp_ID INT NOT NULL,
+	status INT NOT NULL,
+	FOREIGN KEY (complaint_ID) REFERENCES tbl_complaint_sents(complaint_ID),
+	FOREIGN KEY (emp_ID) REFERENCES tbl_employee(emp_ID),
 );
 
---SELECT * FROM tbl_payment_details;
+--SELECT * FROM tbl_complaint_sents;
+--SELECT * FROM tbl_complaint_action;
+--DROP TABLE tbl_complaint_action;
+
+--SELECT * FROM tbl_vehicle_make;
+--SELECT * FROM tbl_vehicle_type;
+--SELECT * FROM tbl_vehicle_model;
+
+--SELECT * FROM tbl_user_accounts;
+--SELECT * FROM tbl_employee_role;
+--SELECT * FROM tbl_payments;
+--SELECT * FROM tbl_premium_damage;
+
+--SELECT * FROM tbl_transmittal_request;
+--SELECT * FROM tbl_transmittal_documents;
+--SELECT * FROM tbl_transmittal_details;
+--SELECT * FROM tbl_transmittal_process;
+--SELECT * FROM tbl_transmit_documents;
+
+--DROP TABLE tbl_user_accounts;
+--DROP TABLE tbl_transmittal_documents;
+--DROP TABLE tbl_transmittal_details;
+--DROP TABLE tbl_transmittal_process;
+--DROP TABLE tbl_transmit_documents;
 
 --DROP TABLE tbl_list_quotes;
 --DROP TABLE tbl_list_insurance;
 --DROP TABLE tbl_client_notif;
 --DROP TABLE tbl_client_account;
 
---UPDATE tbl_quotation SET quote_status = 2;
+--UPDATE tbl_complaint_sents SET status = 2;
+
+--UPDATE tbl_quote_individual SET vehicle_model_ID = '2';
 
 --DELETE FROM tbl_list_quotes;
 
@@ -657,8 +727,8 @@ CREATE TABLE tbl_transmittal_process
 
 --SELECT * FROM tbl_payments;
 
---SELECT * FROM tbl_quote_individual;
+--SELECT * FROM tbl_insurance_account;
 
---SELECT * FROM tbl_client;
+--SELECT * FROM tbl_client_account;
 
---DELETE FROM tbl_list_quotes;
+--DELETE FROM tbl_insurance_account;

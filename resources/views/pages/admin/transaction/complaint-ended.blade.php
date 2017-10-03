@@ -1,6 +1,6 @@
 @extends('pages.admin.master')
 
-@section('title','Complaint - Transaction | i-Insure')
+@section('title','Insurance Accounts - Transaction| i-Insure')
 
 @section('trans','active')
 
@@ -85,22 +85,28 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>COMP-10273-AB</td>
-                                        <td>Service Issue</td>
-                                        <td>yung ano kasi tapos inano ung ano ng ano tapos naano ung ano</td>
-                                        <td>Rola, Ma. Gabriella</td>
-                                        <td>March 05, 2017 (Saturday, 7:12:08PM)</td>
+                                    @foreach($complaints as $comp)
+                                     @if($comp->status == 2)
+                                     <tr>
+                                        <td>{{str_pad($comp->complaint_ID,11, "0", STR_PAD_LEFT)}}</td>
+                                        <td>{{$comp->complaintType_name}}</td>
+                                        <td>{{$comp->complaint}}</td>
+                                        <td>{{$comp->name}}</td>
+                                        <td>{{\Carbon\Carbon::parse($comp->date_sent)->format("M d,Y h:i:s")}}</td>
                                         <td><span class="label bg-green">settled</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>COMP-10273-AB</td>
-                                        <td>Service Issue</td>
-                                        <td>yung ano kasi tapos inano ung ano ng ano tapos naano ung ano</td>
-                                        <td>Rola, Ma. Gabriella</td>
-                                        <td>March 05, 2017 (Saturday, 7:12:08PM)</td>
+                                        </td>
+                                     </tr>
+                                     @elseif($comp->status == 3)
+                                     <tr>
+                                        <td>{{str_pad($comp->complaint_ID,11, "0", STR_PAD_LEFT)}}</td>
+                                        <td>{{$comp->complaintType_name}}</td>
+                                        <td>{{$comp->complaint}}</td>
+                                        <td>{{$comp->name}}</td>
+                                        <td>{{\Carbon\Carbon::parse($comp->date_sent)->format("M d,Y h:i:s")}}</td>
                                         <td><span class="label bg-red">rejected</span></td>
-                                    </tr>
+                                     </tr>
+                                     @endif
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

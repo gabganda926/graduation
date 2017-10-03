@@ -439,7 +439,7 @@
                             <li class = "@yield('general')">
                                 <a href="/admin/utilities/generalSettings">
                                     <i class="material-icons">settings_applications</i>
-                                    <span>GENERAL SETTINGS</span>
+                                    <span>PREMIUM COMPUTATION SETTINGS</span>
                                 </a>
                             </li>
                             <li class = "@yield('tax')">

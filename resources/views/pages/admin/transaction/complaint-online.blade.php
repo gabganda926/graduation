@@ -1,6 +1,6 @@
 @extends('pages.admin.master')
 
-@section('title','Complaint - Transaction| i-Insure')
+@section('title','Insurance Accounts - Transaction| i-Insure')
 
 @section('trans','active')
 

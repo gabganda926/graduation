@@ -89,80 +89,70 @@
                                 </thead>
                                 <tbody>
                                 <!-- MAGKAIBA UNG ACTION DPENDE SA STATUS. DALAWA LANG UNG STATUS, NEW SAKA TO DO -->
-                                    <tr>
-                                        <td>87897-10273-AB</td>
-                                        <td>Rola, Ma. Gabriella</td>
-                                        <td><ul>
-                                            <li>Copy of Insurance Form</li>
-                                            <li>Cheque Voucher</li>
-                                            </ul></td>
-                                        <td><span class="label bg-blue">to do</span></td>
-                                        <td>March 20, 2017 (Monday, 3:05:10PM)</td>
-                                        <td><button type="button" class="btn bg-blue waves-effect" style="position: right;" onclick="window.document.location='{{ URL::asset('admin/transaction/transmittal-info-request') }}';" data-toggle="tooltip" data-placement="left" title="View details">
-                                            <i class="material-icons">security</i><span style="font-size: 15px;">
-                                        </button>
-                                        <button type="button" class="btn bg-green waves-effect" style="position: right;" onclick="window.document.location='{{ URL::asset('admin/transaction/transmittal-documents') }}';" data-toggle="tooltip" data-placement="left" title="Transmit the Document/s">
-                                            <i class="material-icons">send</i><span style="font-size: 15px;">
-                                        </button> 
+                                    @foreach($request as $req)
+                                     @if($req->status == 0)
+                                     <tr>
+                                        <td>{{$req->req_ID}}</td>
+                                        <td>
+                                        @foreach($details as $dts)
+                                         @if($dts->req_ID == $req->req_ID)
+                                          {{$dts->name}}
+                                         @endif
+                                        @endforeach
                                         </td>
-                                    </tr>
-                                    <tr>
-                                        <td>87897-10273-AB</td>
-                                        <td>Rola, Ma. Gabriella</td>
-                                        <td><ul>
-                                            <li>Copy of Insurance Form</li>
-                                            <li>Cheque Voucher</li>
-                                            </ul></td>
+                                        <td>
+                                            <ul>
+                                            @foreach($documents as $doc)
+                                             @if($doc->req_ID)
+                                              <li>{{$doc->document}}</li>
+                                             @endif
+                                            @endforeach
+                                            </ul>
+                                        </td>
                                         <td><span class="label bg-green">new</span></td>
-                                        <td>March 20, 2017 (Monday, 3:05:10PM)</td>
-                                        <td><button type="button" class="btn bg-blue waves-effect" style="position: right;" onclick="window.document.location='{{ URL::asset('admin/transaction/transmittal-info-request') }}';" data-toggle="tooltip" data-placement="left" title="View details">
+                                        <td>{{\Carbon\Carbon::parse($req->date_recieved)->format("M d,Y H:i:s")}}</td>
+                                        <td><button type="button" class="btn bg-blue waves-effect view" style="position: right;" onclick="window.document.location='{{ URL::asset('admin/transaction/transmittal-info-request') }}';" data-toggle="tooltip" data-placement="left" title="View details" data-id = "{{$req->req_ID}}">
                                             <i class="material-icons">security</i><span style="font-size: 15px;">
                                         </button>
-                                        <button type="button" class="btn bg-green waves-effect" style="position: right;" onclick="" data-toggle="tooltip" data-placement="left" title="Accept - Forward to Manager">
+                                        <button type="button" class="btn bg-green waves-effect approve" style="position: right;" onclick="" data-toggle="tooltip" data-placement="left" title="Accept - Forward to Manager" data-id = "{{$req->req_ID}}">
                                             <i class="material-icons">thumb_up</i><span style="font-size: 15px;">
                                         </button>
-                                        <button type="button" class="btn bg-red waves-effect" style="position: right;"  data-toggle="tooltip" data-placement="left" title="Reject">
+                                        <button type="button" class="btn bg-red waves-effect disapprove" style="position: right;"  data-toggle="tooltip" data-placement="left" title="Reject" data-id = "{{$req->req_ID}}">
                                             <i class="material-icons">thumb_down</i><span style="font-size: 15px;">
                                         </button>
                                         </td>
-                                    </tr>
-                                    <tr>
-                                        <td>87897-10273-AB</td>
-                                        <td>Rola, Ma. Gabriella</td>
-                                        <td><ul>
-                                            <li>Copy of Insurance Form</li>
-                                            <li>Cheque Voucher</li>
-                                            </ul></td>
+                                     </tr>
+                                     @elseif($req->status == 1)
+                                     <tr>
+                                        <td>{{$req->req_ID}}</td>
+                                        <td>
+                                        @foreach($details as $dts)
+                                         @if($dts->req_ID == $req->req_ID)
+                                          {{$dts->name}}
+                                         @endif
+                                        @endforeach
+                                        </td>
+                                        <td>
+                                            <ul>
+                                            @foreach($documents as $doc)
+                                             @if($doc->req_ID)
+                                              <li>{{$doc->document}}</li>
+                                             @endif
+                                            @endforeach
+                                            </ul>
+                                        </td>
                                         <td><span class="label bg-blue">to do</span></td>
-                                        <td>March 20, 2017 (Monday, 3:05:10PM)</td>
-                                        <td><button type="button" class="btn bg-blue waves-effect" style="position: right;" onclick="window.document.location='{{ URL::asset('admin/transaction/transmittal-info-request') }}';" data-toggle="tooltip" data-placement="bottom" title="View details">
+                                        <td>{{\Carbon\Carbon::parse($req->date_recieved)->format("M d,Y H:i:s")}}</td>
+                                        <td><button type="button" class="btn bg-blue waves-effect view" style="position: right;" onclick="window.document.location='{{ URL::asset('admin/transaction/transmittal-info-request') }}';" data-toggle="tooltip" data-placement="left" title="View details" data-id = "{{$req->req_ID}}">
                                             <i class="material-icons">security</i><span style="font-size: 15px;">
                                         </button>
-                                        <button type="button" class="btn bg-green waves-effect" style="position: right;" onclick="window.document.location='{{ URL::asset('admin/transaction/transmittal-documents') }}';" data-toggle="tooltip" data-placement="left" title="Transmit the Document/s">
+                                        <button type="button" class="btn bg-green waves-effect transmit" style="position: right;" onclick="window.document.location='{{ URL::asset('admin/transaction/transmittal-documents') }}';" data-toggle="tooltip" data-placement="left" title="Transmit the Document/s" data-id = "{{$req->req_ID}}">
                                             <i class="material-icons">send</i><span style="font-size: 15px;">
                                         </button> 
                                         </td>
-                                    </tr>
-                                    <tr>
-                                        <td>87897-10273-AB</td>
-                                        <td>Rola, Ma. Gabriella</td>
-                                        <td><ul>
-                                            <li>Copy of Insurance Form</li>
-                                            <li>Cheque Voucher</li>
-                                            </ul></td>
-                                        <td><span class="label bg-green">new</span></td>
-                                        <td>March 20, 2017 (Monday, 3:05:10PM)</td>
-                                        <td><button type="button" class="btn bg-blue waves-effect" style="position: right;" onclick="window.document.location='{{ URL::asset('admin/transaction/transmittal-info-request') }}';" data-toggle="tooltip" data-placement="left" title="View details">
-                                            <i class="material-icons">security</i><span style="font-size: 15px;">
-                                        </button>
-                                        <button type="button" class="btn bg-green waves-effect" style="position: right;" onclick="" data-toggle="tooltip" data-placement="left" title="Accept - Forward to Manager">
-                                            <i class="material-icons">thumb_up</i><span style="font-size: 15px;">
-                                        </button>
-                                        <button type="button" class="btn bg-red waves-effect" style="position: right;" data-toggle="tooltip" data-placement="left" title="Reject">
-                                            <i class="material-icons">thumb_down</i><span style="font-size: 15px;">
-                                        </button>
-                                        </td>
-                                    </tr>
+                                     </tr>
+                                     @endif
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -172,5 +162,90 @@
             </div>
         </div>
     </section>
+    
+    <form id = "view" name = "view" action="transmittal-request/view" method="GET">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <div class="col-md-4" style = "display: none;">
+           <input id = "view_ID" name = "ID" type="text" class="form-control" pattern="[A-Za-z'-]">
+        </div>
+    </form>
+    
+    <form id = "transmit" name = "transmit" action="transmittal-request/transmit" method="GET">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <div class="col-md-4" style = "display: none;">
+           <input id = "transmit_ID" name = "ID" type="text" class="form-control" pattern="[A-Za-z'-]">
+        </div>
+    </form>
+
+    <script>
+        $('.approve').on('click', function(){
+              $.ajax({
+
+                  type: 'POST',
+                  url: '/admin/transaction/transmittal-request/approve',
+                  data: {ID:$(this).data('id')},
+                  success:function(xhr){
+                      window.location.reload();
+                      $.notify('Transmittal approved', 
+                        { 
+                          globalPosition: 'top center',
+                          autoHideDelay: 1500, 
+                          className: 'success',
+                        }
+                      );
+                  },
+                    error:function(xhr, ajaxOptions, thrownError,data){
+                      $.notify('There seems to be a problem.', 
+                        { 
+                          globalPosition: 'top center',
+                          autoHideDelay: 1500, 
+                          className: 'error',
+                        }
+                      );
+                  }
+              });
+        });
+
+        $('.disapprove').on('click', function(){
+              $.ajax({
+
+                  type: 'POST',
+                  url: '/admin/transaction/transmittal-request/disapprove',
+                  data: {ID:$(this).data('id')},
+                  success:function(xhr){
+                      window.location.reload();
+                      $.notify('Transmittal disapproved', 
+                        { 
+                          globalPosition: 'top center',
+                          autoHideDelay: 1500, 
+                          className: 'success',
+                        }
+                      );
+                  },
+                    error:function(xhr, ajaxOptions, thrownError,data){
+                      $.notify('There seems to be a problem.', 
+                        { 
+                          globalPosition: 'top center',
+                          autoHideDelay: 1500, 
+                          className: 'error',
+                        }
+                      );
+                  }
+              });
+        });
+
+        $('.view').on('click', function(){
+            var id = $(this).data('id');
+            $('#view_ID').val(id);
+            $('#view').submit();
+        });
+
+        $('.transmit').on('click', function(){
+            var id = $(this).data('id');
+            $('#transmit_ID').val(id);
+            $('#transmit').submit();
+        });
+
+    </script>
     
 @endsection

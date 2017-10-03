@@ -86,16 +86,14 @@
         <div class="container-fluid">
             <div class="row clearfix">
                 <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-                    <button type="button" class="btn btn-block bg-deep-orange waves-effect left" onclick="window.document.location='{{ URL::asset('admin/transaction/insurance-notification-list-company') }}';" >
+                    <button type="button" class="btn btn-block bg-deep-orange waves-effect left" onclick="window.document.location='{{ URL::asset('admin/transaction/insurance-company') }}';" >
                         <i class="material-icons">backspace</i><span style="font-size: 15px;"> BACK</span>
                     </button>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
                     <ol class="breadcrumb breadcrumb-bg-pink align-right">
                         <li><a href="{{ URL::asset('admin/transaction/insurance-company') }}"><i class="material-icons">home</i> Home</a></li>
-                        <li><a href="{{ URL::asset('admin/transaction/insurance-expiring-accounts-company') }}"><i class="material-icons">library_books</i> Expiring Accounts (company)</a></li>
-                        <li><a href="{{ URL::asset('admin/transaction/insurance-notification-list-company') }}"><i class="material-icons">mail</i> Sent Notifications</a></li>
-                        <li><a href="javascript:void(0);"><i class="material-icons">account_circle</i> Insurance Account Details</a></li>
+                        <li><a href="javascript:void(0);"><i class="material-icons">library_books</i> Insurance Account Details (company)</a></li>
                     </ol>
                 </div>
             </div>

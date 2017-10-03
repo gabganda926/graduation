@@ -115,6 +115,7 @@ class trans_quoteWalkinController extends Controller
 
   public function add_quote_indi_temp($req)
   {
+    \Log::info(preg_replace("/[^0-9.]/", "", $req->vehicle_market_value));
     $quoteID = quotationListConnection::orderBy('quote_ID', 'desc')->first();
     $this->quote_indi->quote_indi_ID = $quoteID->quote_ID;
     $this->quote_indi->sales_agent = $req->indi_agent;
@@ -152,8 +153,8 @@ class trans_quoteWalkinController extends Controller
     $this->quote_indi->seat_capacity = $req->seat_capacity;
     $this->quote_indi->color = $req->color;
     $this->quote_indi->personal_accident_ID = $req->pa_ID;
-    $this->quote_indi->bodily_injury_ID = $req->tppd_ID;
-    $this->quote_indi->property_damage_ID = $req->tpbi_ID;
+    $this->quote_indi->bodily_injury_ID = $req->tpbi_ID;
+    $this->quote_indi->property_damage_ID = $req->tppd_ID;
     $this->quote_indi->vehicle_class = $req->vehicle_class;
 
     try
@@ -237,6 +238,7 @@ class trans_quoteWalkinController extends Controller
 
   public function add_quote_comp_temp($req)
   {
+    \Log::info(preg_replace("/[^0-9.]/", "", $req->vehicle_market_value));
     $quoteID = quotationListConnection::orderBy('quote_ID', 'desc')->first();
     $this->quote_comp->quote_comp_ID = $quoteID->quote_ID;
     $this->quote_comp->sales_agent = $req->comp_agent;
@@ -270,7 +272,7 @@ class trans_quoteWalkinController extends Controller
     $this->quote_comp->specify_make = $req->specify_vehicle_make;
     $this->quote_comp->specify_model = $req->specify_vehicle_model;
     $this->quote_comp->vehicle_year_model = $req->year_model;
-    $this->quote_comp->vehicle_value = preg_replace("/[^0-9,.]/", "", $req->vehicle_market_value);
+    $this->quote_comp->vehicle_value = preg_replace("/[^0-9.]/", "", $req->vehicle_market_value);
     $this->quote_comp->plate_number = $req->plate_number;
     $this->quote_comp->serial_chassis = $req->chassis_number;
     $this->quote_comp->motor_engine = $req->engine_number;
@@ -278,8 +280,8 @@ class trans_quoteWalkinController extends Controller
     $this->quote_comp->seat_capacity = $req->seat_capacity;
     $this->quote_comp->color = $req->color;
     $this->quote_comp->personal_accident_ID = $req->pa_ID;
-    $this->quote_comp->bodily_injury_ID = $req->tppd_ID;
-    $this->quote_comp->property_damage_ID = $req->tpbi_ID;
+    $this->quote_comp->bodily_injury_ID = $req->tpbi_ID;
+    $this->quote_comp->property_damage_ID = $req->tppd_ID;
     $this->quote_comp->vehicle_class = $req->vehicle_class;
 
     try

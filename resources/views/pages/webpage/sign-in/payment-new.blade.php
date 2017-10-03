@@ -100,12 +100,12 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <h3 style="text-align: center;"><b> <img src="{{ URL::asset ('images/icons/view-bill.png')}}" style="height: 50px; width: 50px;"> LIST OF BILLS</b></h3><br/><br/>
-                            <label style="text-align: center;">Check Voucher No.: VOUCHER-12823u23</label><br/>
+                            <label style="text-align: center;">BOP Voucher No.: VOUCHER-12823u23</label><br/>
                                 <div class="table-responsive">
                                 <table class="table">
                                     <thead>
                                       <tr>
-                                        <th>Check No.</th>
+                                        <th>BOP No.</th>
                                         <th>Bank</th>
                                         <th>Due Date</th>
                                         <th>Amount Due</th>
@@ -159,7 +159,7 @@
                         <table class="table">
                             <thead>
                               <tr>
-                                <th>Check No.</th>
+                                <th>BOP No.</th>
                                 <th>Bank</th>
                                 <th>Due Date</th>
                                 <th>Amount Due</th>

@@ -1,6 +1,6 @@
 @extends('pages.manager.master')
 
-@section('title','Claims - Transaction| i-Insure')
+@section('title','Claims - Transaction | i-Insure')
 
 @section('transClaims','active')
 
@@ -61,7 +61,7 @@
                         </div>
                         <div class="body">
                             <div class="body table-responsive">
-                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                            <table id="ex" class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                 <thead>
                                     <tr>
                                         <th>Request #</th>
@@ -75,17 +75,78 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                @foreach ($creq as $claims)
+                                    @if($claims->del_flag == 0)
+                                    @if($claims->status == 1)
                                     <tr>
-                                        <td>CLM-10273-AB</td>
-                                        <td>ATQ-CPR-10938734</td>
-                                        <td>Yes</td>
-                                        <td>Huhu HUhu</td>
-                                        <td><ul>
-                                            <li>091233344</li>
-                                            <li>hehe@gmail.com</li>
-                                        </ul></td>
+                                        <td>
+                                                @if($claims->claim_ID >= 10)
+                                                    CLAIM00{{ $claims->claim_ID }}
+                                                @endif
+                                                @if($claims->payment_ID < 10)
+                                                    CLAIM000{{ $claims->claim_ID }}
+                                                @endif
+                                                @if($claims->payment_ID >= 100)
+                                                    CLAIM0{{ $claims->claim_ID }}
+                                                @endif
+                                                @if($claims->payment_ID >= 1000)
+                                                    CLAIM{{ $claims->claim_ID }}
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @foreach ($cliacc as $ins)
+                                                    @if($claims->account_ID == $ins->account_ID)
+                                                        {{ $ins->policy_number }}
+                                                    @endif
+                                                @endforeach
+                                            </td>
+                                            <td>
+                                                @if($claims->notifiedByType == 1)
+                                                    No
+                                                @endif
+                                                @if($claims->notifiedByType == 2)
+                                                    Yes
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @foreach($cnotif as $notif)
+                                                    @if($claims->notifier_ID == $notif->notifier_ID)
+                                                        {{ $notif->notifier_Name }} - {{ $notif->notifier_Relation }}
+                                                    @endif
+                                                @endforeach
+                                            </td>
+                                            <td>
+                                                @foreach($cnotif as $notif)
+                                                    @if($claims->notifier_ID == $notif->notifier_ID)
+                                                    <ul>
+                                                        @if($notif->notifier_cell_1 != null)
+                                                        <li>    
+                                                            {{ $notif->notifier_cell_1 }}
+                                                        </li>
+                                                        @endif
+                                                        @if($notif->notifier_cell_2 != null)
+                                                        <li>    
+                                                            {{ $notif->notifier_cell_2 }}
+                                                        </li>
+                                                        @endif
+                                                        @if($notif->notifier_telnum != null)
+                                                        <li>    
+                                                            {{ $notif->notifier_telnum }}
+                                                        </li>
+                                                        @endif
+                                                        @if($notif->notifier_email != null)
+                                                        <li>    
+                                                            {{ $notif->notifier_email }}
+                                                        </li>
+                                                        @endif
+                                                    </ul>
+                                                    @endif
+                                                @endforeach
+                                            </td>
                                         <td>Ma. Gabriella Tan Rola</td>
-                                        <td>June 23, 2017 3:00AM</td>
+                                        <td>
+                                                   {{ \Carbon\Carbon::parse($claims->updated_at)->format("M-d-Y") }} {{ "(".\Carbon\Carbon::parse($claims->updated_at)->format("l, h:i:s A").")" }}
+                                            </td>
                                         <td><button type="button" class="btn bg-blue waves-effect" style="position: right;" onclick="window.document.location='{{ URL::asset('manager/transaction/claim-details') }}';" data-toggle="tooltip" data-placement="left" title="View Details">
                                                 <i class="material-icons">security</i><span style="font-size: 15px;">
                                             </button>
@@ -97,6 +158,9 @@
                                             </button> 
                                             </td>
                                     </tr>
+                                    @endif
+                                    @endif
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -106,5 +170,11 @@
             </div> 
         </div>
     </section>
+
+    <script>
+        $('#ex').DataTable( {
+            "order": [[ 6, "desc" ]]
+        } );
+    </script>
 
 @endsection

@@ -19,7 +19,6 @@
             }
             return output;
         }
-        console.log('{{$details->plate_number}}');
     </script>
     <section class="content">
     <h2 style="text-align: center"> Welcome to <b style="color: orange;"> i-Insure </b><br/>
@@ -71,18 +70,23 @@
                         </div>
                         <div class="body">
                             <ul class="nav nav-tabs tab-nav-right" role="tablist">
-                                <li role="presentation" class="active"><a href="#individualtab" data-toggle="tab"><img src="{{ URL::asset ('images/icons/insurance-individual.png')}}" style="height: 50px; width: 50px;"> INDIVIDUAL CLIENT</a></li>
+                                <li role="presentation" class="active"><a href="#compvidualtab" data-toggle="tab"><img src="{{ URL::asset ('images/icons/insurance-individual.png')}}" style="height: 50px; width: 50px;"> INDIVIDUAL CLIENT</a></li>
                                 <li role="presentation"><a href="#company" data-toggle="tab"><img src="{{ URL::asset ('images/icons/insurance-company.png')}}" style="height: 50px; width: 50px;"> COMPANY CLIENT</a></li>
                             </ul>
 
                              <div class="tab-content">
                             <!-- INDIVIDUAL -->
                                 <div role="tabpanel" class="tab-pane fade in active" id="individualtab"> 
-                                    <form id="form_client_individual" name = "form_client_individual" action = "insure-client/proceed" method="POST" enctype="multipart/form-data">
+                                    <form id="form_client_individual" name = "form_client_individual" action = "proceed" method="POST" enctype="multipart/form-data">
 
                                      <div class="col-md-4" style = "display: none;">
                                         <input id = "client_type1" name = "client_type1" type="text" class="form-control" value = '0'>
                                      </div>
+
+                                     <div class="col-md-4" style = "display: none;">
+                                        <input id = "indi_quote_id" name = "indi_quote_id" type="text" class="form-control">
+                                     </div>
+
                                       <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                       <button type="button" class="btn btn-xs bg-blue waves-effect" style="float: right;" onclick="window.document.location='{{ URL::asset('/accounting-staff/transaction/client/individual') }}';">
                                             <i class="material-icons">add</i>
@@ -118,19 +122,6 @@
                                         </div>
 
                                         <h3> <small><b>INSURANCE DETAILS</b></small></h3>
-                                            <div class="row clearfix">
-                                                <div class="col-md-12" align="center">
-                                                    <button type="button" class="btn bg-light-blue waves-effect" data-toggle="collapse" data-target="#indi_formImage">Click to attach form</button> <!-- PAG NAKA VIEW NA, Magiging "Hide attached form" yung nakalagay-->
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="collapse fade" role="dialog" id="indi_formImage" align="center">
-                                                        <div class="fallback">
-                                                            <img id="indi_image" src="#" alt="your image" style="height: 500px; width: 500px; border-style: solid; border-width: 2px;"><br/><br/>
-                                                                <input id = "indi_picture" name = "indi_picture" type="file" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|images/*">
-                                                        </div>
-                                                    </div> 
-                                                </div>
-                                            </div> <!-- END OF ROW CLEARFIX -->
                                         <div class="row clearfix">
                                             <div class="col-md-6">
                                                 <div class="form-group form-float">
@@ -228,7 +219,7 @@
                                                 <div class="form-group form-float">
                                                     <div class="form-line">
                                                     <label><small>Plate Number:</small></label>
-                                                        <input id = "indi_plate_number" name = "indi_plate_number" type="text" class="form-control" value = "{{$details->plate_number}}">
+                                                        <input id = "indi_plate_number" name = "indi_plate_number" type="text" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -281,14 +272,13 @@
                                             </div>
                                         </div>
 
-                                        <h3> <small><b>PREMIUMS</b></small></h3>
                                         <div class="row clearfix">
                                             <br/><br/>
                                             <div class="col-md-4">
                                                 <div class="form-group form-float">
                                                     <div class="form-line">
                                                     <label><small>Deductible: </small></label>
-                                                        <input id = "indi_deductible" name = "indi_deductible" type="text" class="form-control"  value="">
+                                                        <input id = "indi_deductible" name = "indi_deductible" type="text" class="form-control" readonly value="">
                                                     </div>
                                                 </div>
                                             </div>
@@ -297,7 +287,7 @@
                                                 <div class="form-group form-float">
                                                     <div class="form-line">
                                                     <label><small>Authorized Repair Limit: </small></label>
-                                                        <input id = "indi_arl" name = "indi_arl" type="text" class="form-control"  value="">
+                                                        <input id = "indi_arl" name = "indi_arl" type="text" class="form-control" readonly value="">
                                                     </div>
                                                 </div>
                                             </div>
@@ -306,27 +296,47 @@
                                                 <div class="form-group form-float">
                                                     <div class="form-line">
                                                     <label><small>Towing: </small></label>
-                                                        <input id = "indi_towing" name = "indi_towing" type="text" class="form-control"  value="">
+                                                        <input id = "indi_towing" name = "indi_towing" type="text" class="form-control" readonly value="">
                                                     </div>
                                                 </div>
                                             </div>                   
                                         </div> <!-- end of rowclearfix --> 
 
+                                        <h3> <small><b>PREMIUMS</b></small></h3>
+                                        
                                         <div class="row clearfix">
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <div class="form-group form-float">
                                                     <div class="form-line">
-                                                        <label><small>Writing Code: </small></label>
-                                                            <input id = "indi_wc" name = "indi_wc" type="text" class="form-control"  value="">
+                                                    <label><small>Act of Nature Coverage: </small></label>
+                                                        <input id = "indi_coverage_aon" name = "indi_coverage_aon" type="text" class="form-control" readonly value="">
                                                     </div>
                                                 </div>
                                             </div>
-
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <div class="form-group form-float">
                                                     <div class="form-line">
-                                                    <label><small>Act of Nature: </small></label>
-                                                        <input id = "indi_aon" name = "indi_aon" type="text" class="form-control"  value="">
+                                                    <label><small>Premium: </small></label>
+                                                        <input id = "indi_aon" name = "indi_aon" type="text" class="form-control" readonly value="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> <!-- end of rowclearfix -->
+
+                                        <div class="row clearfix">
+                                            <div class="col-md-6">
+                                                <div class="form-group form-float">
+                                                    <div class="form-line">
+                                                    <label><small>Own Damage/Theft Coverage: </small></label>
+                                                        <input id = "indi_coverage_odt" name = "indi_coverage_odt" type="text" class="form-control" readonly value="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group form-float">
+                                                    <div class="form-line">
+                                                    <label><small>Premium: </small></label>
+                                                        <input id = "indi_odt" name = "indi_odt" type="text" class="form-control" readonly value="">
                                                     </div>
                                                 </div>
                                             </div>
@@ -433,11 +443,16 @@
                                 </div>
                             <!-- COMPANY-->
                                 <div role="tabpanel" class="tab-pane fade" id="company"> 
-                                    <form id="form_client_company" name = "form_client_company" action = "insure-client/proceed" method="POST" enctype="multipart/form-data">
+                                    <form id="form_client_company" name = "form_client_company" action = "proceed" method="POST" enctype="multipart/form-data">
 
                                      <div class="col-md-4" style = "display: none;">
                                         <input id = "client_type2" name = "client_type2" type="text" class="form-control" value = '1'>
                                      </div>
+
+                                     <div class="col-md-4" style = "display: none;">
+                                        <input id = "comp_quote_id" name = "comp_quote_id" type="text" class="form-control">
+                                     </div>
+
                                       <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                       <button type="button" class="btn btn-xs bg-blue waves-effect" style="float: right;" onclick="window.document.location='{{ URL::asset('/accounting-staff/transaction/client/company') }}';">
                                             <i class="material-icons">add</i>
@@ -480,20 +495,6 @@
                                         </div>
 
                                         <h3> <small><b>INSURANCE DETAILS</b></small></h3>
-                                            <div class="row clearfix">
-                                                <div class="col-md-12" align="center">
-                                                    <button type="button" class="btn bg-light-blue waves-effect" data-toggle="collapse" data-target="#comp_formImage">Click to attach form</button> <!-- PAG NAKA VIEW NA, Magiging "Hide attached form" yung nakalagay-->
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="collapse fade" role="dialog" id="comp_formImage" align="center">
-                                                        <div class="fallback">
-                                                            <img id="comp_image" src="#" alt="your image" style="height: 500px; width: 500px; border-style: solid; border-width: 2px;"><br/><br/>
-                                                                <input id = "comp_picture" name = "comp_picture" type="file" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|images/*">
-                                                        </div>
-                                                    </div> 
-                                                </div>
-                                                
-                                            </div> <!-- END OF ROW CLEARFIX -->
                                         <div class="col-md-6">
                                                 <div class="form-group form-float">
                                                 <label><small>Insurance Company: </small></label>
@@ -644,14 +645,13 @@
                                             </div>
                                         </div>
 
-                                        <h3> <small><b>PREMIUMS</b></small></h3>
                                         <div class="row clearfix">
                                             <br/><br/>
                                             <div class="col-md-4">
                                                 <div class="form-group form-float">
                                                     <div class="form-line">
                                                     <label><small>Deductible: </small></label>
-                                                        <input id = "comp_deductible" name = "comp_deductible" type="text" class="form-control"  value="">
+                                                        <input id = "comp_deductible" name = "comp_deductible" type="text" class="form-control"  readonly value="">
                                                     </div>
                                                 </div>
                                             </div>
@@ -660,7 +660,7 @@
                                                 <div class="form-group form-float">
                                                     <div class="form-line">
                                                     <label><small>Authorized Repair Limit: </small></label>
-                                                        <input id = "comp_arl" name = "comp_arl" type="text" class="form-control"  value="">
+                                                        <input id = "comp_arl" name = "comp_arl" type="text" class="form-control" readonly value="">
                                                     </div>
                                                 </div>
                                             </div>
@@ -669,27 +669,47 @@
                                                 <div class="form-group form-float">
                                                     <div class="form-line">
                                                     <label><small>Towing: </small></label>
-                                                        <input id = "comp_towing" name = "comp_towing" type="text" class="form-control"  value="">
+                                                        <input id = "comp_towing" name = "comp_towing" type="text" class="form-control" readonly value="">
                                                     </div>
                                                 </div>
                                             </div>                   
                                         </div> <!-- end of rowclearfix --> 
 
+                                        <h3> <small><b>PREMIUMS</b></small></h3>
+                                        
                                         <div class="row clearfix">
-                                            <div class="col-md-2">
+                                            <div class="col-md-6">
                                                 <div class="form-group form-float">
                                                     <div class="form-line">
-                                                        <label><small>Writing Code: </small></label>
-                                                            <input id = "comp_wc" name = "comp_wc" type="text" class="form-control"  value="">
+                                                    <label><small>Act of Nature Coverage: </small></label>
+                                                        <input id = "comp_coverage_aon" name = "comp_aon" type="text" class="form-control" readonly value="">
                                                     </div>
                                                 </div>
                                             </div>
-
-                                            <div class="col-md-2">
+                                            <div class="col-md-6">
                                                 <div class="form-group form-float">
                                                     <div class="form-line">
-                                                    <label><small>Act of Nature: </small></label>
-                                                        <input id = "comp_aon" name = "comp_aon" type="text" class="form-control"  value="">
+                                                    <label><small>Premium: </small></label>
+                                                        <input id = "comp_aon" name = "comp_aon" type="text" class="form-control" readonly value="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> <!-- end of rowclearfix -->
+
+                                        <div class="row clearfix">
+                                            <div class="col-md-6">
+                                                <div class="form-group form-float">
+                                                    <div class="form-line">
+                                                    <label><small>Own Damage/Theft Coverage: </small></label>
+                                                        <input id = "comp_coverage_odt" name = "comp_odt" type="text" class="form-control" readonly value="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group form-float">
+                                                    <div class="form-line">
+                                                    <label><small>Premium: </small></label>
+                                                        <input id = "comp_odt" name = "comp_odt" type="text" class="form-control" readonly value="">
                                                     </div>
                                                 </div>
                                             </div>
@@ -1006,10 +1026,10 @@
                 @endif
                @endforeach
             @endforeach
-            @foreach($cperson as $cperson)
+            @foreach($cperson as $cper)
                @foreach($pInfo as $Info)
-                @if($cperson->personal_info_ID == $Info->pinfo_ID )
-                 contactperson["{{ $cperson->cPerson_ID }}"] = "{{ $Info->pinfo_last_name.', '.$Info->pinfo_first_name.' '.$Info->pinfo_middle_name }}";
+                @if($cper->personal_info_ID == $Info->pinfo_ID )
+                 contactperson["{{ $cper->cPerson_ID }}"] = "{{ $Info->pinfo_last_name.', '.$Info->pinfo_first_name.' '.$Info->pinfo_middle_name }}";
                 @endif
                @endforeach
             @endforeach
@@ -1475,6 +1495,7 @@
             {
                 $('#comp_vmodel_value').val("₱ " + numberWithCommas($("#comp_vmodel").find(':selected').data('value')));
             }
+            compute_indi();
         });
                 
         $('#indi_insurance_company').on('change textInput input', function () {
@@ -1483,8 +1504,11 @@
             @foreach($policy as $pnumber)
              @if($pnumber->del_flag == 0)
               @if($pnumber->policyStatus_ID == 0)
-               newOptions[data] = { policy_number : "{{ $pnumber->policy_number }}"};
-               data += 1;
+               if('{{$pnumber->insurance_compID}}' == $(this).val())
+               {
+                   newOptions[data] = { policy_number : "{{ $pnumber->policy_number }}"};
+                   data += 1;
+               }
               @endif
              @endif
             @endforeach
@@ -1504,8 +1528,11 @@
             @foreach($policy as $pnumber)
              @if($pnumber->del_flag == 0)
               @if($pnumber->policyStatus_ID == 0)
-               newOptions[data] = { policy_number : "{{ $pnumber->policy_number }}"};
-               data += 1;
+               if('{{$pnumber->insurance_compID}}' == $(this).val())
+               {
+                   newOptions[data] = { policy_number : "{{ $pnumber->policy_number }}"};
+                   data += 1;
+               }
               @endif
              @endif
             @endforeach
@@ -1552,39 +1579,79 @@
         });
                 
         function compute_indi() 
-        {
-            var data = 0;
-            if($('#indi_pa_premium').val())
-            {
-                data = data + parseFloat($('#indi_pa_premium').val().replace(/[^0-9\.]/g,'')); 
+        {   
+            var ins = $('#indi_insurance_company').val();
+
+            var coverage = parseFloat($('#indi_vmodel_value').val().replace(/[^0-9\.]/g,'')) * .2;
+
+            // var grosspremium = parseFloat($('#indi_vmodel_value').val().replace(/[^0-9\.]/g,'')) * .013;
+
+            $('#indi_coverage_aon').val('₱ '+numberWithCommas(Math.round(coverage * 100)/100));
+            $('#indi_coverage_odt').val('₱ '+numberWithCommas(Math.round(coverage * 100)/100));
+
+            if(ins == 1)
+                $('#indi_aon').val('₱ '+numberWithCommas(coverage * 0.02));
+            if(ins == 2){
+            $('#indi_coverage_aon').val('');
+            $('#indi_aon').val('');
             }
-            if($('#indi_bi_premium').val())
-            {
-                data = data + parseFloat($('#indi_bi_premium').val().replace(/[^0-9\.]/g,'')); 
-            }
-            if($('#indi_pd_premium').val())
-            {
-                data = data + parseFloat($('#indi_pd_premium').val().replace(/[^0-9\.]/g,'')); 
-            }
-            $('#indi_total_net').html("Total Net Premium: ₱ " + numberWithCommas(data));
+            if(ins == 3)
+                $('#indi_aon').val('₱ '+numberWithCommas(coverage * 0.005));
+            if(ins == 4)
+                $('#indi_aon').val('₱ '+numberWithCommas(coverage * 0.005));
+
+            var odt = parseFloat(coverage * .013);
+            // Math.abs((((parseFloat($('#indi_aon').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#indi_bi_premium').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#indi_pd_premium').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#indi_pa_premium').val().replace(/[^0-9\.]/g,''))) * 1.2470) - grosspremium) / 1.2470)
+
+             $('#indi_odt').val('₱ '+numberWithCommas(Math.round(odt * 100)/100));
+
+            var basicpremium = (parseFloat($('#indi_aon').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#indi_bi_premium').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#indi_pd_premium').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#indi_pa_premium').val().replace(/[^0-9\.]/g,''))) + odt;
+            var vat = basicpremium * .125;
+            var stamp = basicpremium * .12;
+            var rounded = Math.ceil((basicpremium + vat + stamp)/100)*100;
+
+            var lgt = rounded - (basicpremium + vat + stamp);
+
+            var total = basicpremium + vat + stamp + lgt;
+            $('#indi_total_net').html("Total Net Premium: ₱ " + numberWithCommas(total));
         }
                 
         function compute_comp() 
-        {
-            var data = 0;
-            if($('#comp_pa_premium').val())
-            {
-                data = data + parseFloat($('#comp_pa_premium').val().replace(/[^0-9\.]/g,'')); 
+        { 
+            var ins = $('#comp_insurance_company').val();
+
+            var coverage = parseFloat($('#comp_vmodel_value').val().replace(/[^0-9\.]/g,'')) * .2;
+
+            $('#comp_coverage_aon').val('₱ '+numberWithCommas(Math.round(coverage * 100)/100));
+            $('#comp_coverage_odt').val('₱ '+numberWithCommas(Math.round(coverage * 100)/100));
+
+            var grosspremium = parseFloat($('#comp_vmodel_value').val().replace(/[^0-9\.]/g,'')) * .013;
+
+            if(ins == 1)
+                $('#comp_aon').val('₱ '+numberWithCommas(coverage * 0.02));
+            if(ins == 2){
+            $('#comp_coverage_aon').val('');
+            $('#comp_aon').val('');
             }
-            if($('#comp_bi_premium').val())
-            {
-                data = data + parseFloat($('#comp_bi_premium').val().replace(/[^0-9\.]/g,'')); 
-            }
-            if($('#comp_pd_premium').val())
-            {
-                data = data + parseFloat($('#comp_pd_premium').val().replace(/[^0-9\.]/g,'')); 
-            }
-            $('#comp_total_net').html("Total Net Premium: ₱ " + numberWithCommas(data));
+            if(ins == 3)
+                $('#comp_aon').val('₱ '+numberWithCommas(coverage * 0.005));
+            if(ins == 4)
+                $('#comp_aon').val('₱ '+numberWithCommas(coverage * 0.005));
+
+            var odt = parseFloat(coverage * .013);
+            // Math.abs((((parseFloat($('#comp_aon').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#comp_bi_premium').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#comp_pd_premium').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#comp_pa_premium').val().replace(/[^0-9\.]/g,''))) * 1.2470) - grosspremium) / 1.2470)
+
+             $('#comp_odt').val('₱ '+numberWithCommas(Math.round(odt * 100)/100));
+
+            var basicpremium = (parseFloat($('#comp_aon').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#comp_bi_premium').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#comp_pd_premium').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#comp_pa_premium').val().replace(/[^0-9\.]/g,''))) + odt;
+            var vat = basicpremium * .125;
+            var stamp = basicpremium * .12;
+            var rounded = Math.ceil((basicpremium + vat + stamp)/100)*100;
+
+            var lgt = rounded - (basicpremium + vat + stamp);
+
+            var total = basicpremium + vat + stamp + lgt;
+            $('#comp_total_net').html("Total Net Premium: ₱ " + numberWithCommas(total));
         }
 
         $('#indi_insurance_company').on('change', function(){
@@ -1654,6 +1721,51 @@
             $("#indi_bi").prop("selectedIndex", -1);
             $('#indi_bi').selectpicker('refresh');
             $('#indi_bi_premium').val("");
+
+            if(ins == 1)
+                $('#indi_deductible').val('₱ '+numberWithCommas(3100));
+            if(ins == 2)
+                $('#indi_deductible').val('₱ '+numberWithCommas(1000));
+            if(ins == 3)
+                $('#indi_deductible').val('₱ '+numberWithCommas(3000));
+            if(ins == 4)
+                $('#indi_deductible').val('₱ '+numberWithCommas(2000));
+
+            $('#indi_towing').val('₱ '+numberWithCommas(100));
+
+            $('#indi_arl').val('₱ '+numberWithCommas(parseFloat($('#indi_deductible').val().replace(/[^0-9\.]/g,''))+parseFloat($('#indi_towing').val().replace(/[^0-9\.]/g,''))))
+
+            var coverage = parseFloat($('#indi_vmodel_value').val().replace(/[^0-9\.]/g,'')) * .2;
+
+            var grosspremium = parseFloat($('#indi_vmodel_value').val().replace(/[^0-9\.]/g,'')) * .013;
+
+            $('#indi_coverage_aon').val('₱ '+numberWithCommas(Math.round(coverage * 100)/100));
+            $('#indi_coverage_odt').val('₱ '+numberWithCommas(Math.round(coverage * 100)/100));
+
+            if(ins == 1)
+                $('#indi_aon').val('₱ '+numberWithCommas(coverage * 0.02));
+            if(ins == 2){
+            $('#indi_coverage_aon').val('');
+            $('#indi_aon').val('');
+            }
+            if(ins == 3)
+                $('#indi_aon').val('₱ '+numberWithCommas(coverage * 0.005));
+            if(ins == 4)
+                $('#indi_aon').val('₱ '+numberWithCommas(coverage * 0.005));
+
+            var odt = parseFloat(coverage * .013);
+
+             $('#indi_odt').val('₱ '+numberWithCommas(Math.round(odt * 100)/100));
+
+            var basicpremium = (parseFloat($('#indi_aon').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#indi_bi_premium').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#indi_pd_premium').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#indi_pa_premium').val().replace(/[^0-9\.]/g,''))) + odt;
+            var vat = basicpremium * .125;
+            var stamp = basicpremium * .12;
+            var rounded = Math.ceil((basicpremium + vat + stamp)/100)*100;
+
+            var lgt = rounded - (basicpremium + vat + stamp);
+
+            var total = basicpremium + vat + stamp + lgt;
+            $('#indi_total_net').html("Total Net Premium: ₱ " + numberWithCommas(total));
         });
 
 
@@ -1725,12 +1837,134 @@
             $("#comp_bi").prop("selectedIndex", -1);
             $('#comp_bi').selectpicker('refresh');
             $('#comp_bi_premium').val("");
+
+            if(ins == 1)
+                $('#comp_deductible').val('₱ '+numberWithCommas(3100));
+            if(ins == 2)
+                $('#comp_deductible').val('₱ '+numberWithCommas(1000));
+            if(ins == 3)
+                $('#comp_deductible').val('₱ '+numberWithCommas(3000));
+            if(ins == 4)
+                $('#comp_deductible').val('₱ '+numberWithCommas(2000));
+
+            $('#comp_towing').val('₱ '+numberWithCommas(100));
+
+            $('#comp_arl').val('₱ '+numberWithCommas(parseFloat($('#comp_deductible').val().replace(/[^0-9\.]/g,''))+parseFloat($('#comp_towing').val().replace(/[^0-9\.]/g,''))))
+
+            var coverage = parseFloat($('#comp_vmodel_value').val().replace(/[^0-9\.]/g,'')) * .2;
+
+            var grosspremium = parseFloat($('#comp_vmodel_value').val().replace(/[^0-9\.]/g,'')) * .013;
+
+            $('#comp_coverage_aon').val('₱ '+numberWithCommas(Math.round(coverage * 100)/100));
+            $('#comp_coverage_odt').val('₱ '+numberWithCommas(Math.round(coverage * 100)/100));
+
+            if(ins == 1)
+                $('#comp_aon').val('₱ '+numberWithCommas(coverage * 0.02));
+            if(ins == 2)
+                {
+            $('#comp_coverage_aon').val('');
+            $('#comp_aon').val('');
+            }
+            if(ins == 3)
+                $('#comp_aon').val('₱ '+numberWithCommas(coverage * 0.005));
+            if(ins == 4)
+                $('#comp_aon').val('₱ '+numberWithCommas(coverage * 0.005));
+
+            var odt = parseFloat(coverage * .013);
+
+             $('#comp_odt').val('₱ '+numberWithCommas(Math.round(odt * 100)/100));
+
+            var basicpremium = (parseFloat($('#comp_aon').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#comp_bi_premium').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#comp_pd_premium').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#comp_pa_premium').val().replace(/[^0-9\.]/g,''))) + odt;
+            var vat = basicpremium * .125;
+            var stamp = basicpremium * .12;
+            var rounded = Math.ceil((basicpremium + vat + stamp)/100)*100;
+
+            var lgt = rounded - (basicpremium + vat + stamp);
+            var total = basicpremium + vat + stamp + lgt;
+            $('#comp_total_net').html("Total Net Premium: ₱ " + numberWithCommas(total));
         });
     </script>
 
-    <script>
-        if('{{$type}}' == 0)
+    <script>//set data here
+        var client_type  = '{{$type}}'
+        var client_id  = '{{$id}}' // 0 indi 1 comp
+
+        var sales_agent = '{{$details->sales_agent}}';
+        var insurance_company = '{{$details->insurance_company}}';
+
+        //vehicle details 
+        var vehicle_type_ID = '{{$details->vehicle_type_ID}}';
+        var vehicle_make_ID = '{{$details->vehicle_make_ID}}';
+        var vehicle_model_ID = '{{$details->vehicle_model_ID}}';
+        var plate_number = '{{$details->plate_number}}';
+        var serial_chassis = '{{$details->serial_chassis}}'
+        var motor_engine = '{{$details->motor_engine}}'
+        var mv_file_number = '{{$details->mv_file_number}}'
+        var seat_capacity = '{{$details->seat_capacity}}'
+        var color = '{{$details->color}}'
+
+        //payment details
+        var personal_accident_ID = '{{$details->personal_accident_ID}}';
+        var bodily_injury_ID = '{{$details->bodily_injury_ID}}';
+        var property_damage_ID = '{{$details->property_damage_ID}}';
+        var vehicle_class = '{{$details->vehicle_class}}';
+
+
+        if (client_type == 0)
         {
+            $('#indi_quote_id').val('{{$details->quote_indi_ID}}');
+            $('#itab').addClass("active in");
+            $('#individualtab').addClass("active in");
+            $('#ctab').removeClass("active in");
+            $('#company').removeClass("active in");
+            $("#client_individual").prop("selectedIndex", client_id);
+            $('#client_individual').selectpicker('refresh');
+            if(client_id > 0)
+            {
+                var salesagent = [];
+                @foreach($salesA as $agent)
+                   @foreach($pInfo as $Info)
+                    @if($agent->personal_info_ID == $Info->pinfo_ID )
+                     salesagent["{{ $agent->agent_ID }}"] = "{{ $Info->pinfo_last_name.', '.$Info->pinfo_first_name.' '.$Info->pinfo_middle_name }}";
+                    @endif
+                   @endforeach
+                @endforeach
+                $('#indi_agent').val(salesagent[sales_agent]);
+            }
+
+            $('#indi_vtype').val(vehicle_type_ID);
+            $('#indi_vtype').selectpicker('refresh');
+            $('#indi_vmake').val(vehicle_make_ID);
+            $('#indi_vmake').selectpicker('refresh');
+
+            var newOptions = [];
+            var data = 0;
+            @foreach($vModel as $vmd)
+             @if($vmd->del_flag == 0)
+              if($('#indi_vtype').val() == "{{ $vmd->vehicle_type }}" && $("#indi_vmake").val() == "{{ $vmd->vehicle_make_ID }}")
+              {
+               newOptions[data] = { model_name : "{{ $vmd->vehicle_year." ".$vmd->vehicle_model_name }}", model_ID : "{{ $vmd->vehicle_model_ID }}", model_value : "{{ $vmd->vehicle_value }}" };
+               data += 1;
+              }
+             @endif
+            @endforeach
+            $('#indi_vmodel option:gt(0)').remove();
+            $.each(newOptions, function(key,value) {
+              var option = '<option value="'+value.model_ID+'" data-value="'+value.model_value+'">'+value.model_name+'</option>';
+              $('#indi_vmodel:last').append(option);
+            });
+            $("#indi_vmodel").prop("selectedIndex", -1);
+            $('#indi_vmodel').selectpicker('refresh');
+            $('#indi_vmodel_value').val("");
+            $('#indi_vmodel').val(vehicle_model_ID);
+            $('#indi_vmodel').selectpicker('refresh');
+            $('#indi_plate_number').val(plate_number);
+            $('#indi_schassis').val(serial_chassis);
+            $('#indi_mengine').val(motor_engine);
+            $('#indi_mfilenum').val(mv_file_number);
+            $('#indi_seat_cap').val(seat_capacity);
+            $('#indi_color').val(color);
+
             $('#client_individual').val('{{$id}}');
             $('#client_individual').selectpicker('refresh');
             $('#indi_insurance_company').val('{{$details->insurance_company}}');
@@ -1739,6 +1973,7 @@
             var ins = $('#indi_insurance_company').val();
             var newOptions = [];
             var data = 0;
+
             @foreach($ppa as $pa)
              @if($pa->del_flag == 0)
               if(ins == '{{$pa->insurance_compID}}')
@@ -1748,11 +1983,13 @@
                 }
              @endif
             @endforeach
+
             $('#indi_pa option:gt(0)').remove();
             $.each(newOptions, function(key,value) {
               var option = '<option value="'+value.ID+'" data-value="'+value.total+'">Number of Person '+value.person+' Coverage ₱ '+numberWithCommas(value.limit)+'</option>';
               $('#indi_pa:last').append(option);
             });
+            $('#indi_vmodel_value').val("₱ " + numberWithCommas($("#indi_vmodel").find(':selected').data('value')));
             $("#indi_pa").prop("selectedIndex", -1);
             $('#indi_pa').selectpicker('refresh');
             $('#indi_pa_premium').val("");
@@ -1771,6 +2008,7 @@
               @endif
              @endif
             @endforeach
+
             $('#indi_pd option:gt(0)').remove();
             $.each(newOptions, function(key,value) {
               var option = '<option value="'+value.ID+'" data-id="'+value.ID+'">₱ '+numberWithCommas(value.limit)+'</option>';
@@ -1803,12 +2041,113 @@
             $('#indi_bi').selectpicker('refresh');
             $('#indi_bi_premium').val("");
 
-            $('#indi_bi').val('{{$details->bodily_injury_ID}}');
+            data = 0;
+            newOptions = [];
+            
+            @foreach($policy as $pnumber)
+             @if($pnumber->del_flag == 0)
+              @if($pnumber->policyStatus_ID == 0)
+               if('{{$pnumber->insurance_compID}}' == ins)
+               {
+                   newOptions[data] = { policy_number : "{{ $pnumber->policy_number }}"};
+                   data += 1;
+               }
+              @endif
+             @endif
+            @endforeach
+            $('#indi_policy_number option:gt(0)').remove();
+            $.each(newOptions, function(key,value) {
+              var option = '<option value="'+value.policy_number+'">'+value.policy_number+'</option>';
+              $('#indi_policy_number:last').append(option);
+            });
+            $("#indi_policy_number").prop("selectedIndex", -1);
+            $('#indi_policy_number').selectpicker('refresh');
+            $('#indi_policy_number').val("");
+
+            if(ins == 1)
+                $('#indi_deductible').val('₱ '+numberWithCommas(3100));
+            if(ins == 2)
+                $('#indi_deductible').val('₱ '+numberWithCommas(1000));
+            if(ins == 3)
+                $('#indi_deductible').val('₱ '+numberWithCommas(3000));
+            if(ins == 4)
+                $('#indi_deductible').val('₱ '+numberWithCommas(2000));
+
+            $('#indi_towing').val('₱ '+numberWithCommas(100));
+
+            $('#indi_arl').val('₱ '+numberWithCommas(parseFloat($('#indi_deductible').val().replace(/[^0-9\.]/g,''))+parseFloat($('#indi_towing').val().replace(/[^0-9\.]/g,''))))
+
+            var coverage = parseFloat($('#indi_vmodel_value').val().replace(/[^0-9\.]/g,'')) * .2;
+
+            var grosspremium = parseFloat($('#indi_vmodel_value').val().replace(/[^0-9\.]/g,'')) * .013;
+
+            $('#indi_coverage_aon').val('₱ '+numberWithCommas(Math.round(coverage * 100)/100));
+            $('#indi_coverage_odt').val('₱ '+numberWithCommas(Math.round(coverage * 100)/100));
+
+            if(ins == 1)
+                $('#indi_aon').val('₱ '+numberWithCommas(coverage * 0.02));
+            if(ins == 2){
+            $('#indi_coverage_aon').val('');
+            $('#indi_aon').val('');
+            }
+            if(ins == 3)
+                $('#indi_aon').val('₱ '+numberWithCommas(coverage * 0.005));
+            if(ins == 4)
+                $('#indi_aon').val('₱ '+numberWithCommas(coverage * 0.005));
+
+            var odt = parseFloat(coverage * .013);
+
+             $('#indi_odt').val('₱ '+numberWithCommas(Math.round(odt * 100)/100));
+
+            var basicpremium = (parseFloat($('#indi_aon').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#indi_bi_premium').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#indi_pd_premium').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#indi_pa_premium').val().replace(/[^0-9\.]/g,''))) + odt;
+            var vat = basicpremium * .125;
+            var stamp = basicpremium * .12;
+            var rounded = Math.ceil((basicpremium + vat + stamp)/100)*100;
+
+            var lgt = rounded - (basicpremium + vat + stamp);
+
+            var total = basicpremium + vat + stamp + lgt;
+
+            $('#indi_bi').val(bodily_injury_ID);
             $('#indi_bi').selectpicker('refresh');
-            $('#indi_pd').val('{{$details->property_damage_ID}}');
+            $('#indi_bi_vclass').val(vehicle_class)
+            $('#indi_bi_vclass').selectpicker('refresh');
+            $('#indi_pd').val(property_damage_ID);
             $('#indi_pd').selectpicker('refresh');
-            $('#indi_pa').val('{{$details->personal_accident_ID}}');
+            $('#indi_pd_vclass').val(vehicle_class)
+            $('#indi_pd_vclass').selectpicker('refresh');
+            $('#indi_pa').val(personal_accident_ID);
             $('#indi_pa').selectpicker('refresh');
+
+            var pvpremium = [];
+            var hvpremium = [];
+            var lvpremium = [];
+            @foreach($pdg as $bi)
+              pvpremium["{{ $bi->premiumDG_ID }}"] = "₱ " + numberWithCommas({{ $bi->privateCar }});
+              hvpremium["{{ $bi->premiumDG_ID }}"] = "₱ " + numberWithCommas({{ $bi->cv_Heavy }});
+              lvpremium["{{ $bi->premiumDG_ID }}"] = "₱ " + numberWithCommas({{ $bi->cv_Light }});
+            @endforeach
+            if($('#indi_bi_vclass').val() == 1)
+            $('#indi_bi_premium').val(pvpremium[bodily_injury_ID]);
+            if($('#indi_bi_vclass').val() == 2)
+            $('#indi_bi_premium').val(hvpremium[bodily_injury_ID]);
+            if($('#indi_bi_vclass').val() == 3)
+            $('#indi_bi_premium').val(lvpremium[bodily_injury_ID]);
+
+            var pvpremium = [];
+            var hvpremium = [];
+            var lvpremium = [];
+            @foreach($pdg as $bi)
+              pvpremium["{{ $bi->premiumDG_ID }}"] = "₱ " + numberWithCommas({{ $bi->privateCar }});
+              hvpremium["{{ $bi->premiumDG_ID }}"] = "₱ " + numberWithCommas({{ $bi->cv_Heavy }});
+              lvpremium["{{ $bi->premiumDG_ID }}"] = "₱ " + numberWithCommas({{ $bi->cv_Light }});
+            @endforeach
+            if($('#indi_pd_vclass').val() == 1)
+            $('#indi_pd_premium').val(pvpremium[property_damage_ID]);
+            if($('#indi_pd_vclass').val() == 2)
+            $('#indi_pd_premium').val(hvpremium[property_damage_ID]);
+            if($('#indi_pd_vclass').val() == 3)
+            $('#indi_pd_premium').val(lvpremium[property_damage_ID]);
 
             var id = $('#indi_pa').find(':selected').val();
             var nperson = [];
@@ -1821,6 +2160,301 @@
             $('#indi_pa_premium').val(premium[id]);
             compute_indi();
 
+        }
+        if(client_type == 1)
+        {
+            $('#comp_quote_id').val('{{$details->quote_comp_ID}}');
+            $('#itab').removeClass("active in");
+            $('#individualtab').removeClass("active in");
+            $('#ctab').addClass("active in");
+            $('#company').addClass("active in");
+            $("#client_company").prop("selectedIndex", client_id);
+            $('#client_company').selectpicker('refresh');
+            @foreach($company as $comp)
+             if('{{$comp->comp_ID}}' == client_id)
+             {
+                var agent = '{{$comp->comp_sales_agent}}';
+                var cperson = '{{$comp->comp_cperson_ID}}';
+             }
+            @endforeach
+
+            if(client_id > 0)
+            {
+                var salesagent = [];
+                var contactperson = [];
+                @foreach($salesA as $agent)
+                   @foreach($pInfo as $Info)
+                    @if($agent->personal_info_ID == $Info->pinfo_ID )
+                     salesagent["{{ $agent->agent_ID }}"] = "{{ $Info->pinfo_last_name.', '.$Info->pinfo_first_name.' '.$Info->pinfo_middle_name }}";
+                    @endif
+                   @endforeach
+                @endforeach
+
+                @foreach($cperson as $cper)
+                   @foreach($pInfo as $Info)
+                    @if($cper->personal_info_ID == $Info->pinfo_ID )
+                     contactperson["{{ $cper->cPerson_ID }}"] = "{{ $Info->pinfo_last_name.', '.$Info->pinfo_first_name.' '.$Info->pinfo_middle_name }}";
+                    @endif
+                   @endforeach
+                @endforeach
+                $('#comp_agent').val(salesagent[agent]);
+                $('#comp_cperson').val(contactperson[cperson]);
+            }
+
+            
+            $('#comp_vtype').val(vehicle_type_ID);
+            $('#comp_vtype').selectpicker('refresh');
+            $('#comp_vmake').val(vehicle_make_ID);
+            $('#comp_vmake').selectpicker('refresh');
+
+            var newOptions = [];
+            var data = 0;
+            @foreach($vModel as $vmd)
+             @if($vmd->del_flag == 0)
+              if($('#comp_vtype').val() == "{{ $vmd->vehicle_type }}" && $("#comp_vmake").val() == "{{ $vmd->vehicle_make_ID }}")
+              {
+               newOptions[data] = { model_name : "{{ $vmd->vehicle_year." ".$vmd->vehicle_model_name }}", model_ID : "{{ $vmd->vehicle_model_ID }}", model_value : "{{ $vmd->vehicle_value }}" };
+               data += 1;
+              }
+             @endif
+            @endforeach
+            $('#comp_vmodel option:gt(0)').remove();
+            $.each(newOptions, function(key,value) {
+              var option = '<option value="'+value.model_ID+'" data-value="'+value.model_value+'">'+value.model_name+'</option>';
+              $('#comp_vmodel:last').append(option);
+            });
+            $("#comp_vmodel").prop("selectedIndex", -1);
+            $('#comp_vmodel').selectpicker('refresh');
+            $('#comp_vmodel_value').val("");
+            $('#comp_vmodel').val(vehicle_model_ID);
+            $('#comp_vmodel').selectpicker('refresh');
+            $('#comp_plate_number').val(plate_number);
+            $('#comp_schassis').val(serial_chassis);
+            $('#comp_mengine').val(motor_engine);
+            $('#comp_mfilenum').val(mv_file_number);
+            $('#comp_seat_cap').val(seat_capacity);
+            $('#comp_color').val(color);
+
+            $('#client_company').val('{{$id}}');
+            $('#client_company').selectpicker('refresh');
+            $('#comp_insurance_company').val('{{$details->insurance_company}}');
+            $('#comp_insurance_company').selectpicker('refresh');
+
+            var ins = $('#comp_insurance_company').val();
+            var newOptions = [];
+            var data = 0;
+            @foreach($ppa as $pa)
+             @if($pa->del_flag == 0)
+              if(ins == '{{$pa->insurance_compID}}')
+                {
+                   newOptions[data] = { ID : "{{ $pa->premiumPA_ID }}", limit : "{{ $pa->insuranceLimit }}", total : "{{ $pa->insuranceCover + $pa->passengerCover + $pa->mrCover }}", person : "{{$pa->passengerNum}}" };
+                   data += 1;   
+                }
+             @endif
+            @endforeach
+
+            $('#comp_pa option:gt(0)').remove();
+            $.each(newOptions, function(key,value) {
+              var option = '<option value="'+value.ID+'" data-value="'+value.total+'">Number of Person '+value.person+' Coverage ₱ '+numberWithCommas(value.limit)+'</option>';
+              $('#comp_pa:last').append(option);
+            });
+            $('#comp_vmodel_value').val("₱ " + numberWithCommas($("#comp_vmodel").find(':selected').data('value')));
+            $("#comp_pa").prop("selectedIndex", -1);
+            $('#comp_pa').selectpicker('refresh');
+            $('#comp_pa_premium').val("");
+
+            data = 0;
+            newOptions = [];
+            
+            @foreach($policy as $pnumber)
+             @if($pnumber->del_flag == 0)
+              @if($pnumber->policyStatus_ID == 0)
+               if('{{$pnumber->insurance_compID}}' == ins)
+               {
+                   newOptions[data] = { policy_number : "{{ $pnumber->policy_number }}"};
+                   data += 1;
+               }
+              @endif
+             @endif
+            @endforeach
+            $('#comp_policy_number option:gt(0)').remove();
+            $.each(newOptions, function(key,value) {
+              var option = '<option value="'+value.policy_number+'">'+value.policy_number+'</option>';
+              $('#comp_policy_number:last').append(option);
+            });
+            $("#comp_policy_number").prop("selectedIndex", -1);
+            $('#comp_policy_number').selectpicker('refresh');
+            $('#comp_policy_number').val("");
+
+            $('#client_company').val('{{$id}}');
+            $('#client_company').selectpicker('refresh');
+            $('#comp_insurance_company').val('{{$details->insurance_company}}');
+            $('#comp_insurance_company').selectpicker('refresh');
+
+            var ins = $('#comp_insurance_company').val();
+            var newOptions = [];
+            var data = 0;
+            @foreach($ppa as $pa)
+             @if($pa->del_flag == 0)
+              if(ins == '{{$pa->insurance_compID}}')
+                {
+                   newOptions[data] = { ID : "{{ $pa->premiumPA_ID }}", limit : "{{ $pa->insuranceLimit }}", total : "{{ $pa->insuranceCover + $pa->passengerCover + $pa->mrCover }}", person : "{{$pa->passengerNum}}" };
+                   data += 1;   
+                }
+             @endif
+            @endforeach
+
+            $('#comp_pa option:gt(0)').remove();
+            $.each(newOptions, function(key,value) {
+              var option = '<option value="'+value.ID+'" data-value="'+value.total+'">Number of Person '+value.person+' Coverage ₱ '+numberWithCommas(value.limit)+'</option>';
+              $('#comp_pa:last').append(option);
+            });
+            $("#comp_pa").prop("selectedIndex", -1);
+            $('#comp_pa').selectpicker('refresh');
+            $('#comp_pa_premium').val("");
+
+            data = 0;
+            newOptions = [];
+
+            @foreach($pdg as $dg)
+             @if($dg->damage_type == 1)
+              @if($pa->del_flag == 0)
+                if(ins == '{{$dg->insurance_compID}}')
+                {
+                   newOptions[data] = { ID : "{{ $dg->premiumDG_ID }}", limit : "{{ $dg->insuranceLimit }}"};
+                   data += 1;   
+                }
+              @endif
+             @endif
+            @endforeach
+            
+            $('#comp_pd option:gt(0)').remove();
+            $.each(newOptions, function(key,value) {
+              var option = '<option value="'+value.ID+'" data-id="'+value.ID+'">₱ '+numberWithCommas(value.limit)+'</option>';
+              $('#comp_pd:last').append(option);
+            });
+            $("#comp_pd").prop("selectedIndex", -1);
+            $('#comp_pd').selectpicker('refresh');
+            $('#comp_pd_premium').val("");
+
+            data = 0;
+            newOptions = [];
+
+            @foreach($pdg as $dg)
+             @if($dg->damage_type == 0)
+              @if($pa->del_flag == 0)
+                if(ins == '{{$dg->insurance_compID}}')
+                {
+                   newOptions[data] = { ID : "{{ $dg->premiumDG_ID }}", limit : "{{ $dg->insuranceLimit }}"};
+                   data += 1;   
+                }
+              @endif
+             @endif
+            @endforeach
+            $('#comp_bi option:gt(0)').remove();
+            $.each(newOptions, function(key,value) {
+              var option = '<option value="'+value.ID+'" data-id="'+value.ID+'">₱ '+numberWithCommas(value.limit)+'</option>';
+              $('#comp_bi:last').append(option);
+            });
+            $("#comp_bi").prop("selectedIndex", -1);
+            $('#comp_bi').selectpicker('refresh');
+            $('#comp_bi_premium').val("");
+
+            if(ins == 1)
+                $('#comp_deductible').val('₱ '+numberWithCommas(3100));
+            if(ins == 2)
+                $('#comp_deductible').val('₱ '+numberWithCommas(1000));
+            if(ins == 3)
+                $('#comp_deductible').val('₱ '+numberWithCommas(3000));
+            if(ins == 4)
+                $('#comp_deductible').val('₱ '+numberWithCommas(2000));
+
+            $('#comp_towing').val('₱ '+numberWithCommas(100));
+
+            $('#comp_arl').val('₱ '+numberWithCommas(parseFloat($('#comp_deductible').val().replace(/[^0-9\.]/g,''))+parseFloat($('#comp_towing').val().replace(/[^0-9\.]/g,''))))
+
+            var coverage = parseFloat($('#comp_vmodel_value').val().replace(/[^0-9\.]/g,'')) * .2;
+
+            var grosspremium = parseFloat($('#comp_vmodel_value').val().replace(/[^0-9\.]/g,'')) * .013;
+
+            $('#comp_coverage_aon').val('₱ '+numberWithCommas(Math.round(coverage * 100)/100));
+            $('#comp_coverage_odt').val('₱ '+numberWithCommas(Math.round(coverage * 100)/100));
+
+            if(ins == 1)
+                $('#comp_aon').val('₱ '+numberWithCommas(coverage * 0.02));
+            if(ins == 2)
+                {
+            $('#comp_coverage_aon').val('');
+            $('#comp_aon').val('');
+            }
+            if(ins == 3)
+                $('#comp_aon').val('₱ '+numberWithCommas(coverage * 0.005));
+            if(ins == 4)
+                $('#comp_aon').val('₱ '+numberWithCommas(coverage * 0.005));
+
+            var odt = parseFloat(coverage * .013);
+
+             $('#comp_odt').val('₱ '+numberWithCommas(Math.round(odt * 100)/100));
+
+            var basicpremium = (parseFloat($('#comp_aon').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#comp_bi_premium').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#comp_pd_premium').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#comp_pa_premium').val().replace(/[^0-9\.]/g,''))) + odt;
+            var vat = basicpremium * .125;
+            var stamp = basicpremium * .12;
+            var rounded = Math.ceil((basicpremium + vat + stamp)/100)*100;
+
+            var lgt = rounded - (basicpremium + vat + stamp);
+            var total = basicpremium + vat + stamp + lgt;
+
+            $('#comp_bi').val('{{$details->bodily_injury_ID}}');
+            $('#comp_bi').selectpicker('refresh');
+            $('#comp_bi_vclass').val('{{$details->vehicle_class}}')
+            $('#comp_bi_vclass').selectpicker('refresh');
+            $('#comp_pd').val('{{$details->property_damage_ID}}');
+            $('#comp_pd').selectpicker('refresh');
+            $('#comp_bi_vclass').val('{{$details->vehicle_class}}')
+            $('#comp_bi_vclass').selectpicker('refresh');
+            $('#comp_pa').val('{{$details->personal_accident_ID}}');
+            $('#comp_pa').selectpicker('refresh');
+
+            var pvpremium = [];
+            var hvpremium = [];
+            var lvpremium = [];
+            @foreach($pdg as $bi)
+              pvpremium["{{ $bi->premiumDG_ID }}"] = "₱ " + numberWithCommas({{ $bi->privateCar }});
+              hvpremium["{{ $bi->premiumDG_ID }}"] = "₱ " + numberWithCommas({{ $bi->cv_Heavy }});
+              lvpremium["{{ $bi->premiumDG_ID }}"] = "₱ " + numberWithCommas({{ $bi->cv_Light }});
+            @endforeach
+            if($('#comp_bi_vclass').val() == 1)
+            $('#comp_bi_premium').val(pvpremium[bodily_injury_ID]);
+            if($('#comp_bi_vclass').val() == 2)
+            $('#comp_bi_premium').val(hvpremium[bodily_injury_ID]);
+            if($('#comp_bi_vclass').val() == 3)
+            $('#comp_bi_premium').val(lvpremium[bodily_injury_ID]);
+        
+            var pvpremium = [];
+            var hvpremium = [];
+            var lvpremium = [];
+            @foreach($pdg as $bi)
+              pvpremium["{{ $bi->premiumDG_ID }}"] = "₱ " + numberWithCommas({{ $bi->privateCar }});
+              hvpremium["{{ $bi->premiumDG_ID }}"] = "₱ " + numberWithCommas({{ $bi->cv_Heavy }});
+              lvpremium["{{ $bi->premiumDG_ID }}"] = "₱ " + numberWithCommas({{ $bi->cv_Light }});
+            @endforeach
+            if($('#comp_pd_vclass').val() == 1)
+            $('#comp_pd_premium').val(pvpremium[property_damage_ID]);
+            if($('#comp_pd_vclass').val() == 2)
+            $('#comp_pd_premium').val(hvpremium[property_damage_ID]);
+            if($('#comp_pd_vclass').val() == 3)
+            $('#comp_pd_premium').val(lvpremium[property_damage_ID]);
+        
+            var id = $('#comp_pa').find(':selected').val();
+            var nperson = [];
+            var premium = [];
+            @foreach($ppa as $pa)
+              nperson["{{ $pa->premiumPA_ID }}"] = "{{ $pa->passengerNum }}";
+              premium["{{ $pa->premiumPA_ID }}"] = "₱ " + numberWithCommas({{ $pa->insuranceCover+$pa->passengerCover+$pa->mrCover }});
+            @endforeach
+            $('#comp_pa_nperson').val(nperson[id]);
+            $('#comp_pa_premium').val(premium[id]);
+            compute_comp();
         }
     </script>
 

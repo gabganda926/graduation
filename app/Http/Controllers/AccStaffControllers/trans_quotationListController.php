@@ -92,32 +92,46 @@ class trans_quotationListController extends Controller
     }
 
     public function forward_client(Request $req)
-    {
-		$id = quotationCompanyConnection::where("quote_comp_ID", "=", $req->ID)->first();
-		if($id)
-		{
-			$this->account->username = $id->comp_name."".$req->ID;
-			$email = $id->comp_email;
-			$name = $id->comp_name;
-		}
-		else
-		{
-    		$id = quotationIndividualConnection::where("quote_indi_ID", "=", $req->ID)->first();
-			$this->account->username = $id->pinfo_last_name."".$req->ID;
-			$email = $id->pinfo_mail;
-			$name = $id->pinfo_first_name." ".$id->pinfo_last_name;
-		}
-		$password = str_pad(rand(0,'9'.round(microtime(true))),11, "0", STR_PAD_LEFT);
-		$this->account->password = bcrypt($password);
-		$this->account->status = 0;
-		$data = array('username'=>$this->account->username, 'password'=>$password,'email'=>$email,'name'=>$name);
-		
-		$this->account->save();
-    	Mail::send('pages.others.forward-manager', ['username'=>$this->account->username, 'password'=>$password], function ($message) use ($data){
-    		$message->from('MySender41N@gmail.com', 'i-Insure');
-    		$message->to($data['email'], $data['name'])->subject('Welcome to Compreline Insurance Services');
-    	});
-    	return $this->add_quote_list($req);
+    {   
+        $connected = @fsockopen("www.example.com", 80); 
+                                        
+        if ($connected)
+        {
+            fclose($connected);   
+            $id = quotationCompanyConnection::where("quote_comp_ID", "=", $req->ID)->first();
+            if($id)
+            {
+                $this->account->username = $id->comp_name."".$req->ID;
+                $email = $id->comp_email;
+                $name = $id->comp_name;
+            }
+            else
+            {
+                $id = quotationIndividualConnection::where("quote_indi_ID", "=", $req->ID)->first();
+                $this->account->username = $id->pinfo_last_name."".$req->ID;
+                $email = $id->pinfo_mail;
+                $name = $id->pinfo_first_name." ".$id->pinfo_last_name;
+            }
+            $password = str_pad(rand(0,'9'.round(microtime(true))),11, "0", STR_PAD_LEFT);
+            $this->account->password = bcrypt($password);
+            $this->account->status = 0;
+            $data = array('username'=>$this->account->username, 'password'=>$password,'email'=>$email,'name'=>$name);
+            
+            $this->account->save();
+            Mail::send('pages.others.forward-manager', ['username'=>$this->account->username, 'password'=>$password], function ($message) use ($data){
+                $message->from('MySender41N@gmail.com', 'i-Insure');
+                $message->to($data['email'], $data['name'])->subject('Welcome to Compreline Insurance Services');
+            });
+            return $this->add_quote_list($req);
+        }
+        else
+        {
+          alert()
+          ->error('ERROR', 'No Internet Connection')
+          ->persistent("Close");
+
+          return Redirect::back();
+        }
     }
 
     public function add_quote_list($req)
@@ -182,6 +196,7 @@ class trans_quotationListController extends Controller
 
                     $this->type->save();
                     $type = vTypeConnection::orderBy('vehicle_type_ID','desc')->first();   
+                    return $this->check_exist_make($req, $type->vehicle_type_ID);
                 }
                 else
                 {
@@ -200,6 +215,7 @@ class trans_quotationListController extends Controller
 
                     $this->type->save();
                     $type = vTypeConnection::orderBy('vehicle_type_ID','desc')->first();   
+                    return $this->check_exist_make($req, $type->vehicle_type_ID);
                 }
                 else
                 {
@@ -208,7 +224,6 @@ class trans_quotationListController extends Controller
             }
         }
      
-
         return $this->check_exist_make($req, null);
     }
 
@@ -231,6 +246,7 @@ class trans_quotationListController extends Controller
 
                     $this->make->save();
                     $make = vMakeConnection::orderBy('vehicle_make_ID','desc')->first();  
+                    return $this->check_exist_model($req, $type, $make->vehicle_make_ID);
                 }
                 else
                     return $this->check_exist_model($req, $type, null);
@@ -248,6 +264,7 @@ class trans_quotationListController extends Controller
 
                     $this->make->save();
                     $make = vMakeConnection::orderBy('vehicle_make_ID','desc')->first();  
+                    return $this->check_exist_model($req, $type, $make->vehicle_make_ID);
                 }
                 else
                     return $this->check_exist_model($req, $type, null);
@@ -294,6 +311,7 @@ class trans_quotationListController extends Controller
 
                     $this->model->save();
                     $model = vModelConnection::orderBy('vehicle_model_ID','desc')->first();  
+                    return $this->update_quote($req, $type, $make, $model->vehicle_model_ID);
                 }
                 else
                     return $this->update_quote($req, $type, $make, null);
@@ -329,6 +347,7 @@ class trans_quotationListController extends Controller
 
                     $this->model->save();
                     $model = vModelConnection::orderBy('vehicle_model_ID','desc')->first();  
+                    return $this->update_quote($req, $type, $make, $model->vehicle_model_ID);
                 }
                 else
                     return $this->update_quote($req, $type, $make, null);
@@ -639,7 +658,7 @@ class trans_quotationListController extends Controller
             return view('pages.accounting-staff.transaction.insure-quote')
             ->with('id', -1)
             ->with('details',$id)
-            ->with('type', -1)
+            ->with('type', 1)
             ->with('address',addressConnection::all())
             ->with('pInfo',personalInfoConnection::all())
             ->with('cperson',contactPersonConnection::all())
@@ -660,7 +679,7 @@ class trans_quotationListController extends Controller
             return view('pages.accounting-staff.transaction.insure-quote')
             ->with('id', -1)
             ->with('details',$id)
-            ->with('type', -1)
+            ->with('type', 0)
             ->with('address',addressConnection::all())
             ->with('pInfo',personalInfoConnection::all())
             ->with('cperson',contactPersonConnection::all())

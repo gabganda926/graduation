@@ -178,20 +178,20 @@
                         <div class="body">
                             <div class="row clearfix">
                                 <div class="col-md-2">
-                                    <input name="group1" type="radio" id="radio_1" onclick="
+                                    <input name="group1" type="radio" id="radio_ind" disabled="disable" onclick="
                                     $('#individualClient').show(800);
                                     $('#companyClient').hide(800);"/>
-                                    <label for="radio_1">Individual</label>
-                                    <input name="group1" type="radio" id="radio_2" onclick="
+                                    <label for="radio_ind">Individual</label>
+                                    <input name="group1" type="radio" id="radio_comp" disabled="disable" onclick="
                                     $('#companyClient').show(800);
                                     $('#individualClient').hide(800);" />
-                                    <label for="radio_2">Company</label>
+                                    <label for="radio_comp">Company</label>
                                 </div>
                                 <div class="col-md-5">
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <label><small>Policy Number:</small></label>
-                                            <input id = "aadd_blcknum" name = "aadd_blcknum" type="text" class="form-control" disabled>
+                                            <input id = "c_pno" name = "c_pno" type="text" class="form-control" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -209,7 +209,7 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label><small>First Name:</small></label>
-                                                <input id = "aCLAIM_type_name" name = "aCLAIM_type_name" type="text" class="form-control" pattern="[A-Za-z'-]" disabled="disable" required>
+                                                <input id = "fname" name = "fname" type="text" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
                                             </div>
                                         </div>
                                     </div>
@@ -218,7 +218,7 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label><small>Birthday:</small></label>
-                                                <input id = "aCLAIM_type_name" name = "aCLAIM_type_name" type="date" class="form-control" pattern="[A-Za-z'-]" disabled required>
+                                                <input id = "bday" name = "bday" type="date" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
                                             </div>
                                         </div>
                                     </div>
@@ -229,7 +229,7 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label><small>Middle Name:</small></label>
-                                                <input id = "aCLAIM_type_name" name = "aCLAIM_type_name" type="text" class="form-control" pattern="[A-Za-z'-]" disabled required>
+                                                <input id = "mname" name = "mname" type="text" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
                                             </div>
                                         </div>
                                     </div>
@@ -238,7 +238,7 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label><small>Age:</small></label>
-                                                <input id = "aCLAIM_type_name" name = "aCLAIM_type_name" type="number" class="form-control" pattern="[A-Za-z'-]" disabled required>
+                                                <input id = "age" name = "age" type="number" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
                                             </div>
                                         </div>
                                     </div>
@@ -249,7 +249,7 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label><small>Last Name:</small></label>
-                                                <input id = "aCLAIM_type_name" name = "aCLAIM_type_name" type="text" class="form-control" pattern="[A-Za-z'-]" disabled required>
+                                                <input id = "lname" name = "lname" type="text" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
                                             </div>
                                         </div>
                                     </div>
@@ -258,9 +258,9 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label><small>Gender:</small></label>
-                                                <input name="groupGen" type="radio" id="male" disabled class="with-gap" />
+                                                <input name="groupGen" type="radio" id="male" class="with-gap"  disabled="disable"/>
                                                 <label for="male">Male</label>
-                                                <input name="groupGen" type="radio" id="fem" disabled class="with-gap" />
+                                                <input name="groupGen" type="radio" id="fem" class="with-gap"  disabled="disable"/>
                                                 <label for="fem">Female</label>
                                             </div>
                                         </div>
@@ -278,7 +278,7 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label><small>Cellphone Number:</small></label>
-                                                <input id = "aCLAIM_type_name" name = "aCLAIM_type_name" type="text" class="form-control" pattern="[A-Za-z'-]" disabled required>
+                                                <input id = "cpno" name = "cpno" type="text" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
                                             </div>
                                         </div>
                                     </div>
@@ -287,7 +287,7 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label><small>Cellphone Number (Alternate):</small></label>
-                                                <input id = "aCLAIM_type_name" name = "aCLAIM_type_name" type="text" class="form-control" pattern="[A-Za-z'-]" disabled required>
+                                                <input id = "cpno_1" name = "cpno_1" type="text" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
                                             </div>
                                         </div>
                                     </div>
@@ -298,7 +298,7 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label><small>Telephone Number:</small></label>
-                                                <input id = "aCLAIM_type_name" name = "aCLAIM_type_name" type="text" class="form-control" pattern="[A-Za-z'-]" disabled required>
+                                                <input id = "telno" name = "telno" type="text" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
                                             </div>
                                         </div>
                                     </div>
@@ -307,26 +307,18 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label><small>Email:</small></label>
-                                                <input id = "aCLAIM_type_name" name = "aCLAIM_type_name" type="email" class="form-control" pattern="[A-Za-z'-]" disabled required>
+                                                <input id = "email" name = "email" type="email" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="row clearfix">
-                                    <div class="col-md-12">
-                                        <label><b>Sales Agent</b></label>
-                                    </div>
-
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
                                         <div class="form-group form-float">
                                             <div class="form-line">
-                                                <select id = "aadd_region" name = "aadd_region" class="form-control show-tick" data-live-search="true" readonly="true">
-                                                      <option selected value = "" style = "display: none;">-- Select Sales Agent --</option>
-                                                            <option value = "I">12345</option>
-                                                            <option value = "II">67890</option>
-                                                            <option value = "III">111111</option>
-                                                    </select>
+                                                <label><small>Sales Agent:</small></label>
+                                                <input id = "agent" name = "agent" type="text" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
                                             </div>
                                         </div>
                                     </div>
@@ -343,7 +335,7 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label><small>Blk&Lot/Bldg/Unit/No.:</small></label>
-                                                <input id = "aCLAIM_type_name" name = "aCLAIM_type_name" type="text" class="form-control" pattern="[A-Za-z'-]" disabled required>
+                                                <input id = "blk" name = "blk" type="text" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
                                             </div>
                                         </div>
                                     </div>
@@ -352,7 +344,7 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label><small>District:</small></label>
-                                                <input id = "aCLAIM_type_name" name = "aCLAIM_type_name" type="text" class="form-control" pattern="[A-Za-z'-]" disabled required>
+                                                <input id = "dist" name = "dist" type="text" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
                                             </div>
                                         </div>
                                     </div>
@@ -363,7 +355,7 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label><small>Street:</small></label>
-                                                <input id = "aCLAIM_type_name" name = "aCLAIM_type_name" type="text" class="form-control" pattern="[A-Za-z'-]" disabled required>
+                                                <input id = "street" name = "street" type="text" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
                                             </div>
                                         </div>
                                     </div>
@@ -372,7 +364,7 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label><small>City/Municipality:</small></label>
-                                                <input id = "aCLAIM_type_name" name = "aCLAIM_type_name" type="text" class="form-control" pattern="[A-Za-z'-]" disabled required>
+                                                <input id = "city" name = "city" type="text" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
                                             </div>
                                         </div>
                                     </div>
@@ -383,7 +375,7 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label><small>Subdivision:</small></label>
-                                                <input id = "aCLAIM_type_name" name = "aCLAIM_type_name" type="text" class="form-control" pattern="[A-Za-z'-]" disabled required>
+                                                <input id = "subd" name = "subd" type="text" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
                                             </div>
                                         </div>
                                     </div>
@@ -392,7 +384,7 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label><small>Province:</small></label>
-                                                <input id = "aCLAIM_type_name" name = "aCLAIM_type_name" type="text" class="form-control" pattern="[A-Za-z'-]" disabled required>
+                                                <input id = "prov" name = "prov" type="text" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
                                             </div>
                                         </div>
                                     </div>
@@ -403,7 +395,7 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label><small>Barangay:</small></label>
-                                                <input id = "aCLAIM_type_name" name = "aCLAIM_type_name" type="text" class="form-control" pattern="[A-Za-z'-]" disabled required>
+                                                <input id = "brgy" name = "brgy" type="text" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
                                             </div>
                                         </div>
                                     </div>
@@ -412,12 +404,7 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label><small>Region:</small></label>
-                                                <select id = "aadd_region" name = "aadd_region" class="form-control show-tick" data-live-search="true" readonly="true">
-                                                      <option selected value = "" style = "display: none;">-- Select Region --</option>
-                                                            <option value = "I">12345</option>
-                                                            <option value = "II">67890</option>
-                                                            <option value = "III">111111</option>
-                                                    </select>
+                                                <input id = "region" name = "region" type="text" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
                                             </div>
                                         </div>
                                     </div>
@@ -428,7 +415,7 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label><small>Zip Code:</small></label>
-                                                <input id = "aCLAIM_type_name" name = "aCLAIM_type_name" type="text" class="form-control" pattern="[A-Za-z'-]" disabled required>
+                                                <input id = "zipcode" name = "zipcode" type="text" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
                                             </div>
                                         </div>
                                     </div>
@@ -436,6 +423,7 @@
                             </div> <!-- END OF INDIVIDUAL -->
 
                             <div id="companyClient">
+
                                 <div class="row clearfix">
                                     <div class="col-md-12">
                                         <label><b>Company Details</b></label>
@@ -443,28 +431,11 @@
                                 </div>
 
                                 <div class="row clearfix">
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label><small>Company Name:</small></label>
-                                                <input id = "aCLAIM_type_name" name = "aCLAIM_type_name" type="text" class="form-control" pattern="[A-Za-z'-]" disabled required>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row clearfix">
-                                    <div class="col-md-12">
-                                        <label><b>Company Contact Details</b></label>
-                                    </div>
-                                </div>
-
-                                <div class="row clearfix">
-                                    <div class="col-md-6">
-                                        <div class="form-group form-float">
-                                            <div class="form-line">
-                                                <label><small>Cellphone Number:</small></label>
-                                                <input id = "aCLAIM_type_name" name = "aCLAIM_type_name" type="text" class="form-control" pattern="[A-Za-z'-]" disabled required>
+                                                <input id = "compname" name = "compname" type="text" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
                                             </div>
                                         </div>
                                     </div>
@@ -472,8 +443,8 @@
                                     <div class="col-md-6">
                                         <div class="form-group form-float">
                                             <div class="form-line">
-                                                <label><small>Cellphone Number (Alternate):</small></label>
-                                                <input id = "aCLAIM_type_name" name = "aCLAIM_type_name" type="text" class="form-control" pattern="[A-Za-z'-]" disabled required>
+                                                <label><small>Fax Number:</small></label>
+                                                <input id = "comp_fax" name = "comp_fax" type="text" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
                                             </div>
                                         </div>
                                     </div>
@@ -484,7 +455,7 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label><small>Telephone Number:</small></label>
-                                                <input id = "aCLAIM_type_name" name = "aCLAIM_type_name" type="text" class="form-control" pattern="[A-Za-z'-]" disabled required>
+                                                <input id = "comp_telnum" name = "comp_telnum" type="text" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
                                             </div>
                                         </div>
                                     </div>
@@ -493,7 +464,7 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label><small>Email:</small></label>
-                                                <input id = "aCLAIM_type_name" name = "aCLAIM_type_name" type="email" class="form-control" pattern="[A-Za-z'-]" disabled required>
+                                                <input id = "comp_email" name = "comp_email" type="email" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
                                             </div>
                                         </div>
                                     </div>
@@ -510,7 +481,7 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label><small>Blk&Lot/Bldg/Unit/No.:</small></label>
-                                                <input id = "aCLAIM_type_name" name = "aCLAIM_type_name" type="text" class="form-control" pattern="[A-Za-z'-]" disabled required>
+                                                <input id = "comp_blk" name = "comp_blk" type="text" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
                                             </div>
                                         </div>
                                     </div>
@@ -519,7 +490,7 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label><small>District:</small></label>
-                                                <input id = "aCLAIM_type_name" name = "aCLAIM_type_name" type="text" class="form-control" pattern="[A-Za-z'-]" disabled required>
+                                                <input id = "comp_dist" name = "comp_dist" type="text" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
                                             </div>
                                         </div>
                                     </div>
@@ -530,7 +501,7 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label><small>Street:</small></label>
-                                                <input id = "aCLAIM_type_name" name = "aCLAIM_type_name" type="text" class="form-control" pattern="[A-Za-z'-]" disabled required>
+                                                <input id = "comp_street" name = "comp_street" type="text" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
                                             </div>
                                         </div>
                                     </div>
@@ -539,7 +510,7 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label><small>City/Municipality:</small></label>
-                                                <input id = "aCLAIM_type_name" name = "aCLAIM_type_name" type="text" class="form-control" pattern="[A-Za-z'-]" disabled required>
+                                                <input id = "comp_city" name = "comp_city" type="text" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
                                             </div>
                                         </div>
                                     </div>
@@ -550,7 +521,7 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label><small>Subdivision:</small></label>
-                                                <input id = "aCLAIM_type_name" name = "aCLAIM_type_name" type="text" class="form-control" pattern="[A-Za-z'-]" disabled required>
+                                                <input id = "comp_subd" name = "comp_subd" type="text" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
                                             </div>
                                         </div>
                                     </div>
@@ -559,7 +530,7 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label><small>Province:</small></label>
-                                                <input id = "aCLAIM_type_name" name = "aCLAIM_type_name" type="text" class="form-control" pattern="[A-Za-z'-]" disabled required>
+                                                <input id = "comp_prov" name = "comp_prov" type="text" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
                                             </div>
                                         </div>
                                     </div>
@@ -570,7 +541,7 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label><small>Barangay:</small></label>
-                                                <input id = "aCLAIM_type_name" name = "aCLAIM_type_name" type="text" class="form-control" pattern="[A-Za-z'-]" disabled required>
+                                                <input id = "comp_brgy" name = "comp_brgy" type="text" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
                                             </div>
                                         </div>
                                     </div>
@@ -579,12 +550,7 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label><small>Region:</small></label>
-                                                <select id = "aadd_region" name = "aadd_region" class="form-control show-tick" data-live-search="true" readonly="true">
-                                                      <option selected value = "" style = "display: none;">-- Select Region --</option>
-                                                            <option value = "I">12345</option>
-                                                            <option value = "II">67890</option>
-                                                            <option value = "III">111111</option>
-                                                    </select>
+                                                <input id = "comp_region" name = "comp_region" type="text" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
                                             </div>
                                         </div>
                                     </div>
@@ -595,7 +561,7 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label><small>Zip Code:</small></label>
-                                                <input id = "aCLAIM_type_name" name = "aCLAIM_type_name" type="text" class="form-control" pattern="[A-Za-z'-]" disabled required>
+                                                <input id = "comp_zipcode" name = "comp_zipcode" type="text" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
                                             </div>
                                         </div>
                                     </div>
@@ -612,7 +578,7 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label><small>First Name:</small></label>
-                                                <input id = "aCLAIM_type_name" name = "aCLAIM_type_name" type="text" class="form-control" pattern="[A-Za-z'-]" disabled required>
+                                                <input id = "cont_fname" name = "cont_fname" type="text" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
                                             </div>
                                         </div>
                                     </div>
@@ -621,7 +587,7 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label><small>Birthday:</small></label>
-                                                <input id = "aCLAIM_type_name" name = "aCLAIM_type_name" type="date" class="form-control" pattern="[A-Za-z'-]" disabled required>
+                                                <input id = "cont_bday" name = "cont_bday" type="date" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
                                             </div>
                                         </div>
                                     </div>
@@ -632,7 +598,7 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label><small>Middle Name:</small></label>
-                                                <input id = "aCLAIM_type_name" name = "aCLAIM_type_name" type="text" class="form-control" pattern="[A-Za-z'-]" disabled required>
+                                                <input id = "cont_mname" name = "cont_mname" type="text" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
                                             </div>
                                         </div>
                                     </div>
@@ -641,7 +607,7 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label><small>Age:</small></label>
-                                                <input id = "aCLAIM_type_name" name = "aCLAIM_type_name" type="number" class="form-control" pattern="[A-Za-z'-]" disabled required>
+                                                <input id = "cont_age" name = "cont_age" type="number" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
                                             </div>
                                         </div>
                                     </div>
@@ -652,7 +618,7 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label><small>Last Name:</small></label>
-                                                <input id = "aCLAIM_type_name" name = "aCLAIM_type_name" type="text" class="form-control" pattern="[A-Za-z'-]" disabled required>
+                                                <input id = "cont_lname" name = "cont_lname" type="text" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
                                             </div>
                                         </div>
                                     </div>
@@ -661,10 +627,10 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label><small>Gender:</small></label>
-                                                <input name="groupGen" type="radio" id="male" disabled class="with-gap" />
-                                                <label for="male">Male</label>
-                                                <input name="groupGen" type="radio" id="fem" disabled class="with-gap" />
-                                                <label for="fem">Female</label>
+                                                <input name="cont_groupGen" type="radio" id="cont_male" class="with-gap"  disabled="disable"/>
+                                                <label for="cont_male">Male</label>
+                                                <input name="cont_groupGen" type="radio" id="cont_fem" class="with-gap"  disabled="disable"/>
+                                                <label for="cont_fem">Female</label>
                                             </div>
                                         </div>
                                     </div>
@@ -681,7 +647,7 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label><small>Cellphone Number:</small></label>
-                                                <input id = "aCLAIM_type_name" name = "aCLAIM_type_name" type="text" class="form-control" pattern="[A-Za-z'-]" disabled required>
+                                                <input id = "cont_cpno" name = "cont_cpno" type="text" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
                                             </div>
                                         </div>
                                     </div>
@@ -690,7 +656,7 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label><small>Cellphone Number (Alternate):</small></label>
-                                                <input id = "aCLAIM_type_name" name = "aCLAIM_type_name" type="text" class="form-control" pattern="[A-Za-z'-]" disabled required>
+                                                <input id = "cont_cpno_1" name = "cont_cpno_1" type="text" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
                                             </div>
                                         </div>
                                     </div>
@@ -701,7 +667,7 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label><small>Telephone Number:</small></label>
-                                                <input id = "aCLAIM_type_name" name = "aCLAIM_type_name" type="text" class="form-control" pattern="[A-Za-z'-]" disabled required>
+                                                <input id = "cont_telno" name = "cont_telno" type="text" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
                                             </div>
                                         </div>
                                     </div>
@@ -710,26 +676,18 @@
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                                 <label><small>Email:</small></label>
-                                                <input id = "aCLAIM_type_name" name = "aCLAIM_type_name" type="email" class="form-control" pattern="[A-Za-z'-]" disabled required>
+                                                <input id = "cont_email" name = "cont_email" type="email" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="row clearfix">
-                                    <div class="col-md-12">
-                                        <label><b>Sales Agent</b></label>
-                                    </div>
-
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
                                         <div class="form-group form-float">
                                             <div class="form-line">
-                                                <select id = "aadd_region" name = "aadd_region" class="form-control show-tick" data-live-search="true" readonly="true">
-                                                      <option selected value = "" style = "display: none;">-- Select Sales Agent --</option>
-                                                            <option value = "I">12345</option>
-                                                            <option value = "II">67890</option>
-                                                            <option value = "III">111111</option>
-                                                    </select>
+                                                <label><small>Sales Agent:</small></label>
+                                                <input id = "comp_agent" name = "comp_agent" type="text" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
                                             </div>
                                         </div>
                                     </div>
@@ -750,7 +708,7 @@
                                         <div class="form-line">
                                             <label><small>Date of Loss:</small></label>
                                             <div class="form-row show-inputbtns">
-                                                    <input id = "apinfo_bday" name = "apinfo_bday" type="date" data-date-inline-picker="false" data-date-open-on-focus="true" class="form-control" disabled />
+                                                    <input id = "date_incident" name = "date_incident" type="date" data-date-inline-picker="false" data-date-open-on-focus="true" class="form-control" disabled />
                                         </div>
                                         </div>
                                     </div>
@@ -761,7 +719,7 @@
                                         <div class="form-line">
                                             <label><small>Time of Loss:</small></label>
                                             <div class="form-row show-inputbtns">
-                                                    <input id = "apinfo_bday" name = "apinfo_bday" type="time" data-date-inline-picker="false" data-date-open-on-focus="true" class="form-control" disabled />
+                                                    <input id = "time_incident" name = "time_incident" type="time" data-date-inline-picker="false" data-date-open-on-focus="true" class="form-control" disabled />
                                             </div>
                                         </div>
                                     </div>
@@ -773,7 +731,7 @@
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <label><small>Place of Loss:</small></label>
-                                            <input id = "aadd_blcknum" name = "aadd_blcknum" type="text" disabled class="form-control">
+                                            <input id = "place_incident" name = "place_incident" type="text" disabled class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -784,7 +742,7 @@
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                               <label><small>Brief Description of the Circumstances of Loss:</small></label>
-                                              <textarea id = "avehicle_type_desc" disabled name = "avehicle_type_desc" rows="6" class="form-control no-resize auto-growth"></textarea>
+                                              <textarea id = "desc_incident" disabled name = "desc_incident" rows="6" class="form-control no-resize auto-growth"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -800,12 +758,12 @@
                         <div class="body">
                             <div class="row clearfix">
                                 <div class="col-md-4">
-                                    <input name="group2" type="radio" id="radio_11" disabled onclick="
+                                    <input name="group2" type="radio" id="radio_phold" disabled onclick="
                                     $('#repp').hide(800);" />
                                     <label for="radio_11">Policyholder</label>
                                 </div>
                                 <div class="col-md-4">
-                                    <input name="group2" type="radio" id="radio_21" disabled onclick="
+                                    <input name="group2" type="radio" id="radio_rep" disabled onclick="
                                     $('#repp').show(800);"/>
                                     <label for="radio_21">Representative of Policy Holder</label>
                                 </div>
@@ -818,7 +776,7 @@
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <label><small>Name:</small></label>
-                                            <input id = "aadd_blcknum" name = "aadd_blcknum" disabled type="text" class="form-control">
+                                            <input id = "rep_name" name = "rep_name" disabled type="text" class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -827,7 +785,7 @@
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <label><small>Relation to Policyholder:</small></label>
-                                            <input id = "aadd_blcknum" name = "aadd_blcknum" disabled type="text" class="form-control">
+                                            <input id = "rep_rel" name = "rep_rel" disabled type="text" class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -837,7 +795,7 @@
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <label><small>Contact Details:</small></label>
-                                            <input id = "aadd_blcknum" name = "aadd_blcknum" disabled type="text" class="form-control" placeholder="Telephone">
+                                            <input id = "rep_telno" name = "rep_telno" disabled type="text" class="form-control" placeholder="Telephone">
                                         </div>
                                     </div>
                                 </div>
@@ -846,7 +804,7 @@
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <label><small>-</small></label>
-                                            <input id = "aadd_blcknum" name = "aadd_blcknum" disabled type="text" class="form-control" placeholder="Cellphone Number">
+                                            <input id = "rep_cpno" name = "rep_cpno" disabled type="text" class="form-control" placeholder="Cellphone Number">
                                         </div>
                                     </div>
                                 </div>
@@ -857,7 +815,7 @@
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                         <label><small>-</small></label>
-                                            <input id = "aadd_blcknum" name = "aadd_blcknum" type="text" class="form-control" disabled placeholder="Cellphone Number (Alternate)">
+                                            <input id = "rep_cpno_1" name = "rep_cpno_1" type="text" class="form-control" disabled placeholder="Cellphone Number (Alternate)">
                                         </div>
                                     </div>
                                 </div>
@@ -866,7 +824,7 @@
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                         <label><small>-</small></label>
-                                            <input id = "aadd_blcknum" name = "aadd_blcknum" type="email" class="form-control" disabled placeholder="Email">
+                                            <input id = "rep_email" name = "rep_email" type="email" class="form-control" disabled placeholder="Email">
                                         </div>
                                     </div>
                                 </div>
@@ -884,6 +842,12 @@
                             <div class="progress">
                                 <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;">
                                     75%
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <label for="claimtypez"><small>Claim Type: </small></label> <!-- AUTO GENERATED -->
+                                    <small><b><input type="text" id="claimtypez" class="form-control" readonly="true" style="font-size: 20px"></b></small>
                                 </div>
                             </div>
                             <div class="body table-responsive">
@@ -978,37 +942,26 @@
         </div>
     </section>
 
-    <!-- CHOOSE INST MODAL -->
-            <div class="modal fade" id="ugh" role="dialog">
-                <div class="modal-dialog animated zoomInLeft active" role="document">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            <form id="add" name = "add" action = "type/submit" method="POST">
-                              <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                <div class="row clearfix">
-                                    <br/><br/><label>Choose claim type first</label>
-                                    <select id = "vehicle_type" name = "vehicle_type" class="form-control show-tick" data-live-search="true" required="">
-                                    <option selected value = "" style = "display: none;">---</option>
-                                    <option>Total Loss</option>
-                                    <option>Carnap</option>
-                                    <option>Iba pang nasa maintenance</option>
-                                    </select>
-                                </div>
-                                <br/><br/><br/>
-                                <div class="col-md-4" style = "display: none;">
-                                   <input id = "time" name = "time" type="text" class="form-control" pattern="[A-Za-z'-]">
-                                </div>
-                        </div>
-                        <div class="modal-footer js-sweetalert">
-                            <button class="btn btn-primary btn-block waves-effect" type="submit" data-dismiss="modal">CONTINUE</button>
-                        </div>
-                    </form>
-                    </div>
-                </div>
-            </div>
-            <!-- #END# ADD INST MODAL -->
-
     <script type="text/javascript">
+
+        function show_Ind()
+        {
+            $("#radio_ind").prop("checked", true);
+            $("#radio_comp").prop("checked", false);
+            $("#pdetNext").prop("disabled", false);
+            $('#individualClient').show(800);
+            $('#companyClient').hide(800);
+        }
+
+        function show_Comp()
+        {
+            $("#radio_ind").prop("checked", false);
+            $("#radio_comp").prop("checked", true);
+            $("#pdetNext").prop("disabled", false);
+            $('#individualClient').hide(800);
+            $('#companyClient').show(800);
+        }
+
         window.onload = function() {
           document.getElementById('individualClient').style.display = 'none';
           document.getElementById('companyClient').style.display = 'none';
@@ -1019,7 +972,188 @@
           document.getElementById('saveCh').style.display = 'none';
           document.getElementById('field').style.display = 'none';
           document.getElementById('progress').style.display = 'none';
+
+          @foreach($creq as $claims)
+            @foreach($cliacc as $ins)
+                @if($creq->account_ID == $ins->account_ID)
+                    $('#c_pno').val('{{$ins->policy_number}}');
+                    $('#date_incident').val('{{$creq->lossDate}}');
+                    $('#time_incident').val('{{$creq->lossDate}}');
+                    $('#place_incident').val('{{$creq->placeOfLoss}}');
+                    $('#desc_incident').val('{{$creq->description}}');
+                    @if($creq->notifiedByType == 1)
+                        $("#radio_phold").prop("checked", true);
+                        $("#radio_rep").prop("checked", false);
+                    @endif
+                    @if($creq->notifiedByType == 1)
+                        $("#radio_phold").prop("checked", false);
+                        $("#radio_rep").prop("checked", true);
+                        $('#repp').show(800);
+                        @foreach($cnotif as $rep)
+                            @if($creq->notifierID == $rep->notifierID)
+                                $('#rep_name').val('{{$rep->notifier_Name}}');
+                                $('#rep_rel').val('{{$rep->notifier_Relation}}');
+                                $('#rep_telno').val('{{$rep->notifier_telnum}}');
+                                $('#rep_cpno').val('{{$rep->notifier_cell_1}}');
+                                $('#rep_cpno_1').val('{{$rep->notifier_cell_2}}');
+                                $('#rep_email').val('{{$rep->notifier_email}}');
+                            @endif
+                        @endforeach
+                    @endif
+                    @foreach($ctype as $ct)
+                        @if($creq->claimType_ID == $ct->claimType_ID)
+                            $('#claimtypez').val('{{$ct->claimType}}');
+                        @endif
+                    @endforeach
+                        @foreach($clist as $list)
+                            @if($list->client_type == 1)
+                                @if($ins->client_ID == $list->client_ID)
+                                    @foreach($cli as $client)
+                                        @if($list->client_ID == $client->client_ID)
+                                            @foreach($pinfo as $inf)
+                                                @if($client->personal_info_ID == $inf->pinfo_ID)
+                                                    show_Ind();
+                                                    $('#fname').val('{{ $inf->pinfo_first_name }}');
+                                                    $('#bday').val('{{ $inf->pinfo_age }}');
+                                                    $('#mname').val('{{ $inf->pinfo_middle_name }}');
+                                                    $('#lname').val('{{ $inf->pinfo_last_name }}');
+                                                    @if($inf->pinfo_gender == 0)
+                                                    $("#male").prop("checked", true);
+                                                    @endif
+                                                    @if($inf->pinfo_gender == 1)
+                                                    $("#fem").prop("checked", true);
+                                                    @endif
+                                                    $('#cpno').val('{{ $inf->pinfo_cpnum_1 }}');
+                                                    $('#cpno_1').val('{{ $inf->pinfo_cpnum_2 }}');
+                                                    $('#telno').val('{{ $inf->pinfo_tpnum }}');
+                                                    $('#email').val('{{ $inf->pinfo_mail}}');
+                                                    @foreach($sales as $agent)
+                                                        @if($client->client_sales_ID == $agent->agent_ID)
+                                                            @foreach($pinfo as $info)
+                                                                @if($agent->personal_info_ID == $info->pinfo_ID)
+                                                                    $('#agent').val('{{ $info->pinfo_last_name }}' +", "+'{{ $info->pinfo_first_name }}' +" "+'{{ $info->pinfo_middle_name }}');
+                                                                @endif
+                                                            @endforeach
+                                                        @endif
+                                                    @endforeach
+                                                    var bday = document.getElementById('bday').value.split('-');
+                                                    var today = new Date();
+                                                    if(bday[0] != 0)
+                                                    {
+                                                        if((today.getMonth() + 1) < bday[1])
+                                                        {
+                                                          document.getElementById('age').value = today.getFullYear() - bday[0] - 1;
+                                                        }
+                                                        else
+                                                        {
+                                                          document.getElementById('age').value = today.getFullYear() - bday[0];
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        document.getElementById('age').value = 'Invalid Input';
+                                                    }
+                                                    @foreach($addr as $add)
+                                                        @if($client->client_add_ID == $add->add_ID)
+                                                            $('#blk').val('{{ $add->add_blcknum}}');
+                                                            $('#dist').val('{{ $add->add_district}}');
+                                                            $('#street').val('{{ $add->add_street}}');
+                                                            $('#city').val('{{ $add->add_city}}');
+                                                            $('#subd').val('{{ $add->add_subdivision}}');
+                                                            $('#prov').val('{{ $add->add_province}}');
+                                                            $('#brgy').val('{{ $add->add_brngy}}');
+                                                            $('#region').val('{{ $add->add_region}}');
+                                                            $('#zipcode').val('{{ $add->add_zipcode}}');
+                                                        @endif
+                                                    @endforeach
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                    @endforeach
+                                @endif
+                            @endif
+                            @if($list->client_type == 2)
+                                @foreach($clist as $list)
+                                    @if($ins->client_ID == $list->client_ID)
+                                        @foreach($comp as $client)
+                                            @if($list->client_ID == $client->comp_ID)
+                                                show_Comp();
+                                                $('#compname').val('{{ $client->comp_telnum }}');
+                                                $('#comp_telnum').val('{{ $client->comp_name }}');
+                                                $('#comp_fax').val('{{ $client->comp_faxnum }}');
+                                                $('#comp_email').val('{{ $client->comp_email }}');
+                                                @foreach($sales as $agent)
+                                                    @if($client->comp_sales_agent == $agent->agent_ID)
+                                                        @foreach($pinfo as $info)
+                                                            @if($agent->personal_info_ID == $info->pinfo_ID)
+                                                                $('#comp_agent').val('{{ $info->pinfo_last_name }}' +", "+'{{ $info->pinfo_first_name }}' +" "+'{{ $info->pinfo_middle_name }}');
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+                                                @endforeach
+                                                @foreach($addr as $add)
+                                                    @if($client->comp_add_ID == $add->add_ID)
+                                                        $('#comp_blk').val('{{ $add->add_blcknum}}');
+                                                        $('#comp_dist').val('{{ $add->add_district}}');
+                                                        $('#comp_street').val('{{ $add->add_street}}');
+                                                        $('#comp_city').val('{{ $add->add_city}}');
+                                                        $('#comp_subd').val('{{ $add->add_subdivision}}');
+                                                        $('#comp_prov').val('{{ $add->add_province}}');
+                                                        $('#comp_brgy').val('{{ $add->add_brngy}}');
+                                                        $('#comp_region').val('{{ $add->add_region}}');
+                                                        $('#comp_zipcode').val('{{ $add->add_zipcode}}');
+                                                    @endif
+                                                @endforeach
+                                                @foreach($cont as $cper)
+                                                    @if($client->comp_cperson_ID == $cper->cPerson_ID)
+                                                        @foreach($pinfo as $inf)
+                                                            @if($cper->personal_info_ID == $inf->pinfo_ID)
+                                                                $('#cont_fname').val('{{ $inf->pinfo_first_name }}');
+                                                                $('#cont_bday').val('{{ $inf->pinfo_age }}');
+                                                                $('#cont_mname').val('{{ $inf->pinfo_middle_name }}');
+                                                                $('#cont_lname').val('{{ $inf->pinfo_last_name }}');
+                                                                @if($inf->pinfo_gender == 0)
+                                                                $("#cont_male").prop("checked", true);
+                                                                @endif
+                                                                @if($inf->pinfo_gender == 1)
+                                                                $("#cont_fem").prop("checked", true);
+                                                                @endif
+                                                                $('#cont_cpno').val('{{ $inf->pinfo_cpnum_1 }}');
+                                                                $('#cont_cpno_1').val('{{ $inf->pinfo_cpnum_2 }}');
+                                                                $('#cont_telno').val('{{ $inf->pinfo_tpnum }}');
+                                                                $('#cont_email').val('{{ $inf->pinfo_mail}}');
+                                                                var bday = document.getElementById('cont_bday').value.split('-');
+                                                                var today = new Date();
+                                                                if(bday[0] != 0)
+                                                                {
+                                                                    if((today.getMonth() + 1) < bday[1])
+                                                                    {
+                                                                      document.getElementById('cont_age').value = today.getFullYear() - bday[0] - 1;
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                      document.getElementById('cont_age').value = today.getFullYear() - bday[0];
+                                                                    }
+                                                                }
+                                                                else
+                                                                {
+                                                                    document.getElementById('cont_age').value = 'Invalid Input';
+                                                                }
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+                                                @endforeach
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                @endforeach
+                            @endif
+                        @endforeach
+                @endif
+            @endforeach
+        @endforeach
         };
+
     </script>
 
     <script>

@@ -9,10 +9,12 @@
 <div class="content">
     <div class="container">
         <ol class="breadcrumb">
-          <li><a href="/home">Home</a></li>
+          <li><a href="/user/home">Home</a></li>
           <li class="active">Complaint</li>
         </ol>
-        
+        <form id="add" name = "add" action = "complaint/send" method="POST">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
         <div class="row">
             <h1><b>FILE A COMPLAINT</b></h1><br/>
                 <div style="float: left; width: 43%;" >
@@ -35,68 +37,104 @@
                     <div>
                         <div class="row">
                             <div class="col-xs-12">
-                                <label for="1"><small>Insurance Company: </small></label>
-                                <select id="1" class="selectpicker" data-size="10" data-live-search="true" data-width="100%">
-                                    <option value="1">Company1</option>
-                                    <option value="2">Company2</option>
-                                    <option value="3">Company3</option>
+                                <label for="insurance_company"><small>Insurance Company: </small></label>
+                                <select id="insurance_company" name = "insurance_company" class="selectpicker" data-size="10" data-live-search="true" data-width="100%">
+                                @foreach($comp as $insc)
+                                 @if($insc->del_flag == 0)
+                                  @if($insc->comp_type == 0)
+                                   <option value = "{{ $insc->comp_ID }}">{{ $insc->comp_name }}</option>
+                                  @endif
+                                 @endif
+                                @endforeach
                                 </select>
                             </div>
                             <div class="col-xs-12">
                                 <br/><label for="1"><small>Policy Number: </small></label>
-                                <input type="text" name="plate" style="width: 100%">
+                                <input type="text" name="policy_number" style="width: 100%">
                             </div><br/>
 
                             <!-- AUTPMATIC NA DIDISPLAY TO -->
                             <div class="col-xs-12">
                                 <br/><label><small>Name: </small></label>
-                                <input type="text" name="" style="width: 100%">
+                                <input type="text" name="name" style="width: 100%">
                             </div>
                             <div class="col-xs-12">
                                 <br/><label><small>Cellphone Number: </small></label>
-                                <input type="text" name="" style="width: 100%">
+                                <input type="text" name="cp1" style="width: 100%">
                             </div>
                             <div class="col-xs-12">
                                 <br/><label><small>Cellphone Number (Alternate): </small></label>
-                                <input type="text" name="" style="width: 100%">
+                                <input type="text" name="cp2" style="width: 100%">
                             </div>
                             <div class="col-xs-12">
                                 <br/><label><small>Telephone: </small></label>
-                                <input type="text" name="" style="width: 100%">
+                                <input type="text" name="tpnum" style="width: 100%">
                             </div>
                             <div class="col-xs-12">
                                 <br/><label><small>Email: </small></label>
-                                <input type="email" name="" style="width: 100%">
+                                <input type="email" name="email" style="width: 100%">
                             </div>
                             <div class="col-xs-12">
                                 <br/><label for="1"><small>Address: </small></label>
-                                <textarea style="resize: none;" rows="4" cols="74"></textarea>
+                                <textarea style="resize: none;" rows="4" cols="74" name = "address"></textarea>
                             </div>
                             <!-- HANGGANG DITO -->
 
                             <div class="col-xs-12">
-                                <br/><label for="1"><small>Complaint Type: </small></label>
-                                <select id="1" class="selectpicker" data-size="10" data-live-search="true" data-width="100%">
-                                    <option value="1">Complaint1</option>
-                                    <option value="2">Complaint2</option>
-                                    <option value="3">Complaint3</option>
+                                <br/><label for="comp_type"><small>Complaint Type: </small></label>
+                                <select id="comp_type" name="comp_type" class="selectpicker" data-size="10" data-width="100%"> 
+                                @foreach($ctype as $type)
+                                 @if($type->del_flag == 0)
+                                  <option value = "{{ $type->complaintType_ID }}">{{ $type->complaintType_name }}</option>
+                                 @endif
+                                @endforeach
+                                  <option value = "0">If others, please specify</option>
                                 </select>
                             </div>
-                            <div class="col-xs-12">
+                            <div class="col-xs-12" name = "spc">
                                 <br/><label><small><b>If others, please specify.</b></small></label>
-                            </div>
-                            <div class="col-xs-12">
-                                <br/><label><small>Complaint Type: </small></label>
-                                <input type="email" name="" style="width: 100%" disabled="disable">
+                                <input type="text" name="specify" style="width: 100%">
                             </div>
 
                             <div class="col-xs-12">
                                 <br/><label for="1"><small>Brief Description of your Complaint: </small></label>
-                                <textarea style="resize: none;" rows="15" cols="74"></textarea>
+                                <textarea style="resize: none;" rows="15" cols="74" name="complaint"></textarea>
                             </div>
 
                             <div class="col-xs-12">
-                                <br/><br/><button type="button" class="btn btn-block btn-success">Submit</button>
+                                <br/><br/><button type="button" class="btn btn-block btn-success" onclick="
+                                if($('#add').valid())
+                                {                                    
+                                  swal({
+                                    title: 'Are you sure?',
+                                    type: 'warning',
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#DD6B55',
+                                    confirmButtonText: 'Continue',
+                                    cancelButtonText: 'Cancel',
+                                    closeOnConfirm: false,
+                                    closeOnCancel: false
+                                  },
+                                  function(isConfirm){
+                                    if (isConfirm) {
+                                      $('#add').submit();
+
+                                        document.getElementById('emp_first_name').value = '';
+                                        document.getElementById('emp_middle_name').value = '';
+                                        document.getElementById('emp_last_name').value = '';
+                                        document.getElementById('emp_contact').value = '';
+                                        document.getElementById('emp_mail').value = '';
+                                    } else {
+                                        swal({
+                                        title: 'Cancelled',
+                                        type: 'warning',
+                                        timer: 500,
+                                        showConfirmButton: false
+                                        });
+                                    }
+                                  });
+                                }
+                                ">Submit</button>
                             </div>
                             <div class="col-xs-12">
                                 <br/><br/>
@@ -105,6 +143,7 @@
                     </div>
                 </div>
         </div>
+      </form>
     </div>
 </div>
 </section>
@@ -150,5 +189,107 @@ $(document).ready(function()
     
     return false;
 });
+
+
+$.validator.addMethod("cpValidator", function(value, element) {
+    return this.optional(element) || /^((\+63)|0)\d{10}$/i.test(value);
+ }, "Invalid Cellphone Format");
+$.validator.addMethod("email", function(value, element) {
+    return this.optional(element) || /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i.test(value);
+ }, "Invalid Email Address Format");
+$.validator.addMethod("alphanumeric", function(value, element) {
+    return this.optional(element) || /^[A-Za-z][A-Za-z0-9 '-.]*$/i.test(value);
+ }, "This field must contain only letters, numbers, dashes, space, apostrophe or dot.");
+$.validator.addMethod("alpha", function(value, element) {
+    return this.optional(element) || /^[A-Za-z][A-Za-z '-.]*$/i.test(value);
+ }, "This field must contain only letters, space, dash, apostrophe or dot.");
+$.validator.addMethod("blcknumber", function(value, element) {
+    return this.optional(element) || /^[A-Za-z0-9][A-Za-z0-9 '-.]*$/i.test(value);
+ }, "This field must contain only letters, numbers, space, dash, apostrophe or dot.");
+
+
+// Wait for the DOM to be ready
+$(function() {
+  // Initialize form validation on the registration form.
+  // It has the name attribute "registration"
+  $("form[name='add']").validate({
+    // Specify validation rules
+    rules: {
+      // The key name on the left side is the name attribute
+      // of an input field. Validation rules are defined
+      // on the right side
+      insurance_company:{
+        required: true,
+      },
+      policy_number:{
+        required: true,
+      },
+      name:{
+        required: true,
+      },
+      cp1:{
+        required: true,
+        cpValidator: true
+      },
+      cp2:{
+        cpValidator: true
+      },
+      tpnum:{
+        required: true,
+        maxlength: 7
+      },
+      email:{
+        required: true,
+        email: true
+      },
+      address:{
+        required: true,
+      },
+      specify:{
+        required: true,
+      },
+      comp_type:{
+        documents: true
+      }
+    },
+    // Make sure the form is submitted to the destination defined
+    // in the "action" attribute of the form when valid
+    submitHandler: function(form) {
+      form.submit();
+    }
+  });
+});
+</script>
+
+<script>
+    $(document).ready(function(){
+        if($('[name*="comp_type"]').val() == 0)
+        {
+            console.log('asd');
+            $('[name*="spc"]').show();
+            $("[name*='specify']").prop('disabled', false);
+        }
+        else
+        {
+            console.log('123');
+            $('[name*="spc"]').hide();
+            $("[name*='specify']").prop('disabled', true);
+        }
+
+        $('[name*="comp_type"]').on('change textInput input', function(){
+            if($('[name*="comp_type"]').val() == 0)
+            {
+                console.log('asd');
+                $('[name*="spc"]').show();
+                $("[name*='specify']").prop('disabled', false);
+            }
+            else
+            {
+                console.log('123');
+                $('[name*="spc"]').hide();
+                $("[name*='specify']").prop('disabled', true);
+            }
+        });
+    });
 </script>
 @endsection

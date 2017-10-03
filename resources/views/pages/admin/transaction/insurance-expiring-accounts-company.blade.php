@@ -77,6 +77,18 @@
                                     <i class="material-icons">assignment_turned_in</i><span style="font-size: 15px;"></span>
                                 </button></li>
                             </ul>
+                        <form id = "display" action = "/admin/transaction/insurance-details-company-expiring" method = "POST" style = "display: none;">
+                              <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                              <div class="col-md-4" style = "display: none;">
+                                 <input id = "id" name = "id" type="text" class="form-control">
+                             </div>
+                              <div class="col-md-4" style = "display: none;">
+                                 <input id = "acc_id" name = "acc_id" type="text" class="form-control">
+                             </div>
+                              <div class="col-md-4" style = "display: none;">
+                                 <input id = "pay_id" name = "pay_id" type="text" class="form-control">
+                             </div>
+                        </form>
                         <div class="divider" style="margin-bottom:20px;"></div>
                         </div>
                         <div class="body">

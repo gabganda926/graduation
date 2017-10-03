@@ -10,6 +10,6 @@ class z_Utilities_TaxSettingsController extends Controller
 {
     public function index()
     {
-      return view('/pages/admin/utilities/adm/tax');
+      return view('/pages/admin/utilities/tax');
     }
 }

@@ -1,4 +1,4 @@
-@extends('pages.webpage.webmaster-1')
+@extends('pages.webpage.webmaster')
 
 @section('title','Quotation | i-Insure')
 
@@ -50,6 +50,8 @@
                     </li>
                 </ul>
             </div>
+
+
             <div class="registration_form">
             <form role="form">
                 <div class="tab-content">
@@ -60,107 +62,99 @@
                             <h3><b>Vehicle Details</b></h3><br/>
                             <div class="modal-body">
                                 <div class="row">
-                                    <div class="col col-xs-6">
+                                    <div class="col col-xs-4">
                                     <label for="1">Vehicle Type: </label>
-                                        <select id="1" class="selectpicker" data-size="10" data-live-search="true" data-width="80%">
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
+                                        <select id="1" class="selectpicker" data-size="10" data-width="85%">
+                                            <option value="1">AAAAAAAAA</option>
+                                            <option value="2">2AAAAAAAA</option>
+                                            <option value="3">3AAAAAAAAAAAA</option>
                                         </select>
                                     </div> 
 
-                                    <div class="col-xs-6">
+                                    <div class="col-xs-4">
+                                        <label for="1">If others, please specify: </label>
+                                            <input type="text" name="plate" style="width: 80%; cursor: not-allowed; border-color: #9e9e9e" disabled>
+                                    </div> 
+
+                                    <div class="col-xs-4">
                                         <label for="1">Plate Number: </label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-th"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 80%">
-                                        </div>
+                                            <input type="text" name="plate" style="width: 80%; border-color: #9e9e9e;">
                                     </div> 
+                                </div>
                                 
-                                    <div class="col-xs-6">
+                                <div class="row">
+                                    <div class="col-xs-4">
                                     <label for="1">Year Model: </label>
-                                        <select id="1" class="selectpicker" data-size="10" data-live-search="true" data-width="80%">
+                                        <select id="1" class="selectpicker" data-size="10" data-width="85%">
                                             <option value="1">1</option>
                                             <option value="2">2</option>
                                             <option value="3">3</option>
                                         </select>
                                     </div>
 
-                                    <div class="col-xs-6">
+                                    <div class="col-xs-4">
+                                        <label for="1">If others, please specify: </label>
+                                            <input type="text" name="plate" style="width: 80%; cursor: not-allowed; border-color: #9e9e9e" disabled>
+                                    </div>
+
+                                    <div class="col-xs-4">
                                         <label for="1">Engine Number: </label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-th"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 80%">
-                                        </div>
+                                            <input type="text" name="plate" style="width: 80%; border-color: #9e9e9e;">
                                     </div> 
+                                </div>
                                 
-                                    <div class="col-xs-6">
+                                <div class="row">
+                                    <div class="col-xs-4">
                                     <label for="1">Make: </label>
-                                        <select id="1" class="selectpicker" data-size="10" data-live-search="true" data-width="80%">
+                                        <select id="1" class="selectpicker" data-size="10" data-width="85%">
                                             <option value="1">1</option>
                                             <option value="2">2</option>
                                             <option value="3">3</option>
                                         </select>
                                     </div>
 
-                                    <div class="col-xs-6">
-                                        <label for="1">Chassis Number: </label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-th"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 80%">
-                                        </div>
+                                    <div class="col-xs-4">
+                                        <label for="1">If others, please specify: </label>
+                                            <input type="text" name="plate" style="width: 80%; cursor: not-allowed; border-color: #9e9e9e" disabled>
                                     </div>
-                                
-                                    <div class="col-xs-6">
+
+                                    <div class="col-xs-4">
+                                        <label for="1">Chassis Number: </label>
+                                            <input type="text" name="plate" style="width: 80%; border-color: #9e9e9e;">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-4">
                                     <label for="1">Model: </label>
-                                        <select id="1" class="selectpicker" data-size="10" data-live-search="true" data-width="80%">
+                                        <select id="1" class="selectpicker" data-size="10" data-width="85%">
                                             <option value="1">1</option>
                                             <option value="2">2</option>
                                             <option value="3">3</option>
                                         </select>
                                     </div> 
 
-                                    <div class="col-xs-6">
+                                    <div class="col-xs-4">
                                         <label for="1">MV File Number: </label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-th"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 80%">
-                                        </div>
+                                            <input type="text" name="plate" style="width: 80%; border-color: #9e9e9e;">
+                                    </div>                             
+                                
+                                    <div class="col-xs-4">
+                                        <label for="1">Color: </label>
+                                            <input type="text" name="plate" style="width: 80%; border-color: #9e9e9e;">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-xs-4">
+                                        <label for="1">Seating Capacity: </label>
+                                            <input type="text" name="plate" style="width: 85%; border-color: #9e9e9e;">
                                     </div>                             
                                 
                                     <div class="col-xs-6">
-                                        <label for="1">Color: </label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-th"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 80%">
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="sky_form1 col col-xs-6">
-                                        <ul>
-                                            <li><label class="radio left"><input type="radio" name="radio" checked=""><i></i>Mortgaged&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></li>
-                                            <li><label class="radio"><input type="radio" name="radio"><i></i>Not Mortgaged</label></li><br/><br/>
-                                            <div class="clearfix"></div>
-                                        </ul>
-                                    </div>
-                                
-                                    <div class="col-xs-5">
-                                        <label for="1">Mortgagee: </label>
-                                        <select id="1" class="selectpicker" data-size="10" data-live-search="true" data-width="100%">
-                                            <option value="1">Bank1</option>
-                                            <option value="2">Bank2</option>
-                                            <option value="3">Bank3</option>
-                                        </select>
+                                        <label for="1">Vehicle Market Value: </label>
+                                            <b><input type="text" name="plate" style="width: 80%; border-color: #9e9e9e;"></b>
                                     </div>
                                 </div>
                             </div>
@@ -174,11 +168,11 @@
                     <div class="tab-pane" role="tabpanel" id="step2">
                         <div class="step2">
                             <h3><b>Quotation Details</b></h3><br/>
-                            <img src="web/images/quote.jpg" alt="" width="100%"><br/><br/>
+                            <img src="{{ URL::asset ('web/images/quote.jpg')}}" alt="" width="100%"><br/><br/>
                                 <div class="row">
-                                    <div class="col-xs-5">
+                                    <div class="col-xs-12">
                                         <label for="1">Insurance Company: </label>
-                                        <select id="1" class="selectpicker" data-size="10" data-live-search="true" data-width="100%">
+                                        <select id="1" class="selectpicker" data-size="10" data-width="100%">
                                             <option value="1">Company1</option>
                                             <option value="2">Company2</option>
                                             <option value="3">Company3</option>
@@ -270,67 +264,48 @@
                                         <label for="1">Client Type: </label>
                                         <div class="sky_form1 col col-xs-12">
                                             <ul>
-                                                <li><label class="radio left"><input type="radio" name="radio" data-toggle="collapse" data-target="#individualType"><i></i>&nbsp;&nbsp;&nbsp;&nbsp;Individual&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></li>
-                                                <li><label class="radio"><input type="radio" name="radio" data-toggle="collapse" data-target="#companyType"><i></i>Company</label></li><br/><br/>
+                                                <li><label class="radio left"><input type="radio" name="radio" onclick="
+                                                $('#individualType').show(800);
+                                                $('#companyType').hide(800);"><i></i>&nbsp;&nbsp;&nbsp;&nbsp;Individual&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></li>
+                                                <li><label class="radio"><input type="radio" name="radio" onclick="
+                                                $('#companyType').show(800);
+                                                $('#individualType').hide(800);"><i></i>Company</label></li><br/><br/>
                                                 <div class="clearfix"></div>
                                             </ul>
                                         </div>
                                     </div>
-                                </div><br/><br/>
+                                </div><br/>
                     <!-- INDIVIDUAL -->
-                            <div class="collapse fade" id="individualType">
+                            <div id="individualType">
                                 <div class="row">
                                     <h4><b>Personal Information</b></h4><br/>
                                     <div class="col-xs-6">
                                         <label for="1">First Name: </label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 80%;">
-                                        </div>
+                                            <input type="text" name="plate" style="width: 80%; border-color: #9e9e9e">
                                     </div>
 
                                     <div class="col-xs-6">
                                         <label for="1">Birthday: </label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="date" name="plate" style="width: 80%;">
-                                        </div>
+                                            <input type="date" name="plate" style="width: 80%; border-color: #9e9e9e">
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-xs-6">
                                         <label for="1">Middle Name: </label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 80%;">
-                                        </div>
+                                            <input type="text" name="plate" style="width: 80%; border-color: #9e9e9e">
                                     </div>
 
                                     <div class="col-xs-6">
                                         <label for="1">Age: </label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 80%;" disabled="disable">
-                                        </div>
+                                            <input type="text" name="plate" style="width: 80%; border-color: #9e9e9e; cursor: not-allowed;" disabled="disable">
                                     </div>
+                                </div>
 
+                                <div class="row">
                                     <div class="col-xs-6">
                                         <label for="1">Last Name: </label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 80%;">
-                                        </div>
+                                            <input type="text" name="plate" style="width: 80%; border-color: #9e9e9e">
                                     </div>
 
                                     <label for="1">Gender: </label>
@@ -347,50 +322,31 @@
                                 <h4><b>Contact Details</b></h4><br/>
                                     <div class="col-xs-6">
                                         <label for="1">Cellphone Number: </label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-earphone"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 80%;">
-                                        </div>
+                                            <input type="text" name="plate" style="width: 80%; border-color: #9e9e9e">
                                     </div> 
                                     
                                     <div class="col-xs-6">
                                         <label for="1">Cellphone Number: (Alt)</label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-earphone"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 80%;">
-                                        </div>
+                                            <input type="text" name="plate" style="width: 80%; border-color: #9e9e9e">
                                     </div>
+                                </div>
 
-                                    
+                                <div class="row">
                                     <div class="col-xs-6">
                                         <label for="1">Telephone Number: </label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-phone-alt"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 80%;">
-                                        </div>
+                                            <input type="text" name="plate" style="width: 80%; border-color: #9e9e9e">
                                     </div>
 
                                     <div class="col-xs-6">
                                         <label for="1">Email: </label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-briefcase"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 80%;">
-                                        </div>
+                                            <input type="text" name="plate" style="width: 80%; border-color: #9e9e9e">
                                     </div>
                                 </div>
 
                                 <div class="row">
                                 <h4><b>Sales Agent</b></h4><br/>
                                     <div class="col-xs-5">
-                                        <select id="1" class="selectpicker" data-size="10" data-live-search="true" data-width="100%">
+                                        <select id="1" class="selectpicker" data-size="10" data-width="85%">
                                             <option value="1">1</option>
                                             <option value="2">2</option>
                                             <option value="3">3</option>
@@ -402,72 +358,43 @@
                                     <h4><b>Residential Address</b></h4><br/>
                                     <div class="col-xs-6">
                                         <label for="1">Blk&Lot/Bldg/Unit No.: </label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-home"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 80%;">
-                                        </div>
+                                            <input type="text" name="plate" style="width: 80%; border-color: #9e9e9e">
                                     </div>
 
                                     <div class="col-xs-6">
                                         <label for="1">District: </label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-home"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 80%;">
-                                        </div>
+                                            <input type="text" name="plate" style="width: 80%; border-color: #9e9e9e">
                                     </div>
+                                </div>
 
+                                <div class="row">
                                     <div class="col-xs-6">
                                         <label for="1">Street: </label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-home"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 80%;">
-                                        </div>
+                                            <input type="text" name="plate" style="width: 80%; border-color: #9e9e9e">
                                     </div>
 
                                     <div class="col-xs-6">
                                         <label for="1">City/Municipality: </label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-home"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 80%;">
-                                        </div>
+                                            <input type="text" name="plate" style="width: 80%; border-color: #9e9e9e">
                                     </div>
+                                </div>
 
+                                <div class="row">
                                     <div class="col-xs-6">
                                         <label for="1">Subdivision: </label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-home"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 80%;">
-                                        </div>
+                                            <input type="text" name="plate" style="width: 80%; border-color: #9e9e9e" >
                                     </div>
 
                                     <div class="col-xs-6">
                                         <label for="1">Province: </label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-home"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 80%;">
-                                        </div>
+                                            <input type="text" name="plate" style="width: 80%; border-color: #9e9e9e">
                                     </div>
+                                </div>
 
+                                <div class="row">
                                     <div class="col-xs-6">
                                         <label for="1">Barangay: </label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-home"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 80%;">
-                                        </div>
+                                            <input type="text" name="plate" style="width: 80%; border-color: #9e9e9e">
                                     </div>
 
                                     <div class="col-xs-6">
@@ -478,65 +405,24 @@
                                             <option value="3">3</option>
                                         </select>
                                     </div>
-
-                                    <div class="col-xs-4">
-                                        <label for="1">Zip Code: </label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-home"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 80%;">
-                                        </div>
-                                    </div>
                                 </div>
 
                                 <div class="row">
-                                    <h4><b>Create an Account</b></h4><br/>
-                                    <div class="col-xs-12">
-                                        <label for="1">Username: </label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 50%;">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-xs-12">
-                                        <label for="1">Password: </label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="password" name="plate" style="width: 50%;">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-xs-12">
-                                        <label for="1">Re-type password: </label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="password" name="plate" style="width: 50%;">
-                                        </div>
+                                    <div class="col-xs-6">
+                                        <label for="1">Zip Code: </label>
+                                            <input type="text" name="plate" style="width: 80%; border-color: #9e9e9e">
                                     </div>
                                 </div>
                             </div> <!-- END -->
 
                     <!-- COMPANY -->
-                            <div class="collapse fade" id="companyType">
+                            <div id="companyType">
 
                                 <div class="row">
                                     <h4><b>Company Details</b></h4><br/>
                                     <div class="col-xs-8">
                                         <label for="1">Company Name: </label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 80%;">
-                                        </div>
+                                            <input type="text" name="plate" style="width: 80%; border-color: #9e9e9e">
                                     </div>
                                 </div>
                                 
@@ -544,43 +430,23 @@
                                 <h4><b>Company Contact Details</b></h4><br/>
                                     <div class="col-xs-6">
                                         <label for="1">Cellphone Number: </label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-earphone"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 80%;">
-                                        </div>
+                                            <input type="text" name="plate" style="width: 80%; border-color: #9e9e9e">
                                     </div> 
                                     
                                     <div class="col-xs-6">
-                                        <label for="1">Cellphone Number: (Alt)</label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-earphone"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 80%;">
-                                        </div>
+                                        <label for="1">Fax Number</label>
+                                            <input type="text" name="plate" style="width: 80%; border-color: #9e9e9e">
                                     </div>
 
                                     
                                     <div class="col-xs-6">
                                         <label for="1">Telephone Number: </label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-phone-alt"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 80%;">
-                                        </div>
+                                            <input type="text" name="plate" style="width: 80%; border-color: #9e9e9e">
                                     </div>
 
                                     <div class="col-xs-6">
                                         <label for="1">Email: </label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-briefcase"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 80%;">
-                                        </div>
+                                            <input type="text" name="plate" style="width: 80%; border-color: #9e9e9e">
                                     </div>
                                 </div>
 
@@ -589,72 +455,37 @@
                                     <h4><b>Company Address</b></h4><br/>
                                     <div class="col-xs-6">
                                         <label for="1">Blk&Lot/Bldg/Unit No.: </label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-home"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 80%;">
-                                        </div>
+                                            <input type="text" name="plate" style="width: 80%; border-color: #9e9e9e">
                                     </div>
 
                                     <div class="col-xs-6">
                                         <label for="1">District: </label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-home"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 80%;">
-                                        </div>
+                                            <input type="text" name="plate" style="width: 80%; border-color: #9e9e9e">
                                     </div>
 
                                     <div class="col-xs-6">
                                         <label for="1">Street: </label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-home"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 80%;">
-                                        </div>
+                                            <input type="text" name="plate" style="width: 80%; border-color: #9e9e9e">
                                     </div>
 
                                     <div class="col-xs-6">
                                         <label for="1">City/Municipality: </label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-home"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 80%;">
-                                        </div>
+                                            <input type="text" name="plate" style="width: 80%; border-color: #9e9e9e">
                                     </div>
 
                                     <div class="col-xs-6">
                                         <label for="1">Subdivision: </label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-home"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 80%;">
-                                        </div>
+                                            <input type="text" name="plate" style="width: 80%;border-color: #9e9e9e">
                                     </div>
 
                                     <div class="col-xs-6">
                                         <label for="1">Province: </label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-home"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 80%;">
-                                        </div>
+                                            <input type="text" name="plate" style="width: 80%;border-color: #9e9e9e">
                                     </div>
 
                                     <div class="col-xs-6">
                                         <label for="1">Barangay: </label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-home"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 80%;">
-                                        </div>
+                                            <input type="text" name="plate" style="width: 80%;border-color: #9e9e9e">
                                     </div>
 
                                     <div class="col-xs-6">
@@ -668,12 +499,7 @@
 
                                     <div class="col-xs-4">
                                         <label for="1">Zip Code: </label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-home"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 80%;">
-                                        </div>
+                                            <input type="text" name="plate" style="width: 80%;border-color: #9e9e9e">
                                     </div>
                                 </div>
 
@@ -681,54 +507,29 @@
                                     <h4><b>Contact Person Information</b></h4><br/>
                                     <div class="col-xs-6">
                                         <label for="1">First Name: </label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 80%;">
-                                        </div>
+                                            <input type="text" name="plate" style="width: 80%;border-color: #9e9e9e">
                                     </div>
 
                                     <div class="col-xs-6">
                                         <label for="1">Birthday: </label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="date" name="plate" style="width: 80%;">
-                                        </div>
+                                            <input type="date" name="plate" style="width: 80%; border-color: #9e9e9e">
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-xs-6">
                                         <label for="1">Middle Name: </label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 80%;">
-                                        </div>
+                                            <input type="text" name="plate" style="width: 80%;border-color: #9e9e9e;">
                                     </div>
 
                                     <div class="col-xs-6">
                                         <label for="1">Age: </label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 80%;" disabled="disable">
-                                        </div>
+                                            <input type="text" name="plate" style="width: 80%;border-color: #9e9e9e;cursor: not-allowed;" disabled="disable">
                                     </div>
 
                                     <div class="col-xs-6">
                                         <label for="1">Last Name: </label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 80%;">
-                                        </div>
+                                            <input type="text" name="plate" style="width: 80%;border-color: #9e9e9e;">
                                     </div>
 
                                     <label for="1">Gender: </label>
@@ -745,89 +546,36 @@
                                 <h4><b>Contact Details</b></h4><br/>
                                     <div class="col-xs-6">
                                         <label for="1">Cellphone Number: </label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-earphone"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 80%;">
-                                        </div>
+                                            <input type="text" name="plate" style="width: 80%;border-color: #9e9e9e;">
                                     </div> 
                                     
                                     <div class="col-xs-6">
                                         <label for="1">Cellphone Number: (Alt)</label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-earphone"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 80%;">
-                                        </div>
+                                            <input type="text" name="plate" style="width: 80%;border-color: #9e9e9e;">
                                     </div>
 
                                     
                                     <div class="col-xs-6">
                                         <label for="1">Telephone Number: </label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-phone-alt"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 80%;">
-                                        </div>
+                                            <input type="text" name="plate" style="width: 80%;border-color: #9e9e9e">
                                     </div>
 
                                     <div class="col-xs-6">
                                         <label for="1">Email: </label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-briefcase"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 80%;">
-                                        </div>
+                                            <input type="text" name="plate" style="width: 80%;border-color: #9e9e9e">
                                     </div>
                                 </div>
 
                                 <div class="row">
                                 <h4><b>Sales Agent</b></h4><br/>
                                     <div class="col-xs-5">
-                                        <select id="1" class="selectpicker" data-size="10" data-live-search="true" data-width="100%">
+                                        <select id="1" class="selectpicker" data-size="10" data-width="85%">
                                             <option value="1">1</option>
                                             <option value="2">2</option>
                                             <option value="3">3</option>
                                         </select>
                                     </div>
                                 </div><br/><br/>
-
-                                <div class="row">
-                                    <h4><b>Create an Account</b></h4><br/>
-                                    <div class="col-xs-12">
-                                        <label for="1">Username: </label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 50%;">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-xs-12">
-                                        <label for="1">Password: </label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="password" name="plate" style="width: 50%;">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-xs-12">
-                                        <label for="1">Re-type password: </label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="password" name="plate" style="width: 50%;">
-                                        </div>
-                                    </div>
-                                </div>
                             </div> <!-- END OF COMPANY -->
                         </div>
                         <ul class="list-inline pull-right">
@@ -982,13 +730,20 @@
             </div>
             <!-- #END# ADD INST MODAL -->
 
-    <script>
+    <script type="text/javascript">
+        window.onload = function() {
+          document.getElementById('individualType').style.display = 'none';
+          document.getElementById('companyType').style.display = 'none';
+        };
+    </script>
+
+    <!-- <script>
         $(document).ready(function(){
             $("#ugh").modal('show');
         });
 
         $('#ugh').modal({backdrop: 'static', keyboard: false})  
-    </script>
+    </script> -->
 
     <script type="text/javascript">
         $(document).ready(function(){

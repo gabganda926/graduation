@@ -1,6 +1,6 @@
 @extends('pages.admin.master')
 
-@section('title','Transmittal - Transaction| i-Insure')
+@section('title','Insurance Accounts - Transaction| i-Insure')
 
 @section('trans','active')
 
@@ -70,22 +70,30 @@
                         </div>
                     </div>
                 </div>
+                <form id="transmit" name = "transmit" action = "transmittal-documents/transmit" method="POST">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
                     <div class="card" id="transform">
                         <div class="header">
                         <h3 style="text-align: center;"><img src="{{ URL::asset ('images/icons/transmit.png')}}" style="height: 50px; width: 50px;"><b> Transmit Documents </b></h3>
                         </div>
                         <div class="body">
-                            <form id="" name = "" action = "" method="POST">
                                 <h3><br/> <small><b>Transmittal Form</b></small></h3>
                                 <br/>
                             <div class="row clearfix">
                                 <div class="col-md-12">
                                     <label>Client: </label>
-                                    <select id = "compdrop" name = "compdrop" class="form-control show-tick" data-live-search="true">
-                                            <option value = "bdo">Avellaneda, Marynel</option>
-                                            <option value = "bdo">Bukid, Gerald</option>
-                                            <option value = "bdo">Rola, Ma. Gabriella</option>
+                                    <select id = "clients" name = "clients" class="form-control show-tick" data-live-search="true">
+                                    <option selected value = "" style = "display: none;">-- Select Client --</option>
+                                    @foreach($details as $dt)
+                                     @foreach($request as $req)
+                                      @if($req->req_ID == $dt->req_ID)
+                                       @if($req->status == 1)
+                                        <option value = "{{$dt->req_ID}}">{{$dt->name}}</option>
+                                       @endif
+                                      @endif
+                                     @endforeach
+                                    @endforeach
                                     </select>
                                     <br/>
                                     <br/>
@@ -96,7 +104,7 @@
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <label><small>Contact Details:</small></label>
-                                            <input id = "aadd_blcknum" name = "aadd_blcknum" type="text" class="form-control" placeholder="Telephone" readonly="true">
+                                            <input id = "tpnum" name = "tpnum" type="text" class="form-control" placeholder="Telephone" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -105,7 +113,7 @@
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <label><small>-</small></label>
-                                            <input id = "aadd_blcknum" name = "aadd_blcknum" type="text" class="form-control" placeholder="Cellphone Number" readonly="true">
+                                            <input id = "cpnum_1" name = "cpnum_1" type="text" class="form-control" placeholder="Cellphone Number" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -114,7 +122,7 @@
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                         <label><small>-</small></label>
-                                            <input id = "aadd_blcknum" name = "aadd_blcknum" type="text" class="form-control" placeholder="Cellphone Number (Alternate)" readonly="true">
+                                            <input id = "cpnum_2" name = "cpnum_2" type="text" class="form-control" placeholder="Cellphone Number (Alternate)" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -123,7 +131,7 @@
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                         <label><small>-</small></label>
-                                            <input id = "aadd_blcknum" name = "aadd_blcknum" type="email" class="form-control" placeholder="Email" readonly="true">
+                                            <input id = "email" name = "email" type="email" class="form-control" placeholder="Email" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -133,7 +141,7 @@
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <label><small>Address:</small></label>
-                                            <input id = "emp_middle_name" name = "emp_middle_name" type="text" class="form-control" >
+                                            <input id = "address" name = "address" type="text" class="form-control" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -143,9 +151,7 @@
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <label><small>Policy Number:</small></label>
-                                            <select id = "vehicle_type" name = "vehicle_type" class="form-control show-tick" data-live-search="true" >
-                                                      <option selected value = "" style = "display: none;">---</option>
-                                                    </select>
+                                            <input id = "policyno" name = "policyno" type="text" class="form-control" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -154,12 +160,7 @@
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <label>Insurance Company: </label>
-                                            <select id = "compdrop" name = "compdrop" class="form-control show-tick" data-live-search="true">
-                                                    <option value = "bdo">Commonwealth Insurance</option>
-                                                    <option value = "bdo">FPG Insurance</option>
-                                                    <option value = "bdo">People's General Insurance</option>
-                                                    <option value = "bdo">Standard Insurance</option>
-                                            </select>
+                                            <input id = "inscomp" name = "inscomp" type="text" class="form-control" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -173,7 +174,7 @@
                                                 <i class="material-icons">date_range</i>
                                             </span>
                                             <div class="form-line">
-                                                <input type="text" class="form-control date" placeholder="Ex: 30/07/2016">
+                                                <input id = "date_create" name = "date_create" type="text" class="form-control date" placeholder="Ex: 30/07/2016">
                                             </div>
                                         </div>
                                     </div>
@@ -184,26 +185,28 @@
                                                 <i class="material-icons">access_time</i>
                                             </span>
                                             <div class="form-line">
-                                                <input type="text" class="form-control time12" placeholder="Ex: 11:59 pm">
+                                                <input id = "time_created" name = "time_created" type="text" class="form-control time12" placeholder="Ex: 11:59 pm">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div><br/><br/>
-                            </form>
                    
                             <div class="row clearfix">
                                 <div class="col col-md-12">
                                     <a class="btn bg-teal btn-block waves-effect m-b-15 right" role="button" aria-expanded="false" onclick="
-                                    $(this).parents('#transform').hide(800);
-                                    $('#docsec').show(800);
-                                    $('#tform').removeClass('active');
-                                    $('#dsec').removeClass('disabled');
-                                    $('#dsec').addClass('active');
-                                    $('body,html').animate({
-                                                                scrollTop: 0
-                                                            }, 500);
-                                                            return false;">
+                                    if($('#transmit').valid())
+                                    {
+                                        $(this).parents('#transform').hide(800);
+                                        $('#docsec').show(800);
+                                        $('#tform').removeClass('active');
+                                        $('#dsec').removeClass('disabled');
+                                        $('#dsec').addClass('active');
+                                        $('body,html').animate({
+                                                                    scrollTop: 0
+                                                                }, 500);
+                                                                return false;
+                                    }">
                                         <span style="font-size: 15px;"> NEXT</span>
                                     </a>
                                 </div>
@@ -226,7 +229,7 @@
                                                 </div>
                                                 <div class="body">
                                                     <div class="table-responsive">
-                                                        <table class="table table-hover dashboard-task-infos">
+                                                        <table class="table table-hover dashboard-task-infos"  id = "docreq">
                                                             <thead>
                                                                 <tr>
                                                                     <th class="col-md-1">#</th>
@@ -234,18 +237,6 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>Cheque Voucher (Client's Copy)</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>2</td>
-                                                                    <td>Insurance Form</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>3</td>
-                                                                    <td>Cheque Voucher (Bank's copy)</td>
-                                                                </tr>
                                                             </tbody>
                                                         </table>
                                                     </div>
@@ -264,31 +255,24 @@
                                                         <table class="table table-hover dashboard-task-infos">
                                                             <thead>
                                                                 <tr>
-                                                                    <th class="col-md-1"><input type="checkbox" id="8" class="filled-in chk-col-green checkCheckbox"><label for="8"></label></th>
+                                                                    <th class="col-md-1"><input type="checkbox" id="8" class="filled-in chk-col-green"><label for="8"></label></th>
                                                                     <th>Document</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <tr>
-                                                                    <td class="col-md-1"><input type="checkbox" id="2" class="filled-in chk-col-green checkCheckbox"><label for="2"></label></td>
-                                                                    <td>Cheque Voucher (Client's Copy)</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="col-md-1"><input type="checkbox" id="3" class="filled-in chk-col-green checkCheckbox"><label for="3"></label></td>
-                                                                    <td>Insurance Form</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="col-md-1"><input type="checkbox" id="4" class="filled-in chk-col-green checkCheckbox"><label for="4"></label></td>
-                                                                    <td>Cheque Voucher (Bank's copy)</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="col-md-1"><input type="checkbox" id="5" class="filled-in chk-col-green checkCheckbox"><label for="5"></label></td>
-                                                                    <td>Policy Receipt</td>
-                                                                </tr>
+                                                                @foreach($records as $rec)
+                                                                 @if($rec->del_flag == 0)
+                                                                    <tr>
+                                                                        <td class="col-md-1"><input type="checkbox" id="{{$rec->transRec_ID}}" name = "record[]" class="filled-in chk-col-green records" data-name = '{{$rec->transRec}}' value = "{{$rec->transRec_ID}}"><label for="{{$rec->transRec_ID}}"></label></td>
+                                                                        <td>{{$rec->transRec}}</td>
+                                                                    </tr>
+                                                                 @endif
+                                                                @endforeach
                                                             </tbody>
                                                         </table>
                                                     </div>
                                                 </div>
+                                                <div id = "error"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -309,15 +293,18 @@
                                     </div>
                                     <div class="col col-md-6">
                                         <a class="btn bg-teal btn-block waves-effect m-b-15 right" role="button" aria-expanded="false" onclick="
-                                        $(this).parents('#docsec').hide(800);
-                                        $('#asscour').show(800);
-                                        $('#dsec').removeClass('active');
-                                        $('#acour').removeClass('disabled');
-                                        $('#acour').addClass('active');
-                                        $('body,html').animate({
-                                                                    scrollTop: 0
-                                                                }, 500);
-                                                                return false;">
+                                        if($('#transmit').valid())
+                                        {
+                                            $(this).parents('#docsec').hide(800);
+                                            $('#asscour').show(800);
+                                            $('#dsec').removeClass('active');
+                                            $('#acour').removeClass('disabled');
+                                            $('#acour').addClass('active');
+                                            $('body,html').animate({
+                                                                        scrollTop: 0
+                                                                    }, 500);
+                                                                    return false;
+                                        }">
                                             <span style="font-size: 15px;"> NEXT</span>
                                         </a>
                                     </div>
@@ -335,9 +322,15 @@
                                         <div class="row clearfix">
                                             <div class="col-md-12">
                                                 <label>Choose available courier: </label>
-                                                <select id = "compdrop" name = "compdrop" class="form-control show-tick" data-live-search="true">
-                                                        <option value = "bdo">Dela Cruz, Lyndan Pol</option>
-                                                        <option value = "bdo">Pery, Roy Christian</option>
+                                                <select id = "courier" name = "courier" class="form-control show-tick" data-live-search="true">
+                                                <option selected value = "" style = "display: none;">-- Select Courier --</option>
+                                                 @foreach($courier as $cor)
+                                                  @foreach($info as $Info)
+                                                   @if($cor->personal_info_ID == $Info->pinfo_ID)
+                                                    <option value = "{{$cor->courier_ID}}" data-name = "{{$Info->pinfo_last_name}}, {{$Info->pinfo_first_name}} {{$Info->pinfo_middle_name}}">{{$Info->pinfo_last_name}}, {{$Info->pinfo_first_name}} {{$Info->pinfo_middle_name}}</option>
+                                                   @endif
+                                                  @endforeach
+                                                 @endforeach
                                                 </select>
                                                 <br/>
                                                 <br/>
@@ -360,15 +353,18 @@
                                 </div>
                                 <div class="col col-md-6">
                                     <a class="btn bg-teal btn-block waves-effect m-b-15 right" role="button" aria-expanded="false" onclick="
-                                    $(this).parents('#asscour').hide(800);
-                                    $('#summary').show(800);
-                                    $('#acour').removeClass('active');
-                                    $('#summ').removeClass('disabled');
-                                    $('#summ').addClass('active');
-                                    $('body,html').animate({
-                                                                scrollTop: 0
-                                                            }, 500);
-                                                            return false;">
+                                    if($('#transmit').valid())
+                                    {
+                                        $(this).parents('#asscour').hide(800);
+                                        $('#summary').show(800);
+                                        $('#acour').removeClass('active');
+                                        $('#summ').removeClass('disabled');
+                                        $('#summ').addClass('active');
+                                        $('body,html').animate({
+                                                                    scrollTop: 0
+                                                                }, 500);
+                                                                return false;
+                                    }">
                                         <span style="font-size: 15px;"> NEXT</span>
                                     </a>
                                 </div>
@@ -383,17 +379,14 @@
                         <div class="body">
                                     <div class="well">   
                                     <br/>
-                                        <form id="" name = "" action = "" method="POST">
                                         <div class="row clearfix">
                                             <div class="col-md-12">
                                                 <label>Client: </label>
-                                                <select id = "compdrop" name = "compdrop" class="form-control show-tick" data-live-search="true">
-                                                        <option value = "bdo">Avellaneda, Marynel</option>
-                                                        <option value = "bdo">Bukid, Gerald</option>
-                                                        <option value = "bdo">Rola, Ma. Gabriella</option>
-                                                </select>
-                                                <br/>
-                                                <br/>
+                                                <div class="input-group">
+                                                    <div class="form-line">
+                                                        <input id = "det_clients" name = "det_clients" type="text" class="form-control" readonly>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="row clearfix">
@@ -401,7 +394,7 @@
                                                 <div class="form-group form-float">
                                                     <div class="form-line">
                                                         <label><small>Contact Details:</small></label>
-                                                        <input id = "aadd_blcknum" name = "aadd_blcknum" type="text" class="form-control" placeholder="Telephone" readonly="true">
+                                                        <input id = "det_tpnum" name = "det_tpnum" type="text" class="form-control" placeholder="Telephone" readonly>
                                                     </div>
                                                 </div>
                                             </div>
@@ -410,7 +403,7 @@
                                                 <div class="form-group form-float">
                                                     <div class="form-line">
                                                         <label><small>-</small></label>
-                                                        <input id = "aadd_blcknum" name = "aadd_blcknum" type="text" class="form-control" placeholder="Cellphone Number" readonly="true">
+                                                        <input id = "det_cpnum_1" name = "det_cpnum_1" type="text" class="form-control" placeholder="Cellphone Number" readonly>
                                                     </div>
                                                 </div>
                                             </div>
@@ -419,7 +412,7 @@
                                                 <div class="form-group form-float">
                                                     <div class="form-line">
                                                     <label><small>-</small></label>
-                                                        <input id = "aadd_blcknum" name = "aadd_blcknum" type="text" class="form-control" placeholder="Cellphone Number (Alternate)" readonly="true">
+                                                        <input id = "det_cpnum_2" name = "det_cpnum_2" type="text" class="form-control" placeholder="Cellphone Number (Alternate)" readonly>
                                                     </div>
                                                 </div>
                                             </div>
@@ -428,7 +421,7 @@
                                                 <div class="form-group form-float">
                                                     <div class="form-line">
                                                     <label><small>-</small></label>
-                                                        <input id = "aadd_blcknum" name = "aadd_blcknum" type="email" class="form-control" placeholder="Email" readonly="true">
+                                                        <input id = "det_email" name = "det_email" type="email" class="form-control" placeholder="Email" readonly>
                                                     </div>
                                                 </div>
                                             </div>
@@ -438,33 +431,26 @@
                                                 <div class="form-group form-float">
                                                     <div class="form-line">
                                                         <label><small>Address:</small></label>
-                                                        <input id = "emp_middle_name" name = "emp_middle_name" type="text" class="form-control" >
+                                                        <input id = "det_address" name = "det_address" type="text" class="form-control" readonly>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row clearfix">
                                             <div class="col-md-4">
-                                                <div class="form-group form-float">
+                                                <div class="input-group">
                                                     <div class="form-line">
                                                         <label><small>Policy Number:</small></label>
-                                                        <select id = "vehicle_type" name = "vehicle_type" class="form-control show-tick" data-live-search="true" >
-                                                                  <option selected value = "" style = "display: none;">---</option>
-                                                                </select>
+                                                        <input id = "det_policyno" name = "det_policyno" type="text" class="form-control" readonly>
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div class="col-md-8">
-                                                <div class="form-group form-float">
+                                                <div class="input-group">
                                                     <div class="form-line">
                                                         <label>Insurance Company: </label>
-                                                        <select id = "compdrop" name = "compdrop" class="form-control show-tick" data-live-search="true">
-                                                                <option value = "bdo">Commonwealth Insurance</option>
-                                                                <option value = "bdo">FPG Insurance</option>
-                                                                <option value = "bdo">People's General Insurance</option>
-                                                                <option value = "bdo">Standard Insurance</option>
-                                                        </select>
+                                                        <input id = "det_inscomp" name = "det_inscomp" type="text" class="form-control" readonly>
                                                     </div>
                                                 </div>
                                             </div>
@@ -478,7 +464,7 @@
                                                             <i class="material-icons">date_range</i>
                                                         </span>
                                                         <div class="form-line">
-                                                            <input type="text" class="form-control date" placeholder="Ex: 30/07/2016">
+                                                            <input type="text" id = "det_date_created" name = "det_date_created" class="form-control date" placeholder="Ex: 30/07/2016" readonly>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -489,7 +475,7 @@
                                                             <i class="material-icons">access_time</i>
                                                         </span>
                                                         <div class="form-line">
-                                                            <input type="text" class="form-control time12" placeholder="Ex: 11:59 pm">
+                                                            <input type="text" id = "det_time_created" name = "det_time_created" class="form-control time12" placeholder="Ex: 11:59 pm" readonly>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -500,10 +486,7 @@
                                                 <div class="form-group form-float">
                                                     <div class="form-line">
                                                         <label><small>Documents to transmit:</small></label>
-                                                        <ul>
-                                                            <li>DOCU 1</li>
-                                                            <li>DOCU 2</li>
-                                                            <li>DOCU 3</li>
+                                                        <ul id = "doc-trans">
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -514,13 +497,12 @@
                                                 <div class="form-group form-float">
                                                     <div class="form-line">
                                                         <label><small>Courier:</small></label>
-                                                        <input id = "emp_middle_name" name = "emp_middle_name" type="text" class="form-control" >
+                                                        <input id = "det_courier" name = "det_courier" type="text" class="form-control" readonly>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     <div class="divider" style="margin-bottom:5%;"></div>
-                                        </form>
                                     </div><br/><br/>
                                     
                                     
@@ -544,7 +526,33 @@
                                     </a>
                                 </div>
                                 <div class="col col-md-4">
-                                    <a class="btn bg-teal btn-block waves-effect m-b-15 right" role="button" aria-expanded="false" onclick="">
+                                    <a class="btn bg-teal btn-block waves-effect m-b-15 right" role="button" aria-expanded="false" onclick="
+                                    if($('#transmit').valid())
+                                    {
+                                        swal({
+                                          title: 'Are you sure?',
+                                          type: 'warning',
+                                          showCancelButton: true,
+                                          confirmButtonColor: '#DD6B55',
+                                          confirmButtonText: 'Continue',
+                                          cancelButtonText: 'Cancel',
+                                          closeOnConfirm: false,
+                                          closeOnCancel: false
+                                        },
+                                        function(isConfirm){
+                                          if (isConfirm) {
+                                            $('#transmit').submit();
+                                          } else {
+                                              swal({
+                                              title: 'Cancelled',
+                                              type: 'warning',
+                                              timer: 500,
+                                              showConfirmButton: false
+                                              });
+                                          }
+                                        });
+                                    }
+                                    ">
                                         <span style="font-size: 15px;"> FINISH</span>
                                     </a>
                                 </div>
@@ -554,6 +562,7 @@
                 </div>
             </div>
         </div>
+        </form>
     </section>
     
     <script type="text/javascript">
@@ -562,5 +571,133 @@
           document.getElementById('asscour').style.display = 'none';
           document.getElementById('summary').style.display = 'none';
         };
+    </script>
+
+    <script>
+        $("#clients").on('change textInput input', function()
+        {
+            @foreach($details as $dt)
+             if('{{$dt->req_ID}}' == $(this).val())
+             {
+                $('#tpnum').val('{{$dt->tp_num}}');
+                $('#cpnum_1').val('{{$dt->cp_1}}');
+                $('#cpnum_2').val('{{$dt->cp_2}}');
+                $('#email').val('{{$dt->email}}');
+                $('#address').val('{{$dt->address}}');
+                $('#policyno').val('{{$dt->policy_number}}');
+
+                $('#det_clients').val('{{$dt->name}}');
+                $('#det_tpnum').val('{{$dt->tp_num}}');
+                $('#det_cpnum_1').val('{{$dt->cp_1}}');
+                $('#det_cpnum_2').val('{{$dt->cp_2}}');
+                $('#det_email').val('{{$dt->email}}');
+                $('#det_address').val('{{$dt->address}}');
+                $('#det_policyno').val('{{$dt->policy_number}}');
+
+                @foreach($inscomp as $ins)
+                 @if($ins->comp_ID == $dt->insurance_company)
+                  $('#inscomp').val('{{$ins->comp_name}}');
+                  $('#det_inscomp').val('{{$ins->comp_name}}');
+                 @endif
+                @endforeach
+
+                @foreach($request as $req)
+                 @if($req->req_ID == $dt->req_ID)
+                  $('#date_create').val('{{\Carbon\Carbon::parse($req->date_recieved)->format("F d, Y")}}');
+                  $('#time_created').val('{{\Carbon\Carbon::parse($req->date_recieved)->format("h:m:s A")}}');
+                  $('#det_date_created').val('{{\Carbon\Carbon::parse($req->date_recieved)->format("F d, Y")}}');
+                  $('#det_time_created').val('{{\Carbon\Carbon::parse($req->date_recieved)->format("h:m:s A")}}');
+                 @endif
+                @endforeach
+
+                var counter = 0;
+
+                @foreach($documents as $doc)
+                 @if($doc->req_ID == $dt->req_ID)
+                  counter++;
+                  $('#docreq tbody').append('<tr><td>'+counter+'</td><td>{{$doc->document}}</td></tr>');
+                 @endif
+                @endforeach
+
+             }
+            @endforeach
+        });
+
+        $(".records").on('change textInput input', function()
+        {
+          $("#doc-trans li").remove(0);
+          records = $(".records:checked").map(function ()
+          {
+              return $(this).data('name')
+          }).get();
+          $.each(records, function(key, value){
+            $("#doc-trans").append('<li>'+value+'</li>');
+          });
+        });
+
+        $('#courier').on('change textInput input', function(){
+            $('#det_courier').val($(this).find(":selected").text());
+        });
+        
+        $('#clients').val('{{$id}}').change();;
+    </script>
+
+    
+
+    <script>
+        jQuery.validator.setDefaults({
+            errorPlacement: function(error, element) {
+                if (element.attr("name") == "record[]" )  
+                    $("#error").append(error)
+                else 
+                    error.insertAfter(element);
+            }
+        });
+
+        $.validator.addMethod("record", function(value, elem, param) {
+            if($(".records:checkbox:checked").length > 0){
+               return true;
+           }else {
+               return false;
+           }
+        },"You must select at least one document!");    
+        $.validator.addMethod("alphanumeric", function(value, element) {
+            return this.optional(element) || /^[A-Za-z][A-Za-z0-9 '-.]*$/i.test(value);
+         }, "This field must contain only letters, numbers, dashes, space, apostrophe or dot.");
+        $.validator.addMethod("alpha", function(value, element) {
+            return this.optional(element) || /^[A-Za-z][A-Za-z '-.]*$/i.test(value);
+         }, "This field must contain only letters, space, dash, apostrophe or dot.");
+        $.validator.addMethod("blcknumber", function(value, element) {
+            return this.optional(element) || /^[A-Za-z0-9][A-Za-z0-9 '-.]*$/i.test(value);
+         }, "This field must contain only letters, numbers, space, dash, apostrophe or dot.");
+
+
+        // Wait for the DOM to be ready
+        $(function() {
+          // Initialize form validation on the registration form.
+          // It has the name attribute "registration"
+          $("form[name='transmit']").validate({
+            // Specify validation rules
+            rules: {
+              // The key name on the left side is the name attribute
+              // of an input field. Validation rules are defined
+              // on the right side
+              clients:{
+                required: true,
+              },
+              courier:{
+                required: true,
+              },
+              'record[]':{
+                record: true,
+              }
+            },
+            // Make sure the form is submitted to the destination defined
+            // in the "action" attribute of the form when valid
+            submitHandler: function(form) {
+              form.submit();
+            }
+          });
+        });
     </script>
 @endsection
