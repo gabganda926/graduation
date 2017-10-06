@@ -120,38 +120,27 @@ Route::post('/admin/maintenance/installment/delete', 'AdminControllers\maint_ins
 
 Route::post('/admin/maintenance/installment/ardelete', 'AdminControllers\maint_installmentTypeController@ardelete_installment');
 
-//mainte-insurance-comp
-Route::get('/admin/maintenance/insurance/company', 'AdminControllers\maint_insuranceCompanyController@index');
+// //mainte-insurance-comp
+// Route::get('/admin/maintenance/insurance/company', 'AdminControllers\maint_insuranceCompanyController@index');
 
-Route::post('/admin/maintenance/insurance/company/submit', 'AdminControllers\maint_insuranceCompanyController@add_inscomp');
+// Route::post('/admin/maintenance/insurance/company/submit', 'AdminControllers\maint_insuranceCompanyController@add_inscomp');
 
-Route::post('/admin/maintenance/insurance/company/update', 'AdminControllers\maint_insuranceCompanyController@update_inscomp');
+// Route::post('/admin/maintenance/insurance/company/update', 'AdminControllers\maint_insuranceCompanyController@update_inscomp');
 
-Route::post('/admin/maintenance/insurance/company/delete', 'AdminControllers\maint_insuranceCompanyController@delete_inscomp');
+// Route::post('/admin/maintenance/insurance/company/delete', 'AdminControllers\maint_insuranceCompanyController@delete_inscomp');
 
-Route::post('/admin/maintenance/insurance/company/ardelete', 'AdminControllers\maint_insuranceCompanyController@ardelete_inscomp');
+// Route::post('/admin/maintenance/insurance/company/ardelete', 'AdminControllers\maint_insuranceCompanyController@ardelete_inscomp');
 
-//mainte-policynum
-Route::get('/admin/maintenance/policyno', 'AdminControllers\maint_policyNumberController@index');
+// //mainte-policynum
+// Route::get('/admin/maintenance/policyno', 'AdminControllers\maint_policyNumberController@index');
 
-Route::post('/admin/maintenance/policyno/submit', 'AdminControllers\maint_policyNumberController@add_policy');
+// Route::post('/admin/maintenance/policyno/submit', 'AdminControllers\maint_policyNumberController@add_policy');
 
-Route::post('/admin/maintenance/policyno/update', 'AdminControllers\maint_policyNumberController@update_policy');
+// Route::post('/admin/maintenance/policyno/update', 'AdminControllers\maint_policyNumberController@update_policy');
 
-Route::post('/admin/maintenance/policyno/delete', 'AdminControllers\maint_policyNumberController@delete_policy');
+// Route::post('/admin/maintenance/policyno/delete', 'AdminControllers\maint_policyNumberController@delete_policy');
 
-Route::post('/admin/maintenance/policyno/ardelete', 'AdminControllers\maint_policyNumberController@ardelete_policy');
-
-//mainte-forms
-Route::get('/admin/maintenance/insurance/forms', 'AdminControllers\maint_FormsController@index');
-
-Route::post('/admin/maintenance/insurance/forms/submit', 'AdminControllers\maint_FormsController@add_iforms');
-
-Route::post('/admin/maintenance/insurance/forms/update', 'AdminControllers\maint_FormsController@update_iforms');
-
-Route::post('/admin/maintenance/insurance/forms/delete', 'AdminControllers\maint_FormsController@delete_iforms');
-
-Route::post('/admin/maintenance/insurance/forms/ardelete', 'AdminControllers\maint_FormsController@ardelete_iforms');
+// Route::post('/admin/maintenance/policyno/ardelete', 'AdminControllers\maint_policyNumberController@ardelete_policy');
 
 //mainte-salesagent
 Route::get('/admin/maintenance/salesagent', 'AdminControllers\maint_salesAgentController@index');
@@ -352,6 +341,7 @@ Route::post('/admin/transaction/claim-create-request-walkin/submit', 'AdminContr
 
 //Claims details walkin
 Route::get('/admin/transaction/claim-details-walkin', 'AdminControllers\trans_claimsController@view_claim_details');
+Route::post('/admin/transaction/claim-details-walkin/submit', 'AdminControllers\trans_claimsController@update_claim_details');
 
 //Claims details online
 Route::get('/admin/transaction/claim-details-online', function (){
@@ -477,6 +467,8 @@ Route::get('/admin/reports/tally-info', function (){
    return view('pages.report.adm.tally-info');
 });
 
+Route::get('/admin/reports/sales/overall', 'AdminControllers\reports_SalesByPaymentController@index');
+
 //UTILITIES
 Route::get('/admin/utilities/archives', 'AdminControllers\z_Utilities_ArchivesController@index');
 
@@ -541,13 +533,27 @@ Route::post('/admin/utilities/archives/premium-damage/reactivate', 'AdminControl
 Route::post('/admin/utilities/archives/premium-damage/arreactivate', 'AdminControllers\z_Utilities_ArchivesController@arreactivate_premium_damage');
 
 
-Route::get('/admin/utilities/computationSettings', 'AdminControllers\z_Utilities_ComputationSettingsController@index');
+//utilities-insurance-comp
+Route::get('/admin/utilities/insurance/company', 'AdminControllers\maint_insuranceCompanyController@index');
 
-Route::get('/admin/utilities/generalSettings', 'AdminControllers\z_Utilities_GeneralSettingsController@index');
+Route::post('/admin/utilities/insurance/company/submit', 'AdminControllers\maint_insuranceCompanyController@add_inscomp');
 
-Route::get('/admin/utilities/taxSettings', 'AdminControllers\z_Utilities_TaxSettingsController@index');
+Route::post('/admin/utilities/insurance/company/update', 'AdminControllers\maint_insuranceCompanyController@update_inscomp');
 
-Route::get('/admin/utilities/templates', 'AdminControllers\z_Utilities_TemplatesController@index');
+Route::post('/admin/utilities/insurance/company/delete', 'AdminControllers\maint_insuranceCompanyController@delete_inscomp');
+
+Route::post('/admin/utilities/insurance/company/ardelete', 'AdminControllers\maint_insuranceCompanyController@ardelete_inscomp');
+
+//utilities-policynum
+Route::get('/admin/utilities/policyno', 'AdminControllers\maint_policyNumberController@index');
+
+Route::post('/admin/utilities/policyno/submit', 'AdminControllers\maint_policyNumberController@add_policy');
+
+Route::post('/admin/utilities/policyno/update', 'AdminControllers\maint_policyNumberController@update_policy');
+
+Route::post('/admin/utilities/policyno/delete', 'AdminControllers\maint_policyNumberController@delete_policy');
+
+Route::post('/admin/utilities/policyno/ardelete', 'AdminControllers\maint_policyNumberController@ardelete_policy');
 
 //Admin Routes End Point//
 
@@ -649,47 +655,46 @@ Route::get('/accounting-staff/transaction/quotation-online-auto-reply', function
 
 
 //PAYMENT
-Route::get('/accounting-staff/transaction/payment', 'AccStaffControllers\trans_listBreakdownController@index');
+Route::get('/accounting-staff/transaction/payment', 'AccStaffControllers\trans_listBreakdownController@index')->middleware('paymentAuth');
 
 //PAYMENT request
 Route::get('/accounting-staff/transaction/payment-request-details', function (){
    return view('pages.accounting-staff.transaction.payment-request-details');
-});
+})->middleware('paymentAuth');
 
 //PAYMENT-VIEW online
 Route::get('/accounting-staff/transaction/payment-view', function (){
    return view('pages.accounting-staff.transaction.payment-view');
-});
+})->middleware('paymentAuth');
 
 //PAYMENT-ONLINE
 Route::get('/accounting-staff/transaction/payment-online', function (){
    return view('pages.accounting-staff.transaction.payment-online');
-});
+})->middleware('paymentAuth');
 
 //PAYMENT-ONLINE auto reply
 Route::get('/accounting-staff/transaction/payment-online-auto-reply', function (){
    return view('pages.accounting-staff.transaction.payment-online-auto-reply');
-});
+})->middleware('paymentAuth');
 
 //PAYMENT-new
-Route::get('/accounting-staff/transaction/payment-new', 'AccStaffControllers\trans_paymentController@index');
+Route::get('/accounting-staff/transaction/payment-new', 'AccStaffControllers\trans_paymentController@index')->middleware('paymentAuth');
 
-Route::post('/accounting-staff/transaction/payment-new/submit', 'AccStaffControllers\trans_paymentController@payment');
+Route::post('/accounting-staff/transaction/payment-new/submit', 'AccStaffControllers\trans_paymentController@payment')->middleware('paymentAuth');
 
 //PAYMENT-list
-Route::get('/accounting-staff/transaction/payment-list', 'AccStaffControllers\trans_paymentListController@index');
+Route::get('/accounting-staff/transaction/payment-list', 'AccStaffControllers\trans_paymentListController@index')->middleware('paymentAuth');;
 
 //Payment Details
 Route::get('/accounting-staff/transaction/payment-details', function (){
    return view('pages.accounting-staff.transaction.payment-details');
-});
+})->middleware('paymentAuth');
+
 
 //Accounting Staff End Point//
 //MANAGER Start Point//
 //quotation 
-Route::get('/manager/transaction/quotation', function (){
-   return view('pages.manager.transaction.quotation');
-});
+Route::get('/manager/transaction/quotation', 'ManagerControllers\indi_quotationApprovalController@quoteHome');
 
 //quotation - individual
 Route::get('/manager/transaction/quotation-individual', 'ManagerControllers\indi_quotationApprovalController@index');

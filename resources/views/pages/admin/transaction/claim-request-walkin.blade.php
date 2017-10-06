@@ -96,13 +96,13 @@
                                                 @if($claims->claim_ID >= 10)
                                                     CLAIM00{{ $claims->claim_ID }}
                                                 @endif
-                                                @if($claims->payment_ID < 10)
+                                                @if($claims->claim_ID < 10)
                                                     CLAIM000{{ $claims->claim_ID }}
                                                 @endif
-                                                @if($claims->payment_ID >= 100)
+                                                @if($claims->claim_ID >= 100)
                                                     CLAIM0{{ $claims->claim_ID }}
                                                 @endif
-                                                @if($claims->payment_ID >= 1000)
+                                                @if($claims->claim_ID >= 1000)
                                                     CLAIM{{ $claims->claim_ID }}
                                                 @endif
                                             </td>
@@ -124,7 +124,7 @@
                                             <td>
                                                 @foreach($cnotif as $notif)
                                                     @if($claims->notifier_ID == $notif->notifier_ID)
-                                                        {{ $notif->notifier_Name }} - {{ $notif->notifier_Relation }}
+                                                        {{ $notif->notifier_Name }}, {{ $notif->notifier_Relation }}
                                                     @endif
                                                 @endforeach
                                             </td>
@@ -162,8 +162,24 @@
                                             <td>
                                                    {{ \Carbon\Carbon::parse($claims->updated_at)->format("M-d-Y") }} {{ "(".\Carbon\Carbon::parse($claims->updated_at)->format("l, h:i:s A").")" }}
                                             </td>
-                                            <td>
-                                                <span class="label bg-red">incomplete</span>
+                                            <td class="statt_{{$claims->claim_ID}}">
+                                                <script> var checklang = 0; </script>
+                                                @foreach($cfile as $filez)
+                                                    @if($claims->claim_ID == $filez->claim_ID)
+                                                        @if($filez->claimReq_picture == null && $filez->claimReq_picture2 == null && $filez->claimReq_picture3 == null && $filez->claimReq_picture4 == null && $filez->claimReq_picture5 == null)
+                                                            <script> var checklang = 1;</script>
+                                                        @endif
+                                                    @endif
+                                                @endforeach
+                                                <script>
+                                                    if (checklang == 0){
+                                                        $("td.statt_{{$claims->claim_ID}}").html('<span class="label bg-green">complete</span>');
+                                                    }
+                                                    if(checklang == 1)
+                                                    {
+                                                        $("td.statt_{{$claims->claim_ID}}").html('<span class="label bg-red">incomplete</span>');
+                                                    }
+                                                </script>
                                             </td>
                                             <td><button form = "claim_display" type="submit" class="btn bg-light-blue waves-effect view" data-id = "{{$claims->claim_ID}}" onclick="$('#claim_id').val($(this).data('id'));" data-toggle="tooltip" data-placement="left" title="View details"><i class="material-icons">remove_red_eye</i>
                                                 <button type="button" class="btn bg-green waves-effect forward_manager" data-id = "{{$claims->claim_ID}}" style="position: right;" data-toggle="tooltip" data-placement="left" title="Accept">
@@ -177,27 +193,6 @@
                                         @endif
                                         @endif
                                     @endforeach
-                                    <!-- <tr>
-                                        <td>CLM-10273-AB</td>
-                                        <td>ATQ-CPR-10938734</td>
-                                        <td>Yes</td>
-                                        <td>Huhu HUhu</td>
-                                        <td><ul>
-                                            <li>091233344</li>
-                                            <li>hehe@gmail.com</li>
-                                        </ul></td>
-                                        <td>June 23, 2017 3:00AM</td>
-                                        <td><button type="button" class="btn bg-blue waves-effect" style="position: right;" onclick="window.document.location='{{ URL::asset('admin/transaction/claim-details-walkin') }}';" data-toggle="tooltip" data-placement="left" title="View Details">
-                                                <i class="material-icons">security</i><span style="font-size: 15px;">
-                                            </button>
-                                            <button type="button" class="btn bg-green waves-effect" style="position: right;" onclick=""  data-toggle="tooltip" data-placement="left" title="Accept">
-                                                <i class="material-icons">thumb_up</i><span style="font-size: 15px;">
-                                            </button>
-                                            <button type="button" class="btn bg-red waves-effect" style="position: right;" onclick=""  data-toggle="tooltip" data-placement="left" title="Reject">
-                                                <i class="material-icons">thumb_down</i><span style="font-size: 15px;">
-                                            </button> 
-                                            </td>
-                                    </tr> -->
                                 </tbody>
                             </table>
                             </div>

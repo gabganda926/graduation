@@ -41,6 +41,10 @@ use App\clientListConnection;
 
 use App\paymentConnection;
 
+use App\paymentsConnection;
+
+use App\checkVoucherConnection;
+
 use Redirect;
 
 use Alert;
@@ -50,8 +54,9 @@ class trans_insIndividualController extends Controller
   public function index()
   {
     return view('pages/admin/transaction/insurance-individual')
-    ->with('payments', paymentConnection::all())
     ->with('paydetails', paymentDetailConnection::all())
+    ->with('payments',paymentsConnection::orderBy('due_date')->get())
+    ->with('voucher',   checkVoucherConnection::all())
     ->with('clist', clientListConnection::all())
     ->with('client',clientConnection::all())
     ->with('sales',salesAgentConnection::all())

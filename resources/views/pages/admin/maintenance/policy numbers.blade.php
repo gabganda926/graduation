@@ -1,10 +1,10 @@
 @extends('pages.admin.master')
 
-@section('title','Policy Number - Maintenance | i-Insure')
+@section('title','Policy Number - Utilities | i-Insure')
 
-@section('maintenance','active')
+@section('utilities','active')
 
-@section('insurance','active')
+@section('ins','active')
 
 @section('policyno','active')
 
@@ -131,7 +131,7 @@
                             <h4><br/>Policy Number Details
                             </h4>
                         </div><br/><br/>
-                        <button id = "Edit" style = "margin-left: 32em" type="button" class="btn btn-success btn-lg waves-effect"
+                        <!-- <button id = "Edit" style = "margin-left: 32em" type="button" class="btn btn-success btn-lg waves-effect"
                         onclick = "
                         document.getElementById('view').action = 'policyno/update';
                         $('#Edit').prop('disabled', true);
@@ -152,7 +152,7 @@
                         ">
                         <i class="material-icons">create</i>
                         <span>Edit</span>
-                        </button>
+                        </button> 
                         <button id = "Delete" type="button" class="btn bg-red btn-lg waves-effect"
                         onclick = "
                         document.getElementById('view').action = 'policyno/delete';
@@ -174,7 +174,7 @@
                         ">
                         <i class="material-icons">delete_sweep</i>
                         <span>Delete</span>
-                        </button>
+                        </button> -->
                         <div class="modal-body">
                             <form id="view" name = "view" method="POST">
                             <div class="row clearfix">
@@ -223,12 +223,9 @@
                                              @endforeach
                                             @endforeach
                                         </select>
-                                        <br/>
-                                        <br/>
                                         </div>
                                     </div>
                                 </div>
-                                <br/>
                                 <div class="row clearfix">
                                     <div class="col-md-12">
                                         <div class="form-group form-float">
@@ -258,7 +255,7 @@
                                 </div>
                         </div>
                         <div class="modal-footer js-sweetalert">
-                            <button id = "schange" class="btn btn-primary waves-effect" style = "display: none;" type="button" onclick = "
+                            <!-- <button id = "schange" class="btn btn-primary waves-effect" style = "display: none;" type="button" onclick = "
                             $('body,html').animate({
                                                                         scrollTop: 0
                                                                     }, 500);
@@ -288,7 +285,7 @@
                                     });
                                 }
                               });
-                            }">SAVE CHANGES</button>
+                            }">SAVE CHANGES</button> -->
                             <button type="button" class="btn btn-link waves-effect" data-toggle="collapse" data-target="#largeModal" onclick="
                             $('body,html').animate({
                                                                         scrollTop: 0
@@ -312,7 +309,7 @@
                     <div class="card">
                         <div class="header">
                             <h2><b>
-                                MAINTENANCE - POLICY NUMBER
+                                UTILITIES - POLICY NUMBER
                             </b></h2>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
@@ -341,7 +338,7 @@
                             <table class="table table-bordered table-striped table-hover dataTable js-basic-example animated lightSpeedIn active">
                                 <thead>
                                     <tr class="bg-blue-grey">
-                                        <th class="col-md-1"></th>
+                                        <!-- <th class="col-md-1"></th> -->
                                         <th>Policy Number</th>
                                         <th>Company</th>
                                         <th>Status</th>
@@ -354,8 +351,8 @@
                                       @foreach($com as $company)
                                         @if($pnumber->insurance_compID == $company->comp_ID)
                                           <tr>
-                                              <td><input type="checkbox" id="{{ $pnumber->policy_number }}" name = "del_check" class="filled-in chk-col-red checkCheckbox" data-id = "{{ $pnumber->policy_number }}"/>
-                                              <label for="{{ $pnumber->policy_number }}"></label></td>
+                                              <!-- <td><input type="checkbox" id="{{ $pnumber->policy_number }}" name = "del_check" class="filled-in chk-col-red checkCheckbox" data-id = "{{ $pnumber->policy_number }}"/>
+                                              <label for="{{ $pnumber->policy_number }}"></label></td> -->
                                               <td>{{ $pnumber->policy_number }}</td>
                                               <td>{{ $company->comp_name }}</td>
                                               <td>

@@ -58,7 +58,6 @@
                             <h2>CHOOSE PAYMENT TYPE</h2>
                         </div>
                         <div class="body">
-                         <form id = "payment" action = "/accounting-staff/transaction/payment-new/submit" method = "POST">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <div class="row clearfix">
                                 <div class="col-md-12">
@@ -156,7 +155,7 @@
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                         <label><small>Bank:</small></label>
-                                            <select id = "checknum_check" name = "checknum_check" class="form-control show-tick" data-live-search="true" readonly="true">
+                                            <select id = "qwe_check" name = "qwe_check" class="form-control show-tick" data-live-search="true" readonly="true">
                                                   <option selected value = "" style = "display: none;">-- Select Bank --</option>
                                             </select>
                                         </div>
@@ -185,7 +184,7 @@
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                         <label><small>Payment for BOP Number:</small></label>
-                                            <select id = "checknum_check" name = "checknum_check" class="form-control show-tick" data-live-search="true" readonly="true">
+                                            <select id = "asdsad" name = "asdsad" class="form-control show-tick" data-live-search="true" readonly="true">
                                                   <option selected value = "" style = "display: none;">-- Select BOP Number --</option>
                                             </select>
                                         </div>
@@ -202,33 +201,7 @@
                                 </div> -->
 
                                 <div class="col-md-12">
-                                    <button type="button" class="btn btn-block bg-green waves-effect left" onclick = "
-                                    $('#cashPay').hide(800);
-                                    $(this).parents('#checkPay').hide(800);
-                                    $('#mainz').show(800);
-                                    swal({
-                                      title: 'Are you sure?',
-                                      type: 'warning',
-                                      showCancelButton: true,
-                                      confirmButtonColor: '#DD6B55',
-                                      confirmButtonText: 'Continue',
-                                      cancelButtonText: 'Cancel',
-                                      closeOnConfirm: false,
-                                      closeOnCancel: false
-                                    },
-                                    function(isConfirm){
-                                      if (isConfirm) {
-                                        $('#payment').submit();
-                                      } else {
-                                          swal({
-                                          title: 'Cancelled',
-                                          type: 'warning',
-                                          timer: 500,
-                                          showConfirmButton: false
-                                          });
-                                      }
-                                    });
-                                    ">
+                                    <button type="button" class="btn btn-block bg-green waves-effect left" >
                                         <span style="font-size: 15px;"> UPDATE BOP VOUCHER</span>
                                     </button>
                                 </div>

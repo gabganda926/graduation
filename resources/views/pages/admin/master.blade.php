@@ -222,19 +222,14 @@
                                     <span>INSURANCE</span>
                                 </a>
                                 <ul class="ml-menu">
-                                    <li class = "@yield('company')">
+                                    <!-- <li class = "@yield('company')">
                                         <a href="/admin/maintenance/insurance/company">
                                             <span>Insurance Company</span></a>
                                     </li>
-
-                                    <!--<li class = "@yield('forms')">
-                                        <a href="/admin/maintenance/insurance/forms">
-                                            <span>Insurance Forms</span></a>
-                                    </li>-->
                                     <li class = "@yield('policyno')">
                                         <a href="/admin/maintenance/policyno">
                                             <span>Insurance - Policy Number</span></a>
-                                    </li>
+                                    </li> -->
 
                                     <li class = "@yield('itype')">
                                         <a href="/admin/maintenance/installment">
@@ -422,11 +417,38 @@
                             <span>REPORTS</span>
                         </a>
                         <ul class="ml-menu">
-                            <li class = "@yield('reportTally')">
+                            <!-- <li class = "@yield('reportTally')">
                                 <a href="/admin/reports/tally">
                                     <i class="material-icons">multiline_chart</i>
                                     <span>TALLY</span>
                                 </a>
+                            </li> -->
+                            <li class = "@yield('reportSales')">
+                                <a href="javascript:void(0);" class="menu-toggle">
+                                    <i class="material-icons">multiline_chart</i>
+                                    <span>SALES</span>
+                                </a>
+                                <ul class="ml-menu">
+                                    <li class = "@yield('salesOverall')">
+                                        <a href="/admin/reports/sales/overall">
+                                            <span>Sales Report - By Collection of Payments</span></a>
+                                    </li>
+
+                                    <li class = "@yield('salesIns')">
+                                        <a href="">
+                                            <span>Sales Report - By Total Net Premium</span></a>
+                                    </li>
+
+                                    <li class = "@yield('salesIns')">
+                                        <a href="">
+                                            <span>Sales Report - By Insurance Company's Sales</span></a>
+                                    </li>
+
+                                    <li class = "@yield('salesAgency')">
+                                        <a href="javascript:void(0);">
+                                            <span>Sales Report - By Agency's Sales</span></a>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
                     </li>
@@ -436,28 +458,44 @@
                             <span>UTILITIES</span>
                         </a>
                         <ul class="ml-menu">
+                            <li class = "@yield('ins')">
+                                <a href="javascript:void(0);" class="menu-toggle">
+                                    <i class="material-icons">create</i>
+                                    <span>INSURANCE SETTINGS</span>
+                                </a>
+                                <ul class="ml-menu">
+                                    <li class = "@yield('company')">
+                                        <a href="/admin/utilities/insurance/company">
+                                            <span>Insurance Company</span></a>
+                                    </li>
+
+                                    <li class = "@yield('policyno')">
+                                        <a href="/admin/utilities/policyno">
+                                            <span>Policy Number</span></a>
+                                    </li>
+
+                                    <li class = "@yield('policyno')">
+                                        <a href="javascript:void(0);">
+                                            <span>Vehicle Market Value Depriciation</span></a>
+                                    </li>
+                                </ul>
+                            </li>
                             <li class = "@yield('general')">
-                                <a href="/admin/utilities/generalSettings">
+                                <a href="javascript:void(0);">
                                     <i class="material-icons">settings_applications</i>
                                     <span>PREMIUM COMPUTATION SETTINGS</span>
                                 </a>
                             </li>
                             <li class = "@yield('tax')">
-                                <a href="/admin/utilities/taxSettings">
+                                <a href="javascript:void(0);">
                                     <i class="material-icons">attach_money</i>
                                     <span>TAX SETTINGS</span>
-                                </a>
-                            </li>
-                            <li class = "@yield('comp')">
-                                <a href="/admin/utilities/computationSettings">
-                                    <i class="material-icons">create</i>
-                                    <span>PREMIUM COMPUTATION SETTINGS</span>
                                 </a>
                             </li>
                             <li class = "@yield('formtemp')">
                                 <a href="/admin/utilities/templates">
                                     <i class="material-icons">layers</i>
-                                    <span>DOCUMENT TEMPLATE</span>
+                                    <span>WEB CONTENT SETTINGS</span>
                                 </a>
                             </li>
 
@@ -540,12 +578,16 @@
     <script src="{{ URL::asset('plugins/jquery-datatable/extensions/export/buttons.html5.min.js') }}"></script>
     <script src="{{ URL::asset('plugins/jquery-datatable/extensions/export/buttons.print.min.js') }}"></script>
 
+    <!-- Chart Plugins Js -->
+    <script src="{{ URL::asset ('plugins/chartjs/Chart.bundle.js')}}"></script>
+
     <!-- Custom Js -->
     <script src="{{ URL::asset('js/admin.js') }}"></script>
     <script src="{{ URL::asset('js/pages/ui/tooltips-popovers.js') }}"></script>
     <script src="{{ URL::asset('js/pages/tables/jquery-datatable.js') }}"></script>
     <script src="{{ URL::asset('js/pages/forms/form-validation.js') }}"></script>
     <script src="{{ URL::asset('js/pages/ui/dialogs.js') }}"></script>
+    <script src="{{ URL::asset ('js/pages/charts/chartjs.js')}}"></script>
 
     <script src="{{ URL::asset('js/notify.js') }}"></script>
 

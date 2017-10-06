@@ -9,6 +9,8 @@ use App\quotationListConnection;
 
 use App\quotationIndividualConnection;
 
+use App\quotationCompanyConnection;
+
 use App\quoteNoteConnection;
 
 use App\salesAgentConnection;
@@ -36,6 +38,13 @@ class indi_quotationApprovalController extends Controller
 	public function __construct(quoteNoteConnection $quoteNote)
 	{
 		$this->note = $quoteNote;
+	}
+
+	public function quoteHome(){
+		return view('pages.manager.transaction.quotation')
+		->with('qcomp', quotationCompanyConnection::all())
+		->with('qind', quotationIndividualConnection::all())
+		->with('qlist', quotationListConnection::all());
 	}
 	
 	public function index()

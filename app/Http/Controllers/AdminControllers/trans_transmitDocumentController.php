@@ -23,6 +23,8 @@ use App\transmittalProccessConnection;
 
 use App\transmitDocumentsConnection;
 
+use App\accListInsuranceConnection;
+
 use Alert;
 
 use Redirect;
@@ -34,16 +36,17 @@ class trans_transmitDocumentController extends Controller
 		$this->process = $proc;
 	}
 
-	public function index(){
-   		return view('pages.admin.transaction.transmittal-documents')
+	public function index()
+  {
+   		return view('pages.admin.transaction.transmittal-documents-walk-in')
+      ->with('data', accListInsuranceConnection::all())
    		->with('courier', courierConnection::all())
    		->with('info', personalInfoConnection::all())
    		->with('inscomp', inscompanyConnection::all())
    		->with('records',transmittalRecordConnection::all())
    		->with('request', transmittalRequestConnection::all())
    		->with('details', transmittalDetailsConnection::all())
-   		->with('documents', transmittalDocumentsConnection::all())
-      ->with('id', -1);
+   		->with('documents', transmittalDocumentsConnection::all());
 	}
 
 	public function transmit(Request $req){

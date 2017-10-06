@@ -627,36 +627,36 @@
              @endif
             @endforeach
 
-            @foreach($ppa as $pa)
-             @if($pa->premiumPA_ID == $paydetails->personal_accident_ID)
-              pa = parseInt('{{$pa->insuranceCover}}') + parseInt('{{$pa->passengerCover}}') + parseInt('{{$pa->mrCover}}');
-             @endif
-            @endforeach
+            // @foreach($ppa as $pa)
+            //  @if($pa->premiumPA_ID == $paydetails->personal_accident_ID)
+            //   pa = parseInt('{{$pa->insuranceCover}}') + parseInt('{{$pa->passengerCover}}') + parseInt('{{$pa->mrCover}}');
+            //  @endif
+            // @endforeach
 
-            @foreach($pdg as $dg)
-             @if($dg->premiumDG_ID == $paydetails->bodily_injury_ID)
-              @if($paydetails->vehicle_class == 1)
-              bi = '{{$dg->privateCar}}';
-              @endif
-              @if($paydetails->vehicle_class == 2)
-              bi = '{{$dg->cv_Light}}';
-              @endif
-              @if($paydetails->vehicle_class == 3)
-              bi = '{{$dg->cv_Heavy}}';
-              @endif
-             @endif
-             @if($dg->premiumDG_ID == $paydetails->property_damage_ID)
-              @if($paydetails->vehicle_class == 1)
-              pd = '{{$dg->privateCar}}';
-              @endif
-              @if($paydetails->vehicle_class == 2)
-              pd = '{{$dg->cv_Light}}';
-              @endif
-              @if($paydetails->vehicle_class == 3)
-              pd = '{{$dg->cv_Heavy}}';
-              @endif
-             @endif
-            @endforeach
+            // @foreach($pdg as $dg)
+            //  @if($dg->premiumDG_ID == $paydetails->bodily_injury_ID)
+            //   @if($paydetails->vehicle_class == 1)
+            //   bi = '{{$dg->privateCar}}';
+            //   @endif
+            //   @if($paydetails->vehicle_class == 2)
+            //   bi = '{{$dg->cv_Light}}';
+            //   @endif
+            //   @if($paydetails->vehicle_class == 3)
+            //   bi = '{{$dg->cv_Heavy}}';
+            //   @endif
+            //  @endif
+            //  @if($dg->premiumDG_ID == $paydetails->property_damage_ID)
+            //   @if($paydetails->vehicle_class == 1)
+            //   pd = '{{$dg->privateCar}}';
+            //   @endif
+            //   @if($paydetails->vehicle_class == 2)
+            //   pd = '{{$dg->cv_Light}}';
+            //   @endif
+            //   @if($paydetails->vehicle_class == 3)
+            //   pd = '{{$dg->cv_Heavy}}';
+            //   @endif
+            //  @endif
+            // @endforeach
 
             $('#insurance_company').val(inscomp);
             $('#Img').attr('src',image);
@@ -674,9 +674,9 @@
             $('#vehicle_make').val(make);    
             $('#vehicle_model').val(model); 
             $('#vehicle_model_value').val('₱ '+value);
-            $('#pa').val('₱ ' + numberWithCommas(pa));     
-            $('#pd').val('₱ ' + numberWithCommas(pd));    
-            $('#bi').val('₱ ' + numberWithCommas(bi)); 
+            // $('#pa').val('₱ ' + numberWithCommas(pa));     
+            // $('#pd').val('₱ ' + numberWithCommas(pd));    
+            // $('#bi').val('₱ ' + numberWithCommas(bi)); 
 
             var bday = document.getElementById("pinfo_bday").value.split('-');
             var today = new Date();

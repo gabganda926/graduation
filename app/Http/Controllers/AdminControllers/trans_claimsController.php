@@ -26,6 +26,8 @@ use App\claimsRequirementConnection;
 
 use App\claimRequestConnection;
 
+use App\claimReqFilesConnection;
+
 use App\claimNotifiedByRepConnection;
 
 use App\paymentDetailConnection;
@@ -44,10 +46,11 @@ use Redirect;
 
 class trans_claimsController extends Controller
 {
-  public function __construct(claimRequestConnection $claims, claimNotifiedByRepConnection $repre)
+  public function __construct(claimRequestConnection $claims, claimNotifiedByRepConnection $repre, claimReqFilesConnection $files)
   {
     $this->claimreq = $claims;
     $this->rep = $repre;
+    $this->fi = $files;
   }
 
   public function index()
@@ -73,8 +76,10 @@ class trans_claimsController extends Controller
   {
     return view('/pages/admin/transaction/claim-request-walkin')
        ->with('pno',policynoConnection::all())
+       ->with('ctype', claimsTypeConnection::all())
        ->with('creq',claimRequestConnection::all())
        ->with('cnotif',claimNotifiedByRepConnection::all())
+       ->with('cfile', claimReqFilesConnection::all())
         ->with('comp',inscompanyConnection::all())
         ->with('clist', clientListConnection::all())
         ->with('cliacc', clientAccountsConnection::all())
@@ -94,6 +99,8 @@ class trans_claimsController extends Controller
         ->with('clist', clientListConnection::all())
         ->with('cliacc', clientAccountsConnection::all())
         ->with('cli', clientConnection::all())
+        ->with('cfile', claimReqFilesConnection::all())
+        ->with('crequire', claimsRequirementConnection::all())
         ->with('pinfo', personalInfoConnection::all())
         ->with('addr', addressConnection::all())
         ->with('sales', salesAgentConnection::all())
@@ -229,29 +236,26 @@ class trans_claimsController extends Controller
       $this->claimreq->description = $req->desc_incident;
       $this->claimreq->notifiedByType = 2;
       $this->claimreq->status = 0;
-      $this->claimreq->notifier_ID = (int)$notifierid->notifier_ID;;
+      $this->claimreq->notifier_ID = (int)$notifierid->notifier_ID;
       $this->claimreq->del_flag = 0;
       $this->claimreq->created_at = $mytime;
       $this->claimreq->updated_at = $mytime;
     }
     try
-      {
-        $this->claimreq->save();
-        alert()
-        ->success('Record Saved', "Success")
-        ->persistent("Close");
-        return Redirect::back();
+        {
+          $this->claimreq->save();
+          return $this->add_file($req);
       }
       catch(Exception $e)
       {
         $message = $e->getCode();
         if($message == 23000)
         {
-            alert()
-            ->error('ERROR', $e->getMessage())
-            ->persistent("Close");
+          alert()
+          ->error('ERROR', $e->getMessage())
+          ->persistent("Close");
 
-            return Redirect::back();
+          return Redirect::back();
         }
         else if($message == 22001)
         {
@@ -270,6 +274,344 @@ class trans_claimsController extends Controller
           return Redirect::back();
         }
       }
+  }
+
+  public function add_file(Request $req)
+  {
+    $ctypes = claimsTypeConnection::where('claimType_ID', "=", $req->claimid)->first();
+    $reqs = claimsRequirementConnection::all();
+
+      foreach ($reqs as $filez) { 
+        if($ctypes->claimType_ID == $filez->claimReq_Type)
+        {
+          if($filez->del_flag == 0)
+          {
+            $fi = new claimReqFilesConnection;
+            $cid = claimRequestConnection::orderBy('claim_ID', 'desc')->first();
+            $mytime = $req->time;
+            $fi->claim_ID = (int)$cid->claim_ID;
+            $fi->claimReq_ID = (int)$filez->claimReq_ID;
+            $fi->created_at = $mytime;
+            $fi->updated_at = $mytime;
+            $pic1 = $fi->claimReq_ID . '_1';
+            $pic2 = $fi->claimReq_ID . '_2';
+            $pic3 = $fi->claimReq_ID . '_3';
+            $pic4 = $fi->claimReq_ID . '_4';
+            $pic5 = $fi->claimReq_ID . '_5';
+
+            if($req->hasFile($pic1))
+            {
+              \Log::info($req);
+              $file = $req->file($pic1);
+
+              $extension = \File::extension($file->getClientOriginalName());
+              try
+              {
+                $name = ($cid->claim_ID) . "_" . ($filez->claimReqFile_ID + 1) . "." . $extension;
+              }
+              catch(\Exception $e)
+              {
+                $name = ($cid->claim_ID) . "_" . ($filez->claimReqFile_ID + 1) . "." . $extension;
+              }
+
+              $fi->claimReq_picture = $name;
+
+              $file->move(public_path().'/image/claim_files/', $name);
+             }
+
+             if($req->hasFile($pic2))
+              {
+                \Log::info($req);
+                $file = $req->file($pic2);
+
+                $extension = \File::extension($file->getClientOriginalName());
+                try
+                {
+                  $name = ($cid->claim_ID) . "_" . ($filez->claimReqFile_ID + 2) . "." . $extension;
+                }
+                catch(\Exception $e)
+                {
+                  $name = ($cid->claim_ID) . "_" . ($filez->claimReqFile_ID + 2) . "." . $extension;
+                }
+
+                $fi->claimReq_picture2 = $name;
+
+                $file->move(public_path().'/image/claim_files/', $name);
+               }
+
+            if($req->hasFile($pic3))
+              {
+                \Log::info($req);
+                $file = $req->file($pic3);
+
+                $extension = \File::extension($file->getClientOriginalName());
+                try
+                {
+                  $name = ($cid->claim_ID) . "_" . ($filez->claimReqFile_ID + 3) . "." . $extension;
+                }
+                catch(\Exception $e)
+                {
+                  $name = ($cid->claim_ID) . "_" . ($filez->claimReqFile_ID + 3) . "." . $extension;
+                }
+
+                $fi->claimReq_picture3 = $name;
+
+                $file->move(public_path().'/image/claim_files/', $name);
+               }
+
+            if($req->hasFile($pic4))
+              {
+                \Log::info($req);
+                $file = $req->file($pic4);
+
+                $extension = \File::extension($file->getClientOriginalName());
+                try
+                {
+                  $name = ($cid->claim_ID) . "_" . ($filez->claimReqFile_ID + 4) . "." . $extension;
+                }
+                catch(\Exception $e)
+                {
+                  $name = ($cid->claim_ID) . "_" . ($filez->claimReqFile_ID + 4) . "." . $extension;
+                }
+
+                $fi->claimReq_picture4 = $name;
+
+                $file->move(public_path().'/image/claim_files/', $name);
+               }
+
+            if($req->hasFile($pic5))
+              {
+                \Log::info($req);
+                $file = $req->file($pic5);
+
+                $extension = \File::extension($file->getClientOriginalName());
+                try
+                {
+                  $name = ($cid->claim_ID) . "_" . ($filez->claimReqFile_ID + 5) . "." . $extension;
+                }
+                catch(\Exception $e)
+                {
+                  $name = ($cid->claim_ID) . "_" . ($filez->claimReqFile_ID + 5) . "." . $extension;
+                }
+
+                $fi->claimReq_picture5 = $name;
+
+                $file->move(public_path().'/image/claim_files/', $name);
+               }
+            
+            try
+            {
+              $fi->save();
+              // alert()
+              // ->success('Record Saved', "Success")
+              // ->persistent("Close");
+            }
+            catch(Exception $e)
+            {
+              $message = $e->getCode();
+              if($message == 23000)
+              {
+                  alert()
+                  ->error('ERROR', $e->getMessage())
+                  ->persistent("Close");
+              }
+              else if($message == 22001)
+              {
+                alert()
+                ->error('ERROR', $e->getMessage())
+                ->persistent("Close");
+              }
+              else
+              {
+                alert()
+                ->error('ERROR', $e->getMessage())
+                ->persistent("Close");
+              }
+            }
+          }
+        }
+      }
+
+    alert()
+    ->success('Record Saved', "Success")
+    ->persistent("Close");
+    return Redirect::back();
+  }
+
+  public function update_claim_details(Request $req)
+  {
+    $ct = claimsTypeConnection::where('claimType_ID', "=", $req->cty)->first();
+    $require = claimsRequirementConnection::all();
+    $fi = claimReqFilesConnection::where('claimReqFile_ID', "=", $req->reqid)->first();
+    $cid = claimRequestConnection::where('claim_ID', "=", $req->claimid)->first();
+
+      if($fi->claim_ID == $cid->claim_ID)
+      {
+        foreach($require as $filez)
+        {
+          if($fi->claimReq_ID == $filez->claimReq_ID)
+          {
+            if($filez->del_flag == 0)
+            {
+              $mytime = $req->time;
+              $fi->updated_at = $mytime;
+              $pic1 = $fi->claimReq_ID . '_1';
+              $pic2 = $fi->claimReq_ID . '_2';
+              $pic3 = $fi->claimReq_ID . '_3';
+              $pic4 = $fi->claimReq_ID . '_4';
+              $pic5 = $fi->claimReq_ID . '_5';
+              \Log::info($req->$pic1);
+              \Log::info($pic1);
+              \Log::info($req->reqid);
+              if($fi->claimReq_picture == null)
+                {
+                  if($req->hasFile($pic1))
+                  {
+                    $file = $req->file($pic1);
+
+                    $extension = \File::extension($file->getClientOriginalName());
+                    try
+                    {
+                      $name = ($cid->claim_ID) . "_" . ($filez->claimReqFile_ID + 1) . "." . $extension;
+                    }
+                    catch(\Exception $e)
+                    {
+                      $name = ($cid->claim_ID) . "_" . ($filez->claimReqFile_ID + 1) . "." . $extension;
+                    }
+
+                    $fi->claimReq_picture = $name;
+
+                    $file->move(public_path().'/image/claim_files/', $name);
+                   }
+                }
+
+              if($fi->claimReq_picture2 == null)
+                {
+                  if($req->hasFile($pic2))
+                  {
+                    $file = $req->file($pic2);
+
+                    $extension = \File::extension($file->getClientOriginalName());
+                    try
+                    {
+                      $name = ($cid->claim_ID) . "_" . ($filez->claimReqFile_ID + 2) . "." . $extension;
+                    }
+                    catch(\Exception $e)
+                    {
+                      $name = ($cid->claim_ID) . "_" . ($filez->claimReqFile_ID + 2) . "." . $extension;
+                    }
+
+                    $fi->claimReq_picture2 = $name;
+
+                    $file->move(public_path().'/image/claim_files/', $name);
+                   }
+                }
+
+              if($fi->claimReq_picture3 == null)
+                {
+                  if($req->hasFile($pic3))
+                  {
+                    $file = $req->file($pic3);
+
+                    $extension = \File::extension($file->getClientOriginalName());
+                    try
+                    {
+                      $name = ($cid->claim_ID) . "_" . ($filez->claimReqFile_ID + 3) . "." . $extension;
+                    }
+                    catch(\Exception $e)
+                    {
+                      $name = ($cid->claim_ID) . "_" . ($filez->claimReqFile_ID + 3) . "." . $extension;
+                    }
+
+                    $fi->claimReq_picture3 = $name;
+
+                    $file->move(public_path().'/image/claim_files/', $name);
+                   }
+                } 
+
+              if($fi->claimReq_picture4 == null)
+              {
+                if($req->hasFile($pic4))
+                {
+                  $file = $req->file($pic4);
+
+                  $extension = \File::extension($file->getClientOriginalName());
+                  try
+                  {
+                    $name = ($cid->claim_ID) . "_" . ($filez->claimReqFile_ID + 4) . "." . $extension;
+                  }
+                  catch(\Exception $e)
+                  {
+                    $name = ($cid->claim_ID) . "_" . ($filez->claimReqFile_ID + 4) . "." . $extension;
+                  }
+
+                  $fi->claimReq_picture4 = $name;
+
+                  $file->move(public_path().'/image/claim_files/', $name);
+                 }
+              }
+
+              if($fi->claimReq_picture5 == null)
+              {
+                if($req->hasFile($pic5))
+                {
+                  $file = $req->file($pic5);
+
+                  $extension = \File::extension($file->getClientOriginalName());
+                  try
+                  {
+                    $name = ($cid->claim_ID) . "_" . ($filez->claimReqFile_ID + 5) . "." . $extension;
+                  }
+                  catch(\Exception $e)
+                  {
+                    $name = ($cid->claim_ID) . "_" . ($filez->claimReqFile_ID + 5) . "." . $extension;
+                  }
+
+                  $fi->claimReq_picture5 = $name;
+
+                  $file->move(public_path().'/image/claim_files/', $name);
+                 }
+              }
+
+              try
+              {
+                $fi->save();
+                // alert()
+                // ->success('Record Saved', "Success")
+                // ->persistent("Close");
+              }
+              catch(Exception $e)
+              {
+                $message = $e->getCode();
+                if($message == 23000)
+                {
+                    alert()
+                    ->error('ERROR', $e->getMessage())
+                    ->persistent("Close");
+                }
+                else if($message == 22001)
+                {
+                  alert()
+                  ->error('ERROR', $e->getMessage())
+                  ->persistent("Close");
+                }
+                else
+                {
+                  alert()
+                  ->error('ERROR', $e->getMessage())
+                  ->persistent("Close");
+                }
+              }
+
+            }
+          }
+        }
+      }
+
+    alert()
+    ->success('Record Saved', "Success")
+    ->persistent("Close");
+    return Redirect::back();
   }
 
   public function forward_manager(Request $req)

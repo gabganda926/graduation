@@ -623,14 +623,13 @@
                             </div>
                         </div>
                     </div>
-
+                    <form name = "claimrequest" id = "claimrequest" action = "/admin/transaction/claim-create-request-walkin/submit" method = "POST" enctype="multipart/form-data">
                      <div class="card" id="clDet">
                         <div class="header">
                         <h3 style="text-align: center;"><img src="{{ URL::asset ('images/icons/closed.png')}}" style="height: 50px; width: 50px;"> II. Details of Claim/Loss </h3>
                         <div class="divider" style="margin-bottom:20px;"></div>
                         </div>
                         <div class="body">
-                        <form name = "claimrequest" id = "claimrequest" action = "/admin/transaction/claim-create-request-walkin/submit" method = "POST">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <div class="row clearfix">
                                 <div class="col-md-4">
@@ -831,8 +830,12 @@
                                 <div class="col-md-6">
                                     <button type="button" id="notifNext"  class="btn btn-block bg-teal waves-effect left" disabled onclick="
                                     if($('#claimrequest').valid())
-                                    { 
-                                    buttonAddMore();
+                                    {
+                                    buttonAddMoreButton();
+                                    buttonAddMoreButton2();
+                                    // buttonAddMoreButton3();
+                                    // buttonAddMoreButton4();
+                                    // buttonAddMoreButton5();
                                     $(this).parents('#notifBy').hide(800);
                                     $('#upDoc').show(800);
                                     $('#notifiedBy').removeClass('active');
@@ -861,6 +864,7 @@
                                 <div class="form-line">
                                     <label for="claimtypez"><small>Claim Type: </small></label> <!-- AUTO GENERATED -->
                                     <small><b><input type="text" id="claimtypez" class="form-control" readonly="true" style="font-size: 20px"></b></small>
+                                    <input type="hidden" id="divID" name="divID">
                                 </div>
                             </div>
                             <div class="body table-responsive">
@@ -934,9 +938,9 @@
                                     </button>
                                 </div>
                             </div>
-                            </form>
                         </div> <!-- end of body -->
                     </div> <!-- end of card -->
+                    </form>
                 </div>
             </div> 
         </div>
@@ -1071,32 +1075,32 @@
             $('#companyClient').hide(800);
         }
 
-        function buttonAddMore(){
-            var next = 1;
-            $(".add-more").click(function(e){
-                e.preventDefault();
-                var addto = "#field" + next;
-                var addRemove = "#field" + (next);
-                next = next + 1;
-                var newIn = '<input autocomplete="off" id="field' + next + '" name="field' + next + '" type="file">';
-                var newInput = $(newIn);
-                var removeBtn = '<button id="remove' + (next - 1) + '" class="btn btn-danger remove-me" >- Remove</button></div><div id="field"><br/>';
-                var removeButton = $(removeBtn);
-                $(addto).after(newInput);
-                $(addRemove).after(removeButton);
-                $("#field" + next).attr('data-source',$(addto).attr('data-source'));
-                $("#count").val(next);  
+        // function buttonAddMore(){
+        //     var next = 1;
+        //     $(".add-more").click(function(e){
+        //         e.preventDefault();
+        //         var addto = "#field" + next;
+        //         var addRemove = "#field" + (next);
+        //         next = next + 1;
+        //         var newIn = '<input autocomplete="off" id="field' + next + '" name="field' + next + '" type="file">';
+        //         var newInput = $(newIn);
+        //         var removeBtn = '<button id="remove' + (next - 1) + '" class="btn btn-danger remove-me" >- Remove</button></div><div id="field"><br/>';
+        //         var removeButton = $(removeBtn);
+        //         $(addto).after(newInput);
+        //         $(addRemove).after(removeButton);
+        //         $("#field" + next).attr('data-source',$(addto).attr('data-source'));
+        //         $("#count").val(next);  
                 
-                    $('.remove-me').click(function(e){
-                        e.preventDefault();
-                        $("br").remove();
-                        var fieldNum = this.id.charAt(this.id.length-1);
-                        var fieldID = "#field" + fieldNum;
-                        $(this).remove();
-                        $(fieldID).remove();
-                    });
-            });  
-        }
+        //             $('.remove-me').click(function(e){
+        //                 e.preventDefault();
+        //                 $("br").remove();
+        //                 var fieldNum = this.id.charAt(this.id.length-1);
+        //                 var fieldID = "#field" + fieldNum;
+        //                 $(this).remove();
+        //                 $(fieldID).remove();
+        //             });
+        //     });  
+        // }
 
         function getInsId(inid){
            inid = $('#insid').val();
@@ -1360,8 +1364,6 @@
             }
          });
 
-        var reqcount = 0;
-
         $('#claim_type').on('change textInput input', function () {
             $('#continue').attr('disabled', false);
             @foreach ($ctype as $type)
@@ -1373,11 +1375,8 @@
                     @foreach ($creq as $req)
                         @if($req->del_flag == 0)
                         @if($req->claimReq_Type == $type->claimType_ID)
-                            var option = '<tr><td>{{ $req->claimRequirement }}</td><td><form class="input-append"><div id="field"><input autocomplete="off" class="input" id="field1" name="prof1" type="file"/><button id="b1" class="btn add-more" type="button">+ Add more File</button><br/></div></form></td></tr>';
+                            var option = '<tr><td>{{ $req->claimRequirement }}</td><td><input autocomplete="off" class="input" id="{{$req->claimReq_ID}}_1" name="{{$req->claimReq_ID}}_1" type="file"/><button id="b1" class="btn {{$req->claimReq_ID}}_1_add_class" type="button">+ Add more File</button><br/><div id="{{$req->claimReq_ID}}_2"><br/><input autocomplete="off" class="input" id="{{$req->claimReq_ID}}_2" name="{{$req->claimReq_ID}}_2" type="file"/><button id="b2" class="btn {{$req->claimReq_ID}}_2_add_class" type="button">+ Add more File</button><button id="rem2" class="btn btn-danger {{$req->claimReq_ID}}_2_remove_class" >- Remove</button><br/></div><div id="{{$req->claimReq_ID}}_3"><br/><input autocomplete="off" class="input" id="{{$req->claimReq_ID}}_3" name="{{$req->claimReq_ID}}_3" type="file"/><button id="b3" class="btn btn {{$req->claimReq_ID}}_3_add_class" type="button">+ Add more File</button><button id="rem3" class="btn btn-danger {{$req->claimReq_ID}}_3_remove_class" >- Remove</button><br/></div><div id="{{$req->claimReq_ID}}_4"><br/><input autocomplete="off" class="input" id="{{$req->claimReq_ID}}_4" name="{{$req->claimReq_ID}}_4" type="file"/><button id="b4" class="btn btn {{$req->claimReq_ID}}_4_add_class" type="button">+ Add more File</button><button id="rem4" class="btn btn-danger {{$req->claimReq_ID}}_4_remove_class" >- Remove</button><br/></div><div id="{{$req->claimReq_ID}}_5"><br/><input autocomplete="off" class="input" id="{{$req->claimReq_ID}}_5" name="{{$req->claimReq_ID}}_5" type="file"/><button id="rem5" class="btn btn-danger {{$req->claimReq_ID}}_5_remove_class" >- Remove</button></div></td></tr>';
                             $('#files tbody').append(option);
-                            reqcount += 1;
-                            $('#claimid').val(reqcount);
-                            console.log("REQCOUNT " + $('#reqc').val());
                         @endif
                         @endif
                     @endforeach
@@ -1385,6 +1384,107 @@
                 @endif
             @endforeach
         });
+
+        function buttonAddMoreButton(){
+            @foreach ($ctype as $type)
+                @if($type->del_flag == 0)
+                if('{{$type->claimType_ID}}' == $('#claim_type option:selected').val()){
+                    @foreach ($creq as $req)
+                        @if($req->del_flag == 0)
+                        @if($req->claimReq_Type == $type->claimType_ID)
+                            $('#{{$req->claimReq_ID}}_2').hide();
+                            $('#{{$req->claimReq_ID}}_3').hide();
+                            $('#{{$req->claimReq_ID}}_4').hide();
+                            $('#{{$req->claimReq_ID}}_5').hide();
+                        @endif
+                        @endif
+                    @endforeach
+                }
+                @endif
+            @endforeach
+        }
+
+        function buttonAddMoreButton2(){
+            @foreach ($ctype as $type)
+                @if($type->del_flag == 0)
+                if('{{$type->claimType_ID}}' == $('#claim_type option:selected').val()){
+                    @foreach ($creq as $req)
+                        @if($req->del_flag == 0)
+                        @if($req->claimReq_Type == $type->claimType_ID)
+                            $(".{{$req->claimReq_ID}}_1_add_class").click(function(e){
+                                e.preventDefault();
+                                $('#{{$req->claimReq_ID}}_2').show(200);
+                                
+                                    $('.{{$req->claimReq_ID}}_2_remove_class').click(function(e){
+                                        e.preventDefault();
+                                        $('#{{$req->claimReq_ID}}_2').hide(200);
+                                    });
+                            }); 
+                            $(".{{$req->claimReq_ID}}_2_add_class").click(function(e){
+                                e.preventDefault();
+                                $('#{{$req->claimReq_ID}}_3').show(200);
+                                
+                                    $('.{{$req->claimReq_ID}}_3_remove_class').click(function(e){
+                                        e.preventDefault();
+                                        $('#{{$req->claimReq_ID}}_3').hide(200);
+                                    });
+                            });  
+                            $(".{{$req->claimReq_ID}}_3_add_class").click(function(e){
+                                e.preventDefault();
+                                $('#{{$req->claimReq_ID}}_4').show(200);
+                                
+                                    $('.{{$req->claimReq_ID}}_4_remove_class').click(function(e){
+                                        e.preventDefault();
+                                        $('#{{$req->claimReq_ID}}_4').hide(200);
+                                    });
+                            }); 
+                            $(".{{$req->claimReq_ID}}_4_add_class").click(function(e){
+                                e.preventDefault();
+                                $('#{{$req->claimReq_ID}}_5').show(200);
+                                
+                                    $('.{{$req->claimReq_ID}}_5_remove_class').click(function(e){
+                                        e.preventDefault();
+                                        $('#{{$req->claimReq_ID}}_5').hide(200);
+                                    });
+                            });   
+                        @endif
+                        @endif
+                    @endforeach
+                }
+                @endif
+            @endforeach
+        }
+
+        // function buttonAddMoreButton3(){
+        //     $(".add-more").click(function(e){
+        //         e.preventDefault();
+        //         $('#button3').show(800);
+                
+        //             $('.remove-me').click(function(e){
+        //                 e.preventDefault();
+        //                 $('#button3').hide(800);
+        //             });
+        //     });  
+        // }
+
+        // function buttonAddMoreButton4(){
+        //     $(".add-more").click(function(e){
+        //         e.preventDefault();
+        //         $('#button4').show(800);
+                
+        //             $('.remove-me').click(function(e){
+        //                 e.preventDefault();
+        //                 $('#button4').hide(800);
+        //             });
+        //     });  
+        // }
+
+        // function buttonAddMoreButton5(){
+        //     $('.remove-me').click(function(e){
+        //         e.preventDefault();
+        //         $('#button5').hide(800);
+        //     }); 
+        // }
 
         var count1 = 0;
         var count2=0;

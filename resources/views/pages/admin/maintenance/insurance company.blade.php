@@ -1,10 +1,10 @@
 @extends('pages.admin.master')
 
-@section('title','Insurance Company - Maintenance | i-Insure')
+@section('title','Insurance Company - Utilities | i-Insure')
 
-@section('maintenance','active')
+@section('utilities','active')
 
-@section('insurance','active')
+@section('ins','active')
 
 @section('company','active')
 
@@ -818,9 +818,9 @@
                     <div class="card">
                         <div class="header">
                             <h2><b>
-                                MAINTENANCE - INSURANCE COMPANY
+                                UTILITIES - INSURANCE COMPANY
                             </b></h2>
-                            <ul class="header-dropdown m-r--5">
+                            <!-- <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
                                     <li>
                                 <button id = "addbtn" form = "add" type="submit" class="btn bg-blue waves-effect" data-toggle="collapse" data-target="#addCompModal" onclick="
@@ -840,14 +840,14 @@
                                 </button>
                                 </li>
                                 </li>
-                            </ul>
+                            </ul> -->
                         </div>
                         <div class="body">
                         <div class="body table-responsive">
                             <table class="table table-bordered table-striped table-hover dataTable js-basic-example animated lightSpeedIn active">
                                 <thead>
                                     <tr class="bg-blue-grey">
-                                        <th class="col-md-1"></th>
+                                        <!-- <th class="col-md-1"></th> -->
                                         <th>Company Name</th>
                                         <th>Address</th>
                                         <th>Policy Numbers</th>
@@ -869,10 +869,10 @@
                                       @foreach($pInfo as $Info)
                                        @if($Info->pinfo_ID == $cper->personal_info_ID)
                                        <tr>
-                                        <td>
+                                        <!-- <td>
                                             <input type="checkbox" id="{{$comp->comp_ID}}" class="filled-in chk-col-red checkCheckbox" data-id = "{{$comp->comp_ID}}"/>
                                             <label for="{{$comp->comp_ID}}"></label>
-                                        </td>
+                                        </td> -->
                                         <td>
                                          {{ $comp->comp_name }}
                                         </td>

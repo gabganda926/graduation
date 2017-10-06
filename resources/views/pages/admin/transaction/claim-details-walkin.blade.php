@@ -150,6 +150,8 @@
                                                             return false;
                                     ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.1 Progress</a>
                             <a href="javascript:void(0);" id="uploadDoc" class="list-group-item" onclick="
+                                    buttonAddMoreButton();
+                                    buttonAddMoreButton2();
                                     $('#uploadDoc').addClass('active');
                                     $('#claimDoc').addClass('active');
                                     $('#upDoc').show(800);
@@ -708,18 +710,18 @@
                                         <div class="form-line">
                                             <label><small>Date of Loss:</small></label>
                                             <div class="form-row show-inputbtns">
-                                                    <input id = "date_incident" name = "date_incident" type="date" data-date-inline-picker="false" data-date-open-on-focus="true" class="form-control" disabled />
+                                                    <input id = "date_incident" name = "date_incident" type="text" data-date-inline-picker="false" data-date-open-on-focus="true" class="form-control" disabled />
                                         </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-md-2">
+                                <div class="col-md-4">
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <label><small>Time of Loss:</small></label>
                                             <div class="form-row show-inputbtns">
-                                                    <input id = "time_incident" name = "time_incident" type="time" data-date-inline-picker="false" data-date-open-on-focus="true" class="form-control" disabled />
+                                                    <input id = "time_incident" name = "time_incident" type="text" data-date-inline-picker="false" data-date-open-on-focus="true" class="form-control" disabled />
                                             </div>
                                         </div>
                                     </div>
@@ -840,8 +842,8 @@
                         </div>
                         <div class="body" id="reqs">
                             <div class="progress">
-                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;">
-                                    75%
+                                <div id="prog1" class="progress-bar progress-bar-success" role="progressbar" aria-valuemax="100" style="width: 50%;">
+                                    <label id="lblprog" for="prog1"></label>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -851,7 +853,7 @@
                                 </div>
                             </div>
                             <div class="body table-responsive">
-                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                <table id="reqFiles" class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                     <thead>
                                         <tr>
                                             <th>Requirement</th>
@@ -860,11 +862,11 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>Photographs of the damaged vehicle </td>
+                                            <!-- <td>Photographs of the damaged vehicle </td>
                                             <td><input type="checkbox" id="md_checkbox_2" class="chk-col-pink" checked disabled="disable" />
-                                                <label for="md_checkbox_2"></label></td>
+                                                <label for="md_checkbox_2"></label></td> -->
                                         </tr>
-                                        <tr>
+                                        <!-- <tr>
                                             <td>Original Car Registration & Official Receipt </td>
                                             <td><input type="checkbox" id="md_checkbox_3" class="chk-col-pink" checked disabled="disable" />
                                                 <label for="md_checkbox_3"></label></td>
@@ -883,35 +885,35 @@
                                             <td>Vehicle Manual and Warranty Booklet </td>
                                             <td><input type="checkbox" id="md_checkbox_6" class="chk-col-pink" disabled="disable" />
                                                 <label for="md_checkbox_6"></label></td>
-                                        </tr>
+                                        </tr> -->
                                     </tbody>
                                 </table>   
                             </div>
                         </div> <!-- end of body -->
                     </div> <!-- end of card -->
 
+                    <form id="sv" name = "sv" method="POST" action = "/admin/transaction/claim-details-walkin/submit" enctype="multipart/form-data">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <div class="col-md-4" style = "display: none;">
+                       <input id = "time" name = "time" type="text" class="form-control">
+                    </div>
+                    <div class="col-md-2" style = "display: none;">
+                       <input id = "claimid" name = "claimid" type="text" class="form-control">
+                    </div>
+                    <div class="col-md-2" style = "display: none;">
+                       <input id = "cty" name = "cty" type="text" class="form-control">
+                    </div>
+                    <div class="col-md-2" style = "display: none;">
+                       <input id = "reqid" name = "reqid" type="text" class="form-control">
+                    </div>
                      <div class="card" id="upDoc">
                         <div class="header">
-                        <h3 style="text-align: center;"><img src="{{ URL::asset ('images/icons/closed.png')}}" style="height: 50px; width: 50px;"> IV. Upload Claim Documents/Requirements 
-                            <ul class="header-dropdown m-r--5">
-                                <li class="dropdown">
-                                    <li>
-                                        <button id="upDate" type="button" class="btn bg-green waves-effect" onclick="
-                                        $('#saveCh').show(200);
-                                        $('#upDate').hide(200);
-                                        $('#viewF').hide(200);
-                                        $('#field').show(200);">
-                                            <i class="material-icons">update</i>
-                                            <span>Update</span>
-                                        </button>
-                                    </li>
-                                </li>
-                            </ul></h3>
+                        <h3 style="text-align: center;"><img src="{{ URL::asset ('images/icons/closed.png')}}" style="height: 50px; width: 50px;"> IV. Upload Claim Documents/Requirements</h3>
                         <div class="divider" style="margin-bottom:20px;"></div>
                         </div>
                         <div class="body" id="filebod">
                             <div class="body table-responsive">
-                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                <table id="upFile" class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                     <thead>
                                         <tr>
                                             <th class="col-md-7">Requirement</th>
@@ -919,30 +921,264 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Photographs of the damaged vehicle </td>
-                                            <td><button id="viewF" class="btn btn-primary btn-block waves-effect" data-toggle="modal" data-target="">VIEW</button>
-                                            <form class="input-append">
-                                                <div id="field"><input autocomplete="off" class="input" id="field1" name="prof1" type="file"/><button id="b1" class="btn add-more" type="button">+ Add more File</button><br/></div>
-                                            </form></td>
-                                        </tr>
+                                        @foreach($cfile as $cf)
+                                            @if($creq->claim_ID == $cf->claim_ID)
+                                                @foreach($crequire as $cr)
+                                                    @if($cf->claimReq_ID == $cr->claimReq_ID)
+                                                        @if($cf->claimReq_picture != null || $cf->claimReq_picture2 != null || $cf->claimReq_picture3 != null || $cf->claimReq_picture4 != null || $cf->claimReq_picture5 != null)
+                                                            <tr><td>{{ $cr->claimRequirement }}</td>
+                                                                <td><button type="button" id="{{ $cf->claimReqFile_ID }}" class="btn bg-blue btn-block waves-effect" data-toggle="modal" data-target="#viewPics" 
+                                                                data-pic1='{!! "/image/claim_files/".$cf->claimReq_picture !!}'
+                                                                data-pic2='{!! "/image/claim_files/".$cf->claimReq_picture2 !!}'
+                                                                data-pic3='{!! "/image/claim_files/".$cf->claimReq_picture3 !!}'
+                                                                data-pic4='{!! "/image/claim_files/".$cf->claimReq_picture4 !!}'
+                                                                data-pic5='{!! "/image/claim_files/".$cf->claimReq_picture5 !!}'
+
+                                                                onclick="
+                                                                var p1 = $(this).data('pic1');
+                                                                var p2 = $(this).data('pic2');
+                                                                var p3 = $(this).data('pic3');
+                                                                var p4 = $(this).data('pic4');
+                                                                var p5 = $(this).data('pic5');
+
+                                                                $('#img1').attr('src', p1);
+                                                                $('#img2').attr('src', p2);
+                                                                $('#img3').attr('src', p3);
+                                                                $('#img4').attr('src', p4);
+                                                                $('#img5').attr('src', p5);
+                                                                ">View</button>
+                                                                </td>
+                                                            </tr>
+
+                                                        @endif
+                                                        @if($cf->claimReq_picture == null && $cf->claimReq_picture2 == null && $cf->claimReq_picture3 == null && $cf->claimReq_picture4 == null && $cf->claimReq_picture5 == null)
+                                                            <tr><td>{{ $cr->claimRequirement }}</td>
+                                                                <td>
+                                                                    <div id="up_{{$cr->claimReq_ID}}"><button id="upDate" type="button" class="btn bg-green waves-effect" onclick="
+                                                                        $(this).parents('#up_{{$cr->claimReq_ID}}').hide(200);
+                                                                        $('#{{$cr->claimReq_ID}}_1').show(200);
+                                                                        $('#save_{{$cr->claimReq_ID}}').show(200);">
+                                                                        <i class="material-icons">update</i>
+                                                                        <span>Update</span>
+                                                                    </button></div>
+                                                                    <div id="{{$cr->claimReq_ID}}_1"><input autocomplete="off" class="input" id="{{$cr->claimReq_ID}}_1" name="{{$cr->claimReq_ID}}_1" type="file"/><button id="b1" class="btn bg-green {{$cr->claimReq_ID}}_1_add_class" type="button">+ Add more File</button><br/></div>
+
+                                                                    <div id="{{$cr->claimReq_ID}}_2"><br/><input autocomplete="off" class="input" id="{{$cr->claimReq_ID}}_2" name="{{$cr->claimReq_ID}}_2" type="file"/><button id="b2" class="btn bg-green {{$cr->claimReq_ID}}_2_add_class" type="button">+ Add more File</button><button id="rem2" class="btn btn-danger {{$cr->claimReq_ID}}_2_remove_class" >- Remove</button><br/></div
+                                                                    >
+                                                                    <div id="{{$cr->claimReq_ID}}_3"><br/><input autocomplete="off" class="input" id="{{$cr->claimReq_ID}}_3" name="{{$cr->claimReq_ID}}_3" type="file"/><button id="b3" class="btn bg-green {{$cr->claimReq_ID}}_3_add_class" type="button">+ Add more File</button><button id="rem3" class="btn btn-danger {{$cr->claimReq_ID}}_3_remove_class" >- Remove</button><br/></div>
+                                                                    <div id="{{$cr->claimReq_ID}}_4"><br/><input autocomplete="off" class="input" id="{{$cr->claimReq_ID}}_4" name="{{$cr->claimReq_ID}}_4" type="file"/><button id="b4" class="btn bg-green {{$cr->claimReq_ID}}_4_add_class" type="button">+ Add more File</button><button id="rem4" class="btn btn-danger {{$cr->claimReq_ID}}_4_remove_class" >- Remove</button><br/></div>
+                                                                    <div id="{{$cr->claimReq_ID}}_5"><br/><input autocomplete="off" class="input" id="{{$cr->claimReq_ID}}_5" name="{{$cr->claimReq_ID}}_5" type="file"/><button id="rem5" class="btn btn-danger {{$cr->claimReq_ID}}_5_remove_class" >- Remove</button></div><br/>
+                                                                    <div id="save_{{$cr->claimReq_ID}}">
+                                                                        <button id="saveCh" type="button" class="btn bg-green btn-block waves-effect" onclick="
+                                                                            $('#reqid').val('{{ $cf->claimReqFile_ID }}');
+                                                                            document.getElementById('time').value = formatDate(new Date());
+                                                                            document.getElementById('claimid').value = getClaimId();
+                                                                            document.getElementById('cty').value = getClaimTypeId();
+                                                                            document.getElementById('reqid').value = getReqFileId();
+                                                                            swal({
+                                                                              title: 'Are you sure?',
+                                                                              type: 'warning',
+                                                                              showCancelButton: true,
+                                                                              confirmButtonColor: '#DD6B55',
+                                                                              confirmButtonText: 'Continue',
+                                                                              cancelButtonText: 'Cancel',
+                                                                              closeOnConfirm: false,
+                                                                              closeOnCancel: false
+                                                                            },
+                                                                            function(isConfirm){
+                                                                              if (isConfirm) {
+                                                                                $('#sv').submit();
+                                                                              } else {
+                                                                                  swal({
+                                                                                  title: 'Cancelled',
+                                                                                  type: 'warning',
+                                                                                  timer: 500,
+                                                                                  showConfirmButton: false
+                                                                                  });
+                                                                              }
+                                                                            });
+                                                                            ">SAVE CHANGES</button>
+                                                                        <button id="canc" type="button" class="btn btn-block waves-effect" onclick="
+                                                                            $('#{{$cr->claimReq_ID}}_1').hide(200);
+                                                                            $('#{{$cr->claimReq_ID}}_2').hide(200);
+                                                                            $('#{{$cr->claimReq_ID}}_3').hide(200);
+                                                                            $('#{{$cr->claimReq_ID}}_4').hide(200);
+                                                                            $('#{{$cr->claimReq_ID}}_5').hide(200);
+                                                                            $('#save_{{$cr->claimReq_ID}}').hide(200);
+                                                                            $('#up_{{$cr->claimReq_ID}}').show(200);">
+                                                                            <span>Cancel</span>
+                                                                        </button>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        @endif
+                                                    @endif
+                                                @endforeach
+                                            @endif
+                                        @endforeach
                                     </tbody>
                                 </table>   
                             </div>
-
-                            <button id="saveCh" type="button" class="btn bg-green btn-block waves-effect" onclick="
-                            $('#upDate').show(200);
-                            $('#saveCh').hide(200);
-                            $('#viewF').show(200);
-                            $('#field').hide(200);">SAVE CHANGES</button>
                         </div> <!-- end of body -->
                     </div> <!-- end of card -->
+                    </form>
                 </div>
             </div> 
         </div>
     </section>
 
+    <!-- CHOOSE INST MODAL -->
+        <div class="modal fade" id="viewPics" role="dialog">
+            <div class="modal-dialog modal-lg animated zoomInLeft active" role="document">
+                <div class="modal-content">
+                    <div class="modal-header modal-header-view">
+                        <h4><br/>IMAGES</h4>
+                    </div>
+          
+                    <div class="modal-body">
+                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                            <!-- Indicators -->
+                            <ol class="carousel-indicators">
+                                @foreach($cfile as $cf)
+                                    @if($creq->claim_ID == $cf->claim_ID)
+                                        @foreach($crequire as $cr)
+                                            @if($cf->claimReq_ID == $cr->claimReq_ID)
+
+                                                @if($cf->claimReq_picture != null)       
+                                                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                                                @endif
+
+                                                @if($cf->claimReq_picture2 != null)
+                                                    <li data-target="#carousel-example-generic" data-slide-to="1"></li> 
+                                                @endif
+
+                                                @if($cf->claimReq_picture3 != null)
+                                                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                                                @endif
+
+                                                @if($cf->claimReq_picture4 != null)
+                                                    <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+                                                @endif
+
+                                                @if($cf->claimReq_picture5 != null)
+                                                    <li data-target="#carousel-example-generic" data-slide-to="4"></li>
+                                                @endif
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                @endforeach  
+                                                    
+                            </ol>
+
+                            <!-- Wrapper for slides -->
+                            <div class="carousel-inner" role="listbox">
+                            @foreach($cfile as $cf)
+                                @if($creq->claim_ID == $cf->claim_ID)
+                                    @foreach($crequire as $cr)
+                                        @if($cf->claimReq_ID == $cr->claimReq_ID)
+
+                                            @if($cf->claimReq_picture != null)
+                                                <div class="item active">
+                                                    <img id="img1" src="{{ URL::asset('image/default-image.png') }}" />
+                                                </div>
+                                            @endif
+
+                                            @if($cf->claimReq_picture2 != null)
+                                                <div class="item">
+                                                    <img id="img2" src="{{ URL::asset('image/default-image.png') }}" />
+                                                </div>
+                                            @endif
+
+                                            @if($cf->claimReq_picture3 != null)
+                                                <div class="item">
+                                                    <img id="img3" src="{{ URL::asset('image/default-image.png') }}" />
+                                                </div>
+                                            @endif
+
+                                            @if($cf->claimReq_picture4 != null)
+                                                <div class="item">
+                                                    <img id="img4" src="{{ URL::asset('image/default-image.png') }}" />
+                                                </div>
+                                            @endif
+
+                                            @if($cf->claimReq_picture5 != null)
+                                                <div class="item">
+                                                    <img id="img5" src="{{ URL::asset('image/default-image.png') }}" />
+                                                </div>
+                                            @endif
+                                        @endif
+                                    @endforeach
+                                @endif
+                            @endforeach           
+                            </div>
+
+                            <!-- Controls -->
+                            <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="modal-footer js-sweetalert">
+                        <div class="row clearfix">
+                        <div class="col-md-4"></div>
+                          <div class="col-md-4">
+                            <button class="btn btn-block waves-effect left" data-dismiss="modal">CLOSE</button>
+                          </div>
+                        <div class="col-md-4"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- #END# ADD INST MODAL -->
+
     <script type="text/javascript">
+
+        function formatDate(date)
+        {
+          var monthNames = [
+            "January", "February", "March",
+            "April", "May", "June", "July",
+            "August", "September", "October",
+            "November", "December"
+          ];
+
+          var day = date.getDate();
+          var monthIndex = date.getMonth() + 1;
+          var year = date.getFullYear();
+          var h = addZero(date.getHours());
+          var m = addZero(date.getMinutes());
+          var s = addZero(date.getSeconds());
+
+          return year + '-' + monthIndex + '-' + day + ' ' + h + ':' + m + ':' + s;
+        }
+
+        function addZero(i) {
+                    if (i < 10) {
+                        i = "0" + i;
+                    }
+                    return i;
+                }
+
+        function getClaimId(clid){
+           clid = $('#claimid').val();
+           return clid;
+        } 
+
+        function getClaimTypeId(clid1){
+           clid1 = $('#cty').val();
+           return clid1;
+        } 
+
+        function getReqFileId(clid){
+           clid2 = $('#reqid').val();
+           return clid2;
+        } 
 
         function show_Ind()
         {
@@ -962,6 +1198,74 @@
             $('#companyClient').show(800);
         }
 
+        function buttonAddMoreButton(){
+            @foreach ($ctype as $type)
+                @if($type->del_flag == 0)
+                    @foreach($crequire as $cr)
+                        @if($cr->del_flag == 0)
+                            @if($cr->claimReq_Type == $type->claimType_ID)
+                                $('#{{$cr->claimReq_ID}}_1').hide();
+                                $('#{{$cr->claimReq_ID}}_2').hide();
+                                $('#{{$cr->claimReq_ID}}_3').hide();
+                                $('#{{$cr->claimReq_ID}}_4').hide();
+                                $('#{{$cr->claimReq_ID}}_5').hide();
+                                $('#save_{{$cr->claimReq_ID}}').hide();
+                            @endif
+                        @endif
+                    @endforeach
+                @endif
+            @endforeach
+        }
+
+        function buttonAddMoreButton2(){
+            @foreach ($ctype as $type)
+                @if($type->del_flag == 0)
+                    @foreach($crequire as $cr)
+                        @if($cr->del_flag == 0)
+                        @if($cr->claimReq_Type == $type->claimType_ID)
+                            $(".{{$cr->claimReq_ID}}_1_add_class").click(function(e){
+                                e.preventDefault();
+                                $('#{{$cr->claimReq_ID}}_2').show(200);
+                                
+                                    $('.{{$cr->claimReq_ID}}_2_remove_class').click(function(e){
+                                        e.preventDefault();
+                                        $('#{{$cr->claimReq_ID}}_2').hide(200);
+                                    });
+                            }); 
+                            $(".{{$cr->claimReq_ID}}_2_add_class").click(function(e){
+                                e.preventDefault();
+                                $('#{{$cr->claimReq_ID}}_3').show(200);
+                                
+                                    $('.{{$cr->claimReq_ID}}_3_remove_class').click(function(e){
+                                        e.preventDefault();
+                                        $('#{{$cr->claimReq_ID}}_3').hide(200);
+                                    });
+                            });  
+                            $(".{{$cr->claimReq_ID}}_3_add_class").click(function(e){
+                                e.preventDefault();
+                                $('#{{$cr->claimReq_ID}}_4').show(200);
+                                
+                                    $('.{{$cr->claimReq_ID}}_4_remove_class').click(function(e){
+                                        e.preventDefault();
+                                        $('#{{$cr->claimReq_ID}}_4').hide(200);
+                                    });
+                            }); 
+                            $(".{{$cr->claimReq_ID}}_4_add_class").click(function(e){
+                                e.preventDefault();
+                                $('#{{$cr->claimReq_ID}}_5').show(200);
+                                
+                                    $('.{{$cr->claimReq_ID}}_5_remove_class').click(function(e){
+                                        e.preventDefault();
+                                        $('#{{$cr->claimReq_ID}}_5').hide(200);
+                                    });
+                            });   
+                        @endif
+                        @endif
+                    @endforeach
+                @endif
+            @endforeach
+        }
+
         window.onload = function() {
           document.getElementById('individualClient').style.display = 'none';
           document.getElementById('companyClient').style.display = 'none';
@@ -969,23 +1273,23 @@
           document.getElementById('notifBy').style.display = 'none';
           document.getElementById('upDoc').style.display = 'none';
           document.getElementById('repp').style.display = 'none';
-          document.getElementById('saveCh').style.display = 'none';
-          document.getElementById('field').style.display = 'none';
+          // document.getElementById('saveCh').style.display = 'none';
+          // document.getElementById('una').style.display = 'none';
+          // document.getElementById('saveBtn').style.display = 'none';
           document.getElementById('progress').style.display = 'none';
-
-          @foreach($creq as $claims)
+          
             @foreach($cliacc as $ins)
                 @if($creq->account_ID == $ins->account_ID)
                     $('#c_pno').val('{{$ins->policy_number}}');
-                    $('#date_incident').val('{{$creq->lossDate}}');
-                    $('#time_incident').val('{{$creq->lossDate}}');
+                    $('#date_incident').val('{{\Carbon\Carbon::parse($creq->lossDate)->format("l, M-d-Y")}}');
+                    $('#time_incident').val('{{\Carbon\Carbon::parse($creq->lossDate)->format("h:i:s A")}}');
                     $('#place_incident').val('{{$creq->placeOfLoss}}');
                     $('#desc_incident').val('{{$creq->description}}');
                     @if($creq->notifiedByType == 1)
                         $("#radio_phold").prop("checked", true);
                         $("#radio_rep").prop("checked", false);
                     @endif
-                    @if($creq->notifiedByType == 1)
+                    @if($creq->notifiedByType == 2)
                         $("#radio_phold").prop("checked", false);
                         $("#radio_rep").prop("checked", true);
                         $('#repp').show(800);
@@ -1000,9 +1304,39 @@
                             @endif
                         @endforeach
                     @endif
+
+                    var done = 0;
+                    var total = 0;
+                    var per = 0;
                     @foreach($ctype as $ct)
                         @if($creq->claimType_ID == $ct->claimType_ID)
                             $('#claimtypez').val('{{$ct->claimType}}');
+                            @foreach ($cfile as $req)
+                                @if($creq->claim_ID == $req->claim_ID)
+                                    @foreach($crequire as $creqs)
+                                        @if($req->claimReq_ID == $creqs->claimReq_ID)
+                                            @if($req->claimReq_picture == null && $req->claimReq_picture2 == null && $req->claimReq_picture3 == null && $req->claimReq_picture4 == null && $req->claimReq_picture5 == null)
+                                                var option = '<tr><td>{{ $creqs->claimRequirement }}</td><td><input type="checkbox" id="{{ $req->claimReqFile_ID }}" class="chk-col-pink" disabled="disable" /><label for="{{ $req->claimReqFile_ID }}"></label></td></tr>';
+                                                    total++;
+                                                    per = Math.round((done/total)*100) +'%';
+                                                    $('#prog1').css({ width : per });   
+                                                    document.getElementById('lblprog').innerText = per;
+                                                    $('#saveCh').show();
+                                                $('#reqFiles tbody').append(option);
+                                            @endif
+                                            @if($req->claimReq_picture != null || $req->claimReq_picture2 != null || $req->claimReq_picture3 != null || $req->claimReq_picture4 != null || $req->claimReq_picture5 != null)
+                                                var option = '<tr><td>{{ $creqs->claimRequirement }}</td><td><input type="checkbox" id="{{ $req->claimReqFile_ID }}" class="chk-col-pink" checked disabled="disable" /><label for="{{ $req->claimReqFile_ID }}"></label></td></tr>';
+                                                    done++;
+                                                    total++;
+                                                    per = Math.round((done/total)*100) +'%';
+                                                    $('#prog1').css({ width : per });   
+                                                    document.getElementById('lblprog').innerText = per;
+                                                $('#reqFiles tbody').append(option);
+                                            @endif
+                                        @endif
+                                    @endforeach
+                                @endif
+                            @endforeach
                         @endif
                     @endforeach
                         @foreach($clist as $list)
@@ -1151,7 +1485,6 @@
                         @endforeach
                 @endif
             @endforeach
-        @endforeach
         };
 
     </script>
