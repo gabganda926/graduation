@@ -935,17 +935,26 @@
                                                                 data-pic5='{!! "/image/claim_files/".$cf->claimReq_picture5 !!}'
 
                                                                 onclick="
-                                                                var p1 = $(this).data('pic1');
-                                                                var p2 = $(this).data('pic2');
-                                                                var p3 = $(this).data('pic3');
-                                                                var p4 = $(this).data('pic4');
-                                                                var p5 = $(this).data('pic5');
-
-                                                                $('#img1').attr('src', p1);
-                                                                $('#img2').attr('src', p2);
-                                                                $('#img3').attr('src', p3);
-                                                                $('#img4').attr('src', p4);
-                                                                $('#img5').attr('src', p5);
+                                                                @if($cf->claimReq_picture != null)
+                                                                    var p1 = $(this).data('pic1');
+                                                                    $('#img1').attr('src', p1);
+                                                                @endif
+                                                                @if($cf->claimReq_picture2 != null)
+                                                                    var p2 = $(this).data('pic2');
+                                                                    $('#img2').attr('src', p2);
+                                                                @endif
+                                                                @if($cf->claimReq_picture3 != null)
+                                                                    var p3 = $(this).data('pic3');
+                                                                    $('#img3').attr('src', p3);
+                                                                @endif
+                                                                @if($cf->claimReq_picture4 != null)
+                                                                    var p4 = $(this).data('pic4');
+                                                                    $('#img4').attr('src', p4);
+                                                                @endif
+                                                                @if($cf->claimReq_picture5 != null)
+                                                                    var p5 = $(this).data('pic5');
+                                                                    $('#img5').attr('src', p5);
+                                                                @endif
                                                                 ">View</button>
                                                                 </td>
                                                             </tr>
@@ -1039,77 +1048,30 @@
                         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                             <!-- Indicators -->
                             <ol class="carousel-indicators">
-                                @foreach($cfile as $cf)
-                                    @if($creq->claim_ID == $cf->claim_ID)
-                                        @foreach($crequire as $cr)
-                                            @if($cf->claimReq_ID == $cr->claimReq_ID)
-
-                                                @if($cf->claimReq_picture != null)       
-                                                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                                                @endif
-
-                                                @if($cf->claimReq_picture2 != null)
-                                                    <li data-target="#carousel-example-generic" data-slide-to="1"></li> 
-                                                @endif
-
-                                                @if($cf->claimReq_picture3 != null)
-                                                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                                                @endif
-
-                                                @if($cf->claimReq_picture4 != null)
-                                                    <li data-target="#carousel-example-generic" data-slide-to="3"></li>
-                                                @endif
-
-                                                @if($cf->claimReq_picture5 != null)
-                                                    <li data-target="#carousel-example-generic" data-slide-to="4"></li>
-                                                @endif
-                                            @endif
-                                        @endforeach
-                                    @endif
-                                @endforeach  
-                                                    
+                                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="1"></li> 
+                                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="4"></li>                       
                             </ol>
 
                             <!-- Wrapper for slides -->
                             <div class="carousel-inner" role="listbox">
-                            @foreach($cfile as $cf)
-                                @if($creq->claim_ID == $cf->claim_ID)
-                                    @foreach($crequire as $cr)
-                                        @if($cf->claimReq_ID == $cr->claimReq_ID)
-
-                                            @if($cf->claimReq_picture != null)
-                                                <div class="item active">
-                                                    <img id="img1" src="{{ URL::asset('image/default-image.png') }}" />
-                                                </div>
-                                            @endif
-
-                                            @if($cf->claimReq_picture2 != null)
-                                                <div class="item">
-                                                    <img id="img2" src="{{ URL::asset('image/default-image.png') }}" />
-                                                </div>
-                                            @endif
-
-                                            @if($cf->claimReq_picture3 != null)
-                                                <div class="item">
-                                                    <img id="img3" src="{{ URL::asset('image/default-image.png') }}" />
-                                                </div>
-                                            @endif
-
-                                            @if($cf->claimReq_picture4 != null)
-                                                <div class="item">
-                                                    <img id="img4" src="{{ URL::asset('image/default-image.png') }}" />
-                                                </div>
-                                            @endif
-
-                                            @if($cf->claimReq_picture5 != null)
-                                                <div class="item">
-                                                    <img id="img5" src="{{ URL::asset('image/default-image.png') }}" />
-                                                </div>
-                                            @endif
-                                        @endif
-                                    @endforeach
-                                @endif
-                            @endforeach           
+                                <div class="item active">
+                                    <img id="img1" src="{{ URL::asset('image/default-image.png') }}" />
+                                </div>
+                                <div class="item">
+                                    <img id="img2" src="{{ URL::asset('image/default-image.png') }}" />
+                                </div>
+                                <div class="item">
+                                    <img id="img3" src="{{ URL::asset('image/default-image.png') }}" />
+                                </div>
+                                 <div class="item">
+                                    <img id="img4" src="{{ URL::asset('image/default-image.png') }}" />
+                                </div>
+                                 <div class="item">
+                                    <img id="img5" src="{{ URL::asset('image/default-image.png') }}" />
+                                </div>         
                             </div>
 
                             <!-- Controls -->

@@ -1139,25 +1139,27 @@
                                                     var now = $('#datengayon').val();
                                                     var incep_start = new Date('{{$insacc->inception_date}}');
                                                     var incep = new Date('{{$insacc->inception_date}}');
+
                                                     incep.setFullYear(incep.getFullYear() + 1);
                                                     if((parseDate(due).addDays(7).getTime() < parseDate(now).getTime()) && lapse == 0 && '{{ $pay->status }}' == 1){
                                                         var p = 3; //lapsed
                                                         console.log(p);
                                                         var lapse=1;
                                                         console.log('{{$pay->or_number}}');
-                                                    }
+                                                    }   
                                                     @if($det->account_ID == $insacc->account_ID)
-                                                    if('{{$insacc->inception_date}}' > now && lapse==0 && '{{ $pay->status }}' == 0 || '{{ $pay->status }}' == 3){
+                                                    if(incep_start > parseDate(now).getTime() && lapse==0){
+                                                        if('{{ $pay->status }}' == 1 || '{{ $pay->status }}' == 3){
                                                                 var p = 1; //on payment
                                                                 console.log(p);
+                                                        }
                                                     }
                                                     @endif
                                                     if(incep < parseDate(now).getTime() && lapse==0){
                                                         var p = 2; //expired
                                                         console.log(p);
-                                                        console.log(now);
                                                     }
-                                                    if(incep >= parseDate(now).getTime() && incep_start <= parseDate(now).getTime() && lapse == 0 && '{{ $pay->status }}' == 0){
+                                                    if(incep >= parseDate(now).getTime() && incep_start <= parseDate(now).getTime() && lapse == 0 && ('{{ $pay->status }}' == 1 || '{{ $pay->status }}' == 3)){
                                                         var p = 4; //active
                                                         console.log(p);
                                                         @foreach($clist as $list)

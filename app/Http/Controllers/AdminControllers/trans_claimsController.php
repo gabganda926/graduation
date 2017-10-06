@@ -307,11 +307,11 @@ class trans_claimsController extends Controller
               $extension = \File::extension($file->getClientOriginalName());
               try
               {
-                $name = ($cid->claim_ID) . "_" . ($filez->claimReqFile_ID + 1) . "." . $extension;
+                $name = ($cid->claim_ID) . "_" . ($fi->claimReq_ID) . "_" . ($filez->claimReqFile_ID + 1) . "." . $extension;
               }
               catch(\Exception $e)
               {
-                $name = ($cid->claim_ID) . "_" . ($filez->claimReqFile_ID + 1) . "." . $extension;
+                $name = ($cid->claim_ID) . "_" . ($fi->claimReq_ID) . "_" .  ($filez->claimReqFile_ID + 1) . "." . $extension;
               }
 
               $fi->claimReq_picture = $name;
@@ -327,11 +327,11 @@ class trans_claimsController extends Controller
                 $extension = \File::extension($file->getClientOriginalName());
                 try
                 {
-                  $name = ($cid->claim_ID) . "_" . ($filez->claimReqFile_ID + 2) . "." . $extension;
+                  $name = ($cid->claim_ID) . "_" . ($fi->claimReq_ID) . "_" .  ($filez->claimReqFile_ID + 2) . "." . $extension;
                 }
                 catch(\Exception $e)
                 {
-                  $name = ($cid->claim_ID) . "_" . ($filez->claimReqFile_ID + 2) . "." . $extension;
+                  $name = ($cid->claim_ID) . "_" . ($fi->claimReq_ID) . "_" .  ($filez->claimReqFile_ID + 2) . "." . $extension;
                 }
 
                 $fi->claimReq_picture2 = $name;
@@ -347,11 +347,11 @@ class trans_claimsController extends Controller
                 $extension = \File::extension($file->getClientOriginalName());
                 try
                 {
-                  $name = ($cid->claim_ID) . "_" . ($filez->claimReqFile_ID + 3) . "." . $extension;
+                  $name = ($cid->claim_ID) . "_" . ($fi->claimReq_ID) . "_" .  ($filez->claimReqFile_ID + 3) . "." . $extension;
                 }
                 catch(\Exception $e)
                 {
-                  $name = ($cid->claim_ID) . "_" . ($filez->claimReqFile_ID + 3) . "." . $extension;
+                  $name = ($cid->claim_ID) . "_" . ($fi->claimReq_ID) . "_" .  ($filez->claimReqFile_ID + 3) . "." . $extension;
                 }
 
                 $fi->claimReq_picture3 = $name;
@@ -367,11 +367,11 @@ class trans_claimsController extends Controller
                 $extension = \File::extension($file->getClientOriginalName());
                 try
                 {
-                  $name = ($cid->claim_ID) . "_" . ($filez->claimReqFile_ID + 4) . "." . $extension;
+                  $name = ($cid->claim_ID) . "_" . ($fi->claimReq_ID) . "_" .  ($filez->claimReqFile_ID + 4) . "." . $extension;
                 }
                 catch(\Exception $e)
                 {
-                  $name = ($cid->claim_ID) . "_" . ($filez->claimReqFile_ID + 4) . "." . $extension;
+                  $name = ($cid->claim_ID) . "_" . ($fi->claimReq_ID) . "_" .  ($filez->claimReqFile_ID + 4) . "." . $extension;
                 }
 
                 $fi->claimReq_picture4 = $name;
@@ -387,11 +387,11 @@ class trans_claimsController extends Controller
                 $extension = \File::extension($file->getClientOriginalName());
                 try
                 {
-                  $name = ($cid->claim_ID) . "_" . ($filez->claimReqFile_ID + 5) . "." . $extension;
+                  $name = ($cid->claim_ID) . "_" . ($fi->claimReq_ID) . "_" .  ($filez->claimReqFile_ID + 5) . "." . $extension;
                 }
                 catch(\Exception $e)
                 {
-                  $name = ($cid->claim_ID) . "_" . ($filez->claimReqFile_ID + 5) . "." . $extension;
+                  $name = ($cid->claim_ID) . "_" . ($fi->claimReq_ID) . "_" .  ($filez->claimReqFile_ID + 5) . "." . $extension;
                 }
 
                 $fi->claimReq_picture5 = $name;
@@ -472,11 +472,11 @@ class trans_claimsController extends Controller
                     $extension = \File::extension($file->getClientOriginalName());
                     try
                     {
-                      $name = ($cid->claim_ID) . "_" . ($filez->claimReqFile_ID + 1) . "." . $extension;
+                      $name = ($cid->claim_ID) . "_" . ($fi->claimReq_ID) . "_" .  ($filez->claimReqFile_ID + 1) . "." . $extension;
                     }
                     catch(\Exception $e)
                     {
-                      $name = ($cid->claim_ID) . "_" . ($filez->claimReqFile_ID + 1) . "." . $extension;
+                      $name = ($cid->claim_ID) . "_" . ($fi->claimReq_ID) . "_" .  ($filez->claimReqFile_ID + 1) . "." . $extension;
                     }
 
                     $fi->claimReq_picture = $name;
@@ -494,11 +494,11 @@ class trans_claimsController extends Controller
                     $extension = \File::extension($file->getClientOriginalName());
                     try
                     {
-                      $name = ($cid->claim_ID) . "_" . ($filez->claimReqFile_ID + 2) . "." . $extension;
+                      $name = ($cid->claim_ID) . "_" . ($fi->claimReq_ID) . "_" .  ($filez->claimReqFile_ID + 2) . "." . $extension;
                     }
                     catch(\Exception $e)
                     {
-                      $name = ($cid->claim_ID) . "_" . ($filez->claimReqFile_ID + 2) . "." . $extension;
+                      $name = ($cid->claim_ID) . "_" . ($fi->claimReq_ID) . "_" .  ($filez->claimReqFile_ID + 2) . "." . $extension;
                     }
 
                     $fi->claimReq_picture2 = $name;
@@ -516,11 +516,11 @@ class trans_claimsController extends Controller
                     $extension = \File::extension($file->getClientOriginalName());
                     try
                     {
-                      $name = ($cid->claim_ID) . "_" . ($filez->claimReqFile_ID + 3) . "." . $extension;
+                      $name = ($cid->claim_ID) . "_" . ($fi->claimReq_ID) . "_" .  ($filez->claimReqFile_ID + 3) . "." . $extension;
                     }
                     catch(\Exception $e)
                     {
-                      $name = ($cid->claim_ID) . "_" . ($filez->claimReqFile_ID + 3) . "." . $extension;
+                      $name = ($cid->claim_ID) . "_" . ($fi->claimReq_ID) . "_" .  ($filez->claimReqFile_ID + 3) . "." . $extension;
                     }
 
                     $fi->claimReq_picture3 = $name;
@@ -538,11 +538,11 @@ class trans_claimsController extends Controller
                   $extension = \File::extension($file->getClientOriginalName());
                   try
                   {
-                    $name = ($cid->claim_ID) . "_" . ($filez->claimReqFile_ID + 4) . "." . $extension;
+                    $name = ($cid->claim_ID) . "_" . ($fi->claimReq_ID) . "_" .  ($filez->claimReqFile_ID + 4) . "." . $extension;
                   }
                   catch(\Exception $e)
                   {
-                    $name = ($cid->claim_ID) . "_" . ($filez->claimReqFile_ID + 4) . "." . $extension;
+                    $name = ($cid->claim_ID) . "_" . ($fi->claimReq_ID) . "_" .  ($filez->claimReqFile_ID + 4) . "." . $extension;
                   }
 
                   $fi->claimReq_picture4 = $name;
@@ -560,11 +560,11 @@ class trans_claimsController extends Controller
                   $extension = \File::extension($file->getClientOriginalName());
                   try
                   {
-                    $name = ($cid->claim_ID) . "_" . ($filez->claimReqFile_ID + 5) . "." . $extension;
+                    $name = ($cid->claim_ID) . "_" . ($fi->claimReq_ID) . "_" .  ($filez->claimReqFile_ID + 5) . "." . $extension;
                   }
                   catch(\Exception $e)
                   {
-                    $name = ($cid->claim_ID) . "_" . ($filez->claimReqFile_ID + 5) . "." . $extension;
+                    $name = ($cid->claim_ID) . "_" . ($fi->claimReq_ID) . "_" .  ($filez->claimReqFile_ID + 5) . "." . $extension;
                   }
 
                   $fi->claimReq_picture5 = $name;

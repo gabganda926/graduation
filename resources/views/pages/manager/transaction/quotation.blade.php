@@ -78,16 +78,21 @@
                         <div class="body">
                             <div class="row clearfix">
                                 <div class="col-md-12">
-                                    <button type="button" class="btn btn-default btn-lg btn-block waves-effect" style="border: 2px solid #102027;color: #102027; padding: 1em; font-size: 20px;" data-toggle="tooltip" data-placement="bottom" title="View quotation requests of individual clients." onclick="window.document.location='{{ URL::asset('/manager/transaction/quotation-individual') }}';"><img src="{{ URL::asset ('images/icons/insurance-individual.png')}}" style="height: 50px; width: 50px;"> INDIVIDUAL <span class="label bg-green">0 
+                                    <button type="button" class="btn btn-default btn-lg btn-block waves-effect" style="border: 2px solid #102027;color: #102027; padding: 1em; font-size: 20px;" data-toggle="tooltip" data-placement="bottom" title="View quotation requests of individual clients." onclick="window.document.location='{{ URL::asset('/manager/transaction/quotation-individual') }}';"><img src="{{ URL::asset ('images/icons/insurance-individual.png')}}" style="height: 50px; width: 50px;"> INDIVIDUAL <span class="label bg-green indi">
+                                    <script type="text/javascript"> 
+                                    var count=0;
                                     @foreach($qind as $qi)
                                         @foreach($qlist as $ql)
                                             @if($qi->quote_indi_ID == $ql->quote_ID)
                                                 @if($ql->quote_status == 5)
-                                                   {{ count($ql) }}
+                                                    count += 1;
                                                 @endif
                                             @endif
                                         @endforeach
-                                     @endforeach</span></button>
+                                     @endforeach
+
+                                     $('.indi').html('' + count);
+                                    </script></span></button>
                                         
                                         
                                 </div>
@@ -95,16 +100,21 @@
                             
                             <div class="row clearfix">
                                 <div class="col-md-12">
-                                    <button type="button" class="btn btn-default btn-lg btn-block waves-effect" style="border: 2px solid #102027;color: #102027; padding: 1em; font-size: 20px;" data-toggle="tooltip" data-placement="bottom" title="View quotation requests of company clients." onclick="window.document.location='{{ URL::asset('/manager/transaction/quotation-company') }}';"><img src="{{ URL::asset ('images/icons/insurance-company.png')}}" style="height: 50px; width: 50px;"> COMPANY <span class="label bg-green">
-                                    @foreach($qcomp as $qc)
-                                        @foreach($qlist as $qli)
-                                            @if($qc->quote_comp_ID == $qli->quote_ID)
-                                                @if($qli->quote_status == 5)
-                                                    {{ count($qli) }}
+                                    <button type="button" class="btn btn-default btn-lg btn-block waves-effect" style="border: 2px solid #102027;color: #102027; padding: 1em; font-size: 20px;" data-toggle="tooltip" data-placement="bottom" title="View quotation requests of company clients." onclick="window.document.location='{{ URL::asset('/manager/transaction/quotation-company') }}';"><img src="{{ URL::asset ('images/icons/insurance-company.png')}}" style="height: 50px; width: 50px;"> COMPANY <span class="label bg-green comp">
+                                     <script type="text/javascript"> 
+                                    var count1=0;
+                                    @foreach($qcomp as $qi)
+                                        @foreach($qlist as $ql)
+                                            @if($qi->quote_comp_ID == $ql->quote_ID)
+                                                @if($ql->quote_status == 5)
+                                                    count1 += 1;
                                                 @endif
                                             @endif
                                         @endforeach
-                                     @endforeach</span></button>
+                                     @endforeach
+
+                                     $('.comp').html('' + count1);
+                                    </script></span></button>
                                 </div>
                             </div>
                         </div>

@@ -265,6 +265,7 @@
                                                   var now = $('#datengayon').val();
 
                                                   console.log("DATE NGAYON:" + $('#datengayon').val());
+                                                  console.log(""+due);
                                                   var incep_start = new Date('{{$iacc->inception_date}}');
                                                   var incep = new Date('{{$iacc->inception_date}}');
                                                   incep.setFullYear(incep.getFullYear() + 1);
@@ -275,30 +276,32 @@
                                                       console.log('{{$pay->or_number}}');
                                                   }
                                                   @if($det->account_ID == $iacc->account_ID)
-                                                  if('{{$iacc->inception_date}}' > now && lapse==0 && '{{ $pay->status }}' == 0 || '{{ $pay->status }}' == 3){
-                                                              var p = 1; //on payment
-                                                              console.log(p);
-                                                  }
+                                                  if(incep_start > parseDate(now).getTime() && lapse==0){
+                                                        if('{{ $pay->status }}' == 1 || '{{ $pay->status }}' == 3){
+                                                                var p = 1; //on payment
+                                                                console.log(p);
+                                                        }
+                                                    }
                                                   @endif
                                                   if(incep < parseDate(now).getTime() && lapse==0){
                                                       var p = 2; //expired
                                                       console.log(p);
                                                       console.log(now);
                                                   }
-                                                  if(incep >= parseDate(now).getTime() && incep_start <= parseDate(now).getTime() && lapse == 0 && '{{ $pay->status }}' == 0){
-                                                      var p = 4; //active
-                                                      console.log(p);
-                                                      @foreach($clist as $list)
-                                                          @if($iacc->client_ID == $list->client_ID)
-                                                              @if($list->client_type == 1)
-                                                                  var ind = 1;
-                                                              @endif
-                                                              @if($list->client_type == 2)
-                                                                  var comp = 1;
-                                                              @endif
-                                                          @endif
-                                                      @endforeach
-                                                  }
+                                                  if(incep >= parseDate(now).getTime() && incep_start <= parseDate(now).getTime() && lapse == 0 && ('{{ $pay->status }}' == 1 || '{{ $pay->status }}' == 3)){
+                                                        var p = 4; //active
+                                                        console.log(p);
+                                                        @foreach($clist as $list)
+                                                            @if($iacc->client_ID == $list->client_ID)
+                                                                @if($list->client_type == 1)
+                                                                    var ind = 1;
+                                                                @endif
+                                                                @if($list->client_type == 2)
+                                                                    var comp = 1;
+                                                                @endif
+                                                            @endif
+                                                        @endforeach
+                                                    }
                                           @endif
                                       @endif
                                   @endforeach

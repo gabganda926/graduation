@@ -263,7 +263,7 @@
 
     <script>
         $('#ex').DataTable( {
-            "order": [[ 5, "desc" ]]
+            "order": [[ 0, "desc" ]]
         } );
     </script>
 @endsection

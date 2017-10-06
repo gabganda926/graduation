@@ -602,6 +602,11 @@
         </div>
     </section>
 
+    <!-- Chart Plugins Js -->
+    <script src="{{ URL::asset ('plugins/chartjs/Chart.bundle.js')}}"></script>
+    
+    <script src="{{ URL::asset ('js/pages/charts/chartjs.js')}}"></script>
+
     <script type="text/javascript">
     	window.onload = function (){
     		document.getElementById('ch_daily1').style.display = 'none';
