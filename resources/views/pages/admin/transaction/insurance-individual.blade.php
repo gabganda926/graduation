@@ -183,6 +183,33 @@
                                                    <button form = "display" type="submit" class="btn bg-light-blue waves-effect" data-id = "{{ $cli->client_ID }}" data-acc = "{{$iacc->account_ID}}" data-pay = "{{$bpay->payment_ID}}" onclick="
                                                     $('#id').val($(this).data('id')); $('#acc_id').val($(this).data('acc')); $('#pay_id').val($(this).data('pay'));" data-toggle="tooltip" data-placement="left" title="View account details."><i class="material-icons">remove_red_eye</i>
                                                     </button>
+                                                    @foreach($inscomp as $icomp)
+                                                     @if($icomp->comp_ID == $iacc->insurance_company)
+                                                       @if($icomp->comp_ID == 1) <!-- FPG -->
+                                                        <button type="button" id="gen"  class="btn bg-orange waves-effect" style="position: right;" data-toggle="tooltip" data-placement="left" title="Generate Form" onclick="window.open('{{ URL ('/pdf/insurance/form/fpg/') }} ')">
+                                                          <i class="material-icons">picture_as_pdf</i><span style="font-size: 15px;"></span>
+                                                          </button>
+                                                       @endif
+
+                                                       @if($icomp->comp_ID == 2) <!-- COMMONWEALTH -->
+                                                        <button type="button" id="gen"  class="btn bg-orange waves-effect" style="position: right;" data-toggle="tooltip" data-placement="left" title="Generate Form" onclick="window.open('{{ URL ('/pdf/insurance/form/commonwealth/') }} ')">
+                                                          <i class="material-icons">picture_as_pdf</i><span style="font-size: 15px;"></span>
+                                                          </button>
+                                                       @endif
+
+                                                       @if($icomp->comp_ID == 3) <!-- STANDARD -->
+                                                        <button type="button" id="gen"  class="btn bg-orange waves-effect" style="position: right;" data-toggle="tooltip" data-placement="left" title="Generate Form" onclick="window.open('{{ URL ('/pdf/insurance/form/standard/') }} ')">
+                                                          <i class="material-icons">picture_as_pdf</i><span style="font-size: 15px;"></span>
+                                                          </button>
+                                                       @endif
+
+                                                       @if($icomp->comp_ID == 4) <!-- PGI -->
+                                                        <button type="button" id="gen"  class="btn bg-orange waves-effect" style="position: right;" data-toggle="tooltip" data-placement="left" title="Generate Form" onclick="window.open('{{ URL ('/pdf/insurance/form/pgi/') }} ')">
+                                                          <i class="material-icons">picture_as_pdf</i><span style="font-size: 15px;"></span>
+                                                          </button>
+                                                       @endif
+                                                     @endif
+                                                    @endforeach
                                                    @endif
                                                   @endforeach
                                                 </td>
@@ -269,15 +296,18 @@
                                                   var incep_start = new Date('{{$iacc->inception_date}}');
                                                   var incep = new Date('{{$iacc->inception_date}}');
                                                   incep.setFullYear(incep.getFullYear() + 1);
-                                                  if((parseDate(due).addDays(7).getTime() < parseDate(now).getTime()) && lapse == 0 && '{{ $pay->status }}' == 1){
+                                                  if((parseDate(due).addDays(7).getTime() < parseDate(now).getTime()) && lapse == 0)
+                                                  {
+                                                    if( '{{ $pay->status }}' == 1 || '{{ $pay->status }}' == 4){
                                                       var p = 3; //lapsed
                                                       console.log(p);
                                                       var lapse=1;
                                                       console.log('{{$pay->or_number}}');
+                                                    }
                                                   }
                                                   @if($det->account_ID == $iacc->account_ID)
                                                   if(incep_start > parseDate(now).getTime() && lapse==0){
-                                                        if('{{ $pay->status }}' == 1 || '{{ $pay->status }}' == 3){
+                                                        if('{{ $pay->status }}' == 1 || '{{ $pay->status }}' == 3 || '{{ $pay->status }}' == 0){
                                                                 var p = 1; //on payment
                                                                 console.log(p);
                                                         }
@@ -288,7 +318,7 @@
                                                       console.log(p);
                                                       console.log(now);
                                                   }
-                                                  if(incep >= parseDate(now).getTime() && incep_start <= parseDate(now).getTime() && lapse == 0 && ('{{ $pay->status }}' == 1 || '{{ $pay->status }}' == 3)){
+                                                  if(incep >= parseDate(now).getTime() && incep_start <= parseDate(now).getTime() && lapse == 0 && ('{{ $pay->status }}' == 0 || '{{ $pay->status }}' == 3)){
                                                         var p = 4; //active
                                                         console.log(p);
                                                         @foreach($clist as $list)

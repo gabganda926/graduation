@@ -96,6 +96,7 @@
                               <input type="hidden" name="_token" value="{{ csrf_token() }}">
                               <div class="col-md-4" style = "display: none;">
                                  <input id = "id" name = "id" type="text" class="form-control">
+                                 <input id = "datengayon" name = "datengayon" type="datetime" class="form-control" >
                              </div>
                               <div class="col-md-4" style = "display: none;">
                                  <input id = "acc_id" name = "acc_id" type="text" class="form-control">
@@ -167,28 +168,12 @@
                                                     var data = formatDate2('{{ $iacc->inception_date }}'); $('#exp_{{$iacc->account_ID}}').text(data);
                                                  </script>
                                                 </td>
-                                                <td>
-                                                  @foreach($paydetails as $pay)
-                                                   @if($pay->account_ID == $iacc->account_ID)
-                                                    @if($pay->payment_type == 1)
-                                                     <span class="label bg-green">active</span>
-                                                    @endif
-                                                    @if($pay->payment_type == 2)
-                                                     <span class="label bg-orange">on payment</span>
-                                                    @endif
-                                                   @endif
-                                                  @endforeach
-                                                  @if((strtotime('today') > strtotime("+1 year", strtotime("-7 day",strtotime($iacc->inception_date)))) && (strtotime('today') < strtotime("+1 year", strtotime($iacc->inception_date)))) 
-                                                   <span class="label bg-red">expiring</span>
-                                                  @endif
-                                                  @if((strtotime('today') > strtotime("+1 year", strtotime($iacc->inception_date)))) 
-                                                   <span class="label bg-red">expired</span>
-                                                  @endif
+                                                <td class="statt_{{ $iacc->policy_number }}">
                                                 </td>
                                                 <td>
                                                   @foreach($paydetails as $bpay)
                                                    @if($bpay->account_ID == $iacc->account_ID)
-                                                   <button form = "display" type="submit" class="btn bg-light-blue waves-effect" data-id = "{{ $cli->client_ID }}" data-acc = "{{$iacc->account_ID}}" data-pay = "{{$pay->payment_ID}}" onclick="
+                                                   <button form = "display" type="submit" class="btn bg-light-blue waves-effect" data-id = "{{ $cli->client_ID }}" data-acc = "{{$iacc->account_ID}}" data-pay = "{{$bpay->payment_ID}}" onclick="
                                                     $('#id').val($(this).data('id')); $('#acc_id').val($(this).data('acc')); $('#pay_id').val($(this).data('pay'));" data-toggle="tooltip" data-placement="left" title="View account details."><i class="material-icons">remove_red_eye</i>
                                                     </button>
                                                    @endif
@@ -217,6 +202,137 @@
         </div>
     </section>
 
+    <script>
+      window.onload = function (){
 
+        var today1 = new Date();
+        var dd1 = today1.getDate();
+        var mm1 = today1.getMonth()+1;
+        var yyyy1 = today1.getFullYear();
+
+        function parseDate(input) {
+          var parts = input.match(/(\d+)/g);
+          // new Date(year, month [, date [, hours[, minutes[, seconds[, ms]]]]])
+          return new Date(parts[0], parts[1]-1, parts[2]); // months are 0-based
+        }
+
+        Date.prototype.addDays = function(days) {
+          var dat = new Date(this.valueOf());
+          dat.setDate(dat.getDate() + days);
+          return dat;
+        } 
+
+        function pad (str, max) {
+          str = str.toString();
+          return str.length < max ? pad("0" + str, max) : str;
+        }
+
+        if(dd1<10){dd1='0'+dd1} if(mm1<10){mm1='0'+mm1} today1 = yyyy1+'-'+mm1+'-'+dd1;
+
+        var f = new Date();
+        $('#datengayon').val(today1+ " " +f.toLocaleTimeString());
+
+        var myVar1=setInterval(function(){myTimer1()},1000);
+
+        function myTimer1() {
+            var f = new Date();
+           $('#datengayon').val(today1+ " " +f.toLocaleTimeString());
+        }
+        @foreach($clist as $list)
+          @foreach($client as $cli)
+           @if($list->client_ID == $cli->client_ID)
+            @if($list->del_flag == 0)
+             @foreach($insaccount as $iacc)
+              @if($cli->client_ID == $iacc->client_ID)
+               @foreach($pInfo as $info)
+                @if($cli->personal_info_ID == $info->pinfo_ID)
+                  var lapse = 0;
+                      var p = 0;
+                      var ind = 0;
+                      var comp = 0;
+                        @foreach($voucher as $vouch)
+                          @if($iacc->account_ID == $vouch->cv_ID)
+                          @foreach($payments as $pay)
+                              @if($pay->check_voucher == $vouch->cv_ID)
+                                  @foreach($paydetails as $det)
+                                      @if($vouch->pay_ID == $det->payment_ID)
+                                          @if($det->acccount_ID == $iacc->acccount_ID)
+                                                  console.log("SIGE");
+                                                  var due = "" + '{{ $pay->due_date }}';
+                                                  var now = $('#datengayon').val();
+
+                                                  console.log("DATE NGAYON:" + $('#datengayon').val());
+                                                  console.log(""+due);
+                                                  var incep_start = new Date('{{$iacc->inception_date}}');
+                                                  var incep = new Date('{{$iacc->inception_date}}');
+                                                  incep.setFullYear(incep.getFullYear() + 1);
+                                                  if((parseDate(due).addDays(7).getTime() < parseDate(now).getTime()) && lapse == 0)
+                                                  {
+                                                    if( '{{ $pay->status }}' == 1 || '{{ $pay->status }}' == 4){
+                                                      var p = 3; //lapsed
+                                                      console.log(p);
+                                                      var lapse=1;
+                                                      console.log('{{$pay->or_number}}');
+                                                    }
+                                                  }
+                                                  @if($det->account_ID == $iacc->account_ID)
+                                                  if(incep_start > parseDate(now).getTime() && lapse==0){
+                                                        if('{{ $pay->status }}' == 1 || '{{ $pay->status }}' == 3 || '{{ $pay->status }}' == 0){
+                                                                var p = 1; //on payment
+                                                                console.log(p);
+                                                        }
+                                                    }
+                                                  @endif
+                                                  if(incep < parseDate(now).getTime() && lapse==0){
+                                                      var p = 2; //expired
+                                                      console.log(p);
+                                                      console.log(now);
+                                                  }
+                                                  if(incep >= parseDate(now).getTime() && incep_start <= parseDate(now).getTime() && lapse == 0 && ('{{ $pay->status }}' == 0 || '{{ $pay->status }}' == 3)){
+                                                        var p = 4; //active
+                                                        console.log(p);
+                                                        @foreach($clist as $list)
+                                                            @if($iacc->client_ID == $list->client_ID)
+                                                                @if($list->client_type == 1)
+                                                                    var ind = 1;
+                                                                @endif
+                                                                @if($list->client_type == 2)
+                                                                    var comp = 1;
+                                                                @endif
+                                                            @endif
+                                                        @endforeach
+                                                    }
+                                          @endif
+                                      @endif
+                                  @endforeach
+                              @endif
+                          @endforeach
+                          @endif
+                      @endforeach
+
+                      if(p == 1){
+                            $("td.statt_{{ $iacc->policy_number }}").html('<span class="label bg-orange">on payment</span>');
+                        }
+                        else if(p == 2){
+                            $("td.statt_{{ $iacc->policy_number }}").html('<span class="label bg-red">expired</span>');
+                        }
+                        else if(p == 3){
+                            $("td.statt_{{ $iacc->policy_number }}").html('<span class="label bg-red">lapsed</span>');
+                        }
+                        else if(p == 4){
+                            $("td.statt_{{ $iacc->policy_number }}").html('<span class="label bg-green">active</span>');
+                          }
+                @endif
+               @endforeach
+              @endif
+             @endforeach
+            @endif
+           @endif
+          @endforeach
+         @endforeach
+
+      };
+
+    </script>
 
 @endsection

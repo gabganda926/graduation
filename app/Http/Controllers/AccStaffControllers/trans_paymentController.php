@@ -53,18 +53,19 @@ class trans_paymentController extends Controller
 
 	public function payment(Request $req)
 	{
+		$remittance = $req->remittance_date;
 		$pay = paymentsConnection::where('payment_ID', '=', $req->checknum)->first();
-		if(strtotime($pay->due_date) <= strtotime($req->remittance_date))
+		if(strtotime($pay->due_date) >= strtotime($remittance))
 		{
 			$pay->status = 0; // paid
 		}
-		elseif(strtotime("+7 days", strtotime($pay->due_date)) < strtotime($req->remittance_date))
-		{
-			$pay->status = 4; //lapse
-		}
-		else 
+		if(strtotime($pay->due_date) < strtotime($remittance))
 		{
 			$pay->status = 3; // late
+		}
+		if(strtotime("+7 days", strtotime($pay->due_date)) < strtotime($remittance))
+		{
+			$pay->status = 4; //lapse
 		}
 		$pay->amount_paid = $req->amount_paid;
 		$pay->paid_date = $req->remittance_date;

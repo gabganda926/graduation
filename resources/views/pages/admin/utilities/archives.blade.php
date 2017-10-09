@@ -18,8 +18,8 @@
                 <div class="body">
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs tab-nav-right" role="tablist">
-                        <li role="presentation" class="active"><a href="#client" data-toggle="tab">CLIENT</a></li>
-                        <li role="presentation"><a href="#personnel" data-toggle="tab">COMPANY PERSONNEL</a></li>
+                        <!-- <li role="presentation" class="active"><a href="#client" data-toggle="tab">CLIENT</a></li> -->
+                        <li class="active" role="presentation"><a href="#personnel" data-toggle="tab">AGENCY PERSONNEL</a></li>
                         <li role="presentation"><a href="#vehicle" data-toggle="tab">VEHICLE</a></li>
                         <li role="presentation"><a href="#insurance" data-toggle="tab">INSURANCE</a></li>
                         <li role="presentation"><a href="#premiums" data-toggle="tab">PREMIUMS</a></li>
@@ -221,7 +221,7 @@
                         <!-- END OF BANK ARCHIVE -->
 
                         <!-- CLIENT ARCHIVE -->
-                        <div role="tabpanel" class="tab-pane fade in active" id="client"> 
+                        <div role="tabpanel" class="tab-pane fade" id="client"> 
                             <p>
                                 <div class="header">
                                     <h2><b>
@@ -598,7 +598,7 @@
                         <!-- END OF CLIENT ARCHIVE -->
 
                         <!-- PERSONNEL ARCHIVE -->
-                        <div role="tabpanel" class="tab-pane fade" id="personnel"> 
+                        <div role="tabpanel" class="tab-pane fade in active" id="personnel"> 
                             <p>
                                 <div class="header">
                                     <h2><b>
@@ -1370,7 +1370,7 @@
                         <!-- INSURANCE ARCHIVE -->
                         <div role="tabpanel" class="tab-pane fade" id="insurance"> 
                             <p>
-                                <div class="header">
+                                <!-- <div class="header">
                                     <h2><b>
                                         INSURANCE COMPANY
                                     </b></h2>
@@ -1566,7 +1566,7 @@
                                         </tbody>
                                     </table>
                                     </div>
-                                </div>
+                                </div> -->
 
                                 <!-- <div class="header">
                                     <h2><b>
@@ -1618,7 +1618,7 @@
                                     </div>
                                 </div> -->
 
-                                <div class="header">
+                                <!-- <div class="header">
                                     <h2><b>
                                         INSURANCE - POLICY NUMBER
                                     </b></h2>
@@ -1687,7 +1687,7 @@
                                         </tbody>
                                     </table>
                                     </div>
-                                </div>
+                                </div> -->
 
                                 <div class="header">
                                     <h2><b>

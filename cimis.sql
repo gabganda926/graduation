@@ -362,7 +362,7 @@ CREATE TABLE tbl_payments
 	amount FLOAT NOT NULL,
 	paid_date datetime,
 	due_date DATETIME NOT NULL,
-	status INT NOT NULL,
+	status INT NOT NULL, --0 paid, 1 to be paid, 3 late, 4 lapsed
 	FOREIGN KEY (check_voucher) REFERENCES tbl_check_voucher(cv_ID),
 );
 
@@ -630,7 +630,7 @@ CREATE TABLE tbl_claimRequest
 	description VARCHAR (8000) NOT NULL,
 	notifiedByType INT NOT NULL, --1 kapag policyholder, 2 kapag representative
 	notifier_ID INT,
-	status INT NOT NULL, --0 kapag new; determine kung incomplete/complete na ung requirements, 1 kapag nasa manager na, 2 kapag forwarded na sa ins company
+	status INT NOT NULL, --0 kapag new; determine kung incomplete/complete na ung requirements, 1 kapag nasa manager na, 2 kapag na-transmit na
 	del_flag INT NOT NULL,
 	created_at datetime NOT NULL,
 	updated_at datetime NOT NULL,
@@ -653,6 +653,20 @@ CREATE TABLE tbl_claimRequirements_Files
 	updated_at datetime NOT NULL,
 	FOREIGN KEY (claim_ID) REFERENCES tbl_claimRequest(claim_ID),
 	FOREIGN KEY (claimReq_ID) REFERENCES tbl_claim_requirements(claimReq_ID),
+);
+
+CREATE TABLE tbl_transmit_claim
+(
+	transmitClaim_ID INT NOT NULL IDENTITY (1,1) PRIMARY KEY,
+	claim_ID INT NOT NULL,
+	inscomp_ID INT NOT NULL,
+	courier_ID INT NOT NULL,
+	status INT NOT NULL, --0 processing, 1 sent, 2 cancelled, 3 on hold
+	created_at datetime not null,
+	updated_at datetime not null,
+	FOREIGN KEY (claim_ID) REFERENCES tbl_claimRequest(claim_ID),
+	FOREIGN KEY (inscomp_ID) REFERENCES tbl_company_info (comp_ID),
+	FOREIGN KEY (courier_ID) REFERENCES tbl_courier (courier_ID),
 );
 
 CREATE TABLE tbl_complaint_sents
@@ -685,6 +699,19 @@ CREATE TABLE tbl_complaint_action
 	status INT NOT NULL,
 	FOREIGN KEY (complaint_ID) REFERENCES tbl_complaint_sents(complaint_ID),
 	FOREIGN KEY (emp_ID) REFERENCES tbl_employee(emp_ID),
+);
+
+CREATE TABLE tbl_ledger
+(
+	ledger_ID INT IDENTITY(1,1) NOT NULL,
+	account_ID INT NOT NULL,
+	payment_ID INT NOT NULL,
+	income FLOAT,
+	commission FLOAT,
+	remarks varchar(100),
+	created_at datetime not null,
+	FOREIGN KEY (account_ID) REFERENCES tbl_insurance_account(account_ID),
+	FOREIGN KEY (payment_ID) REFERENCES tbl_payment_details(payment_ID),
 );
 
 --SELECT * FROM tbl_complaint_sents;

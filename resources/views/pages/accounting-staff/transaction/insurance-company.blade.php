@@ -208,6 +208,19 @@
         </div>
     </section>
 
+    <script type="text/javascript">
+        var times = '<?php 
+     date_default_timezone_set("Asia/Manila");
+     date("h:i:sa"); ?>';
+        function updateTime(){
+          $('#time').html(Date(times));
+          times++;
+        }
+        $(function(){
+          setInterval(updateTime, 1000);
+        });
+    </script>
+
     <script>
       window.onload = function (){
 
@@ -244,15 +257,19 @@
             var f = new Date();
            $('#datengayon').val(today1+ " " +f.toLocaleTimeString());
         }
+        
         @foreach($clist as $list)
-          @foreach($client as $cli)
-           @if($list->client_ID == $cli->client_ID)
+          @foreach($inscomp as $ccompany)
+           @if($list->client_ID == $ccompany->comp_ID)
             @if($list->del_flag == 0)
-             @foreach($insaccount as $iacc)
-              @if($cli->client_ID == $iacc->client_ID)
-               @foreach($pInfo as $info)
-                @if($cli->personal_info_ID == $info->pinfo_ID)
-                  var lapse = 0;
+             @if($ccompany->comp_type == 1)
+              @foreach($insaccount as $iacc)
+               @if($ccompany->comp_ID == $iacc->client_ID)
+                @foreach($contact as $cnt)
+                 @if($ccompany->comp_cperson_ID == $cnt->cPerson_ID)
+                  @foreach($pInfo as $info)
+                   @if($cnt->personal_info_ID == $info->pinfo_ID)
+                    var lapse = 0;
                       var p = 0;
                       var ind = 0;
                       var comp = 0;
@@ -268,19 +285,21 @@
                                                   var now = $('#datengayon').val();
 
                                                   console.log("DATE NGAYON:" + $('#datengayon').val());
-                                                  console.log(""+due);
                                                   var incep_start = new Date('{{$iacc->inception_date}}');
                                                   var incep = new Date('{{$iacc->inception_date}}');
                                                   incep.setFullYear(incep.getFullYear() + 1);
-                                                  if((parseDate(due).addDays(7).getTime() < parseDate(now).getTime()) && lapse == 0 && '{{ $pay->status }}' == 1){
+                                                  if((parseDate(due).addDays(7).getTime() < parseDate(now).getTime()) && lapse == 0)
+                                                  {
+                                                    if( '{{ $pay->status }}' == 1 || '{{ $pay->status }}' == 4){
                                                       var p = 3; //lapsed
                                                       console.log(p);
                                                       var lapse=1;
                                                       console.log('{{$pay->or_number}}');
+                                                    }
                                                   }
                                                   @if($det->account_ID == $iacc->account_ID)
                                                   if(incep_start > parseDate(now).getTime() && lapse==0){
-                                                        if('{{ $pay->status }}' == 1 || '{{ $pay->status }}' == 3){
+                                                        if('{{ $pay->status }}' == 1 || '{{ $pay->status }}' == 3 || '{{ $pay->status }}' == 0){
                                                                 var p = 1; //on payment
                                                                 console.log(p);
                                                         }
@@ -291,7 +310,7 @@
                                                       console.log(p);
                                                       console.log(now);
                                                   }
-                                                  if(incep >= parseDate(now).getTime() && incep_start <= parseDate(now).getTime() && lapse == 0 && ('{{ $pay->status }}' == 1 || '{{ $pay->status }}' == 3)){
+                                                  if(incep >= parseDate(now).getTime() && incep_start <= parseDate(now).getTime() && lapse == 0 && ('{{ $pay->status }}' == 0 || '{{ $pay->status }}' == 3)){
                                                         var p = 4; //active
                                                         console.log(p);
                                                         @foreach($clist as $list)
@@ -325,10 +344,13 @@
                         else if(p == 4){
                             $("td.statt_{{ $iacc->policy_number }}").html('<span class="label bg-green">active</span>');
                           }
-                @endif
-               @endforeach
-              @endif
-             @endforeach
+                   @endif
+                  @endforeach
+                 @endif
+                @endforeach
+               @endif
+              @endforeach
+             @endif
             @endif
            @endif
           @endforeach

@@ -205,7 +205,7 @@
                                             <div>
                                                 <div class="body" align="center">
                                                     <div class="fallback">
-                                                        <img id="contact_img" src="#" alt="your image" style="height: 210px; width: 215px; border-style: solid; border-width: 2px;">
+                                                        <img id="contact_img" src="{{ URL::asset('image/default-image.png') }}" alt="your image" style="height: 210px; width: 215px; border-style: solid; border-width: 2px;">
                                                     </div>
                                                 </div>
                                             </div>
@@ -610,7 +610,10 @@
                cp2 = '{{ $info->pinfo_cpnum_2 }}';
                tel = '{{ $info->pinfo_tpnum }}';
                mail = '{{ $info->pinfo_mail }}';
-               image = '/image/contact_person/{{$info->pinfo_picture}}';
+               @if(!empty($info->pinfo_picture))
+                 image = '/image/client/{{$info->pinfo_picture}}';
+                 $('#contact_img').attr('src',image);
+                @endif
                @endif
               @endif
              @endforeach
@@ -699,7 +702,6 @@
             @endforeach
 
             $('#insurance_comp').val(inscomp);
-            $('#contact_img').attr('src',image);
             $('#contact_name').val(fullname);
             $('#gender').val(gender).change();
             $('#bday').val(bday);

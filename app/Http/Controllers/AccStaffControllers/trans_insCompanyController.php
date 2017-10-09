@@ -39,6 +39,10 @@ use App\clientListConnection;
 
 use App\paymentConnection;
 
+use App\paymentsConnection;
+
+use App\checkVoucherConnection;
+
 use Redirect;
 
 use Alert;
@@ -49,6 +53,8 @@ class trans_insCompanyController extends Controller
   {
     return view('pages/accounting-staff/transaction/insurance-company')
     ->with('paydetails', paymentDetailConnection::all())
+    ->with('payments',paymentsConnection::orderBy('due_date')->get())
+    ->with('voucher',   checkVoucherConnection::all())
     ->with('contact', contactPersonConnection::all())
     ->with('clist', clientListConnection::all())
     ->with('sales',salesAgentConnection::all())

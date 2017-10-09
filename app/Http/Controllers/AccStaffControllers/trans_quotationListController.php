@@ -52,8 +52,9 @@ use Mail;
 
 class trans_quotationListController extends Controller
 {
-	public function __construct(clientSystemAccountConnection $csa, accListQuoteConnection $acq, clientNotificationConnection $notif, vMakeConnection $make, vModelConnection $model, vTypeConnection $type, addressConnection $add, personalInfoConnection $info, clientListConnection $lists, clientConnection $cli, inscompanyConnection $comp)
+	public function __construct(clientSystemAccountConnection $csa, accListQuoteConnection $acq, clientNotificationConnection $notif, vMakeConnection $make, vModelConnection $model, vTypeConnection $type, addressConnection $add, personalInfoConnection $info, clientListConnection $lists, clientConnection $cli, inscompanyConnection $comp, contactPersonConnection $cPerson)
 	{
+        $this->cPerson = $cPerson;
         $this->company = $comp;
         $this->client = $cli;
         $this->list = $lists;
@@ -558,12 +559,12 @@ class trans_quotationListController extends Controller
 
     public function comp_add_client_list($req)
     {
-      $this->list->client_type = 2;
-      $this->list->client_flag = 1;
-      $mytime = $req->time;
-      $this->list->created_at = $mytime;
-      $this->list->updated_at = $mytime;
-      $this->list->del_flag  = 0;
+        date_default_timezone_set('Asia/Manila');
+        $this->list->client_type = 2;
+        $this->list->client_flag = 1;
+        $this->list->created_at = date("Y-m-d H:i:s");
+        $this->list->updated_at = date("Y-m-d H:i:s");
+        $this->list->del_flag  = 0;
 
         $this->list->save();
         return $this->comp_add_data($req);
@@ -585,7 +586,7 @@ class trans_quotationListController extends Controller
         $this->company->comp_sales_agent = $req->sales_agent;
 
         $this->company->save();
-        return $this->sent_to_insure($req, (int)$clistid->client_ID, 1);
+        return $this->sent_to_insure($req, (int)$clist->client_ID, 1);
     }
 
     public function indi_add_client_info($req)

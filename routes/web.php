@@ -408,6 +408,8 @@ Route::get('/admin/transaction/transmittal-documents', 'AdminControllers\trans_t
 
 Route::post('/admin/transaction/transmittal-documents/transmit', 'AdminControllers\trans_transmitDocumentController@transmit');
 
+Route::post('/admin/transaction/transmittal-documents/direct_transmit', 'AdminControllers\trans_transmitDocumentController@direct_transmit');
+
 //Transmittal - request
 Route::get('/admin/transaction/transmittal-request', 'AdminControllers\trans_transmittalRequestController@index');
 
@@ -655,40 +657,51 @@ Route::get('/accounting-staff/transaction/quotation-online-auto-reply', function
 
 
 //PAYMENT
-Route::get('/accounting-staff/transaction/payment', 'AccStaffControllers\trans_listBreakdownController@index')->middleware('paymentAuth');
+Route::get('/accounting-staff/transaction/payment', 'AccStaffControllers\trans_listBreakdownController@index');
 
 //PAYMENT request
 Route::get('/accounting-staff/transaction/payment-request-details', function (){
    return view('pages.accounting-staff.transaction.payment-request-details');
-})->middleware('paymentAuth');
+});
 
 //PAYMENT-VIEW online
 Route::get('/accounting-staff/transaction/payment-view', function (){
    return view('pages.accounting-staff.transaction.payment-view');
-})->middleware('paymentAuth');
+});
 
 //PAYMENT-ONLINE
 Route::get('/accounting-staff/transaction/payment-online', function (){
    return view('pages.accounting-staff.transaction.payment-online');
-})->middleware('paymentAuth');
+});
 
 //PAYMENT-ONLINE auto reply
 Route::get('/accounting-staff/transaction/payment-online-auto-reply', function (){
    return view('pages.accounting-staff.transaction.payment-online-auto-reply');
-})->middleware('paymentAuth');
+});
 
 //PAYMENT-new
-Route::get('/accounting-staff/transaction/payment-new', 'AccStaffControllers\trans_paymentController@index')->middleware('paymentAuth');
+Route::get('/accounting-staff/transaction/payment-new', 'AccStaffControllers\trans_paymentController@index');
 
-Route::post('/accounting-staff/transaction/payment-new/submit', 'AccStaffControllers\trans_paymentController@payment')->middleware('paymentAuth');
+Route::post('/accounting-staff/transaction/payment-new/submit', 'AccStaffControllers\trans_paymentController@payment');
 
 //PAYMENT-list
-Route::get('/accounting-staff/transaction/payment-list', 'AccStaffControllers\trans_paymentListController@index')->middleware('paymentAuth');;
+Route::get('/accounting-staff/transaction/payment-list', 'AccStaffControllers\trans_paymentListController@index');
 
 //Payment Details
 Route::get('/accounting-staff/transaction/payment-details', function (){
    return view('pages.accounting-staff.transaction.payment-details');
-})->middleware('paymentAuth');
+});
+
+//LEDGER
+Route::get('/accounting-staff/transaction/ledger', 'AccStaffControllers\trans_ledgerController@index');
+Route::get('/accounting-staff/transaction/ledger-entry', 'AccStaffControllers\trans_ledgerController@index1');
+Route::post('/accounting-staff/transaction/ledger-entry/submit', 'AccStaffControllers\trans_ledgerController@new_entry');
+
+//LISTS - PR
+Route::get('/accounting-staff/transaction/list-policy-receipt', 'AccStaffControllers\trans_listPRController@index');
+
+//LISTS - CV
+Route::get('/accounting-staff/transaction/list-check-voucher', 'AccStaffControllers\trans_listCVController@index');
 
 
 //Accounting Staff End Point//
@@ -729,6 +742,12 @@ Route::get('/manager/transaction/payment-list', function (){
 Route::get('/manager/transaction/claims', 'ManagerControllers\walkin_claimApprovalController@claims_list');
 //Claims details walkin
 Route::get('/manager/transaction/claim-details', 'ManagerControllers\walkin_claimApprovalController@view_claim_details');
+//Claims - walkin
+Route::post('/manager/transaction/claims/forward-insurance', 'ManagerControllers\walkin_claimApprovalController@forward_insurance');
+
+Route::get('/manager/transaction/claim-transmit', 'ManagerControllers\walkin_claimApprovalController@transmit_docu');
+
+Route::post('/manager/transaction/claim-transmit/submit', 'ManagerControllers\walkin_claimApprovalController@transmit_docu_save');
 
 
 //claims-settings
@@ -753,13 +772,36 @@ Route::get('/manager/transaction/transmittal-details', function (){
 Route::get('/pdf/quotation-proposal', 'trans_quotationProposalController@generatePDF');
 Route::get('/pdf/breakdown-payment', 'trans_breakdownOfPaymentController@generatePDF');
 Route::get('/pdf/transmittal-form', 'trans_TransmittalFormController@generatePDF');
+
+//ACKNOWLEDGEMENT RECEIPT
 Route::get('/pdf/payment-receipt/{or_number}/{pinfo_ID}/{account_ID}/', 'AccStaffControllers\trans_paymentListController@generatePDF');
 
 Route::get('/pdf/payment-receipt-comp/{or_number}/{comp_ID}/{account_ID}/', 'AccStaffControllers\trans_paymentListController@generatePDFcomp');
 
+//BOP
 Route::get('/pdf/breakdown-payment/{cv_ID}/{pinfo_ID}/{account_ID}/', 'AccStaffControllers\trans_listBreakdownController@generateBOP');
 
-Route::get('/pdf/breakdown-payment-comp/{cv_ID}/{comp_ID}/{account_ID}/', 'AccStaffControllers\trans_listBreakdownController@generateBOPcomp');
+Route::get('/pdf/breakdown-payment-comp/{cv_ID}/{pinfo_ID}/{account_ID}/', 'AccStaffControllers\trans_listBreakdownController@generateBOPcomp');
+
+//PR
+Route::get('/pdf/policy-receipt-comp/{cv_ID}/{comp_ID}/{account_ID}/', 'AccStaffControllers\trans_ListPRController@generatePRcomp');
+
+Route::get('/pdf/policy-receipt/{cv_ID}/{pinfo_ID}/{account_ID}/', 'AccStaffControllers\trans_ListPRController@generatePR');
+
+//CV
+Route::get('/pdf/check-voucher-comp/{cv_ID}/{comp_ID}/{account_ID}/', 'AccStaffControllers\trans_ListCVController@generateCVcomp');
+
+Route::get('/pdf/check-voucher/{cv_ID}/{pinfo_ID}/{account_ID}/', 'AccStaffControllers\trans_ListCVController@generateCV');
+
+
+
+Route::get('/pdf/insurance/form/fpg/', 'AdminControllers\trans_insIndividualController@generateFormFPG');
+
+Route::get('/pdf/insurance/form/commonwealth/', 'AdminControllers\trans_insIndividualController@generateFormCommonwealth');
+
+Route::get('/pdf/insurance/form/standard/', 'AdminControllers\trans_insIndividualController@generateFormStandard');
+
+Route::get('/pdf/insurance/form/pgi/', 'AdminControllers\trans_insIndividualController@generateFormPGI');
 
 
 //////////////WEB PAGE///////////////////
@@ -768,6 +810,9 @@ Route::get('/pdf/breakdown-payment-comp/{cv_ID}/{comp_ID}/{account_ID}/', 'AccSt
 //HOME
 Route::get('/home', function (){
    return view('pages.webpage.not-signed-in.home');
+});
+Route::get('/home/1', function (){
+   return view('pages.webpage.not-signed-in.index');
 });
 
 //QUOTATION

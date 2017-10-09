@@ -206,6 +206,12 @@
                             </li>
                         </ul>
                     </li>
+                    <li class = "@yield('transLedger')">
+                        <a href="/accounting-staff/transaction/ledger">
+                            <i class="material-icons">library_books</i>
+                            <span>LEDGER</span>
+                        </a>
+                    </li>
 
                     <li class = "@yield('transPayment')">
                         <a href="javascript:void(0);" class="menu-toggle">
@@ -223,17 +229,35 @@
                                     <span>New Payment</span>
                                 </a>
                             </li>
-                            <li class="@yield('transListPay')">
-                                <a href="/accounting-staff/transaction/payment-list">
-                                    <span>List of Collection of Payments</span>
-                                </a>
-                            </li>
+                        </ul>
+                    </li>
+
+                    <li class = "@yield('transList')">
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">assignment</i>
+                            <span>LISTS</span>
+                        </a>
+                        <ul class="ml-menu">
                             <li class="@yield('transPaymentList')">
                                 <a href="/accounting-staff/transaction/payment">
                                     <span>List of Bills</span>
                                 </a>
                             </li>
-
+                            <li class="@yield('transListPay')">
+                                <a href="/accounting-staff/transaction/payment-list">
+                                    <span>List of Collection of Payments</span>
+                                </a>
+                            </li>
+                            <li class="@yield('transPR')">
+                                <a href="/accounting-staff/transaction/list-policy-receipt">
+                                    <span>List of Policy Receipts</span>
+                                </a>
+                            </li>
+                            <li class="@yield('transCV')">
+                                <a href="/accounting-staff/transaction/list-check-voucher">
+                                    <span>List of Check Vouchers</span>
+                                </a>
+                            </li>
                         </ul>
                     </li>
                 </ul>

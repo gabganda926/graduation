@@ -662,7 +662,7 @@
                                 <h2> <small><b>INSURANCE DETAILS</b></small></h2>
                                 <div class="row clearfix">
                                         <br/><br/>
-                                        <div class="col-md-5">
+                                        <div class="col-md-6">
                                             <div class="form-group form-float">
                                                 <div class="form-line focused success">
                                                     <label><small>Client Name:</small></label>
@@ -670,7 +670,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-6">
                                             <div class="form-group form-float">
                                                 <div class="form-line focused success">
                                                 <label><small>Policy Number: </small></label>
@@ -678,7 +678,9 @@
                                                 </div>
                                             </div>
                                         </div>
+                                </div>
 
+                                <div class="row clearfix">
                                         <div class="col-md-4">
                                             <div class="form-group form-float">
                                                 <div class="form-line focused success">
@@ -699,7 +701,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-4">
+                                        <div class="col-md-8">
                                             <div class="form-group form-float">
                                                 <div class="form-line focused success">
                                                 <label><small>Inception Date: </small></label>
@@ -748,7 +750,7 @@
                                 </div>
                                 
                                 <div class="row clearfix">
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                             <div class="form-group form-float">
                                                 <div class="form-line focused success">
                                                     <label><small>Bank: </small></label>
@@ -756,7 +758,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-6">
                                             <div class="form-group form-float">
                                                 <div class="form-line focused success">
                                                     <label><small>Installment Type: </small></label>
@@ -764,7 +766,9 @@
                                                 </div>
                                             </div>
                                         </div>
+                                </div>
 
+                                <div class="row clearfix">
                                         <div class="col-md-5">
                                             <div class="form-group form-float">
                                                 <div class="form-line focused success">

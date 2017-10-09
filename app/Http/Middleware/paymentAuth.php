@@ -50,7 +50,7 @@ class paymentAuth
                     if(strtotime("+7 day", strtotime($pay->due_date)) < $now)
                     {
                         $lapse = $lapse + 1;
-                        if($pay->status != 0)
+                        if($pay->status != 0 || $pay->status != 3)
                         {
                             $pay->status = 4;
                             $pay->save();

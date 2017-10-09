@@ -58,8 +58,8 @@
 		</div>
         <div class="col s12"><div class="divider" style="height:3px; background-color:teal"></div></div><br/>
 
-		<p style="color:black; text-align: center; font-size:20px;"><b>OFFICIAL RECEIPT</b></p><br/>
-		<p style="color:black; text-align: right; font-size:15px;">OR NO:<b> {{ $or->or_number }}</b></p>
+		<p style="color:black; text-align: center; font-size:20px;"><b>ACKNOWLEDGEMENT RECEIPT</b></p><br/>
+		<p style="color:black; text-align: right; font-size:15px;">AR NO:<b> {{ $or->or_number }}</b></p>
 		<p style="color:black; text-align: right; font-size:15px;">Date: <b><script>
         var today = new Date();
         var dd = today.getDate();

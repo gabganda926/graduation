@@ -935,25 +935,51 @@
                                                                 data-pic5='{!! "/image/claim_files/".$cf->claimReq_picture5 !!}'
 
                                                                 onclick="
-                                                                @if($cf->claimReq_picture != null)
+                                                                @if(!empty($cf->claimReq_picture))
                                                                     var p1 = $(this).data('pic1');
                                                                     $('#img1').attr('src', p1);
+                                                                    document.getElementById('item_img1').style.display = '';
+                                                                    document.getElementById('li1').style.display = '';
                                                                 @endif
-                                                                @if($cf->claimReq_picture2 != null)
+                                                                @if(!empty($cf->claimReq_picture2))
                                                                     var p2 = $(this).data('pic2');
                                                                     $('#img2').attr('src', p2);
+                                                                    document.getElementById('item_img2').style.display = '';
+                                                                    document.getElementById('li2').style.display = '';
                                                                 @endif
-                                                                @if($cf->claimReq_picture3 != null)
+                                                                @if(!empty($cf->claimReq_picture3))
                                                                     var p3 = $(this).data('pic3');
                                                                     $('#img3').attr('src', p3);
+                                                                    document.getElementById('item_img3').style.display = '';
+                                                                    document.getElementById('li3').style.display = '';
                                                                 @endif
-                                                                @if($cf->claimReq_picture4 != null)
+                                                                @if(!empty($cf->claimReq_picture4))
                                                                     var p4 = $(this).data('pic4');
                                                                     $('#img4').attr('src', p4);
+                                                                    document.getElementById('item_img4').style.display = '';
+                                                                    document.getElementById('li4').style.display = '';
                                                                 @endif
-                                                                @if($cf->claimReq_picture5 != null)
+                                                                @if(!empty($cf->claimReq_picture5))
                                                                     var p5 = $(this).data('pic5');
                                                                     $('#img5').attr('src', p5);
+                                                                    document.getElementById('item_img5').style.display = '';
+                                                                    document.getElementById('li5').style.display = '';
+                                                                @endif
+
+                                                                @if(empty($cf->claimReq_picture))
+                                                                    $('#li1').hide();
+                                                                @endif
+                                                                @if(empty($cf->claimReq_picture2))
+                                                                    $('#li2').hide();
+                                                                @endif
+                                                                @if(empty($cf->claimReq_picture3))
+                                                                    $('#li3').hide();
+                                                                @endif
+                                                                @if(empty($cf->claimReq_picture4))
+                                                                    $('#li4').hide();
+                                                                @endif
+                                                                @if(empty($cf->claimReq_picture5))
+                                                                    $('#li5').hide();
                                                                 @endif
                                                                 ">View</button>
                                                                 </td>
@@ -980,10 +1006,12 @@
                                                                     <div id="save_{{$cr->claimReq_ID}}">
                                                                         <button id="saveCh" type="button" class="btn bg-green btn-block waves-effect" onclick="
                                                                             $('#reqid').val('{{ $cf->claimReqFile_ID }}');
+                                                                            $('#claimid').val('{{ $creq->claim_ID }}');
                                                                             document.getElementById('time').value = formatDate(new Date());
                                                                             document.getElementById('claimid').value = getClaimId();
                                                                             document.getElementById('cty').value = getClaimTypeId();
                                                                             document.getElementById('reqid').value = getReqFileId();
+                                                                            console.log('CLAIM ID: ' + $('#claimid').val());
                                                                             swal({
                                                                               title: 'Are you sure?',
                                                                               type: 'warning',
@@ -1048,28 +1076,28 @@
                         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                             <!-- Indicators -->
                             <ol class="carousel-indicators">
-                                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                                <li data-target="#carousel-example-generic" data-slide-to="1"></li> 
-                                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                                <li data-target="#carousel-example-generic" data-slide-to="3"></li>
-                                <li data-target="#carousel-example-generic" data-slide-to="4"></li>                       
+                                <li id="li1" data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                                <li id="li2" data-target="#carousel-example-generic" data-slide-to="1"></li> 
+                                <li id="li3" data-target="#carousel-example-generic" data-slide-to="2"></li>
+                                <li id="li4" data-target="#carousel-example-generic" data-slide-to="3"></li>
+                                <li id="li5" data-target="#carousel-example-generic" data-slide-to="4"></li>                       
                             </ol>
 
                             <!-- Wrapper for slides -->
-                            <div class="carousel-inner" role="listbox">
-                                <div class="item active">
+                            <div class="carousel-inner" role="listbox" id="it">
+                                <div class="item active" id="item_img1">
                                     <img id="img1" src="{{ URL::asset('image/default-image.png') }}" />
                                 </div>
-                                <div class="item">
+                                <div class="item" id="item_img2">
                                     <img id="img2" src="{{ URL::asset('image/default-image.png') }}" />
                                 </div>
-                                <div class="item">
+                                <div class="item" id="item_img3">
                                     <img id="img3" src="{{ URL::asset('image/default-image.png') }}" />
                                 </div>
-                                 <div class="item">
+                                 <div class="item" id="item_img4">
                                     <img id="img4" src="{{ URL::asset('image/default-image.png') }}" />
                                 </div>
-                                 <div class="item">
+                                 <div class="item" id="item_img5">
                                     <img id="img5" src="{{ URL::asset('image/default-image.png') }}" />
                                 </div>         
                             </div>
@@ -1235,11 +1263,19 @@
           document.getElementById('notifBy').style.display = 'none';
           document.getElementById('upDoc').style.display = 'none';
           document.getElementById('repp').style.display = 'none';
-          // document.getElementById('saveCh').style.display = 'none';
-          // document.getElementById('una').style.display = 'none';
-          // document.getElementById('saveBtn').style.display = 'none';
           document.getElementById('progress').style.display = 'none';
-          
+          document.getElementById('item_img1').style.display = 'none';
+          document.getElementById('item_img2').style.display = 'none';
+          document.getElementById('item_img3').style.display = 'none';
+          document.getElementById('item_img4').style.display = 'none';
+          document.getElementById('item_img5').style.display = 'none';
+          document.getElementById('li1').style.display = 'none';
+          document.getElementById('li2').style.display = 'none';
+          document.getElementById('li3').style.display = 'none';
+          document.getElementById('li4').style.display = 'none';
+          document.getElementById('li5').style.display = 'none';
+
+
             @foreach($cliacc as $ins)
                 @if($creq->account_ID == $ins->account_ID)
                     $('#c_pno').val('{{$ins->policy_number}}');
@@ -1449,35 +1485,6 @@
             @endforeach
         };
 
-    </script>
-
-    <script>
-        $(document).ready(function(){
-    var next = 1;
-    $(".add-more").click(function(e){
-        e.preventDefault();
-        var addto = "#field" + next;
-        var addRemove = "#field" + (next);
-        next = next + 1;
-        var newIn = '<input autocomplete="off" id="field' + next + '" name="field' + next + '" type="file">';
-        var newInput = $(newIn);
-        var removeBtn = '<button id="remove' + (next - 1) + '" class="btn btn-danger remove-me" >- Remove</button></div><div id="field"><br/>';
-        var removeButton = $(removeBtn);
-        $(addto).after(newInput);
-        $(addRemove).after(removeButton);
-        $("#field" + next).attr('data-source',$(addto).attr('data-source'));
-        $("#count").val(next);  
-        
-            $('.remove-me').click(function(e){
-                e.preventDefault();
-                $("br").remove();
-                var fieldNum = this.id.charAt(this.id.length-1);
-                var fieldID = "#field" + fieldNum;
-                $(this).remove();
-                $(fieldID).remove();
-            });
-    });  
-});
     </script>
 
 @endsection

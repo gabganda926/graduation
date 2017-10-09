@@ -181,7 +181,7 @@
                                                     }
                                                 </script>
                                             </td>
-                                            <td><button form = "claim_display" type="submit" class="btn bg-light-blue waves-effect view" data-id = "{{$claims->claim_ID}}" onclick="$('#claim_id').val($(this).data('id'));" data-toggle="tooltip" data-placement="left" title="View details"><i class="material-icons">remove_red_eye</i>
+                                            <td><button form = "claim_display" type="submit" class="btn bg-light-blue waves-effect view" data-id = "{{$claims->claim_ID}}" onclick="$('#claim_id').val($(this).data('id'));" data-toggle="tooltip" data-placement="left" title="View details"><i class="material-icons">remove_red_eye</i></button>
                                                 <button type="button" class="btn bg-green waves-effect forward_manager" data-id = "{{$claims->claim_ID}}" style="position: right;" data-toggle="tooltip" data-placement="left" title="Accept">
                                                     <i class="material-icons">thumb_up</i><span style="font-size: 15px;">
                                                 </button>

@@ -1,50 +1,45 @@
 {
-  "name": "chosen-js",
-  "version": "1.8.1",
-  "description": "Chosen is a JavaScript plugin that makes select boxes user-friendly. It is currently available in both jQuery and Prototype flavors.",
-  "keywords": [
-    "select",
-    "multiselect",
-    "dropdown",
-    "form",
-    "input",
-    "ui"
-  ],
-  "homepage": "https://harvesthq.github.io/chosen/",
-  "bugs": "https://github.com/harvesthq/chosen/issues",
-  "license": "MIT",
-  "contributors": [
-    {
-      "name": "Patrick Filler",
-      "url": "https://github.com/pfiller"
+    "title": "Freelancer",
+    "name": "startbootstrap-freelancer",
+    "version": "4.0.0-beta",
+    "description": "A freelancer portfolio HTML theme for Bootstrap.",
+    "keywords": [
+        "css",
+        "sass",
+        "html",
+        "responsive",
+        "theme",
+        "template"
+    ],
+    "homepage": "https://startbootstrap.com/template-overviews/freelancer",
+    "bugs": {
+        "url": "https://github.com/BlackrockDigital/startbootstrap-freelancer/issues",
+        "email": "feedback@startbootstrap.com"
     },
-    {
-      "name": "Christophe Coevoet",
-      "url": "https://github.com/stof"
+    "license": "MIT",
+    "author": "Start Bootstrap",
+    "contributors": [
+        "David Miller (http://davidmiller.io/)"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/BlackrockDigital/startbootstrap-freelancer.git"
     },
-    {
-      "name": "Ken Earley",
-      "url": "https://github.com/kenearley"
+    "dependencies": {
+        "bootstrap": "^4.0.0-beta",
+        "font-awesome": "4.7.0",
+        "jquery": "^3.2.1",
+        "jquery.easing": "^1.4.1",
+        "popper.js": "1.12.3"
     },
-    {
-      "name": "Koen Punt",
-      "url": "https://github.com/koenpunt"
+    "devDependencies": {
+        "browser-sync": "2.18.13",
+        "gulp": "^3.9.1",
+        "gulp-clean-css": "3.7.0",
+        "gulp-filter": "^5.0.1",
+        "gulp-header": "1.8.9",
+        "gulp-rename": "^1.2.2",
+        "gulp-sass": "^3.1.0",
+        "gulp-uglify": "3.0.0"
     }
-  ],
-  "dependencies": {},
-  "files": [
-    "chosen.jquery.js",
-    "chosen.jquery.min.js",
-    "chosen.proto.js",
-    "chosen.proto.min.js",
-    "chosen.css",
-    "chosen.min.css",
-    "chosen-sprite@2x.png",
-    "chosen-sprite.png"
-  ],
-  "main": "chosen.jquery.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/harvesthq/chosen.git"
-  }
 }

@@ -1075,33 +1075,6 @@
             $('#companyClient').hide(800);
         }
 
-        // function buttonAddMore(){
-        //     var next = 1;
-        //     $(".add-more").click(function(e){
-        //         e.preventDefault();
-        //         var addto = "#field" + next;
-        //         var addRemove = "#field" + (next);
-        //         next = next + 1;
-        //         var newIn = '<input autocomplete="off" id="field' + next + '" name="field' + next + '" type="file">';
-        //         var newInput = $(newIn);
-        //         var removeBtn = '<button id="remove' + (next - 1) + '" class="btn btn-danger remove-me" >- Remove</button></div><div id="field"><br/>';
-        //         var removeButton = $(removeBtn);
-        //         $(addto).after(newInput);
-        //         $(addRemove).after(removeButton);
-        //         $("#field" + next).attr('data-source',$(addto).attr('data-source'));
-        //         $("#count").val(next);  
-                
-        //             $('.remove-me').click(function(e){
-        //                 e.preventDefault();
-        //                 $("br").remove();
-        //                 var fieldNum = this.id.charAt(this.id.length-1);
-        //                 var fieldID = "#field" + fieldNum;
-        //                 $(this).remove();
-        //                 $(fieldID).remove();
-        //             });
-        //     });  
-        // }
-
         function getInsId(inid){
            inid = $('#insid').val();
            return inid;
@@ -1141,15 +1114,19 @@
                                                     var incep = new Date('{{$insacc->inception_date}}');
 
                                                     incep.setFullYear(incep.getFullYear() + 1);
-                                                    if((parseDate(due).addDays(7).getTime() < parseDate(now).getTime()) && lapse == 0 && '{{ $pay->status }}' == 1){
-                                                        var p = 3; //lapsed
-                                                        console.log(p);
-                                                        var lapse=1;
-                                                        console.log('{{$pay->or_number}}');
+                                                    if((parseDate(due).addDays(7).getTime() < parseDate(now).getTime()) && lapse == 0 )
+                                                    {
+                                                        if( '{{ $pay->status }}' == 1 || '{{ $pay->status }}' == 4)
+                                                        {
+                                                            var p = 3; //lapsed
+                                                            console.log(p);
+                                                            var lapse=1;
+                                                            console.log('{{$pay->or_number}}');
+                                                        }
                                                     }   
                                                     @if($det->account_ID == $insacc->account_ID)
                                                     if(incep_start > parseDate(now).getTime() && lapse==0){
-                                                        if('{{ $pay->status }}' == 1 || '{{ $pay->status }}' == 3){
+                                                        if('{{ $pay->status }}' == 1 || '{{ $pay->status }}' == 3 || '{{ $pay->status }}' == 0){
                                                                 var p = 1; //on payment
                                                                 console.log(p);
                                                         }
@@ -1159,7 +1136,10 @@
                                                         var p = 2; //expired
                                                         console.log(p);
                                                     }
-                                                    if(incep >= parseDate(now).getTime() && incep_start <= parseDate(now).getTime() && lapse == 0 && ('{{ $pay->status }}' == 1 || '{{ $pay->status }}' == 3)){
+                                                    if(incep >= parseDate(now).getTime() && incep_start <= parseDate(now).getTime() && lapse == 0)
+                                                    {
+                                                        if ('{{ $pay->status }}' == 0 || '{{ $pay->status }}' == 3)
+                                                        {
                                                         var p = 4; //active
                                                         console.log(p);
                                                         @foreach($clist as $list)
@@ -1172,6 +1152,7 @@
                                                                 @endif
                                                             @endif
                                                         @endforeach
+                                                        }
                                                     }
                                                 }
                                             @endif
@@ -1291,8 +1272,8 @@
                                         @if($list->client_ID == $client->comp_ID)
                                             $('#insid').val('{{ $ins->account_ID }}');
                                             console.log("INSURANCE ACC ID: " + $('#insid').val());
-                                            $('#compname').val('{{ $client->comp_telnum }}');
-                                            $('#comp_telnum').val('{{ $client->comp_name }}');
+                                            $('#compname').val('{{ $client->comp_name }}');
+                                            $('#comp_telnum').val('{{ $client->comp_telnum }}');
                                             $('#comp_fax').val('{{ $client->comp_faxnum }}');
                                             $('#comp_email').val('{{ $client->comp_email }}');
                                             @foreach($sales as $agent)

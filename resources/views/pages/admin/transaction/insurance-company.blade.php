@@ -179,7 +179,7 @@
                                             <td>
                                               @foreach($paydetails as $spay)
                                                @if($spay->account_ID == $iacc->account_ID)
-                                               <button form = "display" type="submit" type="button" class="btn bg-light-blue waves-effect" data-id = "{{ $ccompany->comp_ID }}" data-acc = "{{$iacc->account_ID}}" data-pay = "{{$spay->payment_ID}}" onclick="
+                                               <button form = "display" type="submit" type="button" class="btn bg-light-blue waves-effect" data-id = "{{ $ccompany->comp_ID }}" data-acc = "{{$iacc->account_ID}}" data-pay = "{{ $spay->payment_ID }}" onclick="
                                                 $('#id').val($(this).data('id')); $('#acc_id').val($(this).data('acc')); $('#pay_id').val($(this).data('pay'));" data-toggle="tooltip" data-placement="left" title="View account details."><i class="material-icons">remove_red_eye</i>
                                                </button>
                                                @endif
@@ -208,10 +208,6 @@
             </div>
         </div>
     </section>
-
-    <script>
-        
-    </script>
 
     <script type="text/javascript">
         var times = '<?php 
@@ -293,37 +289,42 @@
                                                   var incep_start = new Date('{{$iacc->inception_date}}');
                                                   var incep = new Date('{{$iacc->inception_date}}');
                                                   incep.setFullYear(incep.getFullYear() + 1);
-                                                  if((parseDate(due).addDays(7).getTime() < parseDate(now).getTime()) && lapse == 0 && '{{ $pay->status }}' == 1){
+                                                  if((parseDate(due).addDays(7).getTime() < parseDate(now).getTime()) && lapse == 0)
+                                                  {
+                                                    if( '{{ $pay->status }}' == 1 || '{{ $pay->status }}' == 4){
                                                       var p = 3; //lapsed
                                                       console.log(p);
                                                       var lapse=1;
                                                       console.log('{{$pay->or_number}}');
+                                                    }
                                                   }
                                                   @if($det->account_ID == $iacc->account_ID)
-                                                  if('{{$iacc->inception_date}}' > now && lapse==0 && '{{ $pay->status }}' == 0 || '{{ $pay->status }}' == 3){
-                                                              var p = 1; //on payment
-                                                              console.log(p);
-                                                  }
+                                                  if(incep_start > parseDate(now).getTime() && lapse==0){
+                                                        if('{{ $pay->status }}' == 1 || '{{ $pay->status }}' == 3 || '{{ $pay->status }}' == 0){
+                                                                var p = 1; //on payment
+                                                                console.log(p);
+                                                        }
+                                                    }
                                                   @endif
                                                   if(incep < parseDate(now).getTime() && lapse==0){
                                                       var p = 2; //expired
                                                       console.log(p);
                                                       console.log(now);
                                                   }
-                                                  if(incep >= parseDate(now).getTime() && incep_start <= parseDate(now).getTime() && lapse == 0 && '{{ $pay->status }}' == 0){
-                                                      var p = 4; //active
-                                                      console.log(p);
-                                                      @foreach($clist as $list)
-                                                          @if($iacc->client_ID == $list->client_ID)
-                                                              @if($list->client_type == 1)
-                                                                  var ind = 1;
-                                                              @endif
-                                                              @if($list->client_type == 2)
-                                                                  var comp = 1;
-                                                              @endif
-                                                          @endif
-                                                      @endforeach
-                                                  }
+                                                  if(incep >= parseDate(now).getTime() && incep_start <= parseDate(now).getTime() && lapse == 0 && ('{{ $pay->status }}' == 0 || '{{ $pay->status }}' == 3)){
+                                                        var p = 4; //active
+                                                        console.log(p);
+                                                        @foreach($clist as $list)
+                                                            @if($iacc->client_ID == $list->client_ID)
+                                                                @if($list->client_type == 1)
+                                                                    var ind = 1;
+                                                                @endif
+                                                                @if($list->client_type == 2)
+                                                                    var comp = 1;
+                                                                @endif
+                                                            @endif
+                                                        @endforeach
+                                                    }
                                           @endif
                                       @endif
                                   @endforeach

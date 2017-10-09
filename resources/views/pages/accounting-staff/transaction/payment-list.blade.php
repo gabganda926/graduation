@@ -2,7 +2,7 @@
 
 @section('title','Payment - Transaction | i-Insure')
 
-@section('transPayment','active')
+@section('transList','active')
 
 @section('transListPay','active')
 
@@ -87,7 +87,7 @@
                                 <thead>
                                     <tr>
                                         <th>Remittance Date</th>
-                                        <th class="col-md-1">OR No.</th>
+                                        <th class="col-md-1">AR No.</th>
                                         <th class="col-md-1">Policy No.</th>
                                         <th>Client</th>
                                         <th>Bank</th>
@@ -141,7 +141,7 @@
                                                                 @foreach($company as $comp)
                                                                     @if($clients->client_ID == $comp->comp_ID)
                                                                         {{ $comp->comp_name }}
-                                                                        <script> var pi_id = "pi = " + {{ $pInfo->pinfo_ID }}; console.log(pi_id); </script>
+                                                                        <script> var pi_id = "pi = " + {{ $comp->comp_ID }}; console.log(pi_id); </script>
                                                                     @endif
                                                                 @endforeach
                                                             @endif
@@ -223,7 +223,7 @@
                                                     @if($insacc->client_ID == $clients->client_ID)
                                                         @foreach($company as $comp)
                                                             @if($clients->client_ID == $comp->comp_ID)
-                                                                <button type="button" id="gen" data-or=" {{ $list->or_number }} " data-pinf=" {{$pInfo->pinfoID}} " data-acc="{{ $insacc->account_ID }}" onclick="window.open('{{ URL ('/pdf/payment-receipt-comp/' .$list->or_number. '/' .$comp->comp_ID. '/' .$insacc->account_ID) }}')" class="btn bg-orange waves-effect" style="position: right;" data-toggle="tooltip" data-placement="left" title="Generate Receipt">
+                                                                <button type="button" id="gen" data-or=" {{ $list->or_number }} " data-pinf=" {{$comp->comp_ID}} " data-acc="{{ $insacc->account_ID }}" onclick="window.open('{{ URL ('/pdf/payment-receipt-comp/' .$list->or_number. '/' .$comp->comp_ID. '/' .$insacc->account_ID) }}')" class="btn bg-orange waves-effect" style="position: right;" data-toggle="tooltip" data-placement="left" title="Generate Receipt">
                                             <i class="material-icons">picture_as_pdf</i><span style="font-size: 15px;"></span>
                                             </button>
                                                             @endif

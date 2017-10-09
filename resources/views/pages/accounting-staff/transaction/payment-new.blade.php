@@ -606,23 +606,17 @@
              @endforeach
             @endforeach
 
-            var lapse = 0;
             $.each(newOptions, function(key,value) {
               if(value)
               {
-              if((parseDate(value.due_date).addDays(7).getTime() < parseDate(today).getTime()) && lapse == 0 && value.status == 1)
-                lapse = 1;
               if(value.status == 0)
               var option = '<tr><td>BOP'+pad(value.checknum, 4)+'</td><td>'+bank+'</td><td>'+formatDate2(value.due_date)+'</td><td>₱'+numberWithCommas(Math.round(value.amount * 100) / 100)+'</td><td><span class="label bg-green">paid</span></td></tr>';
               if(value.status == 1)
               var option = '<tr><td>BOP'+pad(value.checknum, 4)+'</td><td>'+bank+'</td><td>'+formatDate2(value.due_date)+'</td><td>₱'+numberWithCommas(Math.round(value.amount * 100) / 100)+'</td><td><span class="label bg-blue">to be paid</span></td></tr>';
               if(value.status == 3)
-              var option = '<tr><td>BOP'+pad(value.checknum, 4)+'</td><td>'+bank+'</td><td>'+formatDate2(value.due_date)+'</td><td>₱'+numberWithCommas(Math.round(value.amount * 100) / 100)+'</td><td><span class="label bg-red">late</span></tr>';
-              if(lapse == 1)
-              {
-                var option = '<tr><td>BOP'+pad(value.checknum, 4)+'</td><td>'+bank+'</td><td>'+formatDate2(value.due_date)+'</td><td>₱'+numberWithCommas(Math.round(value.amount * 100) / 100)+'</td><td><span class="label bg-red">lapse</span></tr>';
-              }
-                
+              var option = '<tr><td>BOP'+pad(value.checknum, 4)+'</td><td>'+bank+'</td><td>'+formatDate2(value.due_date)+'</td><td>₱'+numberWithCommas(Math.round(value.amount * 100) / 100)+'</td><td><span class="label bg-orange">late</span></tr>';
+              if(value.status == 4)
+                var option = '<tr><td>BOP'+pad(value.checknum, 4)+'</td><td>'+bank+'</td><td>'+formatDate2(value.due_date)+'</td><td>₱'+numberWithCommas(Math.round(value.amount * 100) / 100)+'</td><td><span class="label bg-red">lapsed</span></tr>';
               $('#checks tbody').append(option);
               }
             });

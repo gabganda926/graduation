@@ -49,6 +49,8 @@ use Redirect;
 
 use Alert;
 
+use PDF;
+
 class trans_insIndividualController extends Controller
 {
   public function index()
@@ -86,4 +88,36 @@ class trans_insIndividualController extends Controller
     ->with('pInfo',personalInfoConnection::all())
     ->with('add',addressConnection::all());
   }
+
+  public function generateFormFPG(Request $request) 
+    {
+        $pdf = PDF::loadView('pages.pdf.form_fpg')
+            ->setPaper('Letter');
+
+        return $pdf->stream();
+    }//generates the pdf
+
+    public function generateFormCommonwealth(Request $request) 
+    {
+        $pdf = PDF::loadView('pages.pdf.form_commonwealth')
+            ->setPaper('Letter');
+
+        return $pdf->stream();
+    }//generates the pdf
+
+    public function generateFormStandard(Request $request) 
+    {
+        $pdf = PDF::loadView('pages.pdf.form_standard')
+            ->setPaper('Letter');
+
+        return $pdf->stream();
+    }//generates the pdf
+
+    public function generateFormPGI(Request $request) 
+    {
+        $pdf = PDF::loadView('pages.pdf.form_pgi')
+            ->setPaper('Letter');
+
+        return $pdf->stream();
+    }//generates the pdf
 }

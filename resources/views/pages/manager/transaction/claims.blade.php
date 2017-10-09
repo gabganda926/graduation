@@ -47,6 +47,18 @@
                 </div>
             </div>
         <div class="row clearfix">
+                <form id = "claim_display" action = "/manager/transaction/claim-details" method = "GET" style = "display: none;">
+                      <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                      <div class="col-md-4" style = "display: none;">
+                         <input id = "claim_id" name = "claim_id" type="text" class="form-control">
+                     </div>
+                </form>
+                <form id = "claim_transmit" action = "/manager/transaction/claim-transmit" method = "GET" style = "display: none;">
+                      <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                      <div class="col-md-4" style = "display: none;">
+                         <input id = "claimid" name = "claimid" type="text" class="form-control">
+                     </div>
+                </form>
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
@@ -147,11 +159,8 @@
                                         <td>
                                                    {{ \Carbon\Carbon::parse($claims->updated_at)->format("M-d-Y") }} {{ "(".\Carbon\Carbon::parse($claims->updated_at)->format("l, h:i:s A").")" }}
                                             </td>
-                                        <td><button type="button" class="btn bg-blue waves-effect" style="position: right;" onclick="window.document.location='{{ URL::asset('manager/transaction/claim-details') }}';" data-toggle="tooltip" data-placement="left" title="View Details">
-                                                <i class="material-icons">security</i><span style="font-size: 15px;">
-                                            </button>
-                                            <button type="button" class="btn bg-green waves-effect" style="position: right;" onclick=""  data-toggle="tooltip" data-placement="left" title="Accept">
-                                                <i class="material-icons">thumb_up</i><span style="font-size: 15px;">
+                                        <td><button form = "claim_display" type="submit" class="btn bg-light-blue waves-effect view" data-id = "{{$claims->claim_ID}}" onclick="$('#claim_id').val($(this).data('id'));" data-toggle="tooltip" data-placement="left" title="View details"><i class="material-icons">remove_red_eye</i></button>
+                                            <button form = "claim_transmit" type="submit" class="btn bg-orange waves-effect forward_insurance" data-id = "{{$claims->claim_ID}}" onclick="$('#claimid').val($(this).data('id'));" data-toggle="tooltip" data-placement="left" title="Transmit Document"><i class="material-icons">thumb_up</i><span style="font-size: 15px;">
                                             </button>
                                             <button type="button" class="btn bg-red waves-effect" style="position: right;" onclick=""  data-toggle="tooltip" data-placement="left" title="Reject">
                                                 <i class="material-icons">thumb_down</i><span style="font-size: 15px;">
