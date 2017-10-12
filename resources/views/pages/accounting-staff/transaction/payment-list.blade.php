@@ -104,6 +104,7 @@
                                     @foreach($cvouch as $vouch)
                                     @if($list->check_voucher == $vouch->cv_ID)
                                     @if($list->status != 1)
+                                    @if($list->status != 4)
                                     <tr>
 
                                         <td> {{ \Carbon\Carbon::parse($list->paid_date)->format("M-d-Y") }} {{ "(".\Carbon\Carbon::parse($list->paid_date)->format("l, h:i:s A").")" }}</td>
@@ -238,6 +239,7 @@
                                     @endforeach
                                         </td>
                                     </tr>
+                                    @endif
                                     @endif
                                     @endif
                                     @endforeach

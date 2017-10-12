@@ -93,8 +93,18 @@
                                             <i class="material-icons">access_time</i>
                                         </div>
                                         <div class="content">
-                                            <div class="text">PENDING</div>
-                                            <div class="number">15</div>
+                                            <div class="text">NEW / TO DO</div>
+                                            <div class="number">
+                                                <script>
+                                                    var count = 0;
+                                                    @foreach($request as $re)
+                                                        @if($re->status == 0 || $re->status == 1)
+                                                            count+= 1;
+                                                        @endif
+                                                    @endforeach
+                                                    document.write(count);
+                                                </script>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -104,8 +114,18 @@
                                             <i class="material-icons">directions_bike</i>
                                         </div>
                                         <div class="content">
-                                            <div class="text">OPEN</div>
-                                            <div class="number">15</div>
+                                            <div class="text">PROCESSING</div>
+                                            <div class="number">
+                                                <script>
+                                                    var count1 = 0;
+                                                    @foreach($request as $re)
+                                                        @if($re->status == 3)
+                                                            count1+= 1;
+                                                        @endif
+                                                    @endforeach
+                                                    document.write(count1);
+                                                </script>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -119,18 +139,63 @@
                                         </div>
                                         <div class="content">
                                             <div class="text">CLOSED</div>
-                                            <div class="number">15</div>
+                                            <div class="number">
+                                                <script>
+                                                    var count2 = 0;
+                                                    @foreach($request as $re)
+                                                        @if($re->status == 2 || $re->status == 5 || $re->status == 7)
+                                                            count2+= 1;
+                                                        @endif
+                                                    @endforeach
+                                                    document.write(count2);
+                                                </script>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
+                                    <div class="info-box hover-zoom-effect">
+                                        <div class="icon bg-pink">
+                                            <i class="material-icons">pan_tool</i>
+                                        </div>
+                                        <div class="content">
+                                            <div class="text">ON HOLD</div>
+                                            <div class="number">
+                                                <script>
+                                                    var count3 = 0;
+                                                    @foreach($request as $re)
+                                                        @if($re->status == 4)
+                                                            count3+= 1;
+                                                        @endif
+                                                    @endforeach
+                                                    document.write(count3);
+                                                </script>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row clearfix">
+                                <div class="col-md-12">
                                     <div class="info-box hover-zoom-effect">
                                         <div class="icon bg-orange">
                                             <i class="material-icons">donut_small</i>
                                         </div>
                                         <div class="content">
                                             <div class="text">TOTAL</div>
-                                            <div class="number">45</div>
+                                            <div class="number">
+                                                <script>
+                                                    var tot = 0;
+                                                    @foreach($request as $re)
+                                                        @if($re->status != 6)
+                                                            tot+= 1;
+                                                        
+                                                        @endif
+                                                    @endforeach
+                                                    document.write(tot);
+                                                </script>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

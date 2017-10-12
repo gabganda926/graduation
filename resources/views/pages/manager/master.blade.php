@@ -176,10 +176,25 @@
                     </li>
 
                     <li class = "@yield('transTrans')">
-                        <a href="/manager/transaction/transmittal">
+                        <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">insert_drive_file</i>
                             <span>TRANSMITTAL</span>
                         </a>
+                        <ul class="ml-menu">
+                            <li class = "@yield('transRequest')">
+                                <a href="/manager/transaction/transmittal">
+                                    <i class="material-icons">radio_button_checked</i>
+                                    <span>Transmittal Requests</span>
+                                </a>
+                            </li>
+
+                            <li class = "@yield('transTransmittal')">
+                                <a href="/manager/transaction/transmittal/list">
+                                    <i class="material-icons">radio_button_checked</i>
+                                    <span>List of Transmittals</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
 
                     <li class = "@yield('queries')">

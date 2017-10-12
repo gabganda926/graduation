@@ -107,7 +107,7 @@
                                         <td>{{$comp->name}}</td>
                                         <td>{{\Carbon\Carbon::parse($comp->date_sent)->format("M d,Y h:i:s")}}</td>
                                         <td><span class="label bg-blue">new</span></td>
-                                        <td><button type="button" class="btn bg-blue waves-effect view" style="position: right;"  data-toggle="tooltip" data-placement="left" title="View Details">
+                                        <td><button type="button" class="btn bg-blue waves-effect view" style="position: right;"  data-toggle="tooltip" data-placement="left" title="View Details" data-id = "{{$comp->complaint_ID}}">
                                             <i class="material-icons">security</i><span style="font-size: 15px;">
                                         </button>
                                         <button type="button" class="btn bg-green waves-effect" style="position: right;" data-toggle="tooltip" data-placement="left" title="Assign employee to solve this complaint" onclick="
@@ -139,7 +139,7 @@
                         <h3 style="text-align: center;"><img src="{{ URL::asset ('images/icons/1.png')}}" style="height: 50px; width: 50px;"><b> Assign Employee </b></h3>
                         <div class="divider" style="margin-bottom:20px;"></div>
                         </div>
-                        <form id="add" name = "add" action = "complaint-pending/action" method="POST">
+                        <form id="add" name = "add" action = "complaint-pending/update" method="POST">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <div class="col-md-4" style = "display: none;">
                            <input id = "ID" name = "ID" type="text" class="form-control" pattern="[A-Za-z'-]">
@@ -271,6 +271,13 @@
         </div>
     </section>
 
+    <form id = "view" name = "view" action="complaint-pending/view" method="GET">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <div class="col-md-4" style = "display: none;">
+           <input id = "view_ID" name = "ID" type="text" class="form-control" pattern="[A-Za-z'-]">
+        </div>
+    </form>
+
      <script type="text/javascript">
         window.onload = function(){
             document.getElementById("assign").style.display = 'none';
@@ -323,6 +330,12 @@
 
         $('#employee').on('change', function(){
             emp_display();
+        });
+
+        $('.view').on('click', function(){
+            var id = $(this).data('id');
+            $('#view_ID').val(id);
+            $('#view').submit();
         });
     </script>
 

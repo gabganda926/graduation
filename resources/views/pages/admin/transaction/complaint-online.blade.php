@@ -86,35 +86,173 @@
                         <div class="divider" style="margin-bottom:20px;"></div>
                         </div>
                         <div class="body">
-                            <div class="body table-responsive">
-                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
-                                    <thead>
-                                        <tr>
-                                            <th>Category</th>
-                                            <th>Pending</th>
-                                            <th>Open</th>
-                                            <th>Closed</th>
-                                            <th>Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Service Issue</td>
-                                            <td>10</td>
-                                            <td>2</td>
-                                            <td>25</td>
-                                            <td>37</td>
-                                        </tr>
+                            <div class="row clearfix">
+                                <div class="col-md-4">
+                                    <div class="info-box hover-zoom-effect">
+                                        <div class="icon bg-pink">
+                                            <i class="material-icons">access_time</i>
+                                        </div>
+                                        <div class="content">
+                                            <div class="text">PENDING</div>
+                                            <div class="number">
+                                                <script>
+                                                    var count = 0;
+                                                    @foreach($list as $li)
+                                                        @if($li->status == 0)
+                                                            count += 1;
+                                                        @endif
+                                                    @endforeach
 
-                                        <tr>
-                                            <td>Missed Payments</td>
-                                            <td>0</td>
-                                            <td>2</td>
-                                            <td>25</td>
-                                            <td>27</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                                    document.write(count);
+                                                </script>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="info-box hover-zoom-effect">
+                                        <div class="icon bg-pink">
+                                            <i class="material-icons">folder_open</i>
+                                        </div>
+                                        <div class="content">
+                                            <div class="text">OPEN</div>
+                                            <div class="number">
+                                                <script>
+                                                    var count1 = 0;
+
+                                                    @foreach($list as $li)
+                                                        @if($li->status == 1)
+                                                            count1 += 1;
+                                                        @endif
+                                                    @endforeach
+                                                    
+                                                    document.write(count1);
+                                                </script>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="info-box hover-zoom-effect">
+                                        <div class="icon bg-pink">
+                                            <i class="material-icons">check</i>
+                                        </div>
+                                        <div class="content">
+                                            <div class="text">CLOSED</div>
+                                            <div class="number">
+                                                <script>
+                                                    var count2 = 0;
+                                                    @foreach($list as $li)
+                                                        @if($li->status == 2 || $li->status==3)
+                                                            count2 += 1;
+                                                        @endif
+                                                    @endforeach
+                                                    
+                                                    document.write(count2);
+                                                </script>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row clearfix">
+                                <div class="col-md-12">
+                                    <div class="info-box hover-zoom-effect">
+                                        <div class="icon bg-orange">
+                                            <i class="material-icons">donut_small</i>
+                                        </div>
+                                        <div class="content">
+                                            <div class="text">TOTAL</div>
+                                            <div class="number">
+                                                <script>
+                                                    var tot = 0;
+                                                    @foreach($list as $li)
+                                                        tot += 1;
+                                                    @endforeach
+                                                    
+                                                    document.write(tot);
+                                                </script>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                                
+                            <div class="row clearfix">
+                                <div class="col-md-4">
+                                    <div class="info-box hover-zoom-effect">
+                                        <div class="icon bg-red">
+                                            <i class="material-icons">priority_high</i>
+                                        </div>
+                                        <div class="content">
+                                            <div class="text">HIGH</div>
+                                            <div class="number">
+                                                <script>
+                                                    var count3 = 0;
+
+                                                    @foreach($prio as $pr)
+                                                        @if($pr->status == 0)
+                                                            count3 += 1;
+                                                        @endif
+                                                    @endforeach
+                                                    
+                                                    document.write(count3);
+                                                </script>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="info-box hover-zoom-effect">
+                                        <div class="icon bg-deep-orange">
+                                            <i class="material-icons">more_horiz</i>
+                                        </div>
+                                        <div class="content">
+                                            <div class="text">MEDIUM</div>
+                                            <div class="number">
+                                                 <script>
+                                                    var count4 = 0;
+
+                                                    @foreach($prio as $pr)
+                                                        @if($pr->status == 1)
+                                                            count4 += 1;
+                                                        @endif
+                                                    @endforeach
+                                                    
+                                                    document.write(count4);
+                                                </script>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="info-box hover-zoom-effect">
+                                        <div class="icon bg-green">
+                                            <i class="material-icons">arrow_downward</i>
+                                        </div>
+                                        <div class="content">
+                                            <div class="text">LOW</div>
+                                            <div class="number">
+                                                 <script>
+                                                    var count5 = 0;
+
+                                                    @foreach($prio as $pr)
+                                                        @if($pr->status == 2)
+                                                            count5 += 1;
+                                                        @endif
+                                                    @endforeach
+                                                    
+                                                    document.write(count5);
+                                                </script>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

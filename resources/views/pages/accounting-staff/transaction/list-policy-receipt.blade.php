@@ -346,11 +346,14 @@
            @endif
           @endforeach
           @endif
-          @if($clist->client_type == 2)
+         @endforeach
+
+         @foreach($clilist as $list2)
+          @if($list2->client_type == 2)
             @foreach($company as $client)
-                @if($list->client_ID == $client->comp_ID)
+                @if($list2->client_ID == $client->comp_ID)
                     @foreach($cliacc as $iacc)
-                        @if($list->client_ID == $iacc->client_ID)
+                        @if($list2->client_ID == $iacc->client_ID)
                             var lapse = 0;
                       var p = 0;
                       var ind = 0;
@@ -396,12 +399,12 @@
                                                   if(incep >= parseDate(now).getTime() && incep_start <= parseDate(now).getTime() && lapse == 0 && ('{{ $pay->status }}' == 0 || '{{ $pay->status }}' == 3)){
                                                         var p = 4; //active
                                                         console.log(p);
-                                                        @foreach($clilist as $list)
-                                                            @if($iacc->client_ID == $list->client_ID)
-                                                                @if($list->client_type == 1)
+                                                        @foreach($clilist as $list3)
+                                                            @if($iacc->client_ID == $list3->client_ID)
+                                                                @if($list3->client_type == 1)
                                                                     var ind = 1;
                                                                 @endif
-                                                                @if($list->client_type == 2)
+                                                                @if($list3->client_type == 2)
                                                                     var comp = 1;
                                                                 @endif
                                                             @endif

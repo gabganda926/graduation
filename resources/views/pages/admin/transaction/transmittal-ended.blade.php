@@ -76,7 +76,7 @@
                             <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                 <thead>
                                     <tr>
-                                        <th>Transmittal #</th>
+                                        <th>Transmittal ID / Request ID</th>
                                         <th>Client</th>
                                         <th>Courier</th>
                                         <th class="col-md-2">Date Started</th>
@@ -86,9 +86,33 @@
                                 </thead>
                                 <tbody>
                                 @foreach($request as $req)
-                                 @if($req->status == 5)
+                                 @if($req->status == 5 || $req->status == 7 || $req->status == 2)
+                                  
                                  <tr>
-                                    <th>{{$req->req_ID}}</th>
+                                    <td>
+                                      @if($req->status == 2)
+                                        {{ $req->req_ID }}
+                                      @endif
+
+                                      @if($req->status == 7 || $req->status == 5)
+                                      @foreach($process as $pro)
+                                        @if($req->req_ID == $pro->request_ID)
+                                          @if($pro->process_ID >= 10)
+                                              TRANS-00{{ $pro->process_ID }}
+                                          @endif
+                                          @if($pro->process_ID < 10)
+                                              TRANS-000{{ $pro->process_ID }}
+                                          @endif
+                                          @if($pro->process_ID >= 100)
+                                              TRANS-0{{ $pro->process_ID }}
+                                          @endif
+                                          @if($pro->process_ID >= 1000)
+                                              TRANS-{{ $pro->process_ID }}
+                                          @endif
+                                        @endif
+                                      @endforeach
+                                      @endif
+                                    </td>
                                     <td>
                                     @foreach($details as $dts)
                                      @if($dts->req_ID == $req->req_ID)
@@ -97,52 +121,40 @@
                                     @endforeach
                                     </td>
                                     <td>
-                                    @foreach($process as $proc)
-                                     @if($proc->request_ID == $req->req_ID)
-                                      @foreach($courier as $cur)
-                                       @if($cur->courier_ID == $proc->courier_ID)
-                                        @foreach($pinfo as $info)
-                                         @if($cur->personal_info_ID == $info->pinfo_ID)
-                                          {{$info->pinfo_last_name}}, {{$info->pinfo_first_name}} {{$info->pinfo_middle_name}}
-                                         @endif
+                                    @if($req->status == 7 || $req->status == 5)
+                                    @foreach($process as $pro)
+                                      @if($req->req_ID == $pro->request_ID)
+                                        @foreach($courier as $co)
+                                          @if($co->courier_ID == $pro->courier_ID)
+                                              @foreach($pinfo as $info)
+                                                  @if($co->personal_info_ID == $info->pinfo_ID)
+                                                      {{$info->pinfo_last_name}}, {{$info->pinfo_first_name}} {{$info->pinfo_middle_name}}
+                                                   @endif
+                                              @endforeach
+                                          @endif
                                         @endforeach
-                                       @endif
-                                      @endforeach
-                                     @endif
+                                      @endif
                                     @endforeach
+                                    @endif
+
+                                    @if($req->status == 2)
+                                      N/A
+                                    @endif
                                     </td>
                                     <td>{{\Carbon\Carbon::parse($req->date_recieved)->format("M d,Y H:i:s")}}</td>
                                     <td>{{\Carbon\Carbon::parse($req->date_update)->format("M d,Y H:i:s")}}</td>
-                                    <td><span class="label bg-green">delivered</span></td>
-                                 </tr>
-                                 @elseif($req->status == 2)
-                                 <tr>
-                                    <th>{{$req->req_ID}}</th>
                                     <td>
-                                    @foreach($details as $dts)
-                                     @if($dts->req_ID == $req->req_ID)
-                                      {{$dts->name}}
-                                     @endif
-                                    @endforeach
+                                      @if($req->status == 5)
+                                        <span class="label bg-green">delivered</span>
+                                      @endif
+                                      @if($req->status == 7)
+                                        <span class="label bg-deep-orange">cancelled</span>
+                                      @endif
+                                      @if($req->status == 2)
+                                        <span class="label bg-red">rejected</span>
+                                      @endif
                                     </td>
-                                    <td>
-                                    @foreach($process as $proc)
-                                     @if($proc->request_ID == $req->req_ID)
-                                      @foreach($courier as $cur)
-                                       @if($cur->courier_ID == $proc->courier_ID)
-                                        @foreach($pinfo as $info)
-                                         @if($cur->personal_info_ID == $info->pinfo_ID)
-                                          {{$info->pinfo_last_name}}, {{$info->pinfo_first_name}} {{$info->pinfo_middle_name}}
-                                         @endif
-                                        @endforeach
-                                       @endif
-                                      @endforeach
-                                     @endif
-                                    @endforeach
-                                    </td>
-                                    <td>{{\Carbon\Carbon::parse($req->date_recieved)->format("M d,Y H:i:s")}}</td>
-                                    <td>{{\Carbon\Carbon::parse($req->date_update)->format("M d,Y H:i:s")}}</td>
-                                    <td><span class="label bg-red">cancelled</span></td>
+
                                  </tr>
                                  @endif
                                 @endforeach

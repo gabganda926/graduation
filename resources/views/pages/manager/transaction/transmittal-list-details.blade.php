@@ -1,12 +1,12 @@
 @extends('pages.manager.master')
 
-@section('title','Claims - Transaction| i-Insure')
+@section('title','Transmittal - Transaction | i-Insure')
 
 @section('trans','active')
 
-@section('transClaims','active')
+@section('transTrans','active')
 
-@section('transClaimsOnline','active')
+@section('transTransmittal','active')
 
 @section('body')
 
@@ -46,14 +46,14 @@
         <div class="container-fluid">
             <div class="row clearfix">
                 <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-                    <button type="button" class="btn btn-block bg-deep-orange waves-effect left" onclick="window.document.location='{{ URL::asset('manager/transaction/claims') }}';" >
+                    <button type="button" class="btn btn-block bg-deep-orange waves-effect left" onclick="window.document.location='{{ URL::asset('manager/transaction/transmittal/list') }}';" >
                         <i class="material-icons">backspace</i><span style="font-size: 15px;"> BACK</span>
                     </button>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
                     <ol class="breadcrumb breadcrumb-bg-pink align-right">
-                        <li><a href="{{ URL::asset('manager/transaction/claims') }}"><i class="material-icons">home</i> Home</a></li>
-                        <li><a href="javascript:void(0);"><i class="material-icons">library_books</i> Claim Request Details</a></li>
+                        <li><a href="{{ URL::asset('manager/transaction/transmittal/list') }}"><i class="material-icons">home</i> List of Transmittal</a></li>
+                        <li><a href="javascript:void(0);"><i class="material-icons">library_books</i> Transmittal Details</a></li>
                     </ol>
                 </div>
             </div>
@@ -61,13 +61,36 @@
                 <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                     <div class="body">
                         <div class="list-group">
-                            <a href="javascript:void(0);" id="phDetails" class="list-group-item active" onclick="
+                            <a href="javascript:void(0);" id="transDetails" class="list-group-item active" onclick="
+                                    $('#transDetails').addClass('active');
+                                    $('#transDet').show(800);
+                                    $('#phDet').hide(800);
+                                    $('#clDet').hide(800);
+                                    $('#notifBy').hide(800);
+                                    $('#upDoc').hide(800);
+                                    $('#progress').hide(800);
+                                    $('#claimDoc').removeClass('active');
+                                    $('#prog').removeClass('active');
+                                    $('#clDetails').removeClass('active');
+                                    $('#notifiedBy').removeClass('active');
+                                    $('#uploadDoc').removeClass('active');
+                                    $('#phDetails').removeClass('active');
+                                    $('body,html').animate({
+                                                                scrollTop: 0
+                                                            }, 500);
+                                                            return false;
+                                    ">
+                                1. Transmittal Form
+                            </a>
+                            <a href="javascript:void(0);" id="phDetails" class="list-group-item" onclick="
                                     $('#phDetails').addClass('active');
                                     $('#phDet').show(800);
                                     $('#clDet').hide(800);
                                     $('#notifBy').hide(800);
                                     $('#upDoc').hide(800);
                                     $('#progress').hide(800);
+                                    $('#transDetails').removeClass('active');
+                                    $('#transDet').hide(800);
                                     $('#claimDoc').removeClass('active');
                                     $('#prog').removeClass('active');
                                     $('#clDetails').removeClass('active');
@@ -78,7 +101,7 @@
                                                             }, 500);
                                                             return false;
                                     ">
-                                1. Policy holder Details
+                                2. Policy holder Details
                             </a>
                             <a href="javascript:void(0);" id="clDetails" class="list-group-item" onclick="
                                     $('#clDetails').addClass('active');
@@ -87,6 +110,8 @@
                                     $('#notifBy').hide(800);
                                     $('#upDoc').hide(800);
                                     $('#progress').hide(800);
+                                    $('#transDetails').removeClass('active');
+                                    $('#transDet').hide(800);
                                     $('#prog').removeClass('active');
                                     $('#claimDoc').removeClass('active');
                                     $('#phDetails').removeClass('active');
@@ -96,7 +121,7 @@
                                                                 scrollTop: 0
                                                             }, 500);
                                                             return false;
-                                    ">2. Details of Claim/Loss</a>
+                                    ">3. Details of Claim/Loss</a>
                             <a href="javascript:void(0);" id="notifiedBy" class="list-group-item" onclick="
                                     $('#notifiedBy').addClass('active');
                                     $('#notifBy').show(800);
@@ -104,6 +129,8 @@
                                     $('#clDet').hide(800);
                                     $('#upDoc').hide(800);
                                     $('#progress').hide(800);
+                                    $('#transDetails').removeClass('active');
+                                    $('#transDet').hide(800);
                                     $('#claimDoc').removeClass('active');
                                     $('#prog').removeClass('active');
                                     $('#phDetails').removeClass('active');
@@ -113,7 +140,7 @@
                                                                 scrollTop: 0
                                                             }, 500);
                                                             return false;
-                                    ">3. Claim Notified By</a>
+                                    ">4. Claim Notified By</a>
                             <a href="javascript:void(0);" id="claimDoc" class="list-group-item" onclick="
                                     $('#prog').addClass('active');
                                     $('#claimDoc').addClass('active');
@@ -122,6 +149,8 @@
                                     $('#notifBy').hide(800);
                                     $('#clDet').hide(800);
                                     $('#upDoc').hide(800);
+                                    $('#transDetails').removeClass('active');
+                                    $('#transDet').hide(800);
                                     $('#uploadDoc').removeClass('active');
                                     $('#phDetails').removeClass('active');
                                     $('#notifiedBy').removeClass('active');
@@ -130,7 +159,7 @@
                                                                 scrollTop: 0
                                                             }, 500);
                                                             return false;
-                                    ">4. Claim Documents/ Requirements</a>
+                                    ">5. Claim Documents/ Requirements</a>
 
                             <a href="javascript:void(0);" id="prog" class="list-group-item" onclick="
                                     $('#prog').addClass('active');
@@ -140,6 +169,8 @@
                                     $('#notifBy').hide(800);
                                     $('#clDet').hide(800);
                                     $('#upDoc').hide(800);
+                                    $('#transDetails').removeClass('active');
+                                    $('#transDet').hide(800);
                                     $('#uploadDoc').removeClass('active');
                                     $('#phDetails').removeClass('active');
                                     $('#notifiedBy').removeClass('active');
@@ -148,7 +179,7 @@
                                                                 scrollTop: 0
                                                             }, 500);
                                                             return false;
-                                    ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.1 Progress</a>
+                                    ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.1 Progress</a>
                             <a href="javascript:void(0);" id="uploadDoc" class="list-group-item" onclick="
                                     buttonAddMoreButton();
                                     buttonAddMoreButton2();
@@ -159,6 +190,8 @@
                                     $('#notifBy').hide(800);
                                     $('#clDet').hide(800);
                                     $('#progress').hide(800);
+                                    $('#transDetails').removeClass('active');
+                                    $('#transDet').hide(800);
                                     $('#prog').removeClass('active');
                                     $('#phDetails').removeClass('active');
                                     $('#notifiedBy').removeClass('active');
@@ -167,11 +200,108 @@
                                                                 scrollTop: 0
                                                             }, 500);
                                                             return false;
-                                    ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.2 View Claim Documents/Requirements</a>
+                                    ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.2 View Claim Documents/Requirements</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                    <div class="card" id="transDet">
+                        <div class="body">
+                            <div class="card">
+                                <div class="header bg-teal">
+                                    <h2>
+                                        Transmittal Details
+                                    </h2>
+                                </div>
+                                <div class="body">
+                                    <div class="row clearfix">
+                                        <div class="col-md-12">
+                                            <div class="body">
+                                                <h3> Transmittal Form </h3>
+                                                    <div class="row clearfix">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group form-float">
+                                                                <div class="form-line">
+                                                                    <label>Send to Insurance Company: </label>
+                                                                    <input id = "summ_inscomp" name = "inscomp" type="text" class="form-control" readonly>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row clearfix">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group form-float">
+                                                                <div class="form-line">
+                                                                    <label><small>Telephone Number:</small></label>
+                                                                    <input id = "summ_inscomp_telnum" name = "cont_telno" type="text" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-6">
+                                                            <div class="form-group form-float">
+                                                                <div class="form-line">
+                                                                    <label><small>Fax Number:</small></label>
+                                                                    <input id = "summ_inscomp_fax" name = "cont_cpno_1" type="text" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row clearfix">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group form-float">
+                                                                <div class="form-line">
+                                                                    <label><small>Email:</small></label>
+                                                                    <input id = "summ_inscomp_email" name = "cont_telno" type="text" class="form-control" pattern="[A-Za-z'-]" required disabled="disable">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row clearfix">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group form-float">
+                                                                <div class="form-line">
+                                                                    <label><small>Address:</small></label>
+                                                                    <input id = "summ_inscomp_address" name = "address" type="text" class="form-control" readonly>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row clearfix">
+                                                        <div class="demo-masked-input">
+                                                            <div class="col-md-12">
+                                                                <b>Date/Time Created: </b>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon">
+                                                                        <i class="material-icons">date_range</i>
+                                                                    </span>
+                                                                    <div class="form-line">
+                                                                        <input id = "summ_date_create" name = "date_create" type="text" class="form-control date" disabled="disable">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row clearfix">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group form-float">
+                                                                <div class="form-line">
+                                                                    <label><small>Courier:</small></label>
+                                                                    <input id = "summ_det_courier" name = "det_courier" type="text" class="form-control" readonly>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div><br/><br/>                                              
+                                            </div>
+                                        </div><!-- end of col-md-10 -->
+                                    </div><!-- end of row -->
+                                </div><!-- end of body inside body -->
+                            </div><!-- end of card -->
+                        </div> <!-- end of body -->
+                    </div> <!-- end of card -->
+
                     <div class="card" id="phDet">
                         <div class="header">
                         <h3 style="text-align: center;"><img src="{{ URL::asset ('images/icons/closed.png')}}" style="height: 50px; width: 50px;"> I. Policy Holder Details </h3>
@@ -866,47 +996,13 @@
                                             <td><input type="checkbox" id="md_checkbox_2" class="chk-col-pink" checked disabled="disable" />
                                                 <label for="md_checkbox_2"></label></td> -->
                                         </tr>
-                                        <!-- <tr>
-                                            <td>Original Car Registration & Official Receipt </td>
-                                            <td><input type="checkbox" id="md_checkbox_3" class="chk-col-pink" checked disabled="disable" />
-                                                <label for="md_checkbox_3"></label></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Vehicle Sales Invoice & Delivery Receipt </td>
-                                            <td><input type="checkbox" id="md_checkbox_4" class="chk-col-pink" checked disabled="disable" />
-                                                <label for="md_checkbox_4"></label></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Original and duplicate keys </td>
-                                            <td><input type="checkbox" id="md_checkbox_5" class="chk-col-pink" disabled="disable" />
-                                                <label for="md_checkbox_5"></label></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Vehicle Manual and Warranty Booklet </td>
-                                            <td><input type="checkbox" id="md_checkbox_6" class="chk-col-pink" disabled="disable" />
-                                                <label for="md_checkbox_6"></label></td>
-                                        </tr> -->
                                     </tbody>
                                 </table>   
                             </div>
                         </div> <!-- end of body -->
                     </div> <!-- end of card -->
 
-                    <form id="sv" name = "sv" method="POST" action = "/admin/transaction/claim-details-walkin/submit" enctype="multipart/form-data">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <div class="col-md-4" style = "display: none;">
-                       <input id = "time" name = "time" type="text" class="form-control">
-                    </div>
-                    <div class="col-md-2" style = "display: none;">
-                       <input id = "claimid" name = "claimid" type="text" class="form-control">
-                    </div>
-                    <div class="col-md-2" style = "display: none;">
-                       <input id = "cty" name = "cty" type="text" class="form-control">
-                    </div>
-                    <div class="col-md-2" style = "display: none;">
-                       <input id = "reqid" name = "reqid" type="text" class="form-control">
-                    </div>
-                     <div class="card" id="upDoc">
+                    <div class="card" id="upDoc">
                         <div class="header">
                         <h3 style="text-align: center;"><img src="{{ URL::asset ('images/icons/closed.png')}}" style="height: 50px; width: 50px;"> IV. Upload Claim Documents/Requirements</h3>
                         <div class="divider" style="margin-bottom:20px;"></div>
@@ -984,70 +1080,6 @@
                                                                 ">View</button>
                                                                 </td>
                                                             </tr>
-
-                                                        @endif
-                                                        @if($cf->claimReq_picture == null && $cf->claimReq_picture2 == null && $cf->claimReq_picture3 == null && $cf->claimReq_picture4 == null && $cf->claimReq_picture5 == null)
-                                                            <tr><td>{{ $cr->claimRequirement }}</td>
-                                                                <td>
-                                                                    <div id="up_{{$cr->claimReq_ID}}"><button id="upDate" type="button" class="btn bg-green waves-effect" onclick="
-                                                                        $(this).parents('#up_{{$cr->claimReq_ID}}').hide(200);
-                                                                        $('#{{$cr->claimReq_ID}}_1').show(200);
-                                                                        $('#save_{{$cr->claimReq_ID}}').show(200);">
-                                                                        <i class="material-icons">update</i>
-                                                                        <span>Update</span>
-                                                                    </button></div>
-                                                                    <div id="{{$cr->claimReq_ID}}_1"><input autocomplete="off" class="input" id="{{$cr->claimReq_ID}}_1" name="{{$cr->claimReq_ID}}_1" type="file"/><button id="b1" class="btn bg-green {{$cr->claimReq_ID}}_1_add_class" type="button">+ Add more File</button><br/></div>
-
-                                                                    <div id="{{$cr->claimReq_ID}}_2"><br/><input autocomplete="off" class="input" id="{{$cr->claimReq_ID}}_2" name="{{$cr->claimReq_ID}}_2" type="file"/><button id="b2" class="btn bg-green {{$cr->claimReq_ID}}_2_add_class" type="button">+ Add more File</button><button id="rem2" class="btn btn-danger {{$cr->claimReq_ID}}_2_remove_class" >- Remove</button><br/></div
-                                                                    >
-                                                                    <div id="{{$cr->claimReq_ID}}_3"><br/><input autocomplete="off" class="input" id="{{$cr->claimReq_ID}}_3" name="{{$cr->claimReq_ID}}_3" type="file"/><button id="b3" class="btn bg-green {{$cr->claimReq_ID}}_3_add_class" type="button">+ Add more File</button><button id="rem3" class="btn btn-danger {{$cr->claimReq_ID}}_3_remove_class" >- Remove</button><br/></div>
-                                                                    <div id="{{$cr->claimReq_ID}}_4"><br/><input autocomplete="off" class="input" id="{{$cr->claimReq_ID}}_4" name="{{$cr->claimReq_ID}}_4" type="file"/><button id="b4" class="btn bg-green {{$cr->claimReq_ID}}_4_add_class" type="button">+ Add more File</button><button id="rem4" class="btn btn-danger {{$cr->claimReq_ID}}_4_remove_class" >- Remove</button><br/></div>
-                                                                    <div id="{{$cr->claimReq_ID}}_5"><br/><input autocomplete="off" class="input" id="{{$cr->claimReq_ID}}_5" name="{{$cr->claimReq_ID}}_5" type="file"/><button id="rem5" class="btn btn-danger {{$cr->claimReq_ID}}_5_remove_class" >- Remove</button></div><br/>
-                                                                    <div id="save_{{$cr->claimReq_ID}}">
-                                                                        <button id="saveCh" type="button" class="btn bg-green btn-block waves-effect" onclick="
-                                                                            $('#reqid').val('{{ $cf->claimReqFile_ID }}');
-                                                                            $('#claimid').val('{{ $creq->claim_ID }}');
-                                                                            document.getElementById('time').value = formatDate(new Date());
-                                                                            document.getElementById('claimid').value = getClaimId();
-                                                                            document.getElementById('cty').value = getClaimTypeId();
-                                                                            document.getElementById('reqid').value = getReqFileId();
-                                                                            console.log('CLAIM ID: ' + $('#claimid').val());
-                                                                            swal({
-                                                                              title: 'Are you sure?',
-                                                                              type: 'warning',
-                                                                              showCancelButton: true,
-                                                                              confirmButtonColor: '#DD6B55',
-                                                                              confirmButtonText: 'Continue',
-                                                                              cancelButtonText: 'Cancel',
-                                                                              closeOnConfirm: false,
-                                                                              closeOnCancel: false
-                                                                            },
-                                                                            function(isConfirm){
-                                                                              if (isConfirm) {
-                                                                                $('#sv').submit();
-                                                                              } else {
-                                                                                  swal({
-                                                                                  title: 'Cancelled',
-                                                                                  type: 'warning',
-                                                                                  timer: 500,
-                                                                                  showConfirmButton: false
-                                                                                  });
-                                                                              }
-                                                                            });
-                                                                            ">SAVE CHANGES</button>
-                                                                        <button id="canc" type="button" class="btn btn-block waves-effect" onclick="
-                                                                            $('#{{$cr->claimReq_ID}}_1').hide(200);
-                                                                            $('#{{$cr->claimReq_ID}}_2').hide(200);
-                                                                            $('#{{$cr->claimReq_ID}}_3').hide(200);
-                                                                            $('#{{$cr->claimReq_ID}}_4').hide(200);
-                                                                            $('#{{$cr->claimReq_ID}}_5').hide(200);
-                                                                            $('#save_{{$cr->claimReq_ID}}').hide(200);
-                                                                            $('#up_{{$cr->claimReq_ID}}').show(200);">
-                                                                            <span>Cancel</span>
-                                                                        </button>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
                                                         @endif
                                                     @endif
                                                 @endforeach
@@ -1058,7 +1090,6 @@
                             </div>
                         </div> <!-- end of body -->
                     </div> <!-- end of card -->
-                    </form>
                 </div>
             </div> 
         </div>
@@ -1127,142 +1158,15 @@
         </div>
         <!-- #END# ADD INST MODAL -->
 
-    <script type="text/javascript">
-
-        function formatDate(date)
-        {
-          var monthNames = [
-            "January", "February", "March",
-            "April", "May", "June", "July",
-            "August", "September", "October",
-            "November", "December"
-          ];
-
-          var day = date.getDate();
-          var monthIndex = date.getMonth() + 1;
-          var year = date.getFullYear();
-          var h = addZero(date.getHours());
-          var m = addZero(date.getMinutes());
-          var s = addZero(date.getSeconds());
-
-          return year + '-' + monthIndex + '-' + day + ' ' + h + ':' + m + ':' + s;
-        }
-
-        function addZero(i) {
-                    if (i < 10) {
-                        i = "0" + i;
-                    }
-                    return i;
-                }
-
-        function getClaimId(clid){
-           clid = $('#claimid').val();
-           return clid;
-        } 
-
-        function getClaimTypeId(clid1){
-           clid1 = $('#cty').val();
-           return clid1;
-        } 
-
-        function getReqFileId(clid){
-           clid2 = $('#reqid').val();
-           return clid2;
-        } 
-
-        function show_Ind()
-        {
-            $("#radio_ind").prop("checked", true);
-            $("#radio_comp").prop("checked", false);
-            $("#pdetNext").prop("disabled", false);
-            $('#individualClient').show(800);
-            $('#companyClient').hide(800);
-        }
-
-        function show_Comp()
-        {
-            $("#radio_ind").prop("checked", false);
-            $("#radio_comp").prop("checked", true);
-            $("#pdetNext").prop("disabled", false);
-            $('#individualClient').hide(800);
-            $('#companyClient').show(800);
-        }
-
-        function buttonAddMoreButton(){
-            @foreach ($ctype as $type)
-                @if($type->del_flag == 0)
-                    @foreach($crequire as $cr)
-                        @if($cr->del_flag == 0)
-                            @if($cr->claimReq_Type == $type->claimType_ID)
-                                $('#{{$cr->claimReq_ID}}_1').hide();
-                                $('#{{$cr->claimReq_ID}}_2').hide();
-                                $('#{{$cr->claimReq_ID}}_3').hide();
-                                $('#{{$cr->claimReq_ID}}_4').hide();
-                                $('#{{$cr->claimReq_ID}}_5').hide();
-                                $('#save_{{$cr->claimReq_ID}}').hide();
-                            @endif
-                        @endif
-                    @endforeach
-                @endif
-            @endforeach
-        }
-
-        function buttonAddMoreButton2(){
-            @foreach ($ctype as $type)
-                @if($type->del_flag == 0)
-                    @foreach($crequire as $cr)
-                        @if($cr->del_flag == 0)
-                        @if($cr->claimReq_Type == $type->claimType_ID)
-                            $(".{{$cr->claimReq_ID}}_1_add_class").click(function(e){
-                                e.preventDefault();
-                                $('#{{$cr->claimReq_ID}}_2').show(200);
-                                
-                                    $('.{{$cr->claimReq_ID}}_2_remove_class').click(function(e){
-                                        e.preventDefault();
-                                        $('#{{$cr->claimReq_ID}}_2').hide(200);
-                                    });
-                            }); 
-                            $(".{{$cr->claimReq_ID}}_2_add_class").click(function(e){
-                                e.preventDefault();
-                                $('#{{$cr->claimReq_ID}}_3').show(200);
-                                
-                                    $('.{{$cr->claimReq_ID}}_3_remove_class').click(function(e){
-                                        e.preventDefault();
-                                        $('#{{$cr->claimReq_ID}}_3').hide(200);
-                                    });
-                            });  
-                            $(".{{$cr->claimReq_ID}}_3_add_class").click(function(e){
-                                e.preventDefault();
-                                $('#{{$cr->claimReq_ID}}_4').show(200);
-                                
-                                    $('.{{$cr->claimReq_ID}}_4_remove_class').click(function(e){
-                                        e.preventDefault();
-                                        $('#{{$cr->claimReq_ID}}_4').hide(200);
-                                    });
-                            }); 
-                            $(".{{$cr->claimReq_ID}}_4_add_class").click(function(e){
-                                e.preventDefault();
-                                $('#{{$cr->claimReq_ID}}_5').show(200);
-                                
-                                    $('.{{$cr->claimReq_ID}}_5_remove_class').click(function(e){
-                                        e.preventDefault();
-                                        $('#{{$cr->claimReq_ID}}_5').hide(200);
-                                    });
-                            });   
-                        @endif
-                        @endif
-                    @endforeach
-                @endif
-            @endforeach
-        }
-
-        window.onload = function() {
+        <script>
+            window.onload = function() {
           document.getElementById('individualClient').style.display = 'none';
           document.getElementById('companyClient').style.display = 'none';
           document.getElementById('clDet').style.display = 'none';
           document.getElementById('notifBy').style.display = 'none';
           document.getElementById('upDoc').style.display = 'none';
           document.getElementById('repp').style.display = 'none';
+          document.getElementById('phDet').style.display = 'none';
           document.getElementById('progress').style.display = 'none';
           document.getElementById('item_img1').style.display = 'none';
           document.getElementById('item_img2').style.display = 'none';
@@ -1275,8 +1179,7 @@
           document.getElementById('li4').style.display = 'none';
           document.getElementById('li5').style.display = 'none';
 
-
-            @foreach($cliacc as $ins)
+          @foreach($cliacc as $ins)
                 @if($creq->account_ID == $ins->account_ID)
                     $('#c_pno').val('{{$ins->policy_number}}');
                     $('#date_incident').val('{{\Carbon\Carbon::parse($creq->lossDate)->format("l, M-d-Y")}}');
@@ -1398,6 +1301,33 @@
                                                             $('#zipcode').val('{{ $add->add_zipcode}}');
                                                         @endif
                                                     @endforeach
+
+                                                    @foreach($comp as $insc)
+                                                        @if($trans->inscomp_ID == $insc->comp_ID)
+
+                                                            $('#summ_inscomp').val('{{$insc->comp_name}}');
+                                                            $('#summ_inscomp_telnum').val('{{$insc->comp_telnum}}');
+                                                            $('#summ_inscomp_fax').val('{{$insc->comp_faxnum}}');
+                                                            $('#summ_inscomp_email').val('{{$insc->comp_email}}');
+                                                            $('#summ_date_create').val('{{ \Carbon\Carbon::parse($trans->created_at)->format("M-d-Y") }} {{ "(".\Carbon\Carbon::parse($trans->created_at)->format("l, h:i:s A").")" }}');
+
+                                                             @foreach($addr as $add1)
+                                                                @if($insc->comp_add_ID == $add1->add_ID)
+                                                                    $('#summ_inscomp_address').val('{{ $add1->add_blcknum}} {{ $add1->add_district}} {{ $add1->add_street}} {{ $add1->add_city}} {{ $add1->add_subdivision}} {{ $add1->add_province}} {{ $add1->add_brngy}} {{ $add1->add_region}} {{ $add1->add_zipcode}}');
+                                                                @endif
+                                                            @endforeach
+                                                        @endif
+                                                    @endforeach
+
+                                                    @foreach($courier as $cor)
+                                                        @if($cor->courier_ID == $trans->courier_ID)
+                                                            @foreach($pinfo as $Info)
+                                                                @if($cor->personal_info_ID == $Info->pinfo_ID)
+                                                                    $('#summ_det_courier').val('{{$Info->pinfo_last_name}}, {{$Info->pinfo_first_name}} {{$Info->pinfo_middle_name}}');
+                                                                @endif
+                                                            @endforeach
+                                                        @endif
+                                                    @endforeach
                                                 @endif
                                             @endforeach
                                         @endif
@@ -1475,6 +1405,32 @@
                                                         @endforeach
                                                     @endif
                                                 @endforeach
+
+                                                @foreach($comp as $insc)
+                                                    @if($trans->inscomp_ID == $insc->comp_ID)
+                                                        $('#summ_inscomp').val('{{$insc->comp_name}}');
+                                                        $('#summ_inscomp_telnum').val('{{$insc->comp_telnum}}');
+                                                        $('#summ_inscomp_fax').val('{{$insc->comp_faxnum}}');
+                                                        $('#summ_inscomp_email').val('{{$insc->comp_email}}');
+                                                        $('#summ_date_create').val('{{ \Carbon\Carbon::parse($trans->created_at)->format("M-d-Y") }} {{ "(".\Carbon\Carbon::parse($trans->created_at)->format("l, h:i:s A").")" }}');
+
+                                                         @foreach($addr as $add1)
+                                                            @if($insc->comp_add_ID == $add1->add_ID)
+                                                                $('#summ_inscomp_address').val('{{ $add1->add_blcknum}} {{ $add1->add_district}} {{ $add1->add_street}} {{ $add1->add_city}} {{ $add1->add_subdivision}} {{ $add1->add_province}} {{ $add1->add_brngy}} {{ $add1->add_region}} {{ $add1->add_zipcode}}');
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+                                                @endforeach
+
+                                                @foreach($courier as $cor)
+                                                    @if($cor->courier_ID == $trans->courier_ID)
+                                                        @foreach($pinfo as $Info)
+                                                            @if($cor->personal_info_ID == $Info->pinfo_ID)
+                                                                $('#summ_det_courier').val('{{$Info->pinfo_last_name}}, {{$Info->pinfo_first_name}} {{$Info->pinfo_middle_name}}');
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+                                                @endforeach
                                             @endif
                                         @endforeach
                                     @endif
@@ -1483,8 +1439,120 @@
                         @endforeach
                 @endif
             @endforeach
-        };
 
-    </script>
+      };
+        </script>
 
+        <script>
+            function formatDate(date)
+        {
+          var monthNames = [
+            "January", "February", "March",
+            "April", "May", "June", "July",
+            "August", "September", "October",
+            "November", "December"
+          ];
+
+          var day = date.getDate();
+          var monthIndex = date.getMonth() + 1;
+          var year = date.getFullYear();
+          var h = addZero(date.getHours());
+          var m = addZero(date.getMinutes());
+          var s = addZero(date.getSeconds());
+
+          return year + '-' + monthIndex + '-' + day + ' ' + h + ':' + m + ':' + s;
+        }
+        function addZero(i) {
+                    if (i < 10) {
+                        i = "0" + i;
+                    }
+                    return i;
+                }
+        function show_Ind()
+        {
+            $("#radio_ind").prop("checked", true);
+            $("#radio_comp").prop("checked", false);
+            $("#pdetNext").prop("disabled", false);
+            $('#individualClient').show(800);
+            $('#companyClient').hide(800);
+        }
+
+        function show_Comp()
+        {
+            $("#radio_ind").prop("checked", false);
+            $("#radio_comp").prop("checked", true);
+            $("#pdetNext").prop("disabled", false);
+            $('#individualClient').hide(800);
+            $('#companyClient').show(800);
+        }
+
+        function buttonAddMoreButton(){
+            @foreach ($ctype as $type)
+                @if($type->del_flag == 0)
+                    @foreach($crequire as $cr)
+                        @if($cr->del_flag == 0)
+                            @if($cr->claimReq_Type == $type->claimType_ID)
+                                $('#{{$cr->claimReq_ID}}_1').hide();
+                                $('#{{$cr->claimReq_ID}}_2').hide();
+                                $('#{{$cr->claimReq_ID}}_3').hide();
+                                $('#{{$cr->claimReq_ID}}_4').hide();
+                                $('#{{$cr->claimReq_ID}}_5').hide();
+                                $('#save_{{$cr->claimReq_ID}}').hide();
+                            @endif
+                        @endif
+                    @endforeach
+                @endif
+            @endforeach
+        }
+
+        function buttonAddMoreButton2(){
+            @foreach ($ctype as $type)
+                @if($type->del_flag == 0)
+                    @foreach($crequire as $cr)
+                        @if($cr->del_flag == 0)
+                        @if($cr->claimReq_Type == $type->claimType_ID)
+                            $(".{{$cr->claimReq_ID}}_1_add_class").click(function(e){
+                                e.preventDefault();
+                                $('#{{$cr->claimReq_ID}}_2').show(200);
+                                
+                                    $('.{{$cr->claimReq_ID}}_2_remove_class').click(function(e){
+                                        e.preventDefault();
+                                        $('#{{$cr->claimReq_ID}}_2').hide(200);
+                                    });
+                            }); 
+                            $(".{{$cr->claimReq_ID}}_2_add_class").click(function(e){
+                                e.preventDefault();
+                                $('#{{$cr->claimReq_ID}}_3').show(200);
+                                
+                                    $('.{{$cr->claimReq_ID}}_3_remove_class').click(function(e){
+                                        e.preventDefault();
+                                        $('#{{$cr->claimReq_ID}}_3').hide(200);
+                                    });
+                            });  
+                            $(".{{$cr->claimReq_ID}}_3_add_class").click(function(e){
+                                e.preventDefault();
+                                $('#{{$cr->claimReq_ID}}_4').show(200);
+                                
+                                    $('.{{$cr->claimReq_ID}}_4_remove_class').click(function(e){
+                                        e.preventDefault();
+                                        $('#{{$cr->claimReq_ID}}_4').hide(200);
+                                    });
+                            }); 
+                            $(".{{$cr->claimReq_ID}}_4_add_class").click(function(e){
+                                e.preventDefault();
+                                $('#{{$cr->claimReq_ID}}_5').show(200);
+                                
+                                    $('.{{$cr->claimReq_ID}}_5_remove_class').click(function(e){
+                                        e.preventDefault();
+                                        $('#{{$cr->claimReq_ID}}_5').hide(200);
+                                    });
+                            });   
+                        @endif
+                        @endif
+                    @endforeach
+                @endif
+            @endforeach
+        }
+        </script>
+    
 @endsection

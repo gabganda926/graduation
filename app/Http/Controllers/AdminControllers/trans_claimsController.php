@@ -611,7 +611,7 @@ class trans_claimsController extends Controller
     alert()
     ->success('Record Saved', "Success")
     ->persistent("Close");
-    return Redirect::back();
+    return redirect ('/admin/transaction/claim-request-walkin');
   }
 
   public function forward_manager(Request $req)

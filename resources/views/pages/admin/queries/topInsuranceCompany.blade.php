@@ -1,6 +1,6 @@
 @extends('pages.admin.master')
 
-@section('title','Vehicle Make - Maintenance | i-Insure')
+@section('title','Top Insurance Company - Queries | i-Insure')
 
 @section('queries','active')
 
@@ -20,7 +20,7 @@
                         </div>
                         <div class="body">
                             <h2 align="center">List of Insurance Company with Most Insured Clients</h2><br/>
-                                <table class="table table-bordered table-striped dataTable js-basic-example animated lightSpeedIn active">
+                                <table id="ex" class="table table-bordered table-striped dataTable js-basic-example animated lightSpeedIn active">
                                     <thead>
                                         <tr class="bg-teal">
                                             <th>Name of Insurance Company</th>
@@ -30,12 +30,65 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                      <td>FPG Insurance</td>
-                                      <td>421</td>
-                                      <td>12</td>
-                                      <td><b>433</b></td>
-                                    </tr>
+                                        @foreach($ins as $in)
+                                            @if($in->comp_ID <= 4)
+                                                <tr>
+                                                  <td>{{ $in->comp_name }}</td>
+                                                  <td>
+                                                    <script>
+                                                        var count = 0;
+                                                        @foreach($cliacc as $cli)
+                                                            @if($cli->insurance_company == $in->comp_ID)
+                                                                @foreach($clientlist as $list)
+                                                                    @if($cli->client_ID == $list->client_ID)
+                                                                        @if($list->client_type == 1)
+                                                                            count += 1;
+                                                                        @endif
+                                                                    @endif
+                                                                @endforeach
+                                                            @endif
+                                                        @endforeach
+
+                                                        document.write(count);
+                                                    </script>
+                                                  </td>
+                                                  <td>
+                                                        <script>
+                                                        var count1 = 0;
+                                                        @foreach($cliacc as $cli)
+                                                            @if($cli->insurance_company == $in->comp_ID)
+                                                                @foreach($clientlist as $list)
+                                                                    @if($cli->client_ID == $list->client_ID)
+                                                                        @if($list->client_type == 2)
+                                                                            count1 += 1;
+                                                                        @endif
+                                                                    @endif
+                                                                @endforeach
+                                                            @endif
+                                                        @endforeach
+
+                                                        document.write(count1);
+                                                        </script>
+                                                  </td>
+                                                  <td><b>
+                                                       <script>
+                                                        var count2 = 0;
+                                                        @foreach($cliacc as $cli)
+                                                            @if($cli->insurance_company == $in->comp_ID)
+                                                                @foreach($clientlist as $list)
+                                                                    @if($cli->client_ID == $list->client_ID)
+                                                                        count2 += 1;
+                                                                    @endif
+                                                                @endforeach
+                                                            @endif
+                                                        @endforeach
+
+                                                        document.write(count2);
+                                                        </script>
+                                                  </b></td>
+                                                </tr>
+                                            @endif
+                                        @endforeach
                                     </tbody>
                                 </table>
                         </div>
@@ -43,4 +96,12 @@
                 </div>
             </div>
             <!-- #END# Exportable Table -->
+        </div>
+    </section>
+
+    <script>
+        $('#ex').DataTable( {
+            "order": [[ 3, "desc" ]]
+        } );
+    </script>
 @endsection

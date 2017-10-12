@@ -10,29 +10,30 @@ $(function () {
 });
 
 function getChartJs(type) {
+
     var config = null;
 
     if (type === 'line') {
         config = {
             type: 'line',
             data: {
-                labels: ["January", "February", "March", "April", "May", "June", "July"],
+                labels: ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7"],
                 datasets: [{
-                    label: "My First dataset",
-                    data: [65, 59, 80, 81, 56, 55, 40],
-                    borderColor: 'rgba(0, 188, 212, 0.75)',
-                    backgroundColor: 'rgba(0, 188, 212, 0.3)',
-                    pointBorderColor: 'rgba(0, 188, 212, 0)',
-                    pointBackgroundColor: 'rgba(0, 188, 212, 0.9)',
-                    pointBorderWidth: 1
+                    label: "Individual",
+                    data: [87, 59, 80, 81, 56, 55, 40],
+                    borderColor: 'rgba(13, 71, 161, 0.75)',
+                    backgroundColor: 'rgba(68, 138, 255, 0.3)',
+                    pointBorderColor: 'rgba(13, 71, 161, 0)',
+                    pointBackgroundColor: 'rgba(13, 71, 161, 0.9)',
+                    pointBorderWidth: 2
                 }, {
-                        label: "My Second dataset",
+                        label: "Company",
                         data: [28, 48, 40, 19, 86, 27, 90],
-                        borderColor: 'rgba(233, 30, 99, 0.75)',
-                        backgroundColor: 'rgba(233, 30, 99, 0.3)',
-                        pointBorderColor: 'rgba(233, 30, 99, 0)',
-                        pointBackgroundColor: 'rgba(233, 30, 99, 0.9)',
-                        pointBorderWidth: 1
+                        borderColor: 'rgba(239, 83, 80, 0.75)',
+                        backgroundColor: 'rgba(255, 138, 128, 0.3)',
+                        pointBorderColor: 'rgba(239, 83, 80, 0)',
+                        pointBackgroundColor: 'rgba(239, 83, 80, 0.9)',
+                        pointBorderWidth: 2
                     }]
             },
             options: {
@@ -45,23 +46,23 @@ function getChartJs(type) {
         config = {
             type: 'line',
             data: {
-                labels: ["January", "February", "March", "April", "May", "June", "July"],
+                labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
                 datasets: [{
-                    label: "ASDASD",
+                    label: "Individual",
                     data: [65, 59, 80, 81, 56, 55, 40],
-                    borderColor: 'rgba(0, 188, 212, 0.75)',
-                    backgroundColor: 'rgba(0, 188, 212, 0.3)',
-                    pointBorderColor: 'rgba(0, 188, 212, 0)',
-                    pointBackgroundColor: 'rgba(0, 188, 212, 0.9)',
-                    pointBorderWidth: 1
+                    borderColor: 'rgba(13, 71, 161, 0.75)',
+                    backgroundColor: 'rgba(68, 138, 255, 0.3)',
+                    pointBorderColor: 'rgba(13, 71, 161, 0)',
+                    pointBackgroundColor: 'rgba(13, 71, 161, 0.9)',
+                    pointBorderWidth: 2
                 }, {
-                        label: "ASDASD",
+                        label: "Company",
                         data: [28, 48, 40, 19, 86, 27, 90],
-                        borderColor: 'rgba(233, 30, 99, 0.75)',
-                        backgroundColor: 'rgba(233, 30, 99, 0.3)',
-                        pointBorderColor: 'rgba(233, 30, 99, 0)',
-                        pointBackgroundColor: 'rgba(233, 30, 99, 0.9)',
-                        pointBorderWidth: 1
+                        borderColor: 'rgba(239, 83, 80, 0.75)',
+                        backgroundColor: 'rgba(255, 138, 128, 0.3)',
+                        pointBorderColor: 'rgba(239, 83, 80, 0)',
+                        pointBackgroundColor: 'rgba(239, 83, 80, 0.9)',
+                        pointBorderWidth: 2
                     }]
             },
             options: {
@@ -74,23 +75,23 @@ function getChartJs(type) {
         config = {
             type: 'line',
             data: {
-                labels: ["January", "February", "March", "April", "May", "June", "July"],
+                labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
                 datasets: [{
-                    label: "ASDASD",
+                    label: "Individual",
                     data: [65, 59, 80, 81, 56, 55, 40],
-                    borderColor: 'rgba(0, 188, 212, 0.75)',
-                    backgroundColor: 'rgba(0, 188, 212, 0.3)',
-                    pointBorderColor: 'rgba(0, 188, 212, 0)',
-                    pointBackgroundColor: 'rgba(0, 188, 212, 0.9)',
-                    pointBorderWidth: 1
+                    borderColor: 'rgba(13, 71, 161, 0.75)',
+                    backgroundColor: 'rgba(68, 138, 255, 0.3)',
+                    pointBorderColor: 'rgba(13, 71, 161, 0)',
+                    pointBackgroundColor: 'rgba(13, 71, 161, 0.9)',
+                    pointBorderWidth: 2
                 }, {
-                        label: "ASDASD",
+                        label: "Company",
                         data: [28, 48, 40, 19, 86, 27, 90],
-                        borderColor: 'rgba(233, 30, 99, 0.75)',
-                        backgroundColor: 'rgba(233, 30, 99, 0.3)',
-                        pointBorderColor: 'rgba(233, 30, 99, 0)',
-                        pointBackgroundColor: 'rgba(233, 30, 99, 0.9)',
-                        pointBorderWidth: 1
+                        borderColor: 'rgba(239, 83, 80, 0.75)',
+                        backgroundColor: 'rgba(255, 138, 128, 0.3)',
+                        pointBorderColor: 'rgba(239, 83, 80, 0)',
+                        pointBackgroundColor: 'rgba(239, 83, 80, 0.9)',
+                        pointBorderWidth: 2
                     }]
             },
             options: {
@@ -103,23 +104,23 @@ function getChartJs(type) {
         config = {
             type: 'line',
             data: {
-                labels: ["January", "February", "March", "April", "May", "June", "July"],
+                labels: ["1st Quarter", "2nd Quarter", "3rd Quarter", "4th Quarter"],
                 datasets: [{
-                    label: "ASDASD",
+                    label: "Individual",
                     data: [65, 59, 80, 81, 56, 55, 40],
-                    borderColor: 'rgba(0, 188, 212, 0.75)',
-                    backgroundColor: 'rgba(0, 188, 212, 0.3)',
-                    pointBorderColor: 'rgba(0, 188, 212, 0)',
-                    pointBackgroundColor: 'rgba(0, 188, 212, 0.9)',
-                    pointBorderWidth: 1
+                    borderColor: 'rgba(13, 71, 161, 0.75)',
+                    backgroundColor: 'rgba(68, 138, 255, 0.3)',
+                    pointBorderColor: 'rgba(13, 71, 161, 0)',
+                    pointBackgroundColor: 'rgba(13, 71, 161, 0.9)',
+                    pointBorderWidth: 2
                 }, {
-                        label: "ASDASD",
+                        label: "Company",
                         data: [28, 48, 40, 19, 86, 27, 90],
-                        borderColor: 'rgba(233, 30, 99, 0.75)',
-                        backgroundColor: 'rgba(233, 30, 99, 0.3)',
-                        pointBorderColor: 'rgba(233, 30, 99, 0)',
-                        pointBackgroundColor: 'rgba(233, 30, 99, 0.9)',
-                        pointBorderWidth: 1
+                        borderColor: 'rgba(239, 83, 80, 0.75)',
+                        backgroundColor: 'rgba(255, 138, 128, 0.3)',
+                        pointBorderColor: 'rgba(239, 83, 80, 0)',
+                        pointBackgroundColor: 'rgba(239, 83, 80, 0.9)',
+                        pointBorderWidth: 2
                     }]
             },
             options: {
@@ -132,23 +133,23 @@ function getChartJs(type) {
         config = {
             type: 'line',
             data: {
-                labels: ["January", "February", "March", "April", "May", "June", "July"],
+                labels: ["2015", "2016", "2017"],
                 datasets: [{
-                    label: "ASDASD",
+                    label: "Individual",
                     data: [65, 59, 80, 81, 56, 55, 40],
-                    borderColor: 'rgba(0, 188, 212, 0.75)',
-                    backgroundColor: 'rgba(0, 188, 212, 0.3)',
-                    pointBorderColor: 'rgba(0, 188, 212, 0)',
-                    pointBackgroundColor: 'rgba(0, 188, 212, 0.9)',
-                    pointBorderWidth: 1
+                    borderColor: 'rgba(13, 71, 161, 0.75)',
+                    backgroundColor: 'rgba(68, 138, 255, 0.3)',
+                    pointBorderColor: 'rgba(13, 71, 161, 0)',
+                    pointBackgroundColor: 'rgba(13, 71, 161, 0.9)',
+                    pointBorderWidth: 2
                 }, {
-                        label: "ASDASD",
+                        label: "Company",
                         data: [28, 48, 40, 19, 86, 27, 90],
-                        borderColor: 'rgba(233, 30, 99, 0.75)',
-                        backgroundColor: 'rgba(233, 30, 99, 0.3)',
-                        pointBorderColor: 'rgba(233, 30, 99, 0)',
-                        pointBackgroundColor: 'rgba(233, 30, 99, 0.9)',
-                        pointBorderWidth: 1
+                        borderColor: 'rgba(239, 83, 80, 0.75)',
+                        backgroundColor: 'rgba(255, 138, 128, 0.3)',
+                        pointBorderColor: 'rgba(239, 83, 80, 0)',
+                        pointBackgroundColor: 'rgba(239, 83, 80, 0.9)',
+                        pointBorderWidth: 2
                     }]
             },
             options: {

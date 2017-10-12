@@ -27,6 +27,8 @@ use App\complaintTypeConnection;
 
 use App\accListInsuranceConnection;
 
+use App\clientListConnection;
+
 use Alert;
 
 use Redirect;
@@ -46,6 +48,7 @@ class trans_complaintActionController extends Controller
 		->with('address', addressConnection::all())
 		->with('pInfo', personalInfoConnection::all())
 		->with('client', clientConnection::all())
+		->with('clist', clientListConnection::all())
 		->with('policy_num', clientAccountsConnection::all())
 		->with('company', inscompanyConnection::all())
 		->with('complaints', sendComplaintConnection::all())
@@ -62,13 +65,17 @@ class trans_complaintActionController extends Controller
     	$id = accListInsuranceConnection::where('insure_ID', '=', $account->account_ID)->first();
     	$this->scomp->insurance_company = $req->insurance_company;
     	$this->scomp->policy_number = $req->policy_number;
-    	$this->scomp->account_ID = $id->insure_ID;
-    	$this->scomp->name = $req->name;
+    	if($id)
+    	{
+    		$this->scomp->account_ID = $id->account_ID;
+    	}
+    	$this->scomp->name = $req->name1;
     	$this->scomp->cp_1 = $req->cp1;
     	$this->scomp->cp_2 = $req->cp2;
     	$this->scomp->tp_num = $req->tpnum;
     	$this->scomp->email = $req->email;
     	$this->scomp->address = $req->address;
+
     	if($req->comp_type == 0)
     	{
 	    	$this->scomp->complaintType_name = $req->specify;
@@ -80,7 +87,7 @@ class trans_complaintActionController extends Controller
 	    	$this->scomp->complaintType_desc = $comp_type->complaintType_desc;	
     	}
     	$this->scomp->complaint = $req->comp_details;
-    	$this->scomp->status = 0;
+    	$this->scomp->status = 1;
     	$this->scomp->date_sent = date("Y-m-d H:i:s");
     	
     	try

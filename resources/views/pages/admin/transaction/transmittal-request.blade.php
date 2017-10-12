@@ -103,7 +103,7 @@
                                         <td>
                                             <ul>
                                             @foreach($documents as $doc)
-                                             @if($doc->req_ID)
+                                             @if($doc->req_ID == $req->req_ID)
                                               <li>{{$doc->document}}</li>
                                              @endif
                                             @endforeach
@@ -135,7 +135,7 @@
                                         <td>
                                             <ul>
                                             @foreach($documents as $doc)
-                                             @if($doc->req_ID)
+                                             @if($doc->req_ID == $req->req_ID)
                                               <li>{{$doc->document}}</li>
                                              @endif
                                             @endforeach

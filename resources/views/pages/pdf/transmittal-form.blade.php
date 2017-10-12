@@ -46,74 +46,56 @@
 			</right>
 		</div>
         <div class="col s12"><div class="divider" style="height:3px; background-color:teal"></div></div><br/>
-        <p>Client: <strong>Rola, Ma. Gabriella Tan</strong></p>
-        <p>Policy Number: <strong>AIS-CV-2016-1827187</strong></p>
-        <p>Insurance Company: <b>FPG Insurance</b></p><br/>
+        <p style="color:black; text-align: center; font-size:15px;"><b>TRANSMITTAL FORM</b></p><br/><br/>
 
-
-        <p>Date: <b>August 11, 2017</b></p><br/>
-
-        <table width="100%" id="particulars">
+        <table>
+                <tbody>
+                        <tr>
+                                <td><b>Insurance Company: </b>
+                                        @foreach($comp as $co)
+                                                @if($co->comp_ID == $trans->inscomp_ID)
+                                                        {{ $co->comp_name }}
+                                                @endif
+                                        @endforeach 
+                                </td>
+                        </tr>
+                </tbody>
+        </table>
+        <table>
         	<tbody>
         		<tr>
-        			<td><b>Telephone: </b>212 8133</td>
-        			<td><b>Email: </b>gab@gmail.com</td>
-        		</tr>
-        		<tr>
-        			<td><b>Cellphone: </b>123456789000</td>
-        			<td><b>Cellphone(Alt): </b>123456789000</td>
-        		</tr>
-        		<tr>
-        			<td></td>
-        		</tr>
-        		<tr>
-        			<td></td>
-        		</tr>
-        		<tr>
-        			<td></td>
-        		</tr>
-        		<tr>
-        			<td></td>
-        		</tr>
-        		<tr>
-        			<td></td>
-        		</tr>
-        		<tr>
-        			<td></td>
-        		</tr>
-        		<tr>
-        			<td></td>
-        		</tr>
-        		<tr>
-        			<td></td>
+        			<td><b>Address: </b>
+                                        @foreach($comp as $co)
+                                                @if($co->comp_ID == $trans->inscomp_ID)
+                                                        @foreach($addr as $add)
+                                                                @if($add->add_ID == $co->comp_add_ID)
+                                                                        {{ $add->add_blcknum }} {{ $add->add_street }} {{ $add->add_subdivision }} {{ $add->add_brngy }} {{ $add->add_district }} {{ $add->add_city }} {{ $add->add_province }} {{ $add->add_region }} {{ $add->add_zipcode }}
+                                                                @endif
+                                                        @endforeach
+                                                @endif
+                                        @endforeach 
+                                </td>
         		</tr>
         	</tbody>
         </table>
         <table>
         	<tbody>
         		<tr>
-        			<td><b>Address: </b>sakdhkashdjsabfljsadkgfkjasdbsabfsdkbdsv</td>
-        		</tr>
-        	</tbody>
-        </table>
-        <table>
-        	<tbody>
-        		<tr>
-        			<td><b>Date Received: </b></td>
-        			<td>________________________________________________________________________</td>
-        		</tr>
-        		<tr>
-        			<td><b>Time Received: </b></td>
-        			<td>________________________________________________________________________</td>
-        		</tr>
-        	</tbody>
-        </table>
-        <table>
-        	<tbody>
-        		<tr>
-        			<td><b>Documents: </b> <ul style="padding-left: 10em; width: 400px;">
-        					<li>Insurance Form</li>
-        					<li>Breakdown of Payments</li>
+        			<td><b>Documents: </b> 
+                                        <ul style="padding-left: 10em; width: 400px;">
+        					@foreach($creq as $cr)
+                                                        @if($trans->claim_ID == $cr->claim_ID)
+                                                                @foreach($cfile as $cf)
+                                                                        @if($cf->claim_ID == $cr->claim_ID)
+                                                                                @foreach($crequire as $re)
+                                                                                        @if($re->claimReq_ID == $cf->claimReq_ID)
+                                                                                                <li>{{ $re->claimRequirement }}</li>
+                                                                                        @endif
+                                                                                @endforeach
+                                                                        @endif
+                                                                @endforeach
+                                                        @endif
+                                                @endforeach
         				</ul></td>
         		</tr>
         	</tbody>
@@ -121,14 +103,39 @@
         <table>
         	<tbody>
         		<tr>
-        			<td><b>Courier: </b>Lee Jong Suk</td>
+        			<td><b>Delivered by: </b></td>
+                                <td> @foreach($courier as $cor)
+                                                @if($cor->courier_ID == $trans->courier_ID)
+                                                        @foreach($pinfo as $Info)
+                                                                @if($cor->personal_info_ID == $Info->pinfo_ID)
+                                                                        {{$Info->pinfo_last_name}}, {{$Info->pinfo_first_name}} {{$Info->pinfo_middle_name}}
+                                                                @endif
+                                                        @endforeach
+                                                @endif
+                                        @endforeach</td>
         		</tr>
         	</tbody>
         </table>
         <table>
+                <tbody>
+                        <tr>
+                                <td><b>Date Received: </b></td>
+                                <td>________________________________________________________________________</td>
+                        </tr>
+                </tbody>
+        </table>
+         <table>
+                <tbody>
+                        <tr>
+                                <td><b>Time Received: </b></td>
+                                <td>________________________________________________________________________</td>
+                        </tr>
+                </tbody>
+        </table>
+        <table>
         	<tbody>
         		<tr>
-        			<td><b>Client's Signature: </b></td>
+        			<td><b>Received by: </b></td>
         			<td>________________________________________________________________________________</td>
         		</tr>
         	</tbody>

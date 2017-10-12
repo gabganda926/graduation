@@ -402,19 +402,6 @@
                                     <div class="body">
                                     <h3> <small><b>INSURANCE DETAILS</b></small></h3>
                                     <div class="row clearfix">
-                                        <div class="col-md-12" align="center">
-                                            <button type="button" class="btn bg-light-blue waves-effect" data-toggle="collapse" data-target="#formImage">View attached form</button> <!-- PAG NAKA VIEW NA, Magiging "Hide attached form" yung nakalagay-->
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="collapse fade" role="dialog" id="formImage" align="center">
-                                                <div class="fallback">
-                                                    <img src="#" alt="your image" style="height: 500px; width: 500px; border-style: solid; border-width: 2px;">
-                                                </div>
-                                            </div> 
-                                        </div>
-                                        
-                                    </div> <!-- END OF ROW CLEARFIX -->
-                                    <div class="row clearfix">
                                         <br/><br/>
                                         <div class="col-md-6">
                                             <div class="form-group form-float">
@@ -518,15 +505,6 @@
 
                                     <div class="row clearfix">
                                         <br/><br/>
-                                        <div class="col-md-6">
-                                            <div class="form-group form-float">
-                                                <div class="form-line">
-                                                    <label><small>Writing Code: </small></label>
-                                                        <input id = "wcode" name = "wcode" type="text" class="form-control" readonly="true" value="">
-                                                </div>
-                                            </div>
-                                        </div>
-
                                         <div class="col-md-6">
                                             <div class="form-group form-float">
                                                 <div class="form-line">
@@ -650,55 +628,29 @@
              @endif
             @endforeach
 
-            @foreach($vtype as $type)
-             @if($insaccount->vehicle_type == $type->vehicle_type_ID)
-              type = '{{$type->vehicle_type_name}}';
-             @endif
-            @endforeach
+            type = '{{$insaccount->vehicle_type_name}}';
+              make = '{{$insaccount->vehicle_make_name}}';
+              model = '{{$insaccount->vehicle_year.' '.$insaccount->vehicle_model_name}}';
+              value = numberWithCommas('{{$insaccount->vehicle_value}}');
 
-            @foreach($vmake as $make)
-             @if($insaccount->vehicle_make == $make->vehicle_make_ID)
-              make = '{{$make->vehicle_make_name}}';
-             @endif
-            @endforeach
-
-            @foreach($vmod as $mod)
-             @if($insaccount->vehicle_model == $mod->vehicle_model_ID)
-              model = '{{$mod->vehicle_year.' '.$mod->vehicle_model_name}}';
-              value = numberWithCommas('{{$mod->vehicle_value}}');
-             @endif
-            @endforeach
-
-            @foreach($ppa as $pa)
-             @if($pa->premiumPA_ID == $paydetails->personal_accident_ID)
-              pa = parseInt('{{$pa->insuranceCover}}') + parseInt('{{$pa->passengerCover}}') + parseInt('{{$pa->mrCover}}');
-             @endif
-            @endforeach
-
-            @foreach($pdg as $dg)
-             @if($dg->premiumDG_ID == $paydetails->bodily_injury_ID)
-              @if($paydetails->vehicle_class == 1)
-              bi = '{{$dg->privateCar}}';
+              @if($paydetails->account_ID == $insaccount->account_ID)
+                  pa1 = numberWithCommas('{{ $paydetails->pa_cover }}');
+                  pa2 = numberWithCommas('{{ $paydetails->pa_premium }}');
+                  pa = 'COVER: ₱' + pa1 + ' - PREMIUM: ₱' +pa2;
+                  pd1 = numberWithCommas('{{ $paydetails->pd_cover }}');
+                  pd2 = numberWithCommas('{{ $paydetails->pd_premium }}');
+                  pd = 'COVER: ₱' + pd1 + ' - PREMIUM: ₱' +pd2;
+                  bi1 = numberWithCommas('{{ $paydetails->bi_cover }}');
+                  bi2 = numberWithCommas('{{ $paydetails->bi_premium }}');
+                  bi = 'COVER: ₱' + bi1 + ' - PREMIUM: ₱' +bi2;
+                  ded = numberWithCommas('{{ $paydetails->deductible }}');
+                  ar = numberWithCommas('{{ $paydetails->arl }}');
+                  aon1 = numberWithCommas('{{ $paydetails->aon_cover }}');
+                  aon2 = numberWithCommas('{{ $paydetails->aon_premium }}');
+                  aonz = 'COVER: ₱' + aon1 + ' - PREMIUM: ₱' +aon2;
+                  tow = numberWithCommas('{{ $paydetails->towing }}');
+                  data = numberWithCommas('{{ $paydetails->total }}');
               @endif
-              @if($paydetails->vehicle_class == 2)
-              bi = '{{$dg->cv_Light}}';
-              @endif
-              @if($paydetails->vehicle_class == 3)
-              bi = '{{$dg->cv_Heavy}}';
-              @endif
-             @endif
-             @if($dg->premiumDG_ID == $paydetails->property_damage_ID)
-              @if($paydetails->vehicle_class == 1)
-              pd = '{{$dg->privateCar}}';
-              @endif
-              @if($paydetails->vehicle_class == 2)
-              pd = '{{$dg->cv_Light}}';
-              @endif
-              @if($paydetails->vehicle_class == 3)
-              pd = '{{$dg->cv_Heavy}}';
-              @endif
-             @endif
-            @endforeach
 
             $('#insurance_comp').val(inscomp);
             $('#contact_name').val(fullname);
@@ -715,9 +667,15 @@
             $('#vehicle_make').val(make);    
             $('#vehicle_model').val(model); 
             $('#vehicle_value').val('₱ '+value);
-            $('#pa').val('₱ ' + numberWithCommas(pa));     
-            $('#pd').val('₱ ' + numberWithCommas(pd));    
-            $('#bi').val('₱ ' + numberWithCommas(bi)); 
+            $('#pa').val(pa);     
+            $('#pd').val(pd);    
+            $('#bi').val(bi); 
+            $('#deductible').val('₱ ' + numberWithCommas(ded)); 
+            $('#arlimit').val('₱ ' + numberWithCommas(ar)); 
+            $('#towing').val('₱ ' + numberWithCommas(tow)); 
+            $('#aon').val('₱ ' + numberWithCommas(aonz));  
+
+            $('#total').html("<b>Total Net Premium: ₱ " + numberWithCommas(data) + "</b>");
 
             var bday = document.getElementById("bday").value.split('-');
             var today = new Date();
@@ -740,20 +698,6 @@
             {
                 document.getElementById("age").value = "Invalid Input";
             } 
-
-            if($('#pa').val())
-            {
-                data = data + parseFloat($('#pa').val().replace(/[^0-9\.]/g,'')); 
-            }
-            if($('#bi').val())
-            {
-                data = data + parseFloat($('#bi').val().replace(/[^0-9\.]/g,'')); 
-            }
-            if($('#pd').val())
-            {
-                data = data + parseFloat($('#pd').val().replace(/[^0-9\.]/g,'')); 
-            }
-            $('#total').html("<b>Total Net Premium: ₱ " + numberWithCommas(data) + "</b>");
             
         });
     </script>

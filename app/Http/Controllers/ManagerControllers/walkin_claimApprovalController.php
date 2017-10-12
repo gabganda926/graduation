@@ -41,17 +41,6 @@ use App\salesAgentConnection;
 use App\contactPersonConnection;
 
 use App\courierConnection;
-use App\transmittalRecordConnection;
-
-use App\transmittalDetailsConnection;
-
-use App\transmittalDocumentsConnection;
-
-use App\transmittalRequestConnection;
-
-use App\transmittalProccessConnection;
-
-use App\transmitDocumentsConnection;
 
 use App\claimTransmitConnection;
 
@@ -232,7 +221,7 @@ class walkin_claimApprovalController extends Controller
         ->success('The record is processed successfully.', 'Success')
         ->persistent("Close");
 
-        return Redirect::back();
+        return redirect('/manager/transaction/transmittal/list');
       }
       catch(\Exception $e)
       {

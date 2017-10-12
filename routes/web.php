@@ -303,7 +303,7 @@ Route::post('/admin/transaction/insurance-details-company-expiring', 'AdminContr
 
 //Insurance - Expiring Accounts - Individual
 Route::get('/admin/transaction/insurance-expiring-accounts-individual', 'AdminControllers\trans_expireAccountController@list_ind');
-Route::post('/admin/transaction/insurance-details-individual-expiring', 'AdminControllers\trans_expireAccountController@display_info');
+Route::post('/admin/transaction/insurance-details-individual-expiring', 'AdminControllers\trans_expireAccountController@display_info_ind');
 
 
 //Insurance - Sent notifications - Company
@@ -350,14 +350,12 @@ Route::get('/admin/transaction/claim-details-online', function (){
 
 
 //Complaint - online
-Route::get('/admin/transaction/complaint-online', function (){
-   return view('pages.admin.transaction.complaint-online');
-});
+Route::get('/admin/transaction/complaint-online', 'AdminControllers\trans_complaintStatsController@index');
 
 //Complaint - new
 Route::get('/admin/transaction/complaint-new', 'AdminControllers\trans_complaintActionController@view_complaint_new');
 
-Route::post('/admin/transaction/complaint-new/action', 'AdminControllers\trans_complaintActionController@act_complaint');
+Route::post('/admin/transaction/complaint-new/action', 'AdminControllers\trans_complaintActionController@send');
 
 //Complaint - ended
 Route::get('/admin/transaction/complaint-ended', 'AdminControllers\trans_complaintEndController@index');
@@ -367,7 +365,7 @@ Route::get('/admin/transaction/complaint-pending', 'AdminControllers\trans_compl
 
 Route::post('/admin/transaction/complaint-pending/update', 'AdminControllers\trans_complaintPendingController@act_complaint');
 
-Route::post('/admin/transaction/complaint-pending/view', 'AdminControllers\trans_complaintPendingController@view');
+Route::get('/admin/transaction/complaint-pending/view', 'AdminControllers\trans_complaintPendingController@view');
 
 //Complaint-list
 Route::get('/admin/transaction/complaint-list', 'AdminControllers\trans_complaintListController@index');
@@ -387,9 +385,7 @@ Route::get('/admin/transaction/complaint-auto-reply', function (){
 });
 
 //Transmittal - home
-Route::get('/admin/transaction/transmittal-home', function (){
-   return view('pages.admin.transaction.transmittal-home');
-});
+Route::get('/admin/transaction/transmittal-home', 'AdminControllers\trans_transmittalHomeController@index');
 
 //Transmittal
 Route::get('/admin/transaction/transmittal', 'AdminControllers\trans_transmittedController@index');
@@ -397,11 +393,6 @@ Route::get('/admin/transaction/transmittal', 'AdminControllers\trans_transmitted
 Route::post('/admin/transaction/transmittal/update', 'AdminControllers\trans_transmittedController@update');
 
 Route::get('/admin/transaction/transmittal/view', 'AdminControllers\trans_transmittedController@view');
-
-//Transmittal - progress
-Route::get('/admin/transaction/transmittal-progress', function (){
-   return view('pages.admin.transaction.transmittal-progress');
-});
 
 //Transmittal - documents
 Route::get('/admin/transaction/transmittal-documents', 'AdminControllers\trans_transmitDocumentController@index');
@@ -456,7 +447,7 @@ Route::get('/admin/queries/top-insurance-company', 'AdminControllers\z_Queries_t
 
 Route::get('/admin/queries/top-insured-vehicle', 'AdminControllers\z_Queries_topInsuredVehicleController@index');
 
-Route::get('/admin/queries/top-sales-agent', 'AdminControllers\z_Queries_topmaint_salesAgentController@index');
+Route::get('/admin/queries/top-sales-agent', 'AdminControllers\z_Queries_topSalesAgentController@index');
 
 //REPORTS
 //Tally
@@ -646,6 +637,8 @@ Route::post('/accounting-staff/transaction/quotation-list/forward-client', 'AccS
 
 Route::post('/accounting-staff/transaction/quotation-list/insure-client', 'AccStaffControllers\trans_quotationListController@insure_client');
 
+Route::post('/accounting-staff/transaction/quotation-list/update', 'AccStaffControllers\trans_quotationListController@update_quote_stat');
+
 Route::post('/accounting-staff/transaction/quotation-list/proceed', 'AccStaffControllers\trans_quoteInsureController@send_data_individual');
 
 Route::post('/accounting-staff/transaction/quotation-list/submit', 'AccStaffControllers\trans_quoteInsureController@save_insurance_account');
@@ -683,6 +676,8 @@ Route::get('/accounting-staff/transaction/payment-online-auto-reply', function (
 Route::get('/accounting-staff/transaction/payment-new', 'AccStaffControllers\trans_paymentController@index');
 
 Route::post('/accounting-staff/transaction/payment-new/submit', 'AccStaffControllers\trans_paymentController@payment');
+
+Route::post('/accounting-staff/transaction/payment-new/submit2', 'AccStaffControllers\trans_paymentController@payment2');
 
 //PAYMENT-list
 Route::get('/accounting-staff/transaction/payment-list', 'AccStaffControllers\trans_paymentListController@index');
@@ -756,9 +751,18 @@ Route::get('/manager/transaction/claims-settings', function (){
 });
 
 //transmittal
-Route::get('/manager/transaction/transmittal', function (){
-   return view('pages.manager.transaction.transmittal');   
-});
+Route::get('/manager/transaction/transmittal', 'ManagerControllers\transmittalApprovalController@index');
+
+Route::get('/manager/transaction/transmittal/view', 'ManagerControllers\transmittalApprovalController@view');
+
+Route::post('/manager/transaction/transmittal/approve', 'ManagerControllers\transmittalApprovalController@approve');
+
+Route::post('/manager/transaction/transmittal/disapprove', 'ManagerControllers\transmittalApprovalController@disapprove');
+
+//transmittal-claim
+Route::get('/manager/transaction/transmittal/list', 'ManagerControllers\transmittalListController@index');
+Route::get('/manager/transaction/transmittal/list/details', 'ManagerControllers\transmittalListController@view_details');
+Route::post('/manager/transaction/transmittal/list/submit', 'ManagerControllers\transmittalListController@update_status');
 
 //transmittal details
 Route::get('/manager/transaction/transmittal-details', function (){
@@ -793,8 +797,13 @@ Route::get('/pdf/check-voucher-comp/{cv_ID}/{comp_ID}/{account_ID}/', 'AccStaffC
 
 Route::get('/pdf/check-voucher/{cv_ID}/{pinfo_ID}/{account_ID}/', 'AccStaffControllers\trans_ListCVController@generateCV');
 
+//transmit claim to inscomp
+Route::get('/pdf/transmittal-form/{transmitClaim_ID}', 'ManagerControllers\transmittalListController@generateForm');
 
+//transmit to claim
+Route::get('/pdf/transmittal-form-pdf/{req_ID}', 'AdminControllers\trans_transmittedController@generateForm');
 
+//insurance forms
 Route::get('/pdf/insurance/form/fpg/', 'AdminControllers\trans_insIndividualController@generateFormFPG');
 
 Route::get('/pdf/insurance/form/commonwealth/', 'AdminControllers\trans_insIndividualController@generateFormCommonwealth');
@@ -802,6 +811,9 @@ Route::get('/pdf/insurance/form/commonwealth/', 'AdminControllers\trans_insIndiv
 Route::get('/pdf/insurance/form/standard/', 'AdminControllers\trans_insIndividualController@generateFormStandard');
 
 Route::get('/pdf/insurance/form/pgi/', 'AdminControllers\trans_insIndividualController@generateFormPGI');
+
+//transmittal details
+Route::get('/pdf/reports/sales/by/payment', 'AdminControllers\reports_SalesByPaymentController@generateForm');
 
 
 //////////////WEB PAGE///////////////////

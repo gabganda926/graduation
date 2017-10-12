@@ -323,7 +323,7 @@ class trans_transmitDocumentController extends Controller
 			->success('Record Added', 'Success')
 			->persistent('Close');
 
-			return Redirect::back();
+			return redirect('/admin/transaction/transmittal-request');
     	}
     	catch(\Exception $e)
     	{

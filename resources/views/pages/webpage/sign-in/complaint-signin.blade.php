@@ -12,8 +12,6 @@
           <li><a href="/user/home">Home</a></li>
           <li class="active">Complaint</li>
         </ol>
-        <form id="add" name = "add" action = "complaint/send" method="POST">
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
         <div class="row">
             <h1><b>FILE A COMPLAINT</b></h1><br/>
@@ -36,6 +34,8 @@
 
                     <div>
                         <div class="row">
+                        <form id="add" name = "add" action = "complaint/send" method="POST">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <div class="col-xs-12">
                                 <label for="insurance_company"><small>Insurance Company: </small></label>
                                 <select id="insurance_company" name = "insurance_company" class="selectpicker" data-size="10" data-live-search="true" data-width="100%">
@@ -136,14 +136,11 @@
                                 }
                                 ">Submit</button>
                             </div>
-                            <div class="col-xs-12">
-                                <br/><br/>
-                            </div>
+                        </form>
                         </div>
                     </div>
                 </div>
         </div>
-      </form>
     </div>
 </div>
 </section>

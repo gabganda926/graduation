@@ -1118,7 +1118,7 @@
                             </div><br/><br/>
 
                             <div class="row clearfix">
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <button type="button" id="next1"  class="btn btn-block bg-blue waves-effect left" onclick=" 
                                     $(this).parents('#tos').hide(800);
                                     $('#cDet').show(800);
@@ -1132,11 +1132,7 @@
                                         <span style="font-size: 15px;"> PREVIOUS</span>
                                     </button>
                                 </div>
-
-                                <div class="col-md-4">
-                                    <button type="button" id="next1" class="btn btn-block bg-orange waves-effect left"> <span style="font-size: 15px;" onclick=" window.open('{{ URL::asset ('/admin/pdf/quotation-proposal') }}')"> GENERATE PDF</span></button>
-                                </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <button type="button" id="finish"  class="btn btn-block bg-green waves-effect left">
                                         <span style="font-size: 15px;"> FINISH</span>
                                     </button>

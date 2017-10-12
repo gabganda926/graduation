@@ -1,10 +1,10 @@
 @extends('pages.admin.master')
 
-@section('title','Complaint - Transaction| i-Insure')
+@section('title','Complaint - Transaction | i-Insure')
 
-@section('transPayment','active')
+@section('trans','active')
 
-@section('transNewPayment','active')
+@section('transComplaint','active')
 
 @section('body')
 
@@ -73,7 +73,7 @@
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                         <label><small>Date Received:</small></label>
-                                            <input id = "date_recieved" name = "date_recieved" type="date" class="form-control" pattern="[A-Za-z'-]" disabled required>
+                                            <input id = "date_recieved" name = "date_recieved" type="date" class="form-control" pattern="[A-Za-z'-]" readonly required>
                                         </div>
                                     </div>
                                 </div>
@@ -85,7 +85,9 @@
                                             <select id = "insurance_company" name = "insurance_company" class="form-control show-tick" data-live-search="true" >
                                                   <option selected value = "" style = "display: none;">-- Select Insurance Company --</option>
                                                   @foreach($company as $icomp)
+                                                    @if($icomp->comp_ID <= 4)
                                                     <option value = "{{$icomp->comp_ID}}">{{$icomp->comp_name}}</option>
+                                                    @endif
                                                   @endforeach
                                                 </select>
                                         </div>
@@ -96,7 +98,7 @@
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <label><small>Policy Number:</small></label>
-                                            <select id = "policy_number" name = "policy_number" class="form-control show-tick" data-live-search="true" >
+                                            <select id = "policy_number" name = "policy_number" class="form-control show-tick policy_number" data-live-search="true" >
                                                   <option selected value = "" style = "display: none;">-- Select Policy Number --</option>
                                                 </select>
                                         </div>
@@ -117,6 +119,74 @@
                 <!-- END PAYMENT DETAILS -->
                 <!-- BREAKDOWN -->
                 <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                    <div class="card" id="clientDet">
+                        <div class="header">
+                            <h2>CLIENT DETAILS</h2>
+                        </div>
+                        <div class="body">
+                            <div class="row clearfix">
+                                <div class="col-md-12">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                        <label><small>Name:</small></label>
+                                            <input id = "name1" name = "name1" type="text" class="form-control" pattern="[A-Za-z'-]" readonly required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row clearfix">
+                                <div class="col-md-6">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                        <label><small>Cellphone Number:</small></label>
+                                            <input id = "cp1" name = "cp1" type="text" class="form-control" pattern="[A-Za-z'-]" readonly required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                        <label><small>Cellphone Number (Alternate):</small></label>
+                                            <input id = "cp2" name = "cp2" type="text" class="form-control" pattern="[A-Za-z'-]" readonly required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row clearfix">
+                                <div class="col-md-6">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                        <label><small>Telephone:</small></label>
+                                            <input id = "tpnum" name = "tpnum" type="text" class="form-control" pattern="[A-Za-z'-]" readonly required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                        <label><small>Email:</small></label>
+                                            <input id = "email" name = "email" type="text" class="form-control" pattern="[A-Za-z'-]" readonly required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row clearfix">
+                                <div class="col-md-12">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                        <label><small>Address:</small></label>
+                                            <textarea id = "address" rowa="2" name = "address" type="text" class="form-control" readonly pattern="[A-Za-z'-]" required></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="card" id="assign">
                         <div class="header">
                         <h3 style="text-align: center;"><img src="{{ URL::asset ('images/icons/1.png')}}" style="height: 50px; width: 50px;"><b> Assign Employee </b></h3>
@@ -219,6 +289,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <button type="button" id="next1"  class="btn btn-block bg-green waves-effect left" onclick="
+
                                     if($('#add').valid())
                                     {
                                       swal({
@@ -256,75 +327,6 @@
                             </div>
                         </div> <!-- end of body -->
                     </div> <!-- end of card -->
-                    
-                    <div class="card" id="clientDet">
-                        <div class="header">
-                            <h2>CLIENT DETAILS</h2>
-                        </div>
-                        <div class="body">
-                            <div class="row clearfix">
-                                <div class="col-md-12">
-                                    <div class="form-group form-float">
-                                        <div class="form-line">
-                                        <label><small>Name:</small></label>
-                                            <input id = "name" name = "name" type="text" class="form-control" pattern="[A-Za-z'-]" required>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row clearfix">
-                                <div class="col-md-6">
-                                    <div class="form-group form-float">
-                                        <div class="form-line">
-                                        <label><small>Cellphone Number:</small></label>
-                                            <input id = "cp1" name = "cp1" type="text" class="form-control" pattern="[A-Za-z'-]" required>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="form-group form-float">
-                                        <div class="form-line">
-                                        <label><small>Cellphone Number (Alternate):</small></label>
-                                            <input id = "cp2" name = "cp2" type="text" class="form-control" pattern="[A-Za-z'-]" required>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row clearfix">
-                                <div class="col-md-6">
-                                    <div class="form-group form-float">
-                                        <div class="form-line">
-                                        <label><small>Telephone:</small></label>
-                                            <input id = "tpnum" name = "tpnum" type="text" class="form-control" pattern="[A-Za-z'-]" required>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="form-group form-float">
-                                        <div class="form-line">
-                                        <label><small>Email:</small></label>
-                                            <input id = "email" name = "email" type="text" class="form-control" pattern="[A-Za-z'-]" required>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row clearfix">
-                                <div class="col-md-12">
-                                    <div class="form-group form-float">
-                                        <div class="form-line">
-                                        <label><small>Address:</small></label>
-                                            <textarea id = "address" rowa="2" name = "address" type="text" class="form-control" pattern="[A-Za-z'-]" required></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
 
@@ -384,7 +386,6 @@
                                         <span style="font-size: 15px;"> NEXT</span>
                                     </button>
                                 </div>
-                            </form>
                             </div>
                         </div>
                     </div>
@@ -392,6 +393,7 @@
                     
                 </div> <!-- END OF COL XS -->
             </div> <!-- END OF ROW -->
+        </form>
                 <!-- #END# BREAKDOWN -->
             </div>
         </div>
@@ -492,27 +494,80 @@
         function client_display()
         {
             var id = $('#policy_number option:selected').data('id');
+            var na = '';
+            var cp = '';
+            var cp1 = '';
+            var tp = '';
+            var em = '';
+            var ad = '';
+
+            var na_ = '';
+            var cp_ = '';
+            var cp1_ = '';
+            var tp_ = '';
+            var em_ = '';
+            var ad_ = '';
 
             console.log(id);
 
-            @foreach($client as $cli)
+            @foreach($clist as $cli)
+            @if($cli->client_type == 1)
              if('{{$cli->client_ID}}' == id)
              {
+                @foreach($client as $cl)
                 @foreach($pInfo as $info)
-                 @if($cli->personal_info_ID == $info->pinfo_ID)
-                  $('#name').val('{{$info->pinfo_last_name}}, {{$info->pinfo_first_name}} {{$info->pinfo_middle_name}}');
-                  $('#cp1').val('{{$info->pinfo_cpnum_1}}');
-                  $('#cp2').val('{{$info->pinfo_cpnum_2}}');
-                  $('#tpnum').val('{{$info->pinfo_tpnum}}');
-                  $('#email').val('{{$info->pinfo_mail}}');
+                 @if($cl->personal_info_ID == $info->pinfo_ID)
+                  na = "{{$info->pinfo_last_name}}, {{$info->pinfo_first_name}} {{$info->pinfo_middle_name}}";
+                  cp = "{{$info->pinfo_cpnum_1}}";
+                  cp1 = "{{$info->pinfo_cpnum_2}}";
+                  tp = "{{$info->pinfo_tpnum}}";
+                  em = "{{$info->pinfo_mail}}";
                  @endif
                 @endforeach
                 @foreach($address as $add)
                  @if($cli->client_add_ID == $add->add_ID)
-                  $('#address').val('{{$add->add_blcknum}} {{$add->add_street}} {{$add->add_subdivision}} {{$add->add_brngy}} {{$add->add_district}} {{$add->add_city}} {{$add->add_province}} {{$add->add_region}} {{$add->add_zipcode}}');
+                  ad = "{{$add->add_blcknum}} {{$add->add_street}} {{$add->add_subdivision}} {{$add->add_brngy}} {{$add->add_district}} {{$add->add_city}} {{$add->add_province}} {{$add->add_region}} {{$add->add_zipcode}}";
                  @endif
                 @endforeach
+                @endforeach
+                        
+            $('#name1').val(na);
+            $('#cp1').val(cp);
+            $('#cp2').val(cp1);
+            $('#tpnum').val(tp);
+            $('#email').val(em);
+            $('#address').val(ad);
              }
+             @endif
+            @endforeach
+
+            @foreach($clist as $cli1)
+             @if($cli1->client_type == 2)
+             if('{{$cli1->client_ID}}' == id)
+             {
+                @foreach($company as $info)
+                 @if($cli1->client_ID == $info->comp_ID)
+                  na_ = "{{$info->comp_name}}";
+                  cp1_ = "N/A";
+                  cp_ = "N/A";
+                  tp_ = "{{$info->comp_telnum}}";
+                  em_ = "{{$info->comp_email}}";
+
+                    @foreach($address as $add)
+                     @if($info->comp_add_ID == $add->add_ID)
+                      ad_ = "{{$add->add_blcknum}} {{$add->add_street}} {{$add->add_subdivision}} {{$add->add_brngy}} {{$add->add_district}} {{$add->add_city}} {{$add->add_province}} {{$add->add_region}} {{$add->add_zipcode}}";
+                     @endif
+                    @endforeach
+                 @endif
+                @endforeach
+            $('#name1').val(na_);
+            $('#cp1').val(cp_);
+            $('#cp2').val(cp1_);
+            $('#tpnum').val(tp_);
+            $('#email').val(em_);
+            $('#address').val(ad_);
+             }
+             @endif
             @endforeach
         }
 
@@ -561,13 +616,15 @@
             @endforeach
         }
 
-        $('#insurance_company').on('change', function (){
+        $('#insurance_company').on('change textInput input', function (){
             var id = $(this).val();
+            $('#policy_number').find('option:not(:first)').remove();
+            $('#policy_number').selectpicker('refresh');
 
             @foreach($policy_num as $pnum)
              if('{{$pnum->insurance_company}}' == id)
              {
-                $('#policy_number option:gt(0)').remove();
+                // $('#policy_number option:gt(0)').remove();
                 var option = '<option value="{{$pnum->policy_number}}" data-id = "{{$pnum->client_ID}}" >{{$pnum->policy_number}}</option>';
                 $('#policy_number:last').append(option);  
                 $("#policy_number").prop("selectedIndex", -1);

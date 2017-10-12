@@ -40,7 +40,9 @@ use App\clientListConnection;
 
 use App\clientConnection;
 
-use App\paymentConnection;
+use App\paymentsConnection;
+
+use App\checkVoucherConnection;
 
 use Redirect;
 
@@ -58,6 +60,8 @@ class trans_expireAccountController extends Controller
     ->with('pInfo',personalInfoConnection::all())
     ->with('insaccount', clientAccountsConnection::all())
     ->with('inscomp', inscompanyConnection::all())
+    ->with('payments',paymentsConnection::orderBy('due_date')->get())
+    ->with('voucher',   checkVoucherConnection::all())
     ->with('add',addressConnection::all());
   }
 
@@ -66,7 +70,7 @@ class trans_expireAccountController extends Controller
     return view('pages/admin/transaction/insurance-details-company-expiring')
     ->with('client', inscompanyConnection::where('comp_ID', $req->id)->first())
     ->with('contact', contactPersonConnection::all())
-    ->with('payments', paymentConnection::all())
+    ->with('payments', paymentsConnection::all())
     ->with('paydetails', paymentDetailConnection::where('payment_ID', $req->pay_id)->first())
     ->with('clist', clientListConnection::all())
     ->with('sales',salesAgentConnection::all())
@@ -86,7 +90,7 @@ class trans_expireAccountController extends Controller
   public function list_ind()
   {
     return view('pages/admin/transaction/insurance-expiring-accounts-individual')
-    ->with('payments', paymentConnection::all())
+    ->with('payments', paymentsConnection::all())
     ->with('paydetails', paymentDetailConnection::all())
     ->with('clist', clientListConnection::all())
     ->with('client',clientConnection::all())
@@ -94,14 +98,16 @@ class trans_expireAccountController extends Controller
     ->with('pInfo',personalInfoConnection::all())
     ->with('insaccount', clientAccountsConnection::all())
     ->with('inscomp', inscompanyConnection::all())
-    ->with('add',addressConnection::all());
+    ->with('add',addressConnection::all())
+    ->with('payments',paymentsConnection::orderBy('due_date')->get())
+    ->with('voucher',   checkVoucherConnection::all());
   }
 
   public function display_info_ind(Request $req)
   {
     return view('pages/admin/transaction/insurance-details-individual-expiring')
     ->with('client', clientConnection::where('client_ID', $req->id)->first())
-    ->with('payments', paymentConnection::all())
+    ->with('payments', paymentsConnection::all())
     ->with('paydetails', paymentDetailConnection::where('payment_ID', $req->pay_id)->first())
     ->with('clist', clientListConnection::all())
     ->with('sales',salesAgentConnection::all())

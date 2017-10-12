@@ -103,7 +103,7 @@
                                         <td>{{$comp->complaint}}</td>
                                         <td>{{$comp->name}}</td>
                                         <td>{{\Carbon\Carbon::parse($comp->date_sent)->format("M d,Y h:i:s")}}</td>
-                                        <td><span class="label bg-red">rejected</span></td>
+                                        <td><span class="label bg-red">unsettled / rejected</span></td>
                                      </tr>
                                      @endif
                                     @endforeach

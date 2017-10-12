@@ -631,6 +631,18 @@ class trans_quotationListController extends Controller
         return $this->sent_to_insure($req, (int)$clistid->client_ID, 0);
     }
 
+     public function update_quote_stat(Request $req)
+    {
+        $quote = quotationListConnection::where('quote_ID', "=", $req->quoteid)->first();
+        $quote->quote_status = $req->statval;
+
+        $quote->save();
+        alert()
+        ->success('Record Saved', "Success")
+        ->persistent("Close");
+        return Redirect::back();
+    }
+
     public function sent_to_insure($req,$id, $type)
     {
         return view('pages.accounting-staff.transaction.insure-quote')

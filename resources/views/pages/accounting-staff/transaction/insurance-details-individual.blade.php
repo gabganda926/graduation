@@ -280,7 +280,7 @@
                                             <div class="form-group form-float">
                                                 <div class="form-line">
                                                 <label><small>Vehicle Make:</small></label>
-                                                    <input id = "vehicle_make" name = "vehicle_make" type="text" class="form-control"  readonly="true" ">
+                                                    <input id = "vehicle_make" name = "apinfo_tpnum" type="text" class="form-control"  readonly="true" ">
                                                 </div>
                                             </div>
                                         </div>
@@ -409,7 +409,7 @@
                                     <h3> <small><b>PREMIUMS</b></small></h3>
                                     <div class="row clearfix">
                                         <br/><br/>
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                             <div class="form-group form-float">
                                                 <div class="form-line">
                                                 <label><small>Deductible: </small></label>
@@ -418,16 +418,18 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                             <div class="form-group form-float">
                                                 <div class="form-line">
                                                 <label><small>Authorized Repair Limit: </small></label>
-                                                    <input id = "arl" name = "arl" type="text" class="form-control" readonly="true" value="">
+                                                    <input id = "arlimit" name = "arlimit" type="text" class="form-control" readonly="true" value="">
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
 
-                                        <div class="col-md-4">
+                                    <div class="row clearfix">
+                                        <div class="col-md-6">
                                             <div class="form-group form-float">
                                                 <div class="form-line">
                                                 <label><small>Towing: </small></label>
@@ -435,32 +437,22 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <div class="row clearfix">
                                         <div class="col-md-6">
                                             <div class="form-group form-float">
                                                 <div class="form-line">
-                                                <label><small>Bodily Injury Coverage: </small></label>
+                                                <label><small>Bodily Injury: </small></label>
                                                     <input id = "bi" name = "bi" type="text" class="form-control" readonly="true" value="">
                                                 </div>
                                             </div>
                                         </div> 
-                                        <div class="col-md-6">
-                                            <div class="form-group form-float">
-                                                <div class="form-line">
-                                                <label><small>Premium: </small></label>
-                                                    <input id = "bi_premium" name = "bi_premium" type="text" class="form-control" readonly="true" value="">
-                                                </div>
-                                            </div>
-                                        </div> 
                                     </div>
 
                                     <div class="row clearfix">
                                         <div class="col-md-6">
                                             <div class="form-group form-float">
                                                 <div class="form-line">
-                                                <label><small>Property Damage Coverage: </small></label>
+                                                <label><small>Property Damage: </small></label>
                                                     <input id = "pd" name = "pd" type="text" class="form-control" readonly="true" value="">
                                                 </div>
                                             </div>
@@ -469,55 +461,16 @@
                                         <div class="col-md-6">
                                             <div class="form-group form-float">
                                                 <div class="form-line">
-                                                <label><small>Premium: </small></label>
-                                                    <input id = "pd_premium" name = "pd_premium" type="text" class="form-control" readonly="true" value="">
-                                                </div>
-                                            </div>
-                                        </div> 
-                                    </div>
-
-                                    <div class="row clearfix">
-                                        <div class="col-md-6">
-                                            <div class="form-group form-float">
-                                                <div class="form-line">
                                                 <label><small>Personal Accident: </small></label>
                                                     <input id = "pa" name = "pa" type="text" class="form-control" readonly="true" value="">
                                                 </div>
                                             </div>
-                                        </div>   
-
-                                        <div class="col-md-6">
-                                            <div class="form-group form-float">
-                                                <div class="form-line">
-                                                <label><small>Premium: </small></label>
-                                                    <input id = "pa_premium" name = "pa_premium" type="text" class="form-control" readonly="true" value="">
-                                                </div>
-                                            </div>
-                                        </div>           
+                                        </div>                     
                                     </div> <!-- end of rowclearfix --> 
 
                                     <div class="row clearfix">
                                         <br/><br/>
-                                        <div class="col-md-6">
-                                            <div class="form-group form-float">
-                                                <div class="form-line">
-                                                    <label><small>Own Damage/Theft Coverage: </small></label>
-                                                        <input id = "odt" name = "odt" type="text" class="form-control" readonly="true" value="">
-                                                </div>
-                                            </div>
-                                        </div>
 
-                                        <div class="col-md-6">
-                                            <div class="form-group form-float">
-                                                <div class="form-line">
-                                                <label><small>Premium: </small></label>
-                                                    <input id = "odt_premium" name = "odt_premium" type="text" class="form-control" readonly="true" value="">
-                                                </div>
-                                            </div>
-                                        </div> 
-                                    </div>
-
-                                    <div class="row clearfix">
                                         <div class="col-md-6">
                                             <div class="form-group form-float">
                                                 <div class="form-line">
@@ -526,16 +479,7 @@
                                                 </div>
                                             </div>
                                         </div> 
-
-                                        <div class="col-md-6">
-                                            <div class="form-group form-float">
-                                                <div class="form-line">
-                                                <label><small>Premium: </small></label>
-                                                    <input id = "aon_premium" name = "aon_premium" type="text" class="form-control" readonly="true" value="">
-                                                </div>
-                                            </div>
-                                        </div> 
-                                    </div>
+                                    </div> 
 
                                     <div class="row clearfix">
                                         <div class="col-md-4">
@@ -607,7 +551,7 @@
              cp2 = '{{ $info->pinfo_cpnum_2 }}';
              tel = '{{ $info->pinfo_tpnum }}';
              mail = '{{ $info->pinfo_mail }}';
-             @if(!empty($info->pinfo_picture))
+                @if(!empty($info->pinfo_picture))
                  image = '/image/client/{{$info->pinfo_picture}}';
                  $('#Img').attr('src',image);
                 @endif
@@ -646,55 +590,29 @@
              @endif
             @endforeach
 
-            @foreach($vtype as $type)
-             @if($insaccount->vehicle_type == $type->vehicle_type_ID)
-              type = '{{$type->vehicle_type_name}}';
-             @endif
-            @endforeach
+              type = '{{$insaccount->vehicle_type_name}}';
+              make = '{{$insaccount->vehicle_make_name}}';
+              model = '{{$insaccount->vehicle_year.' '.$insaccount->vehicle_model_name}}';
+              value = numberWithCommas('{{$insaccount->vehicle_value}}');
 
-            @foreach($vmake as $make)
-             @if($insaccount->vehicle_make == $make->vehicle_make_ID)
-              make = '{{$make->vehicle_make_name}}';
-             @endif
-            @endforeach
-
-            @foreach($vmod as $mod)
-             @if($insaccount->vehicle_model == $mod->vehicle_model_ID)
-              model = '{{$mod->vehicle_year.' '.$mod->vehicle_model_name}}';
-              value = numberWithCommas('{{$mod->vehicle_value}}');
-             @endif
-            @endforeach
-
-            @foreach($ppa as $pa)
-             @if($pa->premiumPA_ID == $paydetails->personal_accident_ID)
-              pa = parseInt('{{$pa->insuranceCover}}') + parseInt('{{$pa->passengerCover}}') + parseInt('{{$pa->mrCover}}');
-             @endif
-            @endforeach
-
-            @foreach($pdg as $dg)
-             @if($dg->premiumDG_ID == $paydetails->bodily_injury_ID)
-              @if($paydetails->vehicle_class == 1)
-              bi = '{{$dg->privateCar}}';
+              @if($paydetails->account_ID == $insaccount->account_ID)
+                  pa1 = numberWithCommas('{{ $paydetails->pa_cover }}');
+                  pa2 = numberWithCommas('{{ $paydetails->pa_premium }}');
+                  pa = 'COVER: ₱' + pa1 + ' - PREMIUM: ₱' +pa2;
+                  pd1 = numberWithCommas('{{ $paydetails->pd_cover }}');
+                  pd2 = numberWithCommas('{{ $paydetails->pd_premium }}');
+                  pd = 'COVER: ₱' + pd1 + ' - PREMIUM: ₱' +pd2;
+                  bi1 = numberWithCommas('{{ $paydetails->bi_cover }}');
+                  bi2 = numberWithCommas('{{ $paydetails->bi_premium }}');
+                  bi = 'COVER: ₱' + bi1 + ' - PREMIUM: ₱' +bi2;
+                  ded = numberWithCommas('{{ $paydetails->deductible }}');
+                  ar = numberWithCommas('{{ $paydetails->arl }}');
+                  aon1 = numberWithCommas('{{ $paydetails->aon_cover }}');
+                  aon2 = numberWithCommas('{{ $paydetails->aon_premium }}');
+                  aonz = 'COVER: ₱' + aon1 + ' - PREMIUM: ₱' +aon2;
+                  tow = numberWithCommas('{{ $paydetails->towing }}');
+                  data = numberWithCommas('{{ $paydetails->total }}');
               @endif
-              @if($paydetails->vehicle_class == 2)
-              bi = '{{$dg->cv_Light}}';
-              @endif
-              @if($paydetails->vehicle_class == 3)
-              bi = '{{$dg->cv_Heavy}}';
-              @endif
-             @endif
-             @if($dg->premiumDG_ID == $paydetails->property_damage_ID)
-              @if($paydetails->vehicle_class == 1)
-              pd = '{{$dg->privateCar}}';
-              @endif
-              @if($paydetails->vehicle_class == 2)
-              pd = '{{$dg->cv_Light}}';
-              @endif
-              @if($paydetails->vehicle_class == 3)
-              pd = '{{$dg->cv_Heavy}}';
-              @endif
-             @endif
-            @endforeach
 
             $('#insurance_company').val(inscomp);
             $('#client_name').val(fullname);
@@ -711,9 +629,15 @@
             $('#vehicle_make').val(make);    
             $('#vehicle_model').val(model); 
             $('#vehicle_model_value').val('₱ '+value);
-            $('#pa').val('₱ ' + numberWithCommas(pa));     
-            $('#pd').val('₱ ' + numberWithCommas(pd));    
-            $('#bi').val('₱ ' + numberWithCommas(bi)); 
+            $('#pa').val(pa);     
+            $('#pd').val(pd);    
+            $('#bi').val(bi); 
+            $('#deductible').val('₱ ' + numberWithCommas(ded)); 
+            $('#arlimit').val('₱ ' + numberWithCommas(ar)); 
+            $('#towing').val('₱ ' + numberWithCommas(tow)); 
+            $('#aon').val('₱ ' + numberWithCommas(aonz)); 
+
+            $('#total').html("<b>Total Net Premium: ₱ " + numberWithCommas(data) + "</b>");
 
             var bday = document.getElementById("pinfo_bday").value.split('-');
             var today = new Date();
@@ -736,68 +660,7 @@
             {
                 document.getElementById("age").value = "Invalid Input";
             } 
-
-            if($('#pa').val())
-            {
-                data = data + parseFloat($('#pa').val().replace(/[^0-9\.]/g,'')); 
-            }
-            if($('#bi').val())
-            {
-                data = data + parseFloat($('#bi').val().replace(/[^0-9\.]/g,'')); 
-            }
-            if($('#pd').val())
-            {
-                data = data + parseFloat($('#pd').val().replace(/[^0-9\.]/g,'')); 
-            }
             
-            var ins = $('#insurance_company').val();
-
-            if(ins == 1)
-                $('#deductible').val('₱ '+numberWithCommas(3100));
-            if(ins == 2)
-                $('#deductible').val('₱ '+numberWithCommas(1000));
-            if(ins == 3)
-                $('#deductible').val('₱ '+numberWithCommas(3000));
-            if(ins == 4)
-                $('#deductible').val('₱ '+numberWithCommas(2000));
-
-            $('#towing').val('₱ '+numberWithCommas(100));
-
-            $('#arl').val('₱ '+numberWithCommas(parseFloat($('#deductible').val().replace(/[^0-9\.]/g,''))+parseFloat($('#towing').val().replace(/[^0-9\.]/g,''))))
-
-            var coverage = parseFloat($('#vehicle_model_value').val().replace(/[^0-9\.]/g,'')) * .2;
-
-            // var grosspremium = parseFloat($('#indi_vmodel_value').val().replace(/[^0-9\.]/g,'')) * .013;
-
-            $('#aon').val('₱ '+numberWithCommas(Math.round(coverage * 100)/100));
-            $('#odt').val('₱ '+numberWithCommas(Math.round(coverage * 100)/100));
-
-            if(ins == 1)
-                $('#aon_premium').val('₱ '+numberWithCommas(coverage * 0.02));
-            if(ins == 2)
-            {
-                $('#aon').val('₱ 0');
-                $('#aon_premium').val('₱ 0');
-            }
-            if(ins == 3)
-                $('#aon_premium').val('₱ '+numberWithCommas(coverage * 0.005));
-            if(ins == 4)
-                $('#aon_premium').val('₱ '+numberWithCommas(coverage * 0.005));
-
-            var odt = parseFloat(coverage * .013);
-            // Math.abs((((parseFloat($('#indi_aon').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#indi_bi_premium').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#indi_pd_premium').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#indi_pa_premium').val().replace(/[^0-9\.]/g,''))) * 1.2470) - grosspremium) / 1.2470)
-
-             $('#odt_premium').val('₱ '+numberWithCommas(Math.round(odt * 100)/100));
-
-            var basicpremium = (parseFloat($('#aon_premium').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#bi_premium').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#pd_premium').val().replace(/[^0-9\.]/g,'')) + parseFloat($('#pa_premium').val().replace(/[^0-9\.]/g,''))) + odt;
-            var vat = basicpremium * .125;
-            var stamp = basicpremium * .12;
-            var rounded = Math.ceil((basicpremium + vat + stamp)/100)*100;
-
-            var lgt = rounded - (basicpremium + vat + stamp);
-
-            var total = basicpremium + vat + stamp + lgt;
-            $('#total').html("<b>Total Net Premium: ₱ " + numberWithCommas(total) + "</b>");
         });
     </script>
 

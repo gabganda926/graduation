@@ -139,24 +139,68 @@
                                             <tr>
                                                 <td>
                                                     @if($list->quote_status == 0)
-                                                     <span class="label bg-blue">new
+                                                     <span class="label bg-blue">new</span>
                                                     @elseif($list->quote_status == 1)
-                                                     <span class="label bg-orange">approved - client
+                                                     <span class="label bg-orange">approved - client</span>
                                                     @elseif($list->quote_status == 2)
-                                                     <span class="label bg-green">approved - manager
+                                                     <span class="label bg-green">approved - manager</span>
                                                     @elseif($list->quote_status == 3)
-                                                     <span class="label bg-red">rejected - manager
+                                                     <span class="label bg-red">rejected - manager</span>
                                                     @elseif($list->quote_status == 4)
-                                                     <span class="label bg-red">cancelled
+                                                     <span class="label bg-red">cancelled</span>
                                                     @elseif($list->quote_status == 5)
-                                                     <span class="label bg-orange">pending - manager
+                                                     <span class="label bg-orange">pending - manager</span>
                                                     @elseif($list->quote_status == 6)
-                                                     <span class="label bg-orange">pending - client
+                                                     <span class="label bg-orange">pending - client</span>
                                                     @elseif($list->quote_status == 7)
-                                                     <span class="label bg-red">rejected - client
+                                                     <span class="label bg-red">rejected - client</span>
                                                     @elseif($list->quote_status == 8)
-                                                     <span class="label bg-green">Insured Client
+                                                     <span class="label bg-green">Insured Client</span>
                                                     @endif
+                                                    <div id = "div_{{ $list->quote_ID }}" class = "div_{{ $list->quote_ID }}">
+                                                            <select name = "sel_{{ $list->quote_ID }}" id = "sel_{{ $list->quote_ID }}" class="form-control show-tick">
+                                                                <option selected value = "" style = "display: none;">-- Select Status --</option>
+                                                                <option value = "1">approved - client</option>
+                                                                <option value = "7">rejected - client</option>
+                                                            </select>
+                                                    </div>
+                                                        <button id="btn_{{ $list->quote_ID }}" type="button" class="btn bg-green btn-block waves-effect btn_{{ $list->quote_ID }}" onclick="
+                                                        $('#quoteid').val('{{ $list->quote_ID }}');
+                                                        document.getElementById('time').value = formatDate(new Date());
+                                                        document.getElementById('quoteid').value = getTransId();
+                                                        document.getElementById('statval').value = getStatVal();
+                                                        swal({
+                                                          title: 'Are you sure?',
+                                                          type: 'warning',
+                                                          showCancelButton: true,
+                                                          confirmButtonColor: '#DD6B55',
+                                                          confirmButtonText: 'Continue',
+                                                          cancelButtonText: 'Cancel',
+                                                          closeOnConfirm: false,
+                                                          closeOnCancel: false
+                                                        },
+                                                        function(isConfirm){
+                                                          if (isConfirm) {
+                                                            $('#tc').submit();
+                                                          } else {
+                                                              swal({
+                                                              title: 'Cancelled',
+                                                              type: 'warning',
+                                                              timer: 500,
+                                                              showConfirmButton: false
+                                                              });
+                                                          }
+                                                        });
+                                                        $('#div_{{ $list->quote_ID }}').hide(200);
+                                                        $('#btn_{{ $list->quote_ID }}').hide(200);
+                                                        $('#btnC_{{ $list->quote_ID }}').hide(200);">SAVE
+                                                        </button>
+                                                        <button type="button" id="btnC_{{ $list->quote_ID }}" class="btn btn-block waves-effect btnC_{{ $list->quote_ID }}" onclick="
+                                                        $('#div_{{ $list->quote_ID }}').hide(200);
+                                                        $('#btn_{{ $list->quote_ID }}').hide(200);
+                                                        $('#btnC_{{ $list->quote_ID }}').hide(200);
+                                                        console.log('{{ $list->quote_ID }}');"><span>CANCEL</span>
+                                                        </button>
                                                 </td>
                                                 <td>{{\Carbon\Carbon::parse($list->created_at)->format("F d, Y")}}</td>
                                                 <td>{{\Carbon\Carbon::parse($list->updated_at)->format("F d, Y")}}</td>
@@ -206,8 +250,15 @@
                                                 @endif
                                                 @if($list->quote_status == 2)
                                                 <button type="button" class="btn bg-orange waves-effect forward_client" data-id = "{{$indi->quote_indi_ID}}"data-toggle="tooltip" data-placement="left" title="Ask for client's confirmation"><i class="material-icons">question_answer</i>
+                                                </button>
                                                 <button type="button" class="btn bg-red waves-effect delete" data-id = "{{$indi->quote_indi_ID}}"data-toggle="tooltip" data-placement="left" title="Delete this quotation"><i class="material-icons">delete</i>
                                                 </button>
+                                                <button type="button" id="btnS_{{ $list->quote_ID }}" class="btn bg-teal waves-effect" style="position: right;" data-toggle="tooltip" data-placement="left" title="Update Status" onclick="
+                                                $('#div_{{ $list->quote_ID }}').show(200);
+                                                $('#btn_{{ $list->quote_ID }}').show(200);
+                                                $('#btnC_{{ $list->quote_ID }}').show(200);
+                                                console.log('{{ $list->quote_ID }}');">
+                                                    <i class="material-icons">settings</i><span style="font-size: 15px;"></span>
                                                 </button>
                                                 @endif
                                                 @if($list->quote_status == 3 || $list->quote_status == 7)
@@ -298,24 +349,68 @@
                                               <tr>
                                                 <td>
                                                     @if($list->quote_status == 0)
-                                                     <span class="label bg-blue">new
+                                                     <span class="label bg-blue">new</span>
                                                     @elseif($list->quote_status == 1)
-                                                     <span class="label bg-orange">approved - client
+                                                     <span class="label bg-orange">approved - client</span>
                                                     @elseif($list->quote_status == 2)
-                                                     <span class="label bg-green">approved - manager
+                                                     <span class="label bg-green">approved - manager</span>
                                                     @elseif($list->quote_status == 3)
-                                                     <span class="label bg-red">rejected - manager
+                                                     <span class="label bg-red">rejected - manager</span>
                                                     @elseif($list->quote_status == 4)
-                                                     <span class="label bg-red">cancelled
+                                                     <span class="label bg-red">cancelled</span>
                                                     @elseif($list->quote_status == 5)
-                                                     <span class="label bg-orange">pending - manager
+                                                     <span class="label bg-orange">pending - manager</span>
                                                     @elseif($list->quote_status == 6)
-                                                     <span class="label bg-orange">pending - client
+                                                     <span class="label bg-orange">pending - client</span>
                                                     @elseif($list->quote_status == 7)
-                                                     <span class="label bg-red">rejected - client
+                                                     <span class="label bg-red">rejected - client</span>
                                                     @elseif($list->quote_status == 8)
-                                                     <span class="label bg-green">Insured Client
+                                                     <span class="label bg-green">Insured Client</span>
                                                     @endif
+                                                    <div id = "div_{{ $list->quote_ID }}" class = "div_{{ $list->quote_ID }}">
+                                                            <select name = "sel_{{ $list->quote_ID }}" id = "sel_{{ $list->quote_ID }}" class="form-control show-tick">
+                                                                <option selected value = "" style = "display: none;">-- Select Status --</option>
+                                                                <option value = "1">approved - client</option>
+                                                                <option value = "7">rejected - client</option>
+                                                            </select>
+                                                    </div>
+                                                        <button id="btn_{{ $list->quote_ID }}" type="button" class="btn bg-green btn-block waves-effect btn_{{ $list->quote_ID }}" onclick="
+                                                        $('#quoteid').val('{{ $list->quote_ID }}');
+                                                        document.getElementById('time').value = formatDate(new Date());
+                                                        document.getElementById('quoteid').value = getTransId();
+                                                        document.getElementById('statval').value = getStatVal();
+                                                        swal({
+                                                          title: 'Are you sure?',
+                                                          type: 'warning',
+                                                          showCancelButton: true,
+                                                          confirmButtonColor: '#DD6B55',
+                                                          confirmButtonText: 'Continue',
+                                                          cancelButtonText: 'Cancel',
+                                                          closeOnConfirm: false,
+                                                          closeOnCancel: false
+                                                        },
+                                                        function(isConfirm){
+                                                          if (isConfirm) {
+                                                            $('#tc').submit();
+                                                          } else {
+                                                              swal({
+                                                              title: 'Cancelled',
+                                                              type: 'warning',
+                                                              timer: 500,
+                                                              showConfirmButton: false
+                                                              });
+                                                          }
+                                                        });
+                                                        $('#div_{{ $list->quote_ID }}').hide(200);
+                                                        $('#btn_{{ $list->quote_ID }}').hide(200);
+                                                        $('#btnC_{{ $list->quote_ID }}').hide(200);">SAVE
+                                                        </button>
+                                                        <button type="button" id="btnC_{{ $list->quote_ID }}" class="btn btn-block waves-effect btnC_{{ $list->quote_ID }}" onclick="
+                                                        $('#div_{{ $list->quote_ID }}').hide(200);
+                                                        $('#btn_{{ $list->quote_ID }}').hide(200);
+                                                        $('#btnC_{{ $list->quote_ID }}').hide(200);
+                                                        console.log('{{ $list->quote_ID }}');"><span>CANCEL</span>
+                                                        </button>
                                                 </td>
                                                 <td>{{\Carbon\Carbon::parse($list->created_at)->format("F d, Y")}}</td>
                                                 <td>{{\Carbon\Carbon::parse($list->updated_at)->format("F d, Y")}}</td>
@@ -368,8 +463,15 @@
                                                 @endif
                                                 @if($list->quote_status == 2)
                                                 <button type="button" class="btn bg-orange waves-effect forward_client" data-id = "{{$comp->quote_comp_ID}}"data-toggle="tooltip" data-placement="left" title="Ask for client's confirmation"><i class="material-icons">question_answer</i>
+                                                </button>
                                                 <button type="button" class="btn bg-red waves-effect delete" data-id = "{{$comp->quote_comp_ID}}"data-toggle="tooltip" data-placement="left" title="Delete this quotation"><i class="material-icons">delete</i>
                                                 </button>
+                                                <button type="button" id="btnS_{{ $list->quote_ID }}" class="btn bg-teal waves-effect" style="position: right;" data-toggle="tooltip" data-placement="left" title="Update Status" onclick="
+                                                $('#div_{{ $list->quote_ID }}').show(200);
+                                                $('#btn_{{ $list->quote_ID }}').show(200);
+                                                $('#btnC_{{ $list->quote_ID }}').show(200);
+                                                console.log('{{ $list->quote_ID }}');">
+                                                    <i class="material-icons">settings</i><span style="font-size: 15px;"></span>
                                                 </button>
                                                 @endif
                                                 @if($list->quote_status == 3)
@@ -405,6 +507,19 @@
       <div class="col-md-4" style = "display: none;">
        <input id = "code" name = "code" type="text" class="form-control">
       </div>
+    </form>
+
+    <form id="tc" name = "tc" method="POST" action = "/accounting-staff/transaction/quotation-list/update" enctype="multipart/form-data">
+    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+    <div class="col-md-4" style = "display: none;">
+       <input id = "time" name = "time" type="text" class="form-control">
+    </div>
+    <div class="col-md-2" style = "display: none;">
+       <input id = "quoteid" name = "quoteid" type="text" class="form-control">
+    </div>
+    <div class="col-md-2" style = "display: none;">
+       <input id = "statval" name = "statval" type="text" class="form-control">
+    </div>
     </form>
     <script>
         $('.forward_manager').click(function(event){
@@ -605,5 +720,95 @@
               }
             });
         });
+
+        function addZero(i) {
+                    if (i < 10) {
+                        i = "0" + i;
+                    }
+                    return i;
+                }
+
+        function formatDate(date)
+        {
+          var monthNames = [
+            "January", "February", "March",
+            "April", "May", "June", "July",
+            "August", "September", "October",
+            "November", "December"
+          ];
+
+          var day = date.getDate();
+          var monthIndex = date.getMonth() + 1;
+          var year = date.getFullYear();
+          var h = addZero(date.getHours());
+          var m = addZero(date.getMinutes());
+          var s = addZero(date.getSeconds());
+
+          return year + '-' + monthIndex + '-' + day + ' ' + h + ':' + m + ':' + s;
+        }
+
+        function getTransId(clid){
+           clid = $('#quoteid').val();
+           return clid;
+        } 
+
+        function getStatVal(stat){
+           stat = $('#statval').val();
+           return stat;
+        } 
+
+        @foreach($qlist as $lis)
+         @foreach($qindi as $ind)
+          @if($lis->del_flag == 0)
+          @if($lis->quote_ID == $ind->quote_indi_ID)
+                $('#sel_{{ $lis->quote_ID }}').on('change textInput input', function () {
+                    var d = $('#sel_{{ $lis->quote_ID }} option:selected').val();
+                    $('#statval').val(d);
+                    console.log($('#statval').val());
+                });
+            @endif
+            @endif
+        @endforeach
+        @endforeach
+
+        @foreach($qlist as $lis1)
+             @foreach($qcomp as $com1)
+              @if($lis1->del_flag == 0)
+              @if($lis1->quote_ID == $com1->quote_comp_ID)
+                $('#sel_{{ $lis1->quote_ID }}').on('change textInput input', function () {
+                    var d = $('#sel_{{ $lis1->quote_ID }} option:selected').val();
+                    $('#statval').val(d);
+                    console.log($('#statval').val());
+                });
+            @endif
+            @endif
+        @endforeach
+        @endforeach
+
+        window.onload = function(){
+            @foreach($qlist as $li)
+             @foreach($qindi as $in)
+              @if($li->del_flag == 0)
+              @if($li->quote_ID == $in->quote_indi_ID)
+                    document.getElementById("div_{{ $li->quote_ID }}").style.display = 'none';
+                    document.getElementById("btn_{{ $li->quote_ID }}").style.display = 'none';
+                    document.getElementById("btnC_{{ $li->quote_ID }}").style.display = 'none';
+                @endif
+                @endif
+            @endforeach
+            @endforeach
+
+            @foreach($qlist as $li1)
+             @foreach($qcomp as $com)
+              @if($li1->del_flag == 0)
+              @if($li1->quote_ID == $com->quote_comp_ID)
+                    document.getElementById("div_{{ $li1->quote_ID }}").style.display = 'none';
+                    document.getElementById("btn_{{ $li1->quote_ID }}").style.display = 'none';
+                    document.getElementById("btnC_{{ $li1->quote_ID }}").style.display = 'none';
+                @endif
+                @endif
+            @endforeach
+            @endforeach
+        }
     </script>
 @endsection

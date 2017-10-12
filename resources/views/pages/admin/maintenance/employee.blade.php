@@ -1316,13 +1316,13 @@
                     required: true
                   },
                   uname:{
-                    maxlength: 20,
+                    maxlength: 30,
                     minlength: 8,
                     required: true,
                     userpass: true,
                   },
                   pass:{
-                    maxlength: 20,
+                    maxlength: 30,
                     minlength: 8,
                     required: true,
                     userpass: true,
@@ -1435,13 +1435,13 @@
                     required: true
                   },
                   auname:{
-                    maxlength: 20,
+                    maxlength: 30,
                     minlength: 8,
                     required: true,
                     userpass: true,
                   },
                   apass:{
-                    maxlength: 20,
+                    maxlength: 30,
                     minlength: 8,
                     required: true,
                     userpass: true,

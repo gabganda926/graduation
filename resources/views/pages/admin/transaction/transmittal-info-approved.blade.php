@@ -185,11 +185,6 @@
                                                             </div>
                                                         </div>
                                                     </div><br/><br/>
-                                                    <div class="col col-md-12">
-                                                        <a class="btn bg-orange btn-block waves-effect m-b-15 right" role="button" aria-expanded="false" onclick=" window.open('{{ URL::asset ('/admin/pdf/transmittal-form') }}')">
-                                                            <span style="font-size: 15px;"> GENERATE PDF</span>
-                                                        </a>
-                                                    </div>
                                                 </form>                                                
                                             </div>
                                         </div><!-- end of col-md-10 -->

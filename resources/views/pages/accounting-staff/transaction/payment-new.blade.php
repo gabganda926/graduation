@@ -58,7 +58,6 @@
                             <h2>CHOOSE PAYMENT TYPE</h2>
                         </div>
                         <div class="body">
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <div class="row clearfix">
                                 <div class="col-md-12">
                                     <button type="button" class="btn btn-default btn-lg btn-block waves-effect" style="border: 2px solid #102027;color: #102027; padding: 1em; font-size: 20px;" data-toggle="tooltip" data-placement="bottom" title="Pay using cash." onclick="
@@ -100,6 +99,8 @@
                             <h2>PAYMENT DETAILS - CHECK</h2>
                         </div>
                         <div class="body">
+                         <form id = "payment2" action = "/accounting-staff/transaction/payment-new/submit2" method = "POST">
+                            <input id = "amount" name = "amount" type="number" class="form-control" style = "display: none;">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <div class="row clearfix">
                                 <div class="col-md-12">
@@ -155,8 +156,24 @@
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                         <label><small>Bank:</small></label>
-                                            <select id = "qwe_check" name = "qwe_check" class="form-control show-tick" data-live-search="true" readonly="true">
+                                            <select id = "bank_check" name = "bank_check" class="form-control show-tick" data-live-search="true" readonly="true">
                                                   <option selected value = "" style = "display: none;">-- Select Bank --</option>
+                                                  @foreach($bank as $bnk)
+                                                   @if($bnk->del_flag == 0)
+                                                    <option value = "{{$bnk->bank_ID}}" >{{$bnk->bank_name}} {{$bnk->add_city}}</option>
+                                                   @endif
+                                                  @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                        <label><small>Payment for BOP Number:</small></label>
+                                            <select id = "BOP_check" name = "BOP_check" class="form-control show-tick" data-live-search="true" readonly="true">
+                                                  <option selected value = "" style = "display: none;">-- Select BOP Number --</option>
                                             </select>
                                         </div>
                                     </div>
@@ -166,7 +183,7 @@
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                         <label><small>Check Number:</small></label>
-                                            <input id = "ch_check" name = "ch_check" type="text" class="form-control" pattern="[A-Za-z'-]" required>
+                                            <input id = "check_num" name = "check_num" type="text" class="form-control" pattern="[A-Za-z'-]" required>
                                         </div>
                                     </div>
                                 </div>
@@ -175,18 +192,7 @@
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                         <label><small>Amount:</small></label>
-                                            <input id = "ch_check" name = "ch_check" type="text" class="form-control" pattern="[A-Za-z'-]" required>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-12">
-                                    <div class="form-group form-float">
-                                        <div class="form-line">
-                                        <label><small>Payment for BOP Number:</small></label>
-                                            <select id = "asdsad" name = "asdsad" class="form-control show-tick" data-live-search="true" readonly="true">
-                                                  <option selected value = "" style = "display: none;">-- Select BOP Number --</option>
-                                            </select>
+                                            <input id = "amount_check" name = "amount_check" type="number" class="form-control" pattern="[A-Za-z'-]" required>
                                         </div>
                                     </div>
                                 </div>
@@ -201,12 +207,36 @@
                                 </div> -->
 
                                 <div class="col-md-12">
-                                    <button type="button" class="btn btn-block bg-green waves-effect left" >
+                                    <button type="button" class="btn btn-block bg-green waves-effect left" id = "update2" onclick = "
+                                    swal({
+                                      title: 'Are you sure?',
+                                      type: 'warning',
+                                      showCancelButton: true,
+                                      confirmButtonColor: '#DD6B55',
+                                      confirmButtonText: 'Continue',
+                                      cancelButtonText: 'Cancel',
+                                      closeOnConfirm: false,
+                                      closeOnCancel: false
+                                    },
+                                    function(isConfirm){
+                                      if (isConfirm) {
+                                        $('#payment2').submit();
+                                      } else {
+                                          swal({
+                                          title: 'Cancelled',
+                                          type: 'warning',
+                                          timer: 500,
+                                          showConfirmButton: false
+                                          });
+                                      }
+                                    });
+                                    ">
                                         <span style="font-size: 15px;"> UPDATE BOP VOUCHER</span>
                                     </button>
                                 </div>
                             </div>
                         </div>
+                      </form>
                     </div><!-- END OF CARD -->
                     <div id="backCash">
                       <div class="row clearfix">
@@ -283,6 +313,7 @@
                                         <div class="form-line">
                                         <label><small>Payment for BOP Number:</small></label>
                                             <select id = "checknum" name = "checknum" class="form-control show-tick" data-live-search="true" readonly="true">
+                                                <option selected value = "" style = "display: none;">-- Select BOP Number --</option>
                                             </select>
                                         </div>
                                     </div>
@@ -414,6 +445,7 @@
 
     <script>
         $('#update').attr('disabled', true);
+        $('#update2').attr('disabled', true);
         var today = new Date();
         var dd = today.getDate();
         var mm = today.getMonth()+1;
@@ -444,12 +476,6 @@
         function myTimer1() {
             var f = new Date();
            $('#remittance_date').val(today+ " " +f.toLocaleTimeString());
-        }
-
-        var myVar2=setInterval(function(){myTimer2()},1000);
-
-        function myTimer2() {
-            var f = new Date();
            $('#remittance_date_check').val(today+ " " +f.toLocaleTimeString());
         }
 
@@ -571,7 +597,7 @@
              @endforeach
             @endforeach
 
-            $('#check option:gt(0)').remove();
+            $('#checknum option:gt(0)').remove();
             $.each(newOptions, function(key,value) {
               if(value)
               {
@@ -643,10 +669,164 @@
               }
             });
         });
-            $('.generate').on('click', function(){
-              $('#ID').val($(this).data('id'));
-              $('#gen').submit();
-            }); 
-    
+
+        $('#policy_number_check').on('change', function(){
+            var id = $(this).val();
+            var newOptions = [];
+            var data = 0;
+            var bank = '';
+            var client = '';
+
+            @foreach($voucher as $vouch)
+             @foreach($ptail as $dtail)
+              @if($vouch->pay_ID == $dtail->payment_ID)
+                @if($vouch->pay_ID >= 10)   
+                  $('#billnum').val('BILL00{{$vouch->pay_ID}}');
+                @endif
+                @if($vouch->pay_ID < 10)
+                    $('#billnum').val('BILL000{{$vouch->pay_ID}}');
+                @endif
+                @if($vouch->pay_ID >= 100)
+                    $('#billnum').val('BILL0{{$vouch->pay_ID}}');
+                @endif
+                @if($vouch->pay_ID >= 1000)
+                    $('#billnum').val('BILL{{$vouch->pay_ID}}');
+                @endif
+
+              @foreach($insacc as $acc)
+               @if($dtail->account_ID == $acc->account_ID)
+                if('{{$acc->policy_number}}' == $('#policy_number_check option:selected').val())
+                {
+                   @foreach($bank as $bnk)
+                    @foreach($address as $add)
+                     @if($bnk->bank_add_ID == $add->add_ID)
+                      if('{{$bnk->bank_ID}}' == '{{$dtail->bank_ID}}')
+                      {
+                         bank = '{{$bnk->bank_name}} - {{$add->add_city}}';
+                      }
+                     @endif
+                    @endforeach
+                   @endforeach
+
+                     @foreach($individual as $client)
+                      @if($acc->client_ID == $client->client_ID)
+                       @foreach($pinfo as $info)
+                        @if($client->personal_info_ID == $info->pinfo_ID)
+                         $('#client_check').val('{{$info->pinfo_last_name.", ".$info->pinfo_first_name." ".$info->pinfo_middle_name}}');
+                        @endif
+                       @endforeach
+                      @endif
+                     @endforeach
+
+                     @foreach($company as $comp)
+                      @if($acc->client_ID == $comp->comp_ID)
+                       $('#client_check').val('{{$comp->comp_name}}');
+                      @endif
+                     @endforeach
+                }
+               @endif
+              @endforeach
+              @endif
+             @endforeach
+            @endforeach
+
+            @foreach($voucher as $vouch)
+             @foreach($ptail as $dtail)
+              @if($vouch->pay_ID == $dtail->payment_ID)
+              @foreach($insacc as $acc)
+               @if($dtail->account_ID == $acc->account_ID)
+                @foreach($payments as $pay)
+                 @if($vouch->cv_ID == $pay->check_voucher)
+                  @if($pay->status == 1)
+                   if('{{$acc->policy_number}}' == $('#policy_number_check option:selected').val())
+                   newOptions[data] = { check_num : "{{ $pay->payment_ID }}", due_date : "{{\Carbon\Carbon::parse($pay->due_date)->format('Y-m-d')}}", amount : "{{$pay->amount}}" };
+                   data += 1; 
+                  @endif
+                 @endif
+                @endforeach
+               @endif
+              @endforeach
+              @endif
+             @endforeach
+            @endforeach
+
+            $('#BOP_check option:gt(0)').remove();
+            $.each(newOptions, function(key,value) {
+              if(value)
+              {
+                var option = '<option value="'+value.check_num+'" data-amount="'+value.amount+'">BOP'+pad(value.check_num, 4)+'</option>';
+                $('#BOP_check:last').append(option);
+              }
+            });
+            $("#BOP_check").prop("selectedIndex", -1);
+            $('#BOP_check').selectpicker('refresh');
+            $('#BOP_check').val("");
+
+            newOptions = [];
+            data = 0;
+            $('#checks tbody tr').remove();
+
+            @foreach($voucher as $vouch)
+             @foreach($ptail as $dtail)
+              @if($vouch->pay_ID == $dtail->payment_ID)
+              @foreach($insacc as $acc)
+               @if($dtail->account_ID == $acc->account_ID)
+                @foreach($payments as $pay)
+                 @if($vouch->cv_ID == $pay->check_voucher)
+                 if('{{$acc->policy_number}}' == $('#policy_number_check option:selected').val())
+                 newOptions[data] = { checknum : "{{ $pay->payment_ID }}", due_date : "{{\Carbon\Carbon::parse($pay->due_date)->format('Y-m-d')}}", amount : "{{$pay->amount}}", status : "{{$pay->status}}" };
+                 data += 1;
+                 @endif
+                @endforeach
+               @endif
+              @endforeach
+              @endif
+             @endforeach
+            @endforeach
+
+            $.each(newOptions, function(key,value) {
+              if(value)
+              {
+              if(value.status == 0)
+              var option = '<tr><td>BOP'+pad(value.checknum, 4)+'</td><td>'+bank+'</td><td>'+formatDate2(value.due_date)+'</td><td>₱'+numberWithCommas(Math.round(value.amount * 100) / 100)+'</td><td><span class="label bg-green">paid</span></td></tr>';
+              if(value.status == 1)
+              var option = '<tr><td>BOP'+pad(value.checknum, 4)+'</td><td>'+bank+'</td><td>'+formatDate2(value.due_date)+'</td><td>₱'+numberWithCommas(Math.round(value.amount * 100) / 100)+'</td><td><span class="label bg-blue">to be paid</span></td></tr>';
+              if(value.status == 3)
+              var option = '<tr><td>BOP'+pad(value.checknum, 4)+'</td><td>'+bank+'</td><td>'+formatDate2(value.due_date)+'</td><td>₱'+numberWithCommas(Math.round(value.amount * 100) / 100)+'</td><td><span class="label bg-orange">late</span></tr>';
+              if(value.status == 4)
+                var option = '<tr><td>BOP'+pad(value.checknum, 4)+'</td><td>'+bank+'</td><td>'+formatDate2(value.due_date)+'</td><td>₱'+numberWithCommas(Math.round(value.amount * 100) / 100)+'</td><td><span class="label bg-red">lapsed</span></tr>';
+              $('#checks tbody').append(option);
+              }
+            });
+        });
+
+
+        $('#BOP_check').on('change', function(){
+          var amount = parseFloat(Math.round($('#BOP_check option:selected').data('amount') * 100)/100);
+          $('#amount').val(amount);
+          console.log($('#amount').val());
+        });
+
+        $('#amount_check').on('change textInput input', function(){
+          var amount_due = $('#amount').val().replace(/[^0-9\.]/g,'');
+          var amount_paid = $(this).val()
+          var change = amount_paid - amount_due;
+          if(change >= 0)
+          {
+            $("#amount_check").parent().next(".validation").remove();
+            $('#update2').attr('disabled', false);
+          }
+          else
+          {
+            $("#amount_check").parent().next(".validation").remove();
+            $("#amount_check").parent().after("<div class='validation' style='color:red;margin-bottom: 20px;'>Amount must be Exact or greater</div>");
+            $('#update2').attr('disabled', true);
+          }
+        });
+
+        $('.generate').on('click', function(){
+          $('#ID').val($(this).data('id'));
+          $('#gen').submit();
+        }); 
     </script>
 @endsection

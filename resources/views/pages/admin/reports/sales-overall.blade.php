@@ -6,8 +6,6 @@
 
 @section('reportSales','active')
 
-@section('salesOverall','active')
-
 @section('body')
 	<script>
         function numberWithCommas(x) {
@@ -70,6 +68,16 @@
                         <li role="presentation" class="col-md-4 active"><a href="#graphical" data-toggle="tab" style="text-align: center; font-size: 20px">GRAPHICAL</a></li>
                         <li role="presentation" class="col-md-4"><a href="#pdf" data-toggle="tab" style="text-align: center; font-size: 20px">GENERATE PDF</a></li>
                     </ul>
+
+                    <form id = "gen_pdf" action = "/pdf/reports/sales/by/payment" method = "GET" style = "display: none;">
+                          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                          <div class="col-md-4" style = "display: none;">
+                             <input id = "date_end" name = "date_end" type="text" class="form-control">
+                         </div>
+                          <div class="col-md-4" style = "display: none;">
+                             <input id = "date_start" name = "date_start" type="text" class="form-control">
+                         </div>
+                    </form>
 
                     <!-- Tab panes -->
                     <div class="tab-content">
@@ -138,27 +146,26 @@
                                 <div class="body">
                                 	<div id="ch_daily">
                                 		<div class="row clearfix" style="text-align: center;">
-                                			<div class="col-md-4">
-                                				<label>Year</label>
-				                                    <select id = "daily_year" name = "daily_year" class="form-control show-tick" data-live-search="true" required>
-				                                        <option value="2017">2017</option>
-				                                    </select>
-                                			</div>
-                                			<div class="col-md-4">
-                                				<label>Month</label>
-				                                    <select id = "daily_monthy" name = "daily_monthy" class="form-control show-tick" data-live-search="true" required>
-				                                        <option value="January">January</option>
-				                                    </select>
-                                			</div>
-                                			<div class="col-md-4">
-                                				<label>Week</label>
-				                                    <select id = "daily_week" name = "daily_week" class="form-control show-tick" data-live-search="true" required>
-				                                        <option value="1">Week1</option>
-				                                    </select>
-                                			</div>
-                                		</div>
+	                                		<div class="col-md-2"></div>
+	                                		<div class="col-md-3">
+			                                    <div class="form-group form-float">
+		                                            <div class="form-line">
+		                                                <input id = "ch_d_startdate" name = "ch_d_startdate" type="date" class="form-control">
+		                                            </div>
+		                                        </div>
+	                            			</div>
+	                            			<div class="col-md-1"><b>to</b></div>
+	                            			<div class="col-md-3">
+	                            				<div class="form-group form-float">
+		                                            <div class="form-line">
+		                                                <input id = "ch_d_enddate" name = "ch_d_enddate" type="date" class="form-control">
+		                                            </div>
+		                                        </div>
+	                            			</div>
+	                            			<div class="col-md-2"></div>
+	                                	</div>
                                 		<div class="body table-responsive">
-				                            <table id="ex" class="table table-bordered table-striped table-hover js-basic-example dataTable">
+				                            <table id="tb_daily" class="table table-bordered table-striped table-hover js-basic-example dataTable">
 				                                <thead>
 				                                    <tr class="bg-teal">
 				                                        <th>Day</th>
@@ -166,34 +173,12 @@
 				                                    </tr>
 				                                </thead>
 				                                <tbody>
-				                                	<tr>
-				                                		<td><b>Total Amount</b></td>
-					                                	<td><b>Php10,248.93</b></td>
-				                                	</tr>
-				                                	<tr>
-				                                		<td>Monday<br/>07/10/18</td>
-				                                		<td>Php10,248.93</td>
-				                                	</tr>
 				                             	</tbody>
 				                            </table>
 				                        </div>
                                 	</div>
 
                                 	<div id="ch_weekly">
-                                		<div class="row clearfix" style="text-align: center;">
-                                			<div class="col-md-6">
-                                				<label>Year</label>
-				                                    <select id = "weekly_year" name = "weekly_year" class="form-control show-tick" data-live-search="true" required>
-				                                        <option value="2017">2017</option>
-				                                    </select>
-                                			</div>
-                                			<div class="col-md-6">
-                                				<label>Month</label>
-				                                    <select id = "weekly_monthy" name = "weekly_monthy" class="form-control show-tick" data-live-search="true" required>
-				                                        <option value="January">January</option>
-				                                    </select>
-                                			</div>
-                                		</div>
                                 		<div class="body table-responsive">
 				                            <table id="ex" class="table table-bordered table-striped table-hover js-basic-example dataTable">
 				                                <thead>
@@ -203,30 +188,30 @@
 				                                    </tr>
 				                                </thead>
 				                                <tbody>
+				                                	@foreach($pay as $list)
 				                                	<tr>
-				                                		<td><b>Total Amount</b></td>
-					                                	<td><b>Php10,248.93</b></td>
+				                                		<td>{{ $list->Week }}</td>
+				                                		<td><b>
+				                                			<script>
+				                                            	var data = numberWithCommas({{ $list->Amount }}); document.write("₱" + data);
+				                                            </script>
+				                                        </b></td>
 				                                	</tr>
-				                                	<tr>
-				                                		<td>Week 1<br/>07/10/18 to 07/17/18</td>
-				                                		<td>Php10,248.93</td>
-				                                	</tr>
+												    @endforeach
 				                             	</tbody>
 				                            </table>
+				                            <br/>
+					                            <div style = "display:none;">
+									                {{$total = 0}}
+					                                @foreach($pay as $list)
+											          	{{$total = $total + $list->Amount}}
+					                                @endforeach
+					                            </div>
+			                                	<h3 style="text-align: center;"><b>Total Amount: ₱ <?php echo number_format($total, 2, '.', ','); ?></b></h3>
 				                        </div>
                                 	</div>
 
                                 	<div id="ch_monthly">
-                                		<div class="row clearfix" style="text-align: center;">
-                                			<div class="col-md-4"></div>
-                                			<div class="col-md-4">
-                                				<label>Year</label>
-				                                    <select id = "monthly_year" name = "monthly_year" class="form-control show-tick" data-live-search="true" required>
-				                                        <option value="2017">2017</option>
-				                                    </select>
-                                			</div>
-                                			<div class="col-md-4"></div>
-                                		</div>
                                 		<div class="body table-responsive">
 				                            <table id="ex" class="table table-bordered table-striped table-hover js-basic-example dataTable">
 				                                <thead>
@@ -236,30 +221,30 @@
 				                                    </tr>
 				                                </thead>
 				                                <tbody>
+				                                	@foreach($month as $list)
 				                                	<tr>
-				                                		<td><b>Total Amount</b></td>
-					                                	<td><b>Php10,248.93</b></td>
+				                                		<td>{{ $list->Month }}</td>
+				                                		<td><b>
+				                                			<script>
+				                                            	var data = numberWithCommas({{ $list->Amount }}); document.write("₱" + data);
+				                                            </script>
+				                                        </b></td>
 				                                	</tr>
-				                                	<tr>
-				                                		<td>January<br/>01/01/18 to 01/31/18</td>
-				                                		<td>Php10,248.93</td>
-				                                	</tr>
+												    @endforeach
 				                             	</tbody>
 				                            </table>
+				                            <br/>
+					                            <div style = "display:none;">
+									                {{$total = 0}}
+					                                @foreach($month as $list)
+											                  {{$total = $total + $list->Amount}}
+					                                @endforeach
+					                            </div>
+			                                	<h3 style="text-align: center;"><b>Total Amount: ₱ <?php echo number_format($total, 2, '.', ','); ?></b></h3>
 				                        </div>
                                 	</div>
 
                                 	<div id="ch_quarterly">
-                                		<div class="row clearfix" style="text-align: center;">
-                                			<div class="col-md-4"></div>
-                                			<div class="col-md-4">
-                                				<label>Year</label>
-				                                    <select id = "quarterly_year" name = "quarterly_year" class="form-control show-tick" data-live-search="true" required>
-				                                        <option value="2017">2017</option>
-				                                    </select>
-                                			</div>
-                                			<div class="col-md-4"></div>
-                                		</div>
                                 		<div class="body table-responsive">
 				                            <table id="ex" class="table table-bordered table-striped table-hover js-basic-example dataTable">
 				                                <thead>
@@ -269,16 +254,25 @@
 				                                    </tr>
 				                                </thead>
 				                                <tbody>
+				                                	@foreach($quar as $list)
 				                                	<tr>
-				                                		<td><b>Total Amount</b></td>
-					                                	<td><b>Php10,248.93</b></td>
+				                                		<td>{{ $list->Quarter }}</td>
+					                                	<td><b>
+					                                		<script>
+				                                            	var data = numberWithCommas({{ $list->Amount }}); document.write("₱" + data);
+				                                            </script>
+					                                	</b></td>
 				                                	</tr>
-				                                	<tr>
-				                                		<td>1st Quarter<br/>January to April</td>
-				                                		<td>Php10,248.93</td>
-				                                	</tr>
+				                                	@endforeach
 				                             	</tbody>
-				                            </table>
+				                            </table><br/>
+					                            <div style = "display:none;">
+									                {{$total = 0}}
+					                                @foreach($quar as $list)
+											                  {{$total = $total + $list->Amount}}
+					                                @endforeach
+					                            </div>
+			                                	<h3 style="text-align: center;"><b>Total Amount: ₱ <?php echo number_format($total, 2, '.', ','); ?></b></h3>
 				                        </div>
                                 	</div>
 
@@ -293,16 +287,25 @@
 					                                    </tr>
 					                                </thead>
 					                                <tbody>
+					                                	@foreach($year as $list)
 					                                	<tr>
-					                                		<td><b>Total Amount</b></td>
-					                                		<td><b>Php10,248.93</b></td>
+					                                		<td>{{ $list->Year }}</td>
+					                                		<td><b>
+					                                			<script>
+					                                            	var data = numberWithCommas({{ $list->Amount }}); document.write("₱" + data);
+					                                            </script>
+					                                		</b></td>
 					                                	</tr>
-					                                	<tr>
-					                                		<td>2017</td>
-					                                		<td>Php10,248.93</td>
-					                                	</tr>
+					                                	@endforeach
 					                             	</tbody>
-					                            </table>
+					                            </table><br/>
+					                            <div style = "display:none;">
+									                {{$total = 0}}
+					                                @foreach($year as $list)
+											            {{$total = $total + $list->Amount}}
+					                                @endforeach
+					                            </div>
+			                                	<h3 style="text-align: center;"><b>Total Amount: ₱ <?php echo number_format($total, 2, '.', ','); ?></b></h3>
 					                        </div>
                                 		</div>
                                 	</div>
@@ -388,20 +391,6 @@
 					                                            </script>
 					                                        </td>
 					                                        <td> {{ \Carbon\Carbon::parse($list->paid_date)->format("M-d-Y") }} {{ "(".\Carbon\Carbon::parse($list->paid_date)->format("l, h:i:s A").")" }}</td>
-					                                	<!-- <tr>
-					                                		<td></td>
-					                                		<td></td>
-					                                		<td></td>
-					                                		<td><b>Total Amount</b></td>
-					                                		<td><b>Php10,248.93</b></td>
-					                                	</tr>
-					                                	<tr>
-					                                		<td>BOP0001</td>
-					                                		<td>ABC-123</td>
-					                                		<td>Rola, Ma. Gabriella</td>
-					                                		<td>Php10,000</td>
-					                                		<td>July 10, 2017</td>
-					                                	</tr> -->
 					                                	</tr>
 					                                	@endif
 					                                	@endif
@@ -413,7 +402,9 @@
 									                {{$total = 0}}
 					                                @foreach($plist as $list)
 					                                    @if($list->status != 1)
+					                                    @if($list->status != 4)
 											                  {{$total = $total + $list->amount}}
+					                                	@endif
 					                                	@endif
 					                                @endforeach
 					                            </div>
@@ -475,68 +466,34 @@
                                 <div class="body">
                                 	<div id="ch_daily1">
                                 		<div class="row clearfix" style="text-align: center;">
+                                			<div class="col-md-2"></div>
                                 			<div class="col-md-4">
-                                				<label>Year</label>
-				                                    <select id = "daily_year" name = "daily_year" class="form-control show-tick" data-live-search="true" required>
-				                                        <option value="2017">2017</option>
-				                                    </select>
+                                				<div class="form-group form-float">
+			                                        <div class="form-line">
+			                                        <label><small>Start Date:</small></label>
+			                                            <input id = "daily_start" name = "daily_start" type="date" class="form-control" required>
+			                                        </div>
+			                                    </div>
                                 			</div>
                                 			<div class="col-md-4">
-                                				<label>Month</label>
-				                                    <select id = "daily_monthy" name = "daily_monthy" class="form-control show-tick" data-live-search="true" required>
-				                                        <option value="January">January</option>
-				                                    </select>
+                                				<div class="form-group form-float">
+			                                        <div class="form-line">
+			                                        <label><small>End Date:</small></label>
+			                                            <input id = "daily_end" name = "daily_end" type="date" class="form-control" required>
+			                                        </div>
+			                                    </div>
                                 			</div>
-                                			<div class="col-md-4">
-                                				<label>Week</label>
-				                                    <select id = "daily_week" name = "daily_week" class="form-control show-tick" data-live-search="true" required>
-				                                        <option value="1">Week1</option>
-				                                    </select>
-                                			</div>
+                                			<div class="col-md-2"></div>
                                 		</div>
                                 		<canvas id="line_chart" height="150"></canvas>
                                 	</div>
                                 	<div id="ch_weekly1">
-                                		<div class="row clearfix" style="text-align: center;">
-                                			<div class="col-md-6">
-                                				<label>Year</label>
-				                                    <select id = "weekly_year" name = "weekly_year" class="form-control show-tick" data-live-search="true" required>
-				                                        <option value="2017">2017</option>
-				                                    </select>
-                                			</div>
-                                			<div class="col-md-6">
-                                				<label>Month</label>
-				                                    <select id = "weekly_monthy" name = "weekly_monthy" class="form-control show-tick" data-live-search="true" required>
-				                                        <option value="January">January</option>
-				                                    </select>
-                                			</div>
-                                		</div>
                                 		<canvas id="line_chart1" height="150"></canvas>
                                 	</div>
                                 	<div id="ch_monthly1">
-                                		<div class="row clearfix" style="text-align: center;">
-                                			<div class="col-md-4"></div>
-                                			<div class="col-md-4">
-                                				<label>Year</label>
-				                                    <select id = "monthly_year" name = "monthly_year" class="form-control show-tick" data-live-search="true" required>
-				                                        <option value="2017">2017</option>
-				                                    </select>
-                                			</div>
-                                			<div class="col-md-4"></div>
-                                		</div>
                                 		<canvas id="line_chart2" height="150"></canvas>
                                 	</div>
                                 	<div id="ch_quarterly1">
-                                		<div class="row clearfix" style="text-align: center;">
-                                			<div class="col-md-4"></div>
-                                			<div class="col-md-4">
-                                				<label>Year</label>
-				                                    <select id = "quarterly_year" name = "quarterly_year" class="form-control show-tick" data-live-search="true" required>
-				                                        <option value="2017">2017</option>
-				                                    </select>
-                                			</div>
-                                			<div class="col-md-4"></div>
-                                		</div>
                                 		<canvas id="line_chart3" height="150"></canvas>
                                 	</div>
                                 	<div id="ch_annually1">
@@ -554,24 +511,10 @@
                                 <div class="body">
                                 	<div class="row clearfix" style="text-align: center;">
                                 		<div class="col-md-2"></div>
-                                		<div class="col-md-8">
-		                                    <select id = "monthly_year" name = "monthly_year" class="form-control show-tick" data-live-search="true" required>
-		                                        <option value="2017">Annually</option>
-		                                        <option value="2017">Quarterly</option>
-		                                        <option value="2017">Monthly</option>
-		                                        <option value="2017">Weekly</option>
-		                                        <option value="2017">Daily</option>
-		                                    </select>
-                            			</div>
-                            			<div class="col-md-2"></div>
-                                	</div>
-
-                                	<div class="row clearfix" style="text-align: center;">
-                                		<div class="col-md-2"></div>
                                 		<div class="col-md-3">
 		                                    <div class="form-group form-float">
 	                                            <div class="form-line">
-	                                                <input id = "frm" name = "frmy" type="date" class="form-control">
+	                                                <input id = "startdate" name = "startdate" type="date" class="form-control">
 	                                            </div>
 	                                        </div>
                             			</div>
@@ -579,7 +522,7 @@
                             			<div class="col-md-3">
                             				<div class="form-group form-float">
 	                                            <div class="form-line">
-	                                                <input id = "frm" name = "frmy" type="date" class="form-control">
+	                                                <input id = "enddate" name = "enddate" type="date" class="form-control">
 	                                            </div>
 	                                        </div>
                             			</div>
@@ -589,7 +532,7 @@
                                 	<div class="row clearfix" style="text-align: center;">
                                 		<div class="col-md-2"></div>
                                 		<div class="col-md-8">
-		                                    <button type="button" id="geh"  class="btn btn-block bg-orange waves-effect">GENERATE PDF</button>
+		                                    <button form="gen_pdf" type="submit" id="gen" name="gen"  class="btn btn-block bg-orange waves-effect"  onclick="$('#date_start').val($('#startdate').val()); $('#date_end').val($('#enddate').val());">GENERATE PDF</button>
                             			</div>
                             			<div class="col-md-2"></div>
                                 	</div>
@@ -604,8 +547,6 @@
 
     <!-- Chart Plugins Js -->
     <script src="{{ URL::asset ('plugins/chartjs/Chart.bundle.js')}}"></script>
-    
-    <script src="{{ URL::asset ('js/pages/charts/chartjs.js')}}"></script>
 
     <script type="text/javascript">
     	window.onload = function (){
@@ -622,5 +563,234 @@
     		document.getElementById('ch_annually').style.display = 'none';
     		document.getElementById('ch_transac').style.display = 'none';
     	};
+    </script>
+
+    <script>
+    	$(function () {
+		    new Chart(document.getElementById("line_chart").getContext("2d"), getChartJs('line'));
+		    new Chart(document.getElementById("line_chart1").getContext("2d"), getChartJs('line1'));
+		    new Chart(document.getElementById("line_chart2").getContext("2d"), getChartJs('line2'));
+		    new Chart(document.getElementById("line_chart3").getContext("2d"), getChartJs('line3'));
+		    new Chart(document.getElementById("line_chart4").getContext("2d"), getChartJs('line4'));
+		});
+
+		$('#daily_start').on('change', function(){
+			new Chart(document.getElementById("line_chart").getContext("2d"), getChartJs('line'));
+		});
+
+		$('#daily_end').on('change', function(){
+			new Chart(document.getElementById("line_chart").getContext("2d"), getChartJs('line'));
+		});
+
+		$('#ch_d_startdate').on('change', function(){
+			$("#tb_daily td").parent().remove();
+			var st = '';
+			var en = '';
+			st = $('#ch_d_startdate').val();
+			en = $('#ch_d_enddate').val();
+			var total = 0;
+			var additional = '';
+			@foreach($plist as $list)
+		    	if('{{$list->paid_date}}' >= st && '{{$list->paid_date}}' <= en)
+		    	{
+		    		@if($list->status == 0 || $list->status == 3)
+		    			var data = numberWithCommas({{ $list->amount }});
+				    	var option = '<tr><td>{{ \Carbon\Carbon::parse($list->paid_date)->format("M-d-Y") }} {{ "(".\Carbon\Carbon::parse($list->paid_date)->format("l, h:i:s A").")" }}</td><td><b>₱' + data + '</b></td></tr>'
+				    	$('#tb_daily tbody').append(option);
+
+				    	total += {{ $list->amount }}
+			    	@endif
+		    	}
+		    @endforeach
+		    var additional = '<tr><td>Total Amount: </td><td><b>₱' + total + '</b></td></tr>'
+		    $('#tb_daily tbody').append(additional);
+		});
+
+		$('#ch_d_enddate').on('change', function(){
+			$("#tb_daily td").parent().remove();
+			var st = '';
+			var en = '';
+			st = $('#ch_d_startdate').val();
+			en = $('#ch_d_enddate').val();
+			var total = 0;
+			var additional = '';
+			@foreach($plist as $list)
+		    	if('{{$list->paid_date}}' >= st && '{{$list->paid_date}}' <= en)
+		    	{
+		    		@if($list->status == 0 || $list->status == 3)
+		    			var data = numberWithCommas({{ $list->amount }});
+				    	var option = '<tr><td>{{ \Carbon\Carbon::parse($list->paid_date)->format("M-d-Y") }} {{ "(".\Carbon\Carbon::parse($list->paid_date)->format("l, h:i:s A").")" }}</td><td><b>₱' + data + '</b></td></tr>'
+				    	$('#tb_daily tbody').append(option);
+
+				    	total += {{ $list->amount }}
+			    	@endif
+		    	}
+		    @endforeach
+		    var data2 = numberWithCommas(total);
+		    var additional = '<tr><td>Total Amount: </td><td><b>₱' + data2 + '</b></td></tr>'
+		    $('#tb_daily tbody').append(additional);
+		});
+
+		function getChartJs(type) {
+
+			var config = null;
+			var st = '';
+			var en = '';
+
+		    if (type === 'line') {
+		    	var a = 0;
+			    var i = 0;
+			   	st = $('#daily_start').val();
+			    en = $('#daily_end').val();
+			    var labels = [],data=[];
+			    @foreach($plist as $list1)
+			    	if('{{$list1->paid_date}}' >= st && '{{$list1->paid_date}}' <= en)
+			    	{
+			    		@if($list1->status == 0 || $list1->status == 3)
+					    	labels[a] = "{{ $list1->paid_date }}"
+					    	data[a] = "{{ $list1->amount }}"
+					    	a += 1;
+				    	@endif
+			    	}
+			    @endforeach
+		        config = {
+		            type: 'line',
+		            data: {
+		                labels: labels,
+		                datasets: [{
+		                    label: "Amount",
+		                    data: data,
+		                    borderColor: 'rgba(13, 71, 161, 0.75)',
+		                    backgroundColor: 'rgba(68, 138, 255, 0.3)',
+		                    pointBorderColor: 'rgba(13, 71, 161, 0)',
+		                    pointBackgroundColor: 'rgba(13, 71, 161, 0.9)',
+		                    pointBorderWidth: 2
+		                }]
+		            },
+		            options: {
+		                responsive: true,
+		                legend: false
+		            }
+		        }
+		    }
+		    if (type === 'line1') {
+		    	var a = 0;
+			    var i = 0;
+			    var labels = [],data=[];
+			    @foreach($pay as $list2)
+			    	labels[a] = "{{ $list2->Week }}"
+			    	data[a] = "{{ $list2->Amount }}"
+			    	a += 1;
+			    @endforeach
+
+		        config = {
+		            type: 'line',
+		            data: {
+		                labels: labels,
+		                datasets: [{
+		                    label: "Amount",
+	                        data: data,
+	                        borderColor: 'rgba(239, 83, 80, 0.75)',
+	                        backgroundColor: 'rgba(255, 138, 128, 0.3)',
+	                        pointBorderColor: 'rgba(239, 83, 80, 0)',
+	                        pointBackgroundColor: 'rgba(239, 83, 80, 0.9)',
+	                        pointBorderWidth: 2
+		                }]
+		            },
+		            options: {
+		                responsive: true,
+		                legend: false
+		            }
+		        }
+		    }
+		    if (type === 'line2') {
+		    	var a = 0;
+			    var i = 0;
+			    var labels = [],data=[];
+			    @foreach($month as $list3)
+			    	labels[a] = "{{ $list3->Month }}"
+			    	data[a] = "{{ $list3->Amount }}"
+			    	a += 1;
+			    @endforeach
+		        config = {
+		            type: 'line',
+		            data: {
+		                labels: labels,
+		                datasets: [{
+		                    label: "Amount",
+		                    data: data,
+		                    borderColor: 'rgba(13, 71, 161, 0.75)',
+		                    backgroundColor: 'rgba(68, 138, 255, 0.3)',
+		                    pointBorderColor: 'rgba(13, 71, 161, 0)',
+		                    pointBackgroundColor: 'rgba(13, 71, 161, 0.9)',
+		                    pointBorderWidth: 2
+		                }]
+		            },
+		            options: {
+		                responsive: true,
+		                legend: false
+		            }
+		        }
+		    }
+		    if (type === 'line3') {
+		    	var a = 0;
+			    var i = 0;
+			    var labels = [],data=[];
+			    @foreach($quar as $list4)
+			    	labels[a] = "{{ $list4->Quarter }}"
+			    	data[a] = "{{ $list4->Amount }}"
+			    	a += 1;
+			    @endforeach
+		        config = {
+		            type: 'line',
+		            data: {
+		                labels: labels,
+		                datasets: [{
+		                    label: "Amount",
+		                    data: data,
+		                    borderColor: 'rgba(239, 83, 80, 0.75)',
+	                        backgroundColor: 'rgba(255, 138, 128, 0.3)',
+	                        pointBorderColor: 'rgba(239, 83, 80, 0)',
+	                        pointBackgroundColor: 'rgba(239, 83, 80, 0.9)',
+		                    pointBorderWidth: 2
+		                }]
+		            },
+		            options: {
+		                responsive: true,
+		                legend: false
+		            }
+		        }
+		    }
+		    if (type === 'line4') {
+		    	var a = 0;
+			    var i = 0;
+			    var labels = [],data=[];
+			    @foreach($year as $list5)
+			    	labels[a] = "{{ $list5->Year }}"
+			    	data[a] = "{{ $list5->Amount }}"
+			    	a += 1;
+			    @endforeach
+		        config = {
+		            type: 'line',
+		            data: {
+		                labels: labels,
+		                datasets: [{
+		                    label: "Amount",
+		                    data: data,
+		                    borderColor: 'rgba(13, 71, 161, 0.75)',
+		                    backgroundColor: 'rgba(68, 138, 255, 0.3)',
+		                    pointBorderColor: 'rgba(13, 71, 161, 0)',
+		                    pointBackgroundColor: 'rgba(13, 71, 161, 0.9)',
+		                    pointBorderWidth: 2
+		                }]
+		            },
+		            options: {
+		                responsive: true,
+		                legend: false
+		            }
+		        }
+		    }
+		    return config;
+		}
     </script>
 @endsection

@@ -565,7 +565,7 @@ CREATE TABLE tbl_transmittal_request
 	account_ID INT NOT NULL,
 	date_recieved DATETIME NOT NULL,
 	date_update DATETIME,
-	status INT NOT NULL,
+	status INT NOT NULL, -- 0 - New, 1 - Accepted ng manager TO DO, 2 - Declined, 3 - Processing, 4 - On Hold, 5 - Sent, 6 - Sent to manager, 7 - Cancelled
 	FOREIGN KEY (account_ID) REFERENCES tbl_client_account(account_ID),
 );
 
@@ -672,19 +672,19 @@ CREATE TABLE tbl_transmit_claim
 CREATE TABLE tbl_complaint_sents
 (
 	complaint_ID INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-	account_ID INT NOT NULL,
+	account_ID INT,
 	insurance_company INT NOT NULL,
 	policy_number VARCHAR(20) NOT NULL,
 	name VARCHAR(50) NOT NULL,
 	cp_1 VARCHAR(15) NOT NULL,
 	cp_2 VARCHAR(15),	
-	tp_num VARCHAR(15) NOT NULL,
+	tp_num VARCHAR(15),
 	email VARCHAR(50) NOT NULL,
 	address VARCHAR(100) NOT NULL,
 	complaintType_name varchar(20) NOT NULL,
 	complaintType_desc varchar(50),
 	complaint varchar(500),
-	status INT NOT NULL,
+	status INT NOT NULL, -- 0 - New, 1 - process/action ongoing, 2 - settled, 3 - unsettled/rejected
 	date_sent DATETIME NOT NULL,
 	date_updated DATETIME,
 	FOREIGN KEY (insurance_company) REFERENCES tbl_company_info(comp_ID),
@@ -696,7 +696,7 @@ CREATE TABLE tbl_complaint_action
 	comp_action_ID INT IDENTITY(1,1) NOT NULL,
 	complaint_ID INT NOT NULL,
 	emp_ID INT NOT NULL,
-	status INT NOT NULL,
+	status INT NOT NULL, -- 0 high, 1 medium, 2 low
 	FOREIGN KEY (complaint_ID) REFERENCES tbl_complaint_sents(complaint_ID),
 	FOREIGN KEY (emp_ID) REFERENCES tbl_employee(emp_ID),
 );
@@ -712,6 +712,16 @@ CREATE TABLE tbl_ledger
 	created_at datetime not null,
 	FOREIGN KEY (account_ID) REFERENCES tbl_insurance_account(account_ID),
 	FOREIGN KEY (payment_ID) REFERENCES tbl_payment_details(payment_ID),
+);
+
+CREATE TABLE tbl_payment_check
+(
+	check_ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	bank_ID INT NOT NULL,
+	check_number VARCHAR(100) NOT NULL UNIQUE,
+	payment_ID INT NOT NULL,
+	FOREIGN KEY (bank_ID) REFERENCES tbl_bank_info(bank_ID),
+	FOREIGN KEY (payment_ID) REFERENCES tbl_payments(payment_ID)
 );
 
 --SELECT * FROM tbl_complaint_sents;

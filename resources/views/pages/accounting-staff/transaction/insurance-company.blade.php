@@ -96,6 +96,7 @@
                               <input type="hidden" name="_token" value="{{ csrf_token() }}">
                               <div class="col-md-4" style = "display: none;">
                                  <input id = "id" name = "id" type="text" class="form-control">
+                                 <input id = "datengayon" name = "datengayon" type="datetime" class="form-control" >
                              </div>
                               <div class="col-md-4" style = "display: none;">
                                  <input id = "acc_id" name = "acc_id" type="text" class="form-control">
@@ -103,7 +104,6 @@
                               <div class="col-md-4" style = "display: none;">
                                  <input id = "pay_id" name = "pay_id" type="text" class="form-control">
                              </div>
-                             <input id = "datengayon" name = "datengayon" type="datetime" class="form-control" >
                         </form>
                         <div class="divider" style="margin-bottom:20px;"></div>
                         </div>
@@ -174,14 +174,10 @@
                                             <td>
                                               @foreach($paydetails as $spay)
                                                @if($spay->account_ID == $iacc->account_ID)
-                                               <button form = "display" type="submit" type="button" class="btn bg-light-blue waves-effect" data-id = "{{ $ccompany->comp_ID }}" data-acc = "{{$iacc->account_ID}}" data-pay = "{{$pay->payment_ID}}" onclick="
+                                               <button form = "display" type="submit" type="button" class="btn bg-light-blue waves-effect" data-id = "{{ $ccompany->comp_ID }}" data-acc = "{{$iacc->account_ID}}" data-pay = "{{ $spay->payment_ID }}" onclick="
                                                 $('#id').val($(this).data('id')); $('#acc_id').val($(this).data('acc')); $('#pay_id').val($(this).data('pay'));" data-toggle="tooltip" data-placement="left" title="View account details."><i class="material-icons">remove_red_eye</i>
                                                </button>
                                                @endif
-                                               @if((strtotime('today') > strtotime("+1 year", strtotime("+7 day",strtotime($iacc->inception_date)))) && (strtotime('today') < strtotime("+1 year", strtotime($iacc->inception_date)))) 
-                                               <button type="button" class="btn bg-orange waves-effect" onclick="window.document.location='{{ URL::asset('/accounting-staff/transaction/insurance-renew-company') }}';" data-toggle="tooltip" data-placement="left" title="Renew account."><i class="material-icons">refresh</i>
-                                                    </button>
-                                              @endif
                                               @endforeach
                                             </td>              
                                             <!-- <span class="label bg-red">expiring</span> -->
@@ -359,5 +355,4 @@
       };
 
     </script>
-
 @endsection

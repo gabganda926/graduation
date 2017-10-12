@@ -2,9 +2,9 @@
 
 @section('title','Complaint - Transaction| i-Insure')
 
-@section('transPayment','active')
+@section('trans','active')
 
-@section('transNewPayment','active')
+@section('transComplaint','active')
 
 @section('body')
 
@@ -57,9 +57,9 @@
                     </ol>
                 </div>
             </div>
-            <div class="row clearfix">
             <form id="add" name = "add" action = "complaint-new/action" method="POST">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <div class="row clearfix">
                 <!-- PAYMENT DETAILS -->
                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                     <div class="card">
@@ -385,8 +385,8 @@
                     
                 </div> <!-- END OF COL XS -->
             </div> <!-- END OF ROW -->
+        </form>
         </div>
-    </form>
     </section>
 
     <script type="text/javascript">

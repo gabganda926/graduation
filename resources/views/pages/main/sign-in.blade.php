@@ -32,7 +32,7 @@
 <body class="login-page bg-teal">
     <div class="login-box">
         <div class="logo">
-            <a href="javascript:void(0);"><b>Compreline|</b>Insurace</a>
+            <a href="javascript:void(0);"><b>Compreline|</b>Insurance</a>
             <small>Philippines</small>
         </div>
         <div class="card">

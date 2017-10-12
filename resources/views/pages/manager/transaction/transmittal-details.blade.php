@@ -87,7 +87,7 @@
                                                             <div class="form-group form-float">
                                                                 <div class="form-line">
                                                                     <label><small>Name:</small></label>
-                                                                    <input id = "aadd_blcknum" name = "aadd_blcknum" type="text" class="form-control" readonly="true">
+                                                                    <input id = "aadd_blcknum" name = "aadd_blcknum" type="text" class="form-control" readonly="true" value="{{ $details->name }}">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -97,7 +97,7 @@
                                                             <div class="form-group form-float">
                                                                 <div class="form-line">
                                                                     <label><small>Contact Details:</small></label>
-                                                                    <input id = "aadd_blcknum" name = "aadd_blcknum" type="text" class="form-control" placeholder="Telephone" readonly="true">
+                                                                    <input id = "aadd_blcknum" name = "aadd_blcknum" type="text" class="form-control" placeholder="Telephone" readonly="true" value="{{ $details->tp_num }}">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -106,7 +106,7 @@
                                                             <div class="form-group form-float">
                                                                 <div class="form-line">
                                                                     <label><small>-</small></label>
-                                                                    <input id = "aadd_blcknum" name = "aadd_blcknum" type="text" class="form-control" placeholder="Cellphone Number" readonly="true">
+                                                                    <input id = "aadd_blcknum" name = "aadd_blcknum" type="text" class="form-control" placeholder="Cellphone Number" readonly="true" value="{{ $details->cp_1 }}">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -117,7 +117,7 @@
                                                             <div class="form-group form-float">
                                                                 <div class="form-line">
                                                                 <label><small>-</small></label>
-                                                                    <input id = "aadd_blcknum" name = "aadd_blcknum" type="text" class="form-control" placeholder="Cellphone Number (Alternate)" readonly="true">
+                                                                    <input id = "aadd_blcknum" name = "aadd_blcknum" type="text" class="form-control" placeholder="Cellphone Number (Alternate)" readonly="true" value="{{ $details->cp_2 }}">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -126,7 +126,7 @@
                                                             <div class="form-group form-float">
                                                                 <div class="form-line">
                                                                 <label><small>-</small></label>
-                                                                    <input id = "aadd_blcknum" name = "aadd_blcknum" type="email" class="form-control" placeholder="Email" readonly="true">
+                                                                    <input id = "aadd_blcknum" name = "aadd_blcknum" type="email" class="form-control" placeholder="Email" readonly="true" value="{{ $details->email }}">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -136,7 +136,7 @@
                                                             <div class="form-group form-float">
                                                                 <div class="form-line">
                                                                     <label><small>Address:</small></label>
-                                                                    <input id = "aadd_blcknum" name = "aadd_blcknum" type="text" class="form-control" readonly="true" value="ADDRESS NA NASA MAINTENANCE">
+                                                                    <input id = "aadd_blcknum" name = "aadd_blcknum" type="text" class="form-control" readonly="true" value="{{ $details->address }}">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -146,9 +146,7 @@
                                                             <div class="form-group form-float">
                                                                 <div class="form-line">
                                                                     <label><small>Policy Number:</small></label>
-                                                                    <select id = "vehicle_type" name = "vehicle_type" class="form-control show-tick" data-live-search="true" >
-                                                                              <option selected value = "" style = "display: none;">---</option>
-                                                                            </select>
+                                                                    <input id = "aadd_blcknum" name = "aadd_blcknum" type="text" class="form-control" readonly="true" value="{{ $details->policy_number }}">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -157,9 +155,7 @@
                                                             <div class="form-group form-float">
                                                                 <div class="form-line">
                                                                     <label><small>Insurance Company:</small></label>
-                                                                    <select id = "vehicle_type" name = "vehicle_type" class="form-control show-tick" data-live-search="true" >
-                                                                              <option selected value = "" style = "display: none;">---</option>
-                                                                            </select>
+                                                                    <input id = "aadd_blcknum" name = "aadd_blcknum" type="text" class="form-control" readonly="true" value="{{ $inscomp->comp_name }}">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -170,9 +166,9 @@
                                                                 <div class="form-line">
                                                                     <label><small>Documents to transmit:</small></label>
                                                                     <ul>
-                                                                        <li>DOCU 1</li>
-                                                                        <li>DOCU 2</li>
-                                                                        <li>DOCU 3</li>
+                                                                        @foreach($documents as $doc)
+                                                                            <li>{{ $doc->document }}</li>
+                                                                        @endforeach
                                                                     </ul>
                                                                 </div>
                                                             </div>

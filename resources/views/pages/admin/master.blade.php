@@ -424,11 +424,11 @@
                                 </a>
                             </li> -->
                             <li class = "@yield('reportSales')">
-                                <a href="javascript:void(0);" class="menu-toggle">
+                                <a href="/admin/reports/sales/overall">
                                     <i class="material-icons">multiline_chart</i>
-                                    <span>SALES</span>
+                                    <span>SALES REPORT</span>
                                 </a>
-                                <ul class="ml-menu">
+                                <!-- <ul class="ml-menu">
                                     <li class = "@yield('salesOverall')">
                                         <a href="/admin/reports/sales/overall">
                                             <span>Sales Report - By Collection of Payments</span></a>
@@ -448,7 +448,7 @@
                                         <a href="javascript:void(0);">
                                             <span>Sales Report - By Agency's Sales</span></a>
                                     </li>
-                                </ul>
+                                </ul> -->
                             </li>
                         </ul>
                     </li>
