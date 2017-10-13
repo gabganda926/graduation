@@ -238,6 +238,7 @@ CREATE TABLE tbl_vehicle_model
 	vehicle_year varchar(4) NOT NULL,
 	vehicle_type INT NOT NULL,
 	vehicle_value FLOAT NOT NULL,
+	vehicle_depreciation FLOAT NOT NULL,
 	vehicle_picture varchar(50),
 	del_flag int NOT NULL,
 	created_at datetime NOT NULL,
@@ -307,6 +308,8 @@ CREATE TABLE tbl_insurance_account
 	del_flag int NOT NULL,
 	created_at datetime NOT NULL,
 	updated_at datetime NOT NULL,
+	employee_info_ID INT NOT NULL,
+	FOREIGN KEY (employee_info_ID) REFERENCES tbl_personal_info(pinfo_ID),
 	FOREIGN KEY (client_ID) REFERENCES tbl_client_list(client_ID),
 	FOREIGN KEY (insurance_company) REFERENCES tbl_company_info(comp_ID),
 );
@@ -350,6 +353,8 @@ CREATE TABLE tbl_check_voucher
 (
 	cv_ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	pay_ID INT NOT NULL,
+	employee_info_ID INT NOT NULL,
+	FOREIGN KEY (employee_info_ID) REFERENCES tbl_personal_info(pinfo_ID),
 	FOREIGN KEY (pay_ID) REFERENCES tbl_payment_details(payment_ID),
 );
 
@@ -363,6 +368,8 @@ CREATE TABLE tbl_payments
 	paid_date datetime,
 	due_date DATETIME NOT NULL,
 	status INT NOT NULL, --0 paid, 1 to be paid, 3 late, 4 lapsed
+	employee_info_ID INT NOT NULL,
+	FOREIGN KEY (employee_info_ID) REFERENCES tbl_personal_info(pinfo_ID),
 	FOREIGN KEY (check_voucher) REFERENCES tbl_check_voucher(cv_ID),
 );
 
@@ -403,7 +410,9 @@ CREATE TABLE tbl_quotation
 	quote_status INT NOT NULL,
 	del_flag INT NOT NULL,
 	created_at datetime NOT NULL,
-	updated_at datetime NOT NULL
+	updated_at datetime NOT NULL,
+	employee_info_ID INT NOT NULL,
+	FOREIGN KEY (employee_info_ID) REFERENCES tbl_personal_info(pinfo_ID),
 );
 
 CREATE TABLE tbl_quote_individual
@@ -447,6 +456,8 @@ CREATE TABLE tbl_quote_individual
 	bodily_injury_ID INT NOT NULL,
 	property_damage_ID INT NOT NULL,
 	vehicle_class INT NOT NULL,
+	employee_info_ID INT NOT NULL,
+	FOREIGN KEY (employee_info_ID) REFERENCES tbl_personal_info(pinfo_ID),
 	FOREIGN KEY (quote_indi_ID) REFERENCES tbl_quotation(quote_ID),
 	FOREIGN KEY (sales_agent) REFERENCES tbl_salesagent (agent_ID),
 	FOREIGN KEY (personal_accident_ID) REFERENCES tbl_premium_pa(premiumPA_ID),
@@ -566,6 +577,8 @@ CREATE TABLE tbl_transmittal_request
 	date_recieved DATETIME NOT NULL,
 	date_update DATETIME,
 	status INT NOT NULL, -- 0 - New, 1 - Accepted ng manager TO DO, 2 - Declined, 3 - Processing, 4 - On Hold, 5 - Sent, 6 - Sent to manager, 7 - Cancelled
+	employee_info_ID INT NOT NULL,
+	FOREIGN KEY (employee_info_ID) REFERENCES tbl_personal_info(pinfo_ID),
 	FOREIGN KEY (account_ID) REFERENCES tbl_client_account(account_ID),
 );
 
@@ -634,6 +647,8 @@ CREATE TABLE tbl_claimRequest
 	del_flag INT NOT NULL,
 	created_at datetime NOT NULL,
 	updated_at datetime NOT NULL,
+	employee_info_ID INT NOT NULL,
+	FOREIGN KEY (employee_info_ID) REFERENCES tbl_personal_info(pinfo_ID),
 	FOREIGN KEY (claimType_ID) REFERENCES tbl_claim_types(claimType_ID),
 	FOREIGN KEY (account_ID) REFERENCES tbl_insurance_account(account_ID),
 	FOREIGN KEY (notifier_ID) REFERENCES tbl_claimNotifiedByRepresentative(notifier_ID),
@@ -723,6 +738,41 @@ CREATE TABLE tbl_payment_check
 	FOREIGN KEY (bank_ID) REFERENCES tbl_bank_info(bank_ID),
 	FOREIGN KEY (payment_ID) REFERENCES tbl_payments(payment_ID)
 );
+
+CREATE TABLE tbl_online_payments
+(
+	payment_ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	pay_ID INT NOT NULL,
+	amount_paid FLOAT NOT NULL,
+	deposit_file VARCHAR(50) NOT NULL,
+	deposit_date DATETIME NOT NULL,
+	remittance_date DATETIME NOT NULL,
+	FOREIGN KEY (pay_ID) REFERENCES tbl_payments(payment_ID),
+);
+
+CREATE TABLE tbl_util_computation
+(
+	comp_ID INT NOT NULL PRIMARY KEY, --1 FPG, 2 COMM, 3 STD, 4 PGI
+	deductible FLOAT,
+	towing FLOAT,
+	aon FLOAT,
+	FOREIGN KEY (comp_ID) REFERENCES tbl_company_info,
+);
+
+INSERT INTO tbl_util_computation(comp_ID, deductible, towing, aon) VALUES ('1', '3100', '100', '.02');
+INSERT INTO tbl_util_computation(comp_ID, deductible, towing, aon) VALUES ('2', '2000', '100', '.005');
+INSERT INTO tbl_util_computation(comp_ID, deductible, towing, aon) VALUES ('3', '2000', '100', '');
+INSERT INTO tbl_util_computation(comp_ID, deductible, towing, aon) VALUES ('4', '3000', '100', '.005');
+
+CREATE TABLE tbl_util_tax
+(
+	tax_ID INT NOT NULL PRIMARY KEY, 
+	tax_name varchar(50),
+	percentage FLOAT,
+);
+
+INSERT INTO tbl_util_tax(tax_ID, tax_name, percentage) VALUES ('1', 'Documentary Stamp Tax (DST)', '.125');
+INSERT INTO tbl_util_tax(tax_ID, tax_name, percentage) VALUES ('2', 'Value Added Tax (VAT)', '.12');
 
 --SELECT * FROM tbl_complaint_sents;
 --SELECT * FROM tbl_complaint_action;

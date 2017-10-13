@@ -10,6 +10,6 @@ class z_Utilities_GeneralSettingsController extends Controller
 {
     public function index()
     {
-      return view('/pages/admin/utilities/adm/general');
+      return view('/pages/admin/utilities/general');
     }
 }

@@ -46,6 +46,7 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
+        'employeeAuth' => \App\Http\Middleware\employeeAuth::class,
         'paymentAuth' => \App\Http\Middleware\paymentAuth::class,
         'clientAuth' => \App\Http\Middleware\clientAuth::class,
         'auth' => \Illuminate\Auth\Middleware\Authenticate::class,

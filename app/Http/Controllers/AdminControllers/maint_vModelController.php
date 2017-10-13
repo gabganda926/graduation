@@ -38,6 +38,7 @@ class maint_vModelController extends Controller
     $this->mod->vehicle_type = $req->vehicle_type;
     $this->mod->vehicle_year = $req->vehicle_year;
     $this->mod->vehicle_value = $req->vehicle_value;
+    $this->mod->vehicle_depreciation = $req->dep;
     $mytime = $req->time;
     $this->mod->created_at = $mytime;
     $this->mod->updated_at = $mytime;
@@ -102,6 +103,7 @@ class maint_vModelController extends Controller
      $mod->vehicle_type = $req->avehicle_type;
      $mod->vehicle_year = $req->avehicle_year;
      $mod->vehicle_value = $req->avehicle_value;
+     $mod->vehicle_depreciation = $req->adep;
      $mytime = $req->atime;
      $mod->updated_at = $mytime;
 

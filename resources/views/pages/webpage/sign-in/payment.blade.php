@@ -33,6 +33,20 @@
     color: white;
 }
 </style>
+<script>
+    function numberWithCommas(x) {
+        x = (x * 100)/100; 
+        x = x + '';
+        num = x.split('.');
+        variable = num[0].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        output = variable + "." + num[1];
+        if (!num[1])
+        {
+            output = variable;
+        }
+        return output;
+    }
+</script>
 <div class="content">
     <div class="container">
         <ol class="breadcrumb" style="padding-top: 0em;">
@@ -43,24 +57,28 @@
                 <div class="col-xs-6">
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            <h3 style="text-align: center;"><b> <img src="{{ URL::asset ('images/icons/insurance-individual.png')}}" style="height: 50px; width: 50px;"> Ma. Gabriella Tan Rola</b></h3><br/>
+                            <h3 style="text-align: center;" id="name"><b></b></h3><br/>
                                 <table class="table">
                                     <tbody>      
+                                    <form id="payment" name="payment" action="/user/payment/new" method="POST">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <input type="hidden" id="pay_ID" name="pay_ID">
                                         <tr>
                                             <td>YOUR ACCOUNT POLICY NUMBER: </td>
-                                            <td><b>MCAR-12345</b></td>
+                                            <td><b><input type="text" id = "policy_number" name="policy_number" style="width: 80%; border-color: #9e9e9e"></b></td>
                                         </tr>
+                                    </form>
                                         <tr>
                                             <td>INSURANCE COMPANY: </td>
-                                            <td><b>FPG INSURANCE</b></td>
+                                            <td><span id="insurance_company"><b></b></span></td>
                                         </tr>
                                         <tr>
                                             <td>INCEPTION DATE: </td>
-                                            <td><b>October 21, 2017</b></td>
+                                            <td><span id="date_inception"><b></b></span></td>
                                         </tr>
                                         <tr>
                                             <td>END DATE: </td>
-                                            <td><b>October 21, 2018</b></td>
+                                            <td><span id="date_end"><b></b></span></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -77,19 +95,21 @@
                                             <td style="text-align: center;">CURRENT BALANCE: </td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align: center; font-size: 45px; color: orange;"><b>PHP 10,000.80</b></td>
+                                            <td style="text-align: center; font-size: 45px; color: orange;"><span id="current_balance"><b></b></span></td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align: center;">Due Date: August 21, 2017</td>
+                                            <td style="text-align: center;">Due Date: <span id="due_date"></span></td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align: center;">Next Bill: September 21, 2017</td>
+                                            <td style="text-align: center;">Next Bill: <span id="next_bill"></span></td>
                                         </tr>
                                     </tbody>
                                 </table>
 
                                 <div class="col-xs-12">
-                                    <center><button type="button" class="button button1" onclick="window.document.location='{{ URL::asset('/user/payment/new') }}';">PAY MY BILL</button></center>
+                                    <center><button type="button" class="button button1" id ="pay_btn" form = "payment" onclick="
+                                     $('#payment').submit();
+                                    ">PAY MY BILL</button></center>
                                 </div>
                         </div>
                     </div>
@@ -101,8 +121,8 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <h3 style="text-align: center;"><b> <img src="{{ URL::asset ('images/icons/view-bill.png')}}" style="height: 50px; width: 50px;"> LIST OF BILL</b></h3><br/><br/>
-                            <label style="text-align: center;">BOP Voucher No.: VOUCHER-12823u23</label><br/>
-                                <table class="table">
+                            <label style="text-align: center;">BOP Voucher No.: <span id="Vouch"></span></label><br/>
+                                <table class="table" id="Bills">
                                     <thead>
                                       <tr>
                                         <th>BOP No.</th>
@@ -112,35 +132,7 @@
                                         <th>Status</th>
                                       </tr>
                                     </thead>
-                                    <tbody>      
-                                      <tr class="success">
-                                        <td>12232</td>
-                                        <td>Banco De Oro - Antipolo City</td>
-                                        <td>July 4, 2017</td>
-                                        <td>Php 7,000.50</td>
-                                        <td>Paid</td>
-                                      </tr>
-                                      <tr class="danger">
-                                        <td>12233</td>
-                                        <td>Banco De Oro - Antipolo City</td>
-                                        <td>August 4, 2017</td>
-                                        <td>Php 7,000.50</td>
-                                        <td>Delayed (1 day/s)</td>
-                                      </tr>
-                                      <tr class="info">
-                                        <td>12234</td>
-                                        <td>Banco De Oro - Antipolo City</td>
-                                        <td>September 4, 2017</td>
-                                        <td>Php 7,000.50</td>
-                                        <td>to be paid</td>
-                                      </tr>
-                                      <tr class="info">
-                                        <td>12234</td>
-                                        <td>Banco De Oro - Antipolo City</td>
-                                        <td>October 4, 2017</td>
-                                        <td>Php 7,000.50</td>
-                                        <td>to be paid</td>
-                                      </tr>
+                                    <tbody>
                                     </tbody>
                                 </table>
                         </div>
@@ -151,6 +143,79 @@
 </div>
 </section>
 
+<script>
+    $('#pay_btn').prop('disabled', true);
+    $('#pay_btn').css({cursor: "not-allowed"});
+
+    $('#policy_number').on('change textInput input', function(){
+        @foreach($alist as $list)
+         if('{{$list->insurance->policy_number}}' == $(this).val())
+         {
+             @if($list->account_ID == Session::get('accountID'))
+              @if($list->insurance->payment_details->payment_status == 0)
+               $('#pay_btn').prop('disabled', false);
+               $('#pay_btn').css({cursor: ""});
+               @if($list->insurance->client->client_type == 1)
+               $('#name').html('<img src="{{ URL::asset ("images/icons/insurance-individual.png")}}" style="height: 50px; width: 50px;"> {{$list->insurance->client->individual->details->pinfo_last_name  or "error"}}, {{$list->insurance->client->individual->details->pinfo_first_name  or "error"}} {{$list->insurance->client->individual->details->pinfo_middle_name  or "error"}} ');
+               @elseif($list->insurance->client->client_type == 0)
+               $('#name').html('<img src="{{ URL::asset ("images/icons/insurance-company.png")}}" style="height: 50px; width: 50px;"> {{$list->insurance->client->company->comp_name or "error"}}');
+               @endif
+               $('#insurance_company').text('{{$list->insurance->inscomp->comp_name}}');
+               $('#date_inception').text('{{\Carbon\Carbon::parse($list->insurance->inception_date)->format("F d, Y") }}');
+               $('#date_end').text('{{date("F d, Y", strtotime("+1 Year", strtotime($list->insurance->inception_date)))}}');
+
+               var total = '{{$list->insurance->payment_details->total}}';
+               var counter = 0;
+               var counter2 = 0;
+
+               $('#Vouch').text('{{str_pad($list->insurance->payment_details->check_voucher->cv_ID,11, "0", STR_PAD_LEFT)}}')
+
+               $('#Bills tbody tr').remove();
+
+               @foreach($list->insurance->payment_details->check_voucher->payments as $pay)
+                total = total - '{{$pay->amount_paid}}';
+                <?php 
+                $d1 = \Carbon\Carbon::parse($pay->due_date)->format("Y-m-d");
+                $d2 = \Carbon\Carbon::parse($pay->paid_date)->format("Y-m-d");
+                $d1 = DateTime::createFromFormat('Y-m-d', $d1);
+                $d2 = DateTime::createFromFormat('Y-m-d', $d2);
+                $length = $d1->diff($d2);
+                ?>
+                @if($pay->status == 0)
+                $('#Bills tbody').append('<tr class="success"><td>{{str_pad($pay->payment_ID,5,"0",STR_PAD_LEFT)}}</td><td>{{$list->insurance->payment_details->bank->bank_name or ""}} - {{$list->insurance->payment_details->bank->address->add_city or ""}}</td><td>{{\Carbon\Carbon::parse($pay->due_date)->format("F d, Y")}}</td><td>₱ '+numberWithCommas('{{$pay->amount}}')+'</td><td>Paid</td></tr>');
+                @elseif($pay->status == 1)
+                $('#Bills tbody').append('<tr class="info"><td>{{str_pad($pay->payment_ID,5,"0",STR_PAD_LEFT)}}</td><td>{{$list->insurance->payment_details->bank->bank_name or ""}} - {{$list->insurance->payment_details->bank->address->add_city or ""}}</td><td>{{\Carbon\Carbon::parse($pay->due_date)->format("F d, Y")}}</td><td>₱ '+numberWithCommas('{{$pay->amount}}')+'</td><td>to be paid</td></tr>');
+                @elseif($pay->status == 3)
+                $('#Bills tbody').append('<tr class="danger"><td>{{str_pad($pay->payment_ID,5,"0",STR_PAD_LEFT)}}</td><td>{{$list->insurance->payment_details->bank->bank_name or ""}} - {{$list->insurance->payment_details->bank->address->add_city or ""}}</td><td>{{\Carbon\Carbon::parse($pay->due_date)->format("F d, Y")}}</td><td>₱ '+numberWithCommas('{{$pay->amount}}')+'</td><td>Delayed ({{$length->format("%d")}} day/s)</td></tr>');
+                @endif
+                if(counter == 1 && counter2 == 0)
+                {
+                    $('#next_bill').text('{{\Carbon\Carbon::parse($pay->due_date)->format("F d, Y")}}');
+                    counter2 = 1;
+                }
+                if(counter == 0)
+                {
+                    @if($pay->amount_paid == "")
+                        $('#due_date').text('{{\Carbon\Carbon::parse($pay->due_date)->format("F d, Y")}}');
+                        $('#pay_ID').val('{{$pay->payment_ID}}');
+                        counter = 1;
+                    @endif                       
+                }
+               @endforeach
+               $('#current_balance').text("₱ " + numberWithCommas(total));
+               @else
+                $('#insurance_company').text('');
+                $('#date_inception').text('');
+                $('#date_end').text('');
+                $('#pay_btn').prop('disabled', true);
+                $('#pay_btn').css({cursor: "not-allowed"});
+              @endif
+             @endif  
+         }
+        @endforeach
+    });
+</script>
+
 <script type="text/javascript">
   $('.collapse').on('show.bs.collapse', function () {
     $('.collapse.in').each(function(){
@@ -158,7 +223,6 @@
     });
   });
 </script>
-
 
 <script>
 //according menu

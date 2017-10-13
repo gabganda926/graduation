@@ -100,13 +100,29 @@
                                             </div>
                                         </div>
                                 </div>
+                                <div class="row clearfix">
+                                    <div class="col-md-4">
+                                        <div class="form-group form-float">
+                                            <div class="form-line">
+                                            <label><small>Depreciation (in %) :</small></label>
+                                                <input id = "vehicle_dep" name = "vehicle_dep" type="number" min="1" class="form-control" pattern="[A-Za-z'-]" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <br/><br/><br/>
                                 <div class="col-md-4" style = "display: none;">
                                    <input id = "time" name = "time" type="text" class="form-control" pattern="[A-Za-z'-]">
                                 </div>
+                                <div class="col-md-4" style = "display: none;">
+                                   <input id = "dep" name = "dep" type="text" class="form-control" pattern="[A-Za-z'-]">
+                                </div>
                         </div>
                         <div class="modal-footer js-sweetalert">
                             <button class="btn btn-primary waves-effect" type="button" onclick = "
+
+                            $('#dep').val($('#vehicle_dep').val());
+                            document.getElementById('dep').value = getDep();
                             document.getElementById('time').value = formatDate(new Date());
                             if($('#add').valid())
                             {
@@ -165,6 +181,7 @@
                         $('#avehicle_model_name').prop('disabled', false);
                         $('#avehicle_year').prop('disabled', false);
                         $('#avehicle_value').prop('disabled', false);
+                        $('#avehicle_dep').prop('disabled', false);
                         $('#schange').html('SAVE CHANGES');
                           $( '#avehicle_model_name' ).focus();
                           $.notify('You can now edit the record', 
@@ -230,6 +247,9 @@
                               <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <div class="col-md-4" style = "display: none;">
                                   <input id = "id" type="text" class="form-control" name="id" pattern="[A-Za-z'-]">
+                                </div>
+                                <div class="col-md-4" style = "display: none;">
+                                   <input id = "adep" name = "adep" type="text" class="form-control" pattern="[A-Za-z'-]">
                                 </div>
                                 <div class="row clearfix">
                                         <div class="col-md-12">
@@ -297,6 +317,16 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row clearfix">
+                                    <div class="col-md-4">
+                                        <div class="form-group form-float">
+                                            <div class="form-line">
+                                            <label><small>Depreciation (in %) :</small></label>
+                                                <input id = "avehicle_dep" name = "avehicle_dep" type="number" min="1" class="form-control" pattern="[A-Za-z'-]" disabled="disable" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <br/><br/><br/>
                                 <div class="col-md-4" style = "display: none;">
                                    <input id = "atime" name = "atime" type="text" class="form-control">
@@ -304,6 +334,8 @@
                         </div>
                         <div class="modal-footer js-sweetalert">
                             <button id = "schange" class="btn btn-primary waves-effect" style = "display: none;" type="button" onclick = "
+                            $('#adep').val($('#avehicle_dep').val());
+                            document.getElementById('adep').value = getaDep();
                             document.getElementById('atime').value = formatDate(new Date());
                             if($('#view').valid())
                             {
@@ -339,7 +371,8 @@
                             document.getElementById('avehicle_make').disabled=true;
                             $('#avehicle_model_name').prop('disabled', true);
                             $('#avehicle_year').prop('disabled', true);
-                            $('#avehicle_value').prop('disabled', true);">CLOSE</button>
+                            $('#avehicle_value').prop('disabled', true);
+                            $('#avehicle_dep').prop('disabled', true);">CLOSE</button>
                         </div>
                     </form>
                     </div>
@@ -383,6 +416,7 @@
                                         <th>Vehicle Make</th>
                                         <th>Vehicle Type</th>
                                         <th>Market Value (in PHP)</th>
+                                        <th>Depreciation (%) </th>
                                         <th class="col-md-1">Action</th>
                                     </tr>
                                 </thead>
@@ -407,8 +441,11 @@
                                     </td>
                                     <td>
                                         <script>
-                                            var data = numberWithCommas({{ $mod->vehicle_value }}); document.write("₱ " + data);
+                                            var data = numberWithCommas({{ $mod->vehicle_value }}); document.write("₱" + data);
                                         </script>
+                                    </td>
+                                    <td>
+                                        <?php $percent = ((float)$mod->vehicle_depreciation * 100 ) . '%'; echo $percent; ?>
                                     </td>
                                     <td>
                                     <div class="icon-button-demo">
@@ -558,6 +595,18 @@
     </script>
 
     <script>
+        function getDep(a){
+           var aa = $('#dep').val();
+           a = aa * .01;
+           return a;
+        } 
+
+        function getaDep(a){
+           var aa = $('#adep').val();
+           a = aa * .01;
+           return a;
+        } 
+
         $('#apicture').hide();          
         $(document).ready(function()
         {

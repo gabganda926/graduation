@@ -17,7 +17,7 @@ class clientAccountsConnection extends Model
 
     public function client()
     {
-    	return $this->hasOne('App\clientListConnection', 'client_ID', 'client_ID');
+        return $this->hasOne('App\clientListConnection', 'client_ID', 'client_ID');
     }
 
     public function inscomp()

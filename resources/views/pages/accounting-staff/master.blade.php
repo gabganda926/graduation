@@ -127,17 +127,17 @@
             <!-- User Info -->
             <div class="user-info">
                 <div class="image">
-                    <img src="{{ URL::asset ('images/user.png') }}" width="48" height="48" alt="User" />
+                    <img id="userimg" src="{{ URL::asset ('images/user.png') }}" width="55" height="55" alt="User" />
                 </div>
                 <div class="info-container">
-                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ma. Gabriella Rola</div>
+                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{Session::get('fname')}} {{Session::get('mname')}} {{Session::get('lname')}}
                     <div class="text" style="color: white;">Accounting Staff</div>
                     <div class="btn-group user-helper-dropdown">
                         <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                         <ul class="dropdown-menu pull-right">
                             <li><a href="javascript:void(0);"><i class="material-icons">person</i>My Account</a></li>
                             <li role="seperator" class="divider"></li>
-                            <li><a href="javascript:void(0);"><i class="material-icons">input</i>Sign Out</a></li>
+                            <li><a href="/user/logout"><i class="material-icons">input</i>Sign Out</a></li>
                         </ul>
                     </div>
                 </div>
@@ -277,6 +277,19 @@
         </aside>
         <!-- #END# Left Sidebar -->
     </section>
+
+    <script>
+        window.onload = function(){
+            var comp = "{{ Session::get('pic')}}";
+            if(comp != null)
+            {
+                var src = "/image/employee/{{ Session::get('pic')}}";
+                $('#userimg').attr('src',src);
+            }
+
+
+        }
+    </script>
 
     <!-- Jquery Core Js -->
     <script src="{{ URL::asset('plugins/jquery/jquery.min.js') }}"></script>       

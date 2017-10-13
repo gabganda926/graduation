@@ -1,6 +1,6 @@
 @extends('pages.admin.master')
 
-@section('title','Vehicle Make - Maintenance | i-Insure')
+@section('title','Top Individual Client - Queries | i-Insure')
 
 @section('queries','active')
 

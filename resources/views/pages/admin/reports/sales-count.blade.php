@@ -6,7 +6,7 @@
 
 @section('reportSales','active')
 
-@section('salesOverall','active')
+@section('salesCount','active')
 
 @section('body')
 	<script>
@@ -61,7 +61,7 @@
         	<div class="card">
         		<div class="header">
                     <h1 style="text-align: center;"><b>SALES REPORT</b></h1>
-                    <h4 style="text-align: center;">- By Collection of Payments -</h3>
+                    <h4 style="text-align: center;">- By Number of Collected Payments -</h3>
                 </div>
                 <div class="body">
                     <!-- Nav tabs -->
@@ -71,7 +71,7 @@
                         <li role="presentation" class="col-md-4"><a href="#pdf" data-toggle="tab" style="text-align: center; font-size: 20px">GENERATE PDF</a></li>
                     </ul>
 
-                    <form id = "gen_pdf" action = "/pdf/reports/sales/by/payment" method = "GET" style = "display: none;">
+                    <form id = "gen_pdf" action = "/pdf/reports/sales/by/count" method = "GET" style = "display: none;">
                           <input type="hidden" name="_token" value="{{ csrf_token() }}">
                           <div class="col-md-4" style = "display: none;">
                              <input id = "date_end" name = "date_end" type="text" class="form-control">
@@ -93,8 +93,7 @@
 		                                    $('#ch_weekly').hide(800);
 		                                    $('#ch_monthly').hide(800);
 		                                    $('#ch_quarterly').hide(800);
-		                                    $('#ch_annually').hide(800);
-		                                    $('#ch_transac').hide(800);"/>
+		                                    $('#ch_annually').hide(800);"/>
 		                                    <label for="radio_daily">Daily</label>
 
 		                                    <input name="group" type="radio" id="radio_weekly" onclick="
@@ -102,8 +101,7 @@
 		                                    $('#ch_weekly').show(800);
 		                                    $('#ch_monthly').hide(800);
 		                                    $('#ch_quarterly').hide(800);
-		                                    $('#ch_annually').hide(800);
-		                                    $('#ch_transac').hide(800);" />
+		                                    $('#ch_annually').hide(800);" />
 		                                    <label for="radio_weekly">Weekly</label>
 
 		                                    <input name="group" type="radio" id="radio_monthly" onclick="
@@ -111,8 +109,7 @@
 		                                    $('#ch_weekly').hide(800);
 		                                    $('#ch_monthly').show(800);
 		                                    $('#ch_quarterly').hide(800);
-		                                    $('#ch_annually').hide(800);
-		                                    $('#ch_transac').hide(800);" />
+		                                    $('#ch_annually').hide(800);" />
 		                                    <label for="radio_monthly">Monthly</label>
 
 		                                    <input name="group" type="radio" id="radio_quarterly" onclick="
@@ -120,8 +117,7 @@
 		                                    $('#ch_weekly').hide(800);
 		                                    $('#ch_monthly').hide(800);
 		                                    $('#ch_quarterly').show(800);
-		                                    $('#ch_annually').hide(800);
-		                                    $('#ch_transac').hide(800);"  />
+		                                    $('#ch_annually').hide(800);"  />
 		                                    <label for="radio_quarterly">Quarterly</label>
 
 		                                    <input name="group" type="radio" id="radio_annually" onclick="
@@ -129,18 +125,8 @@
 		                                    $('#ch_weekly').hide(800);
 		                                    $('#ch_monthly').hide(800);
 		                                    $('#ch_quarterly').hide(800);
-		                                    $('#ch_annually').show(800);
-		                                    $('#ch_transac').hide(800);"  />
+		                                    $('#ch_annually').show(800);"  />
 		                                    <label for="radio_annually">Annually</label>
-
-		                                    <input name="group" type="radio" id="radio_transac" onclick="
-		                                    $('#ch_daily').hide(800);
-		                                    $('#ch_weekly').hide(800);
-		                                    $('#ch_monthly').hide(800);
-		                                    $('#ch_quarterly').hide(800);
-		                                    $('#ch_annually').hide(800);
-		                                    $('#ch_transac').show(800);"  />
-		                                    <label for="radio_transac">Transaction</label>
 		                                </div>
                                     </div>
                                 </div>
@@ -171,7 +157,7 @@
 				                                <thead>
 				                                    <tr class="bg-teal">
 				                                        <th>Day</th>
-				                                        <th>Sum Amount</th>
+				                                        <th>Number of Received Payment</th>
 				                                    </tr>
 				                                </thead>
 				                                <tbody>
@@ -186,7 +172,7 @@
 				                                <thead>
 				                                    <tr class="bg-teal">
 				                                        <th>Week</th>
-				                                        <th>Sum Amount</th>
+				                                        <th>Number of Received Payment</th>
 				                                    </tr>
 				                                </thead>
 				                                <tbody>
@@ -195,7 +181,7 @@
 				                                		<td>{{ $list->Week }}</td>
 				                                		<td><b>
 				                                			<script>
-				                                            	var data = numberWithCommas({{ $list->Amount }}); document.write("₱" + data);
+				                                            	var data = numberWithCommas({{ $list->Count }}); document.write(data);
 				                                            </script>
 				                                        </b></td>
 				                                	</tr>
@@ -206,10 +192,10 @@
 					                            <div style = "display:none;">
 									                {{$total = 0}}
 					                                @foreach($pay as $list)
-											          	{{$total = $total + $list->Amount}}
+											          	{{$total = $total + $list->Count}}
 					                                @endforeach
 					                            </div>
-			                                	<h3 style="text-align: center;"><b>Total Amount: ₱ <?php echo number_format($total, 2, '.', ','); ?></b></h3>
+			                                	<h3 style="text-align: center;"><b>Total Number: <?php echo $total; ?></b></h3>
 				                        </div>
                                 	</div>
 
@@ -219,7 +205,7 @@
 				                                <thead>
 				                                    <tr class="bg-teal">
 				                                        <th>Month</th>
-				                                        <th>Sum Amount</th>
+				                                        <th>Number of Received Payment</th>
 				                                    </tr>
 				                                </thead>
 				                                <tbody>
@@ -228,7 +214,7 @@
 				                                		<td>{{ $list->Month }}</td>
 				                                		<td><b>
 				                                			<script>
-				                                            	var data = numberWithCommas({{ $list->Amount }}); document.write("₱" + data);
+				                                            	var data = numberWithCommas({{ $list->Count }}); document.write(data);
 				                                            </script>
 				                                        </b></td>
 				                                	</tr>
@@ -239,10 +225,10 @@
 					                            <div style = "display:none;">
 									                {{$total = 0}}
 					                                @foreach($month as $list)
-											                  {{$total = $total + $list->Amount}}
+											                  {{$total = $total + $list->Count}}
 					                                @endforeach
 					                            </div>
-			                                	<h3 style="text-align: center;"><b>Total Amount: ₱ <?php echo number_format($total, 2, '.', ','); ?></b></h3>
+			                                	<h3 style="text-align: center;"><b>Total Number: <?php echo $total; ?></b></h3>
 				                        </div>
                                 	</div>
 
@@ -252,7 +238,7 @@
 				                                <thead>
 				                                    <tr class="bg-teal">
 				                                        <th>Quarter</th>
-				                                        <th>Sum Amount</th>
+				                                        <th>Number of Received Payment</th>
 				                                    </tr>
 				                                </thead>
 				                                <tbody>
@@ -261,7 +247,7 @@
 				                                		<td>{{ $list->Quarter }}</td>
 					                                	<td><b>
 					                                		<script>
-				                                            	var data = numberWithCommas({{ $list->Amount }}); document.write("₱" + data);
+				                                            	var data = numberWithCommas({{ $list->Count }}); document.write(data);
 				                                            </script>
 					                                	</b></td>
 				                                	</tr>
@@ -271,10 +257,10 @@
 					                            <div style = "display:none;">
 									                {{$total = 0}}
 					                                @foreach($quar as $list)
-											                  {{$total = $total + $list->Amount}}
+											                  {{$total = $total + $list->Count}}
 					                                @endforeach
 					                            </div>
-			                                	<h3 style="text-align: center;"><b>Total Amount: ₱ <?php echo number_format($total, 2, '.', ','); ?></b></h3>
+			                                	<h3 style="text-align: center;"><b>Total Number: <?php echo $total; ?></b></h3>
 				                        </div>
                                 	</div>
 
@@ -285,7 +271,7 @@
 					                                <thead>
 					                                    <tr class="bg-teal">
 					                                        <th>Year</th>
-					                                        <th>Sum Amount</th>
+					                                        <th>Number of Received Payment</th>
 					                                    </tr>
 					                                </thead>
 					                                <tbody>
@@ -294,7 +280,7 @@
 					                                		<td>{{ $list->Year }}</td>
 					                                		<td><b>
 					                                			<script>
-					                                            	var data = numberWithCommas({{ $list->Amount }}); document.write("₱" + data);
+					                                            	var data = numberWithCommas({{ $list->Count }}); document.write(data);
 					                                            </script>
 					                                		</b></td>
 					                                	</tr>
@@ -304,114 +290,11 @@
 					                            <div style = "display:none;">
 									                {{$total = 0}}
 					                                @foreach($year as $list)
-											            {{$total = $total + $list->Amount}}
+											            {{$total = $total + $list->Count}}
 					                                @endforeach
 					                            </div>
-			                                	<h3 style="text-align: center;"><b>Total Amount: ₱ <?php echo number_format($total, 2, '.', ','); ?></b></h3>
+			                                	<h3 style="text-align: center;"><b>Total Number: <?php echo $total; ?></b></h3>
 					                        </div>
-                                		</div>
-                                	</div>
-
-                                	<div id="ch_transac">
-                                		<div class="body">
-                                			<div class="body table-responsive">
-					                            <table id="ex" class="table table-bordered table-striped table-hover js-basic-example dataTable">
-					                                <thead>
-					                                    <tr class="bg-teal">
-					                                        <th>BOP Number</th>
-					                                        <th>Policy Number</th>
-					                                        <th>Client Name</th>
-					                                        <th>Total Amount</th>
-					                                        <th>Remittance Date</th>
-					                                    </tr>
-					                                </thead>
-					                                <tbody>
-					                                @foreach($plist as $list)
-					                                    @foreach($cvouch as $vouch)
-					                                    @if($list->check_voucher == $vouch->cv_ID)
-					                                    @if($list->status != 1)
-					                                    <tr>
-					                                    <td>@if($list->payment_ID >= 10)
-				                                                BOP00{{ $list->payment_ID }}
-				                                            @endif
-				                                            @if($list->payment_ID < 10)
-				                                                BOP000{{ $list->payment_ID }}
-				                                            @endif
-				                                            @if($list->payment_ID >= 100)
-				                                                BOP0{{ $list->payment_ID }}
-				                                            @endif
-				                                            @if($list->payment_ID >= 1000)
-				                                                BOP{{ $list->payment_ID }}
-				                                            @endif</td>
-				                                         <td>
-					                                        @foreach($pdet as $paydet)
-					                                            @if($vouch->pay_ID == $paydet->payment_ID)
-					                                                @foreach($cliacc as $insacc)
-					                                                    @if($insacc->account_ID == $paydet->account_ID)
-					                                                        {{ $insacc->policy_number }}
-					                                                        <script> var ins_id = "ins = " +{{ $insacc->account_ID }}; console.log(ins_id); </script>
-					                                                    @endif
-					                                                @endforeach
-					                                        </td>
-					                                        <td>
-					                                                @foreach($cliacc as $insacc)
-					                                                    @if($insacc->account_ID == $paydet->account_ID)
-					                                                        @foreach($clist as $clients)
-					                                                            @if($clients->client_type == 1)
-					                                                            @if($insacc->client_ID == $clients->client_ID)
-					                                                                @foreach($cli as $client)
-					                                                                    @if($clients->client_ID == $client->client_ID)
-					                                                                        @foreach($pinfo as $pInfo)
-					                                                                            @if($client->personal_info_ID == $pInfo->pinfo_ID)
-					                                                                            {{ $pInfo->pinfo_last_name}}, {{$pInfo->pinfo_first_name}} {{$pInfo->pinfo_middle_name }}
-					                                                                            <script> var pi_id = "pi = " + {{ $pInfo->pinfo_ID }}; console.log(pi_id); </script>
-					                                                                            @endif
-					                                                                        @endforeach
-					                                                                    @endif
-					                                                                @endforeach
-					                                                            @endif
-					                                                            @endif
-					                                                            @if($clients->client_type == 2)
-					                                                            @if($insacc->client_ID == $clients->client_ID)
-					                                                                @foreach($company as $comp)
-					                                                                    @if($clients->client_ID == $comp->comp_ID)
-					                                                                        {{ $comp->comp_name }}
-					                                                                        <script> var pi_id = "pi = " + {{ $pInfo->pinfo_ID }}; console.log(pi_id); </script>
-					                                                                    @endif
-					                                                                @endforeach
-					                                                            @endif
-					                                                            @endif
-					                                                        @endforeach
-					                                                    @endif
-					                                                @endforeach
-					                                            @endif
-					                                        @endforeach
-					                                    	</td>
-					                                    	<td>
-					                                            <script>
-					                                            var data = numberWithCommas({{ $list->amount }}); document.write("₱" + data);
-					                                            </script>
-					                                        </td>
-					                                        <td> {{ \Carbon\Carbon::parse($list->paid_date)->format("M-d-Y") }} {{ "(".\Carbon\Carbon::parse($list->paid_date)->format("l, h:i:s A").")" }}</td>
-					                                	</tr>
-					                                	@endif
-					                                	@endif
-					                                	@endforeach
-					                                @endforeach
-					                             	</tbody>
-					                            </table>
-			                                    <div style = "display:none;">
-									                {{$total = 0}}
-					                                @foreach($plist as $list)
-					                                    @if($list->status != 1)
-					                                    @if($list->status != 4)
-											                  {{$total = $total + $list->amount}}
-					                                	@endif
-					                                	@endif
-					                                @endforeach
-					                            </div>
-			                                	<h3 style="text-align: center;"><b>Total Amount: ₱ <?php echo number_format($total, 2, '.', ','); ?></b></h3>
-						                        </div>
                                 		</div>
                                 	</div>
                                 </div>
@@ -563,7 +446,6 @@
     		document.getElementById('ch_monthly').style.display = 'none';
     		document.getElementById('ch_quarterly').style.display = 'none';
     		document.getElementById('ch_annually').style.display = 'none';
-    		document.getElementById('ch_transac').style.display = 'none';
     	};
     </script>
 
@@ -592,19 +474,17 @@
 			en = $('#ch_d_enddate').val();
 			var total = 0;
 			var additional = '';
-			@foreach($plist as $list)
-		    	if('{{$list->paid_date}}' >= st && '{{$list->paid_date}}' <= en)
+			var data = 0;
+			@foreach($day as $list)
+		    	if('{{$list->Day}}' >= st && '{{$list->Day}}' <= en)
 		    	{
-		    		@if($list->status == 0 || $list->status == 3)
-		    			var data = numberWithCommas({{ $list->amount }});
-				    	var option = '<tr><td>{{ \Carbon\Carbon::parse($list->paid_date)->format("M-d-Y") }} {{ "(".\Carbon\Carbon::parse($list->paid_date)->format("l, h:i:s A").")" }}</td><td><b>₱' + data + '</b></td></tr>'
-				    	$('#tb_daily tbody').append(option);
+			    	var option = '<tr><td>{{ \Carbon\Carbon::parse($list->Day)->format("M-d-Y") }}</td><td><b>{{ $list->Count }}</b></td></tr>'
+			    	$('#tb_daily tbody').append(option);
 
-				    	total += {{ $list->amount }}
-			    	@endif
+			    	total += 1;
 		    	}
 		    @endforeach
-		    var additional = '<tr><td>Total Amount: </td><td><b>₱' + total + '</b></td></tr>'
+		    var additional = '<tr><td>Total Number: </td><td><b>₱' + total + '</b></td></tr>'
 		    $('#tb_daily tbody').append(additional);
 		});
 
@@ -616,20 +496,17 @@
 			en = $('#ch_d_enddate').val();
 			var total = 0;
 			var additional = '';
-			@foreach($plist as $list)
-		    	if('{{$list->paid_date}}' >= st && '{{$list->paid_date}}' <= en)
+			var data = 0;
+			@foreach($day as $list)
+		    	if('{{$list->Day}}' >= st && '{{$list->Day}}' <= en)
 		    	{
-		    		@if($list->status == 0 || $list->status == 3)
-		    			var data = numberWithCommas({{ $list->amount }});
-				    	var option = '<tr><td>{{ \Carbon\Carbon::parse($list->paid_date)->format("M-d-Y") }} {{ "(".\Carbon\Carbon::parse($list->paid_date)->format("l, h:i:s A").")" }}</td><td><b>₱' + data + '</b></td></tr>'
-				    	$('#tb_daily tbody').append(option);
+			    	var option = '<tr><td>{{ \Carbon\Carbon::parse($list->Day)->format("M-d-Y") }}</td><td><b>{{ $list->Count }}</b></td></tr>'
+			    	$('#tb_daily tbody').append(option);
 
-				    	total += {{ $list->amount }}
-			    	@endif
+			    	total += 1;
 		    	}
 		    @endforeach
-		    var data2 = numberWithCommas(total);
-		    var additional = '<tr><td>Total Amount: </td><td><b>₱' + data2 + '</b></td></tr>'
+		    var additional = '<tr><td>Total Number: </td><td><b>' + total + '</b></td></tr>'
 		    $('#tb_daily tbody').append(additional);
 		});
 
@@ -645,15 +522,13 @@
 			   	st = $('#daily_start').val();
 			    en = $('#daily_end').val();
 			    var labels = [],data=[];
-			    @foreach($plist as $list1)
-			    	if('{{$list1->paid_date}}' >= st && '{{$list1->paid_date}}' <= en)
+			    @foreach($day as $list1)
+			    	if('{{$list1->Day}}' >= st && '{{$list1->Day}}' <= en)
 			    	{
-			    		@if($list1->status == 0 || $list1->status == 3)
-					    	labels[a] = "{{ $list1->paid_date }}"
-					    	data[a] = "{{ $list1->amount }}"
-					    	a += 1;
-				    	@endif
-			    	}
+				    	labels[a] = "{{ $list1->Day }}"
+				    	data[a] = "{{ $list1->Count }}"
+				    	a += 1;
+				    }
 			    @endforeach
 		        config = {
 		            type: 'line',
@@ -681,7 +556,7 @@
 			    var labels = [],data=[];
 			    @foreach($pay as $list2)
 			    	labels[a] = "{{ $list2->Week }}"
-			    	data[a] = "{{ $list2->Amount }}"
+			    	data[a] = "{{ $list2->Count }}"
 			    	a += 1;
 			    @endforeach
 
@@ -690,7 +565,7 @@
 		            data: {
 		                labels: labels,
 		                datasets: [{
-		                    label: "Amount",
+		                    label: "Total Number",
 	                        data: data,
 	                        borderColor: 'rgba(239, 83, 80, 0.75)',
 	                        backgroundColor: 'rgba(255, 138, 128, 0.3)',
@@ -711,7 +586,7 @@
 			    var labels = [],data=[];
 			    @foreach($month as $list3)
 			    	labels[a] = "{{ $list3->Month }}"
-			    	data[a] = "{{ $list3->Amount }}"
+			    	data[a] = "{{ $list3->Count }}"
 			    	a += 1;
 			    @endforeach
 		        config = {
@@ -719,7 +594,7 @@
 		            data: {
 		                labels: labels,
 		                datasets: [{
-		                    label: "Amount",
+		                    label: "Total Number",
 		                    data: data,
 		                    borderColor: 'rgba(13, 71, 161, 0.75)',
 		                    backgroundColor: 'rgba(68, 138, 255, 0.3)',
@@ -740,7 +615,7 @@
 			    var labels = [],data=[];
 			    @foreach($quar as $list4)
 			    	labels[a] = "{{ $list4->Quarter }}"
-			    	data[a] = "{{ $list4->Amount }}"
+			    	data[a] = "{{ $list4->Count }}"
 			    	a += 1;
 			    @endforeach
 		        config = {
@@ -748,7 +623,7 @@
 		            data: {
 		                labels: labels,
 		                datasets: [{
-		                    label: "Amount",
+		                    label: "Total Number",
 		                    data: data,
 		                    borderColor: 'rgba(239, 83, 80, 0.75)',
 	                        backgroundColor: 'rgba(255, 138, 128, 0.3)',
@@ -769,7 +644,7 @@
 			    var labels = [],data=[];
 			    @foreach($year as $list5)
 			    	labels[a] = "{{ $list5->Year }}"
-			    	data[a] = "{{ $list5->Amount }}"
+			    	data[a] = "{{ $list5->Count }}"
 			    	a += 1;
 			    @endforeach
 		        config = {
@@ -777,7 +652,7 @@
 		            data: {
 		                labels: labels,
 		                datasets: [{
-		                    label: "Amount",
+		                    label: "Total Number",
 		                    data: data,
 		                    borderColor: 'rgba(13, 71, 161, 0.75)',
 		                    backgroundColor: 'rgba(68, 138, 255, 0.3)',

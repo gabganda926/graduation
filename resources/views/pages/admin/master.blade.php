@@ -126,17 +126,17 @@
             <!-- User Info -->
             <div class="user-info">
                 <div class="image">
-                    <img src="{{ URL::asset ('images/user.png') }}" width="48" height="48" alt="User" />
+                    <img id="userimg" src="{{ URL::asset ('images/user.png') }}" width="55" height="55" alt="User" />
                 </div>
                 <div class="info-container">
-                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ma. Gabriella Rola</div>
+                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{Session::get('fname')}} {{Session::get('mname')}} {{Session::get('lname')}}</div>
                     <div class="text" style="color: white;">Administrator</div>
                     <div class="btn-group user-helper-dropdown">
                         <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                         <ul class="dropdown-menu pull-right">
                             <li><a href="javascript:void(0);"><i class="material-icons">person</i>My Account</a></li>
                             <li role="seperator" class="divider"></li>
-                            <li><a href="javascript:void(0);"><i class="material-icons">input</i>Sign Out</a></li>
+                            <li><a href="/user/logout"><i class="material-icons">input</i>Sign Out</a></li>
                         </ul>
                     </div>
                 </div>
@@ -358,25 +358,13 @@
                             <li class = "@yield('topInd')">
                                 <a href="/admin/queries/top-individual-client">
                                     <i class="material-icons">radio_button_checked</i>
-                                    <span>TOP INDIVIDUAL CLIENT</span>
+                                    <span>TOP INDIVIDUAL CLIENTS</span>
                                 </a>
                             </li>
                             <li class = "@yield('topComp')">
                                 <a href="/admin/queries/top-company-client">
                                     <i class="material-icons">radio_button_checked</i>
-                                    <span>TOP COMPANY CLIENT</span>
-                                </a>
-                            </li>
-                            <li class = "@yield('activeInd')">
-                                <a href="/admin/queries/most-active-individual-client">
-                                    <i class="material-icons">radio_button_checked</i>
-                                    <span>MOST ACTIVE CLIENT - INDIVIDUAL</span>
-                                </a>
-                            </li>
-                            <li class = "@yield('activeComp')">
-                                <a href="/admin/queries/most-active-company-client">
-                                    <i class="material-icons">radio_button_checked</i>
-                                    <span>MOST ACTIVE CLIENT - COMPANY</span>
+                                    <span>TOP COMPANY CLIENTS</span>
                                 </a>
                             </li>
                             <li class = "@yield('topIns')">
@@ -391,22 +379,22 @@
                                     <span>TOP SALES AGENT</span>
                                 </a>
                             </li>
-                            <li class = "@yield('topVehicle')">
-                                <a href="/admin/queries/top-insured-vehicle">
+                            <li class = "@yield('compIns')">
+                                <a href="/admin/queries/complaint-insurance">
                                     <i class="material-icons">radio_button_checked</i>
-                                    <span>TOP INSURED VEHICLE</span>
+                                    <span>EXPIRING ACCOUNTS</span>
+                                </a>
+                            </li>
+                            <li class = "@yield('compType')">
+                                <a href="/admin/queries/complaint-type">
+                                    <i class="material-icons">radio_button_checked</i>
+                                    <span>CLAIMS - CLAIM TYPE</span>
                                 </a>
                             </li>
                             <li class = "@yield('compType')">
                                 <a href="/admin/queries/complaint-type">
                                     <i class="material-icons">radio_button_checked</i>
                                     <span>COMPLAINTS - COMPLAINT TYPE</span>
-                                </a>
-                            </li>
-                            <li class = "@yield('compIns')">
-                                <a href="/admin/queries/complaint-insurance">
-                                    <i class="material-icons">radio_button_checked</i>
-                                    <span>COMPLAINTS - INSURANCE COMPANY</span>
                                 </a>
                             </li>
                         </ul>
@@ -424,31 +412,54 @@
                                 </a>
                             </li> -->
                             <li class = "@yield('reportSales')">
-                                <a href="/admin/reports/sales/overall">
+                                <a href="javascript:void(0);" class="menu-toggle">
                                     <i class="material-icons">multiline_chart</i>
                                     <span>SALES REPORT</span>
                                 </a>
-                                <!-- <ul class="ml-menu">
+                                <ul class="ml-menu">
                                     <li class = "@yield('salesOverall')">
                                         <a href="/admin/reports/sales/overall">
-                                            <span>Sales Report - By Collection of Payments</span></a>
+                                            <span>Sales Report - By Amount of Collected Payments</span></a>
+                                    </li>
+
+                                    <li class = "@yield('salesCount')">
+                                        <a href="/admin/reports/sales/count">
+                                            <span>Sales Report - By Number of Collected Payments</span></a>
                                     </li>
 
                                     <li class = "@yield('salesIns')">
-                                        <a href="">
-                                            <span>Sales Report - By Total Net Premium</span></a>
-                                    </li>
-
-                                    <li class = "@yield('salesIns')">
-                                        <a href="">
+                                        <a href="/admin/reports/sales/insurance/company">
                                             <span>Sales Report - By Insurance Company's Sales</span></a>
                                     </li>
 
                                     <li class = "@yield('salesAgency')">
-                                        <a href="javascript:void(0);">
+                                        <a href="/admin/reports/sales/agency">
                                             <span>Sales Report - By Agency's Sales</span></a>
                                     </li>
-                                </ul> -->
+                                </ul> 
+                            </li>
+                            <li class = "@yield('reportClient')">
+                                <a href="javascript:void(0);" class="menu-toggle">
+                                    <i class="material-icons">multiline_chart</i>
+                                    <span>CLIENT REPORT</span>
+                                </a>
+                                <ul class="ml-menu">
+                                    <li class = "@yield('salesOverall')">
+                                        <a href="/admin/reports/client/type">
+                                            <span>Client Report - By Client Type</span></a>
+                                    </li>
+
+                                    <li class = "@yield('salesIns')">
+                                        <a href="/admin/reports/client/status">
+                                            <span>Client Report - By Client Status</span></a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class = "@yield('reportSales')">
+                                <a href="/admin/reports/sales/overall">
+                                    <i class="material-icons">multiline_chart</i>
+                                    <span>INSURANCE ACCOUNTS REPORT</span>
+                                </a>
                             </li>
                         </ul>
                     </li>
@@ -473,21 +484,16 @@
                                         <a href="/admin/utilities/policyno">
                                             <span>Policy Number</span></a>
                                     </li>
-
-                                    <li class = "@yield('policyno')">
-                                        <a href="javascript:void(0);">
-                                            <span>Vehicle Market Value Depriciation</span></a>
-                                    </li>
                                 </ul>
                             </li>
-                            <li class = "@yield('general')">
-                                <a href="javascript:void(0);">
+                            <li class = "@yield('premium')">
+                                <a href="/admin/utilities/premium">
                                     <i class="material-icons">settings_applications</i>
                                     <span>PREMIUM COMPUTATION SETTINGS</span>
                                 </a>
                             </li>
                             <li class = "@yield('tax')">
-                                <a href="javascript:void(0);">
+                                <a href="/admin/utilities/tax">
                                     <i class="material-icons">attach_money</i>
                                     <span>TAX SETTINGS</span>
                                 </a>
@@ -524,6 +530,19 @@
         </aside>
         <!-- #END# Left Sidebar -->
     </section>
+
+    <script>
+        window.onload = function(){
+            var comp = "{{ Session::get('pic')}}";
+            if(comp != null)
+            {
+                var src = "/image/employee/{{ Session::get('pic')}}";
+                $('#userimg').attr('src',src);
+            }
+
+
+        }
+    </script>
 
     <!-- Jquery Core Js -->
     <script src="{{ URL::asset('plugins/jquery/jquery.min.js') }}"></script>       

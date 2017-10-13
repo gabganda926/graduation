@@ -66,7 +66,7 @@
         <div class="col s12"><div class="divider" style="height:3px; background-color:teal"></div></div><br/>
 
         <p style="color:black; text-align: center; font-size:20px;"><strong>Sales Report</strong></p>
-       	<p style="text-align: center;">{{ $date_start }} to {{ $date_end }}</p>
+       	<p style="text-align: center;">{{ \Carbon\Carbon::parse($date_start)->format("M-d-Y") }} to {{ \Carbon\Carbon::parse($date_end)->format("M-d-Y") }}</p>
 
         <table width="100%" id="particulars">
         	<thead>

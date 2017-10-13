@@ -13,4 +13,14 @@ class paymentDetailConnection extends Model
     {
     	return $this->belongsTo('App\clientAccountsConnection', 'account_ID');
     }
+
+    public function check_voucher()
+    {
+    	return $this->hasOne('App\checkVoucherConnection', 'pay_ID', 'payment_ID');
+    }
+
+    public function bank()
+    {
+        return $this->hasOne('App\bankConnection','bank_ID','bank_ID');
+    }
 }
