@@ -115,9 +115,10 @@
         <p style="color:black; text-align: right; font-size:12px;">Amount Paid:<b> ₱ <?php $number = round($or->amount_paid,2); echo number_format($number, 2, '.', ','); ?></b></p>
         <p style="color:black; text-align: right; font-size:12px;">Change:<b> ₱ <?php $number = round($or->amount_paid,2) - round($or->amount,2); echo number_format($number, 2, '.', ','); ?></b></p><br/><br/>
 
-        <p style="color:black; text-align: left; font-size:15px;"><b>Maria Gabriella Tan Rola</b></p><br/>
-        <p style="color:black; text-align: left; font-size:12px;"><b>Accounting Staff</b></p>
-
+        <div style="position: absolute; bottom: 0px;">
+        <p style="color:black; text-align: left; font-size:15px;"><b>{{Session::get('fname')}} {{Session::get('mname')}} {{Session::get('lname')}}</b></p><br/>
+        <p style="color:black; text-align: left; font-size:12px;"><b>{{Session::get('role') }}</b></p>
+    	</div>
 	</body>
 
 </html>

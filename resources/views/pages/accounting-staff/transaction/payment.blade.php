@@ -76,7 +76,7 @@
                                 <table id="details" class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                     <thead>
                                         <tr>
-                                            <th>Remittance Date/Time</th>
+                                            <th class="col-md-1">Remittance Date/Time</th>
                                             <th>BOP No.</th>
                                             <th>Bank</th>
                                             <th>Due Date</th>

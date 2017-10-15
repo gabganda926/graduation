@@ -53,6 +53,8 @@ use Redirect;
 
 use Alert;
 
+use Session;
+
 class trans_quoteInsureController extends Controller
 {public function __construct(policynoConnection $policy, clientAccountsConnection $clientAccount, paymentDetailConnection $paymentDetail, paymentsConnection $payments,checkVoucherConnection $cvoucher, accListInsuranceConnection $inslist)   
     {
@@ -445,7 +447,7 @@ class trans_quoteInsureController extends Controller
           $pay->amount = $req->data_amount;
 
         $pay->due_date = $date." 23:59:59";
-
+        $pay->employee_info_ID = Session::get('id');
         $pay->status = 1;
         $tdate = strtotime( '-1 month' , strtotime ($date));
         $date = date('Y-m-d', $tdate);
@@ -536,7 +538,7 @@ class trans_quoteInsureController extends Controller
       $pay->check_voucher = $id->cv_ID;
       $pay->or_number = str_pad(rand(0,'9'.round(microtime(true))),11, "0", STR_PAD_LEFT);
       $pay->amount = $req->total;
-
+      $pay->employee_info_ID = Session::get('id');
       $pay->due_date = $date." 23:59:59";
       $pay->status = 0;
 
@@ -581,6 +583,7 @@ class trans_quoteInsureController extends Controller
     {
     	$quote = quotationListConnection::where('quote_ID', "=", $req->quote_ID)->first();
     	$quote->quote_status = 8;
+      $quote->employee_info_ID = Session::get('id');
 
       try
       {

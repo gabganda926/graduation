@@ -201,7 +201,7 @@
                                             {{ $ins->vehicle_year }} {{ $ins->vehicle_make_name }} {{ $ins->vehicle_model_name }}
                                         </td>
                                         <td>
-                                            <script> var data = numberWithCommas({{ $ins->vehicle_value }}); document.write("₱" + data);</script>
+                                            ₱<?php $number = round($ins->vehicle_value,2); echo number_format($number, 2, '.', ','); ?>
                                         </td>
                                         <td>
                                             @foreach($comp as $insco)
@@ -307,30 +307,18 @@
                                         <td>
                                             @foreach($ptail as $det)
                                                 @if($det->account_ID == $ins->account_ID)
-                                                    <script type="text/javascript">
-                                                        var data1 = numberWithCommas({{ $det->basicpremium }});
-                                                        document.write("₱" + data1);
-                                                    </script>
+                                                ₱<?php $number = round($det->basicpremium,2); echo number_format($number, 2, '.', ','); ?>
                                         </td>
-                                        <td>        
-                                                    <script type="text/javascript">
-                                                        var data2 = numberWithCommas({{ $det->total }});
-                                                        document.write("₱" + data2);
-                                                    </script>
+                                        <td>    
+                                                ₱<?php $number = round($det->total,2); echo number_format($number, 2, '.', ','); ?>
                                                 @endif
                                             @endforeach                         
                                         </td>
                                         <td>
-                                            <script type="text/javascript">
-                                                var data3 = numberWithCommas({{ $le->income }});
-                                                document.write("₱" + data3);
-                                            </script>
+                                            ₱<?php $number = round($le->income,2); echo number_format($number, 2, '.', ','); ?>
                                         </td>
                                         <td>
-                                            <script type="text/javascript">
-                                                var data4 = numberWithCommas({{ $le->commission }});
-                                                document.write("₱" + data4);
-                                            </script>
+                                            ₱<?php $number = round($le->commission,2); echo number_format($number, 2, '.', ','); ?>
                                         </td>
                                         <td>
                                             {{ $le->remarks }}

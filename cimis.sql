@@ -63,11 +63,11 @@ CREATE TABLE tbl_employee_role
 	del_flag int NOT NULL,
 );
 
-INSERT INTO tbl_employee_role VALUES('Manager','Manager','2017-08-30','2017-08-30','0');
-
 INSERT INTO tbl_employee_role VALUES('Admin','Administrator','2017-08-30','2017-08-30','0');
 
 INSERT INTO tbl_employee_role VALUES('Accounting Staff','Accounting Staff','2017-08-30','2017-08-30','0');
+
+INSERT INTO tbl_employee_role VALUES('Manager','Manager','2017-08-30','2017-08-30','0');
 
 CREATE TABLE tbl_salesagent
 (
@@ -308,8 +308,6 @@ CREATE TABLE tbl_insurance_account
 	del_flag int NOT NULL,
 	created_at datetime NOT NULL,
 	updated_at datetime NOT NULL,
-	employee_info_ID INT NOT NULL,
-	FOREIGN KEY (employee_info_ID) REFERENCES tbl_personal_info(pinfo_ID),
 	FOREIGN KEY (client_ID) REFERENCES tbl_client_list(client_ID),
 	FOREIGN KEY (insurance_company) REFERENCES tbl_company_info(comp_ID),
 );
@@ -353,8 +351,6 @@ CREATE TABLE tbl_check_voucher
 (
 	cv_ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	pay_ID INT NOT NULL,
-	employee_info_ID INT NOT NULL,
-	FOREIGN KEY (employee_info_ID) REFERENCES tbl_personal_info(pinfo_ID),
 	FOREIGN KEY (pay_ID) REFERENCES tbl_payment_details(payment_ID),
 );
 
@@ -368,7 +364,7 @@ CREATE TABLE tbl_payments
 	paid_date datetime,
 	due_date DATETIME NOT NULL,
 	status INT NOT NULL, --0 paid, 1 to be paid, 3 late, 4 lapsed
-	employee_info_ID INT NOT NULL,
+	employee_info_ID INT,
 	FOREIGN KEY (employee_info_ID) REFERENCES tbl_personal_info(pinfo_ID),
 	FOREIGN KEY (check_voucher) REFERENCES tbl_check_voucher(cv_ID),
 );
@@ -411,7 +407,7 @@ CREATE TABLE tbl_quotation
 	del_flag INT NOT NULL,
 	created_at datetime NOT NULL,
 	updated_at datetime NOT NULL,
-	employee_info_ID INT NOT NULL,
+	employee_info_ID,
 	FOREIGN KEY (employee_info_ID) REFERENCES tbl_personal_info(pinfo_ID),
 );
 
@@ -456,8 +452,6 @@ CREATE TABLE tbl_quote_individual
 	bodily_injury_ID INT NOT NULL,
 	property_damage_ID INT NOT NULL,
 	vehicle_class INT NOT NULL,
-	employee_info_ID INT NOT NULL,
-	FOREIGN KEY (employee_info_ID) REFERENCES tbl_personal_info(pinfo_ID),
 	FOREIGN KEY (quote_indi_ID) REFERENCES tbl_quotation(quote_ID),
 	FOREIGN KEY (sales_agent) REFERENCES tbl_salesagent (agent_ID),
 	FOREIGN KEY (personal_accident_ID) REFERENCES tbl_premium_pa(premiumPA_ID),
@@ -577,7 +571,7 @@ CREATE TABLE tbl_transmittal_request
 	date_recieved DATETIME NOT NULL,
 	date_update DATETIME,
 	status INT NOT NULL, -- 0 - New, 1 - Accepted ng manager TO DO, 2 - Declined, 3 - Processing, 4 - On Hold, 5 - Sent, 6 - Sent to manager, 7 - Cancelled
-	employee_info_ID INT NOT NULL,
+	employee_info_ID INT,
 	FOREIGN KEY (employee_info_ID) REFERENCES tbl_personal_info(pinfo_ID),
 	FOREIGN KEY (account_ID) REFERENCES tbl_client_account(account_ID),
 );
@@ -643,11 +637,11 @@ CREATE TABLE tbl_claimRequest
 	description VARCHAR (8000) NOT NULL,
 	notifiedByType INT NOT NULL, --1 kapag policyholder, 2 kapag representative
 	notifier_ID INT,
-	status INT NOT NULL, --0 kapag new; determine kung incomplete/complete na ung requirements, 1 kapag nasa manager na, 2 kapag na-transmit na
+	status INT NOT NULL, --0 kapag new; determine kung incomplete/complete na ung requirements, 1 kapag nasa manager na, 2 kapag na-transmit na sa inscompany, 3 rejected
 	del_flag INT NOT NULL,
 	created_at datetime NOT NULL,
 	updated_at datetime NOT NULL,
-	employee_info_ID INT NOT NULL,
+	employee_info_ID INT,
 	FOREIGN KEY (employee_info_ID) REFERENCES tbl_personal_info(pinfo_ID),
 	FOREIGN KEY (claimType_ID) REFERENCES tbl_claim_types(claimType_ID),
 	FOREIGN KEY (account_ID) REFERENCES tbl_insurance_account(account_ID),
@@ -668,6 +662,37 @@ CREATE TABLE tbl_claimRequirements_Files
 	updated_at datetime NOT NULL,
 	FOREIGN KEY (claim_ID) REFERENCES tbl_claimRequest(claim_ID),
 	FOREIGN KEY (claimReq_ID) REFERENCES tbl_claim_requirements(claimReq_ID),
+);
+
+CREATE TABLE tbl_web_claimNotifiedByRepresentative --gumawa ako ng bago kasi try lang to lol
+(
+	web_notifier_ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	web_notifier_Name VARCHAR (200) NOT NULL,
+	web_notifier_Relation VARCHAR (50) NOT NULL,
+	web_notifier_telnum VARCHAR(11),
+	web_notifier_cell_1 VARCHAR (13) NOT NULL,
+	web_notifier_cell_2 VARCHAR (13),
+	web_notifier_email VARCHAR (50) NOT NULL,
+);
+
+CREATE TABLE tbl_web_claimRequest
+(
+	web_claim_ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	web_claimType_ID INT NOT NULL,
+	web_lossDate DATETIME,
+	web_policyno varchar(50) NOT NULL,
+	web_inscompany INT NOT NULL,
+	web_placeOfLoss VARCHAR(100) NOT NULL,
+	web_description VARCHAR (8000) NOT NULL,
+	web_notifiedByType INT NOT NULL, --1 kapag policyholder, 2 kapag representative
+	web_notifier_ID INT,
+	web_status INT, --0 new, 1 accepted at nalipat na sa list, 2 rejected
+	web_del_flag INT NOT NULL,
+	web_created_at datetime NOT NULL,
+	web_updated_at datetime NOT NULL,
+	FOREIGN KEY (web_claimType_ID) REFERENCES tbl_claim_types(claimType_ID),
+	FOREIGN KEY (web_notifier_ID) REFERENCES tbl_web_claimNotifiedByRepresentative(notifier_ID),
+	FOREIGN KEY (web_inscompany) REFERENCES tbl_company_info(comp_ID)
 );
 
 CREATE TABLE tbl_transmit_claim
@@ -725,6 +750,8 @@ CREATE TABLE tbl_ledger
 	commission FLOAT,
 	remarks varchar(100),
 	created_at datetime not null,
+	employee_info_ID INT NOT NULL,
+	FOREIGN KEY (employee_info_ID) REFERENCES tbl_personal_info(pinfo_ID),
 	FOREIGN KEY (account_ID) REFERENCES tbl_insurance_account(account_ID),
 	FOREIGN KEY (payment_ID) REFERENCES tbl_payment_details(payment_ID),
 );

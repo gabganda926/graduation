@@ -44,6 +44,8 @@ use Alert;
 
 use Redirect;
 
+use Session;
+
 class trans_claimsController extends Controller
 {
   public function __construct(claimRequestConnection $claims, claimNotifiedByRepConnection $repre, claimReqFilesConnection $files)
@@ -222,6 +224,8 @@ class trans_claimsController extends Controller
       $this->claimreq->del_flag = 0;
       $this->claimreq->created_at = $mytime;
       $this->claimreq->updated_at = $mytime;
+      $this->claimreq->employee_info_ID = Session::get('id');
+
     }
     if($req->notifby_check == 2)
     {
@@ -240,6 +244,7 @@ class trans_claimsController extends Controller
       $this->claimreq->del_flag = 0;
       $this->claimreq->created_at = $mytime;
       $this->claimreq->updated_at = $mytime;
+      $this->claimreq->employee_info_ID = Session::get('id');
     }
     try
         {
@@ -435,7 +440,7 @@ class trans_claimsController extends Controller
     alert()
     ->success('Record Saved', "Success")
     ->persistent("Close");
-    return Redirect::back();
+    return redirect('/admin/transaction/claim-request-walkin');
   }
 
   public function update_claim_details(Request $req)
@@ -618,7 +623,15 @@ class trans_claimsController extends Controller
     {
       $claim = claimRequestConnection::where('claim_ID', "=", $req->ID)->first();
       $claim->status = 1;
+      $claim->employee_info_ID = Session::get('id');
+      $claim->save();
+    }
 
+    public function reject_request(Request $req)
+    {
+      $claim = claimRequestConnection::where('claim_ID', "=", $req->ID)->first();
+      $claim->status = 3;
+      $claim->employee_info_ID = Session::get('id');
       $claim->save();
     }
 

@@ -58,13 +58,15 @@ class clientAccessController extends Controller
 	{
         $account = clientSystemAccountConnection::where(['username'=>$req['username']])->first();
         $employee = AccountsConnection::where(['user_name'=>$req['username']])->first();
-        $emp = salesAgentConnection::where('agent_ID', "=", $employee->user_ID)->first();
-        $pinfo = personalInfoConnection::where('pinfo_ID', "=", $emp->personal_info_ID)->first();
 
         if($employee)
         {
             if(Hash::check($req['password'],$employee->user_password))
-            {
+            { 
+                $emp = salesAgentConnection::where('agent_ID', "=", $employee->user_ID)->first();
+                $pinfo = personalInfoConnection::where('pinfo_ID', "=", $emp->personal_info_ID)->first();
+                $empl = employeeConnection::where('emp_ID', "=", $emp->agent_ID)->first();
+                $empRole = employeeRoleConnection::where('emp_role_ID', "=", $empl->emp_role_ID)->first();
                 session()->put('username', $req['username']);
                 session()->put('password', $req['password']);
                 Session::put('fname', $pinfo->pinfo_first_name);
@@ -72,8 +74,9 @@ class clientAccessController extends Controller
                 Session::put('lname', $pinfo->pinfo_last_name);
                 Session::put('pic', $pinfo->pinfo_picture);
                 Session::put('id', $pinfo->pinfo_ID);
+                Session::put('role', $empRole->emp_role_Name);
                 $login_redirect = employeeConnection::where('emp_ID', "=",$employee->user_ID)->first();
-                if($login_redirect->emp_role_ID == 0)
+                if($login_redirect->emp_role_ID == 3)
                 {
                     return redirect('/manager/dashboard');
                 }

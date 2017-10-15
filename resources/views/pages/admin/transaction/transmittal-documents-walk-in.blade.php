@@ -72,6 +72,9 @@
                 </div>
                 <form id="transmit" name = "transmit" action = "transmittal-documents/direct_transmit" method="POST">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <div class="col-md-4" style = "display: none;">
+                    <input id = "empid" name = "empid" type="text" class="form-control" value = "{{ Session::get('id') }}">
+                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
                     <div class="card" id="transform">
                         <div class="header">
@@ -496,7 +499,7 @@
                                     
                                     
                             <div class="row clearfix">
-                                <div class="col col-md-4">
+                                <div class="col col-md-6">
                                     <a class="btn bg-blue btn-block waves-effect m-b-15 right" role="button" aria-expanded="false" onclick="
                                     $(this).parents('#summary').hide(800);
                                     $('#asscour').show(800);
@@ -509,12 +512,7 @@
                                         <span style="font-size: 15px;"> PREVIOUS</span>
                                     </a>
                                 </div>
-                                <div class="col col-md-4">
-                                    <a class="btn bg-orange btn-block waves-effect m-b-15 right" role="button" aria-expanded="false" onclick=" window.open('{{ URL::asset ('/pdf/transmittal-form') }}')">
-                                        <span style="font-size: 15px;"> GENERATE PDF</span>
-                                    </a>
-                                </div>
-                                <div class="col col-md-4">
+                                <div class="col col-md-6">
                                     <a class="btn bg-teal btn-block waves-effect m-b-15 right" role="button" aria-expanded="false" onclick="
                                     if($('#transmit').valid())
                                     {

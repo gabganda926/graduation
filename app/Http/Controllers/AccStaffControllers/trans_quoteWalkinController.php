@@ -47,6 +47,8 @@ use Redirect;
 
 use Alert;
 
+use Session;
+
 class trans_quoteWalkinController extends Controller
 {
   public function __construct(quotationListConnection $list,quotationIndividualConnection $indi,quotationCompanyConnection $comp)
@@ -77,6 +79,7 @@ class trans_quoteWalkinController extends Controller
   {
     $this->quote->quote_status = 0;
     $this->quote->del_flag = 0;
+    $this->quote->employee_info_ID = Session::get('id');
 
     try
     {
@@ -200,7 +203,8 @@ class trans_quoteWalkinController extends Controller
   {
     $this->quote->quote_status = 0;
     $this->quote->del_flag = 0;
-
+    $this->quote->employee_info_ID = Session::get('id');
+    
     try
     {
       $this->quote->save();

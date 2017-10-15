@@ -127,6 +127,14 @@
             <!-- User Info -->
             <div class="user-info">
                 <div class="image">
+                    <script>
+                        var comp = "{{ Session::get('pic')}}";
+                        if(comp != "")
+                        {
+                            var src = "/image/employee/{{ Session::get('pic')}}";
+                            $('#userimg').attr('src',src);
+                        }
+                    </script>
                     <img id="userimg" src="{{ URL::asset ('images/user.png') }}" width="55" height="55" alt="User" />
                 </div>
                 <div class="info-container">
@@ -162,7 +170,7 @@
                     </li>
 
                     <li class = "@yield('transPayment')">
-                        <a href="/manager/transaction/payment-home">
+                        <a href="/manager/transaction/payment-list">
                             <i class="material-icons">credit_card</i>
                             <span>PAYMENT</span>
                         </a>
@@ -294,7 +302,7 @@
     <script>
         window.onload = function(){
             var comp = "{{ Session::get('pic')}}";
-            if(comp != null)
+            if(comp != "")
             {
                 var src = "/image/employee/{{ Session::get('pic')}}";
                 $('#userimg').attr('src',src);

@@ -29,6 +29,8 @@ use Alert;
 
 use Redirect;
 
+use Session;
+
 class trans_transmitDocumentController extends Controller
 {
 	public function __construct(transmittalProccessConnection $proc,transmittalRequestConnection $request, transmittalDetailsConnection $details)
@@ -59,6 +61,7 @@ class trans_transmitDocumentController extends Controller
       $this->request->account_ID = $req->acc_ID;
       $this->request->date_recieved = date("Y-m-d H:i:s");
       $this->request->status = 0;
+      $this->request->employee_info_ID = Session::get('id');
       
       try
       {
@@ -208,6 +211,7 @@ class trans_transmitDocumentController extends Controller
     $record = transmittalRequestConnection::where('req_ID','=', $id)->first();
     $record->status = 3;
     $record->date_update = date("Y-m-d H:i:s");
+    $record->employee_info_ID = Session::get('id');
     try
       {
         $record->save();
@@ -313,7 +317,7 @@ class trans_transmitDocumentController extends Controller
     date_default_timezone_set('Asia/Manila');
     $reqID = str_pad($req->clients,11, "0", STR_PAD_LEFT);
 		$record = transmittalRequestConnection::where('req_ID','=', $reqID)->first();
-
+    $record->employee_info_ID = Session::get('id');
 		$record->status = 3;
 		$record->date_update = date("Y-m-d H:i:s");
 		try

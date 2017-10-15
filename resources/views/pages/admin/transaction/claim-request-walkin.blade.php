@@ -6,7 +6,7 @@
 
 @section('transClaims','active')
 
-@section('transClaimsWalkin','active')
+@section('transClaimsList','active')
 
 @section('body')
 
@@ -185,7 +185,7 @@
                                                 <button type="button" class="btn bg-green waves-effect forward_manager" data-id = "{{$claims->claim_ID}}" style="position: right;" data-toggle="tooltip" data-placement="left" title="Accept">
                                                     <i class="material-icons">thumb_up</i><span style="font-size: 15px;">
                                                 </button>
-                                                <button type="button" class="btn bg-red waves-effect" style="position: right;" onclick=""  data-toggle="tooltip" data-placement="left" title="Reject">
+                                                <button type="button" class="btn bg-red waves-effect reject_request" data-id = "{{$claims->claim_ID}}" style="position: right;" onclick=""  data-toggle="tooltip" data-placement="left" title="Reject">
                                                     <i class="material-icons">thumb_down</i><span style="font-size: 15px;">
                                                 </button> 
                                             </td>
@@ -241,6 +241,33 @@
                   success:function(xhr){
                       window.location.reload();
                       $.notify('Record Forwarded to Manager', 
+                        { 
+                          globalPosition: 'top center',
+                          autoHideDelay: 1500, 
+                          className: 'success',
+                        }
+                      );
+                  },
+                    error:function(xhr, ajaxOptions, thrownError,data){
+                      $.notify('There seems to be a problem.', 
+                        { 
+                          globalPosition: 'top center',
+                          autoHideDelay: 1500, 
+                          className: 'error',
+                        }
+                      );
+                  }
+              });
+        });
+
+        $('.reject_request').click(function(event){
+              $.ajax({
+                  type: 'POST',
+                  url: '/admin/transaction/claim-request-walkin/reject-request',
+                  data: {ID:$(this).data('id')},
+                  success:function(xhr){
+                      window.location.reload();
+                      $.notify('Request successfully rejected.', 
                         { 
                           globalPosition: 'top center',
                           autoHideDelay: 1500, 

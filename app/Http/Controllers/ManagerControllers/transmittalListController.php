@@ -104,7 +104,7 @@ class transmittalListController extends Controller
 
         $pdf = PDF::loadView('pages.pdf.transmittal-form',
                 compact('trans', 'creq', 'comp', 'insacc', 'cfile', 'crequire', 'pinfo', 'addr', 'courier'))
-            ->setPaper(array(0, 0, 595, 500), 'portrait');
+            ->setPaper(array(0, 0, 595, 600), 'portrait');
 
         return $pdf->stream();
     }//generates the pdf

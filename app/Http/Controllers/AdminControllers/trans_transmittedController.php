@@ -29,6 +29,8 @@ use Redirect;
 
 use PDF;
 
+use Session;
+
 class trans_transmittedController extends Controller
 {
     public function index()
@@ -64,7 +66,7 @@ class trans_transmittedController extends Controller
         \Log::info($req->statval);
         $data->status = $req->statval;
         $data->date_update = $req->time;
-
+        $data->employee_info_ID = Session::get('id');
     	$data->save();
       alert()
       ->success('Record Updated', "Success")
@@ -87,7 +89,7 @@ class trans_transmittedController extends Controller
 
         $pdf = PDF::loadView('pages.pdf.transmittal-form-pdf',
                 compact('id', 'inscomp', 'proc', 'cour', 'details', 'request', 'documents', 'inf'))
-            ->setPaper(array(0, 0, 595, 500), 'portrait');
+            ->setPaper(array(0, 0, 595, 600), 'portrait');
 
         return $pdf->stream();
     }//generates the pdf

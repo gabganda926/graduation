@@ -68,6 +68,7 @@
                                         <th>Client</th>
                                         <th>Requested Documents
                                         <th class="col-md-1">Status</th>
+                                        <th>Forwarded by</th>
                                         <th class="col-md-1">Date Received</th>
                                         <th class="col-md-1">Action</th>
                                     </tr>
@@ -94,6 +95,13 @@
                                             </ul>
                                         </td>
                                         <td><span class="label bg-green">new</span></td>
+                                        <td>
+                                          @foreach($pinfo as $info)
+                                              @if($req->employee_info_ID == $info->pinfo_ID)
+                                                  {{ $info->pinfo_last_name}}, {{$info->pinfo_first_name}} {{$info->info_middle_name }}
+                                              @endif
+                                          @endforeach
+                                        </td>
                                         <td>{{\Carbon\Carbon::parse($req->date_recieved)->format("M d,Y H:i:s")}}</td>
                                         <td><button type="button" class="btn bg-blue waves-effect view" style="position: right;" onclick="window.document.location='{{ URL::asset('admin/transaction/transmittal-info-request') }}';" data-toggle="tooltip" data-placement="left" title="View details" data-id = "{{$req->req_ID}}">
                                             <i class="material-icons">security</i><span style="font-size: 15px;">

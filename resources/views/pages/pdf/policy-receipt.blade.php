@@ -182,7 +182,7 @@
 			</tbody>
         </table><br/><br/>
 
-
+		<div style="position: absolute; bottom: 0px;">
         <table width="100%">
         	<thead>
         		<tr>
@@ -197,16 +197,17 @@
         			<td height="50" valign="bottom">_______________________________</td>
         		</tr>
         		<tr>
-        			<td><b>Ma. Gabriella T. Rola</b></td>
+        			<td><b>{{Session::get('fname')}} {{Session::get('mname')}} {{Session::get('lname')}}</b></td>
         			<td></td>
         		</tr>
 
         		<tr>
-        			<td>Accounting Staff</td>
+        			<td>{{Session::get('role') }}</td>
         			<td></td>
         		</tr>
         	</tbody>
         </table>
+    	</div>
 	</body>
 
 </html>

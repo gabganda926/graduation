@@ -596,22 +596,22 @@
               value = numberWithCommas('{{$insaccount->vehicle_value}}');
 
               @if($paydetails->account_ID == $insaccount->account_ID)
-                  pa1 = numberWithCommas('{{ $paydetails->pa_cover }}');
-                  pa2 = numberWithCommas('{{ $paydetails->pa_premium }}');
+                  pa1 = numberWithCommas('<?php $number = round($paydetails->pa_cover,2); echo number_format($number, 2, '.', ','); ?>'); 
+                  pa2 = numberWithCommas('<?php $number = round($paydetails->pa_premium,2); echo number_format($number, 2, '.', ','); ?>');
                   pa = 'COVER: ₱' + pa1 + ' - PREMIUM: ₱' +pa2;
-                  pd1 = numberWithCommas('{{ $paydetails->pd_cover }}');
-                  pd2 = numberWithCommas('{{ $paydetails->pd_premium }}');
+                  pd1 = numberWithCommas('<?php $number = round($paydetails->pd_cover,2); echo number_format($number, 2, '.', ','); ?>');
+                  pd2 = numberWithCommas('<?php $number = round($paydetails->pd_cover,2); echo number_format($number, 2, '.', ','); ?>');
                   pd = 'COVER: ₱' + pd1 + ' - PREMIUM: ₱' +pd2;
-                  bi1 = numberWithCommas('{{ $paydetails->bi_cover }}');
-                  bi2 = numberWithCommas('{{ $paydetails->bi_premium }}');
+                  bi1 = numberWithCommas('<?php $number = round($paydetails->bi_cover,2); echo number_format($number, 2, '.', ','); ?>');
+                  bi2 = numberWithCommas('<?php $number = round($paydetails->bi_cover,2); echo number_format($number, 2, '.', ','); ?>');
                   bi = 'COVER: ₱' + bi1 + ' - PREMIUM: ₱' +bi2;
-                  ded = numberWithCommas('{{ $paydetails->deductible }}');
-                  ar = numberWithCommas('{{ $paydetails->arl }}');
-                  aon1 = numberWithCommas('{{ $paydetails->aon_cover }}');
-                  aon2 = numberWithCommas('{{ $paydetails->aon_premium }}');
-                  aonz = 'COVER: ₱' + aon1 + ' - PREMIUM: ₱' +aon2;
-                  tow = numberWithCommas('{{ $paydetails->towing }}');
-                  data = numberWithCommas('{{ $paydetails->total }}');
+                  ded = numberWithCommas('<?php $number = round($paydetails->deductible,2); echo number_format($number, 2, '.', ','); ?>');
+                  ar = numberWithCommas('<?php $number = round($paydetails->arl,2); echo number_format($number, 2, '.', ','); ?>');
+                  aon1 = numberWithCommas('<?php $number = round($paydetails->aon_cover,2); echo number_format($number, 2, '.', ','); ?>');
+                  aon2 = numberWithCommas('<?php $number1 = round($paydetails->aon_premium,2); echo number_format($number1, 2, '.', ','); ?>');
+                  aonz = 'COVER: ₱ ' + aon1 + ' - PREMIUM: ₱ ' +aon2;
+                  tow = numberWithCommas('<?php $number = round($paydetails->towing,2); echo number_format($number, 2, '.', ','); ?>');
+                  data = numberWithCommas('<?php $number = round($paydetails->total,2); echo number_format($number, 2, '.', ','); ?>');
               @endif
 
             $('#insurance_company').val(inscomp);

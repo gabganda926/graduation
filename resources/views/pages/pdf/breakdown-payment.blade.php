@@ -172,9 +172,10 @@
 			</tbody>
         </table><br/><br/>
 
-
-        <p><STRONG>Ma. Gabriella Tan Rola</STRONG></p><br/>
-        <p>Accounting Staff</p>
+        <div style="position: absolute; bottom: 0px;">
+        <p><STRONG>{{Session::get('fname')}} {{Session::get('mname')}} {{Session::get('lname')}}</STRONG></p><br/>
+        <p>{{Session::get('role') }}</p>
+        </div>
 	</body>
 
 </html>

@@ -129,6 +129,14 @@
                     <img id="userimg" src="{{ URL::asset ('images/user.png') }}" width="55" height="55" alt="User" />
                 </div>
                 <div class="info-container">
+                    <script>
+                        var comp = "{{ Session::get('pic')}}";
+                        if(comp != "")
+                        {
+                            var src = "/image/employee/{{ Session::get('pic')}}";
+                            $('#userimg').attr('src',src);
+                        }
+                    </script>
                     <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{Session::get('fname')}} {{Session::get('mname')}} {{Session::get('lname')}}</div>
                     <div class="text" style="color: white;">Administrator</div>
                     <div class="btn-group user-helper-dropdown">
@@ -324,13 +332,23 @@
                                 </a>
                                 <ul class="ml-menu">
                                     <li class = "@yield('transClaimsWalkin')">
-                                        <a href="/admin/transaction/claim-request-walkin">
+                                        <a href="/admin/transaction/claim-create-request-walkin">
                                             <span>Walk in - Claim Request</span>
+                                        </a>
+                                    </li>
+                                    <li class = "@yield('transClaimsList')">
+                                        <a href="/admin/transaction/claim-request-walkin">
+                                            <span>Claim Requests</span>
                                         </a>
                                     </li>
                                     <li class = "@yield('transClaimsOnline')">
                                         <a href="/admin/transaction/claim-request-online">
                                             <span>Online - Claim Request</span>
+                                        </a>
+                                    </li>
+                                    <li class = "@yield('transClaimsRejected')">
+                                        <a href="/admin/transaction/claim-rejected">
+                                            <span>Rejected Requests Folder</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -534,13 +552,11 @@
     <script>
         window.onload = function(){
             var comp = "{{ Session::get('pic')}}";
-            if(comp != null)
+            if(comp != "")
             {
                 var src = "/image/employee/{{ Session::get('pic')}}";
                 $('#userimg').attr('src',src);
             }
-
-
         }
     </script>
 

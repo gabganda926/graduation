@@ -104,8 +104,8 @@
                                             <th>Total Premium</th>
                                             <th>Insurance Company</th>
                                             <th>Sales Agent</th>
-                                            <th>Sent by</th>
-                                            <th>Action</th>
+                                            <th>Forwarded by</th>
+                                            <th class="col-md-1">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -194,7 +194,11 @@
                                                 @endforeach
                                                 </td>
                                                 <td>
-                                                 {{$indi->pinfo_last_name.", ".$indi->pinfo_first_name." ".$indi->pinfo_middle_name}}
+                                                 @foreach($pinfo as $inf)
+                                                   @if($inf->pinfo_ID == $list->employee_info_ID)
+                                                    {{$inf->pinfo_last_name.", ".$inf->pinfo_first_name." ".$inf->pinfo_middle_name}}
+                                                   @endif
+                                                  @endforeach
                                                 </td>
                                                 <td><button type="button" class="btn bg-light-blue waves-effect" data-toggle="tooltip" data-placement="left" title="View details" onclick="
                                                 $('#vehicle_type').val('{{$indi->vehicle_type_ID}}');
@@ -632,7 +636,7 @@
                             </div>
 
                             <div class="row clearfix">
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <button type="button" id="next1"  class="btn btn-block bg-blue waves-effect left" onclick=" 
                                     $(this).parents('#qDet').hide(800);
                                     $('#det').show(800);
@@ -644,10 +648,7 @@
                                         <span style="font-size: 15px;"> PREVIOUS</span>
                                     </button>
                                 </div>
-                                <div class="col-md-4">
-                                    <button type="button" id="next1" class="btn btn-block bg-orange waves-effect left"> <span style="font-size: 15px;" onclick=" window.open('{{ URL::asset ('/admin/pdf/quotation-proposal') }}')"> GENERATE PDF</span></button>
-                                </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <button type="button" id="next1"  class="btn btn-block bg-teal waves-effect left" onclick=" 
                                     $(this).parents('#qDet').hide(800);
                                     $('#indDet').show(800);

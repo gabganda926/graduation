@@ -30,380 +30,34 @@
                 <div style="float: right; width: 57%">
                     <h3><b>Online Claim Notification</b></h3><br/>
                     <label><small>Welcome to the Online Claim Notification of Compreline Insurance! Please complete the form below to facilitate the notification of your claim. Our Representative will immediately get in touch with you regarding this claim. Thank you.</small></label><br/><br/>
-
+                <form id="add" name = "add" action = "/claims/sign-in/send" method="POST">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <div class="col-md-4" style = "display: none;">
+                    <input id = "notifby_check" name = "notifby_check" type="text" class="form-control">
+                 </div>
+                <div class="col-md-4" style = "display: none;">
+                   <input id = "time" name = "time" type="text" class="form-control">
+                </div>
+                <div class="col-md-2" style = "display: none;">
+                   <input id = "claimid" name = "claimid" type="text" class="form-control">
+                </div>
+                <div class="col-md-2" style = "display: none;">
+                   <input id = "inscompid" name = "inscompid" type="text" class="form-control">
+                </div>
                     <div>
                         <label><small><b>A. Policy Holder Details</b></small></label><br/>
                         <div class="col-xs-12">
-                            <label for="1"><small>Insurance Company: </small></label>
-                            <select id="1" class="selectpicker" data-size="10" data-live-search="true" data-width="100%">
-                                <option value="1">Company1</option>
-                                <option value="2">Company2</option>
-                                <option value="3">Company3</option>
+                            <label><small>Insurance Company: </small></label>
+                            <select id="new_inscomp" name="new_inscomp" class="selectpicker" data-width="100%">
+                            @foreach($inscomp as $ins)
+                                <option value="{{$ins->comp_ID}}">{{$ins->comp_name}}</option>
+                            @endforeach
                             </select>
                         </div>
                         <div class="col-xs-12">
-                            <br/><label for="1"><small>Policy Number: </small></label>
-                            <input type="text" name="plate" style="width: 100%">
+                            <br/><label><small>Policy Number: </small></label>
+                            <input type="text" id="new_policyno" name="new_policyno" style="width: 100%">
                         </div><br/>
-                        <div class="sky_form1 col col-xs-12">
-                            <ul>
-                                <br/><li><label><small>Client Type: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</small></label></li>
-                                <li><label class="radio left"><input type="radio" name="radio" data-toggle="collapse" data-target="#individualType"><i></i>Individual&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></li>
-                                <li><label class="radio"><input type="radio" name="radio" data-toggle="collapse" data-target="#companyType"><i></i>Company</label></li><br/><br/>
-                                <div class="clearfix"></div>
-                            </ul>
-                        </div>
-
-                <!-- PAG PINILI YUNG INDIVIDUAL -->
-                        <div class="collapse fade" id="individualType">
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <br/><br/><label for="1"><small><b>Personal Information: </b></small></label> <br/>
-                                </div>
-                                    <div class="col-xs-12">
-                                        <label for="1"><small>First Name: </small></label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 100%">
-                                        </div>
-                                    </div><br/>
-
-                                    <div class="col-xs-12">
-                                        <br/><label for="1"><small>Middle Name: </small></label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 100%">
-                                        </div>
-                                    </div><br/>
-
-                                    <div class="col-xs-12">
-                                        <br/><label for="1"><small>Last Name: </small></label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 100%">
-                                        </div>
-                                    </div><br/>
-                            </div>
-
-
-                            <div class="row">
-                                <div class="col-xs-12">
-                                <br/><br/><label for="1"><small><b>Address: </b></small></label>
-                                </div>
-                                    <div class="col-xs-12">
-                                        <br/><label for="1"><small>No./Building/Street: </small></label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 100%">
-                                        </div>
-                                    </div><br/>
-
-                                    <div class="col-xs-12">
-                                        <br/><label for="1"><small>Village/Subdivision: </small></label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 100%">
-                                        </div>
-                                    </div><br/>
-
-                                    <div class="col-xs-12">
-                                        <br/><label for="1"><small>Municipality/City: </small></label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 100%">
-                                        </div>
-                                    </div><br/>
-
-                                    <div class="col-xs-12">
-                                        <br/><label for="1"><small>Province: </small></label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 100%">
-                                        </div>
-                                    </div><br/>
-
-                                <div class="col-xs-12">
-                                <br/><br/><label for="1"><small><b>Contact Details: </b></small></label> <br/>
-                                </div>
-                                    <div class="col-xs-12">
-                                        <label for="1"><small>Cellphone Number: </small></label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 100%">
-                                        </div>
-                                    </div><br/>
-
-                                    <div class="col-xs-12">
-                                        <br/><label for="1"><small>Cellphone Number (Alternate): </small></label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 100%">
-                                        </div>
-                                    </div><br/>
-
-                                    <div class="col-xs-12">
-                                        <br/><label for="1"><small>Telephone Number: </small></label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 100%">
-                                        </div>
-                                    </div><br/>
-
-                                    <div class="col-xs-12">
-                                        <br/><label for="1"><small>Email: </small></label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 100%">
-                                        </div>
-                                    </div><br/>
-                            </div>
-                        </div> <!-- END OF INDIVIDUAL ROW COLLAPSE--> 
-
-                <!-- PAG PINILI YUNG COMPANY -->
-                        <div class="collapse fade" id="companyType">
-                            <div class="row">
-                                <div class="col-xs-12">
-                                <br/><br/><label for="1"><small><b>Company Details: </b></small></label> <br/>
-                                </div>
-                                    <div class="col-xs-12">
-                                        <label for="1"><small>Company Name: </small></label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 100%">
-                                        </div>
-                                    </div><br/>
-
-                                <div class="col-xs-12">
-                                <br/><br/><label for="1"><small><b>Company Address: </b></small></label> <br/>
-                                </div>
-                                    <div class="col-xs-12">
-                                        <label for="1"><small>No./Building/Street: </small></label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 100%">
-                                        </div>
-                                    </div><br/>
-
-                                    <div class="col-xs-12">
-                                        <br/><label for="1"><small>Village/Subdivision: </small></label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 100%">
-                                        </div>
-                                    </div><br/>
-
-                                    <div class="col-xs-12">
-                                        <br/><label for="1"><small>Municipality/City: </small></label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 100%">
-                                        </div>
-                                    </div><br/>
-
-                                    <div class="col-xs-12">
-                                        <br/><label for="1"><small>Province: </small></label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 100%">
-                                        </div>
-                                    </div><br/>
-
-                                <div class="col-xs-12">
-                                <br/><br/><label for="1"><small><b>Company Contact Details: </b></small></label> <br/>
-                                </div>
-                                    <div class="col-xs-12">
-                                        <label for="1"><small>Cellphone Number: </small></label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 100%">
-                                        </div>
-                                    </div><br/>
-
-                                    <div class="col-xs-12">
-                                        <br/><label for="1"><small>Cellphone Number (Alternate): </small></label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 100%">
-                                        </div>
-                                    </div><br/>
-
-                                    <div class="col-xs-12">
-                                        <br/><label for="1"><small>Telephone Number: </small></label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 100%">
-                                        </div>
-                                    </div><br/>
-
-                                    <div class="col-xs-12">
-                                        <br/><label for="1"><small>Email: </small></label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 100%">
-                                        </div>
-                                    </div><br/>
-
-                                <div class="col-xs-12">
-                                <br/><br/><label for="1"><small><b>Contact Person Information: </b></small></label> <br/>
-                                </div>
-                                    <div class="col-xs-12">
-                                        <label for="1"><small>First Name: </small></label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 100%">
-                                        </div>
-                                    </div><br/>
-
-                                    <div class="col-xs-12">
-                                        <br/><label for="1"><small>Middle Name: </small></label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 100%">
-                                        </div>
-                                    </div><br/>
-
-                                    <div class="col-xs-12">
-                                        <br/><label for="1"><small>Last Name: </small></label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 100%">
-                                        </div>
-                                    </div><br/>
-
-                                <div class="col-xs-12">
-                                <br/><br/><label for="1"><small><b>Address: </b></small></label> <br/>
-                                </div>
-                                    <div class="col-xs-12">
-                                        <label for="1"><small>No./Building/Street: </small></label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 100%">
-                                        </div>
-                                    </div><br/>
-
-                                    <div class="col-xs-12">
-                                        <br/><label for="1"><small>Village/Subdivision: </small></label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 100%">
-                                        </div>
-                                    </div><br/>
-
-                                    <div class="col-xs-12">
-                                        <br/><label for="1"><small>Municipality/City: </small></label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 100%">
-                                        </div>
-                                    </div><br/>
-
-                                    <div class="col-xs-12">
-                                        <br/><label for="1"><small>Province: </small></label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 100%">
-                                        </div>
-                                    </div><br/>
-
-                                <div class="col-xs-12">
-                                <br/><br/><label><small><b>Contact Details: </b></small></label> <br/>
-                                </div>
-                                    <div class="col-xs-12">
-                                        <label for="1"><small>Cellphone Number: </small></label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 100%">
-                                        </div>
-                                    </div><br/>
-
-                                    <div class="col-xs-12">
-                                        <br/><label for="1"><small>Cellphone Number (Alternate): </small></label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 100%">
-                                        </div>
-                                    </div><br/>
-
-                                    <div class="col-xs-12">
-                                        <br/><label for="1"><small>Telephone Number: </small></label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 100%">
-                                        </div>
-                                    </div><br/>
-
-                                    <div class="col-xs-12">
-                                        <br/><label for="1"><small>Email: </small></label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                            </span>
-                                            <input type="text" name="plate" style="width: 100%">
-                                        </div>
-                                    </div><br/>
-                                </div>
-                        </div> <!-- END OF COMPANY COLLAPSE -->
-
                     </div> <!-- END OF DIV DETAILS -->
 
 
@@ -413,20 +67,28 @@
                         </div>
                         <label><small><b>B. Details of Claim/Loss</b></small></label>
                         <div class="col-xs-12">
-                            <br/><label for="1"><small>Date of Loss: </small></label>
-                            <input type="date" name="plate" style="width: 50%">
+                            <br/><label><small>Date of Loss: </small></label>
+                            <input type="date" id="new_lossDate" name="new_lossDate" style="width: 50%">
                         </div><br/>
                         <div class="col-xs-12">
-                            <br/><label for="1"><small>Estimated Time of Loss: </small></label>
-                            <input type="time" name="plate" style="width: 50%">
+                            <br/><label><small>Estimated Time of Loss: </small></label>
+                            <input type="time" id="new_lossTime" name="new_lossTime" style="width: 50%">
                         </div><br/>
                         <div class="col-xs-12">
-                            <br/><label for="1"><small>Place of Loss: </small></label>
-                            <input type="text" name="plate" style="width: 100%">
+                            <br/><label><small>Claim Type: </small></label>
+                            <select id="new_claimType" name="new_claimType" class="selectpicker" data-width="50%">
+                                @foreach($comp as $type)
+                                <option value="{{ $type->claimType_ID }}">{{ $type->claimType }}</option>
+                                @endforeach
+                            </select>
                         </div><br/>
                         <div class="col-xs-12">
-                            <br/><label for="1"><small>Brief Description of the Circumstances of Loss: </small></label>
-                            <textarea style="resize: none;" rows="15" cols="80"></textarea>
+                            <br/><label><small>Place of Loss: </small></label>
+                            <input type="text" id="new_lossPlace" name="new_lossPlace" style="width: 100%">
+                        </div><br/>
+                        <div class="col-xs-12">
+                            <br/><label><small>Brief Description of the Circumstances of Loss: </small></label>
+                            <textarea id="new_descrip" name="new_descrip" style="resize: none;" rows="15" cols="80"></textarea>
                         </div>
                     </div> <!-- END OF DIV DETAILS -->
 
@@ -438,14 +100,14 @@
                         <div class="col-xs-12">
                             <div class="sky_form1 col col-xs-12">
                                 <ul>
-                                    <br/><li><label class="radio left"><input type="radio" name="radio"><i></i>Policy holder&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></li>
-                                    <li><label class="radio"><input type="radio" name="radio" data-toggle="collapse" data-target="#rep"><i></i>Representative of Policy holder</label></li><br/><br/>
-                                    <div class="clearfix"></div>
+                                    <br/><li><label class="radio left"><input type="radio" id="new_radio" name="new_radio" onclick="$('#rep').hide(600); $('#notifby_check').val('1');"><i></i>Policy holder&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></li>
+                                    <li><label class="radio"><input type="radio" id="new_radio" name="new_radio" onclick="$('#rep').show(600);
+                                        $('#notifby_check').val('2');"><i></i>Representative of Policy holder</label></li><br/><br/>
                                 </ul>
                             </div>
                         </div>
 
-                        <div class="collapse fade" id="rep">
+                        <div id="rep">
                             <div class="row">
                                 <div class="col-xs-12">
                                     <br/><label><small><b>If other than the policy holder, please specify the relation to policy holder.</b></small></label>
@@ -453,11 +115,11 @@
 
                                 <div class="col-xs-12">
                                     <br/><label><small>Name: </small></label>
-                                    <input type="text" name="" style="width: 100%;">
+                                    <input type="text" id="new_repName" name="new_repName" style="width: 100%;">
                                 </div>
                                 <div class="col-xs-12">
                                     <br/><label><small>Relation to Policy holder: </small></label>
-                                    <input type="text" name="" style="width: 100%;">
+                                    <input type="text" id="new_repRel" name="new_repRel" style="width: 100%;">
                                 </div>
 
                                 <div class="col-xs-12">
@@ -466,22 +128,22 @@
 
                                 <div class="col-xs-12">
                                     <br/><label><small>Telephone: </small></label>
-                                    <input type="text" name="" style="width: 100%;">
+                                    <input type="text" id="new_repTel" name="new_repTel" style="width: 100%;">
                                 </div>
 
                                 <div class="col-xs-12">
                                     <br/><label><small>Cellphone Number: </small></label>
-                                    <input type="text" name="" style="width: 100%;">
+                                    <input type="text" id="new_repCpnum" name="new_repCpnum" style="width: 100%;">
                                 </div>
 
                                 <div class="col-xs-12">
                                     <br/><label><small>Cellphone Number (Alternate): </small></label>
-                                    <input type="text" name="" style="width: 100%;">
+                                    <input type="text" id="new_repCpnum2" name="new_repCpnum2" style="width: 100%;">
                                 </div>
 
                                 <div class="col-xs-12">
                                     <br/><label><small>Email: </small></label>
-                                    <input type="email" name="" style="width: 100%;">
+                                    <input type="email" id="new_repEmail" name="new_repEmail" style="width: 100%;">
                                 </div>
                             </div>
                         </div>
@@ -492,26 +154,21 @@
                         <div class="col-xs-12">
                             <br/><br/>
                         </div>
-                        <label><small><b>D. Documents</b></small></label>
-                        <div class="col-xs-12">
-                            <br/><label for="1"><small>Upload Claim Documents</small></label>
-                        </div><br/>
-                        <div class="col-xs-12">
-                            <br/><input type="file" name="plate" style="width: 50%">
-                        </div><br/>
-                        <div class="col-xs-12">
-                            <br/><a href="">Add more file + </a>
-                        </div>
 
                         <div class="col-xs-12">
                             <br/><button type="button" class="btn btn-block btn-primary" onclick="window.open('{{ URL::asset('/claim/requirements') }}')">View claim requirements</button>
                         </div>
 
                         <div class="col-xs-12">
-                            <button type="button" class="btn btn-block btn-success">Submit</button>
+                            <button type="submit" class="btn btn-block btn-success" onclick="
+                            document.getElementById('time').value = formatDate(new Date());
+                            document.getElementById('notifby_check').value = getVal();
+                            document.getElementById('claimid').value = getClaimId();
+                            document.getElementById('inscompid').value = getCompId();
+                            ">Submit</button>
                         </div>
                     </div> <!-- END OF DIV DETAILS -->
-
+                </form>
                 </div><!-- END OF DIV FLOAT RIGHT -->
 
                 <div class="row">
@@ -527,20 +184,88 @@
 </div>
 </section>
 
-<script type="text/javascript">
-  $('.collapse').on('show.bs.collapse', function () {
-    $('.collapse.in').each(function(){
-        $(this).collapse('hide');
-    });
-  });
-</script>
+<script>
+    function addZero(i) {
+                    if (i < 10) {
+                        i = "0" + i;
+                    }
+                    return i;
+                }
 
+        function formatDate(date)
+        {
+          var monthNames = [
+            "January", "February", "March",
+            "April", "May", "June", "July",
+            "August", "September", "October",
+            "November", "December"
+          ];
+
+          var day = date.getDate();
+          var monthIndex = date.getMonth() + 1;
+          var year = date.getFullYear();
+          var h = addZero(date.getHours());
+          var m = addZero(date.getMinutes());
+          var s = addZero(date.getSeconds());
+
+          return year + '-' + monthIndex + '-' + day + ' ' + h + ':' + m + ':' + s;
+        }
+
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1;
+        var yyyy = today.getFullYear();
+
+
+        function parseDate(input) {
+          var parts = input.match(/(\d+)/g);
+          // new Date(year, month [, date [, hours[, minutes[, seconds[, ms]]]]])
+          return new Date(parts[0], parts[1]-1, parts[2]); // months are 0-based
+        }
+
+        Date.prototype.addDays = function(days) {
+          var dat = new Date(this.valueOf());
+          dat.setDate(dat.getDate() + days);
+          return dat;
+        } 
+
+        function pad (str, max) {
+          str = str.toString();
+          return str.length < max ? pad("0" + str, max) : str;
+        }
+
+        if(dd<10){dd='0'+dd} if(mm<10){mm='0'+mm} today = yyyy+'-'+mm+'-'+dd;
+
+        function getVal(rc){
+           rc = $('#notifby_check').val();
+           return rc;
+        } 
+
+        function getClaimId(clid){
+           clid = $('#claimid').val();
+           return clid;
+        } 
+
+        function getCompId(cli){
+           cli = $('#inscompid').val();
+           return cli;
+        } 
+
+        $('#new_claimType').on('change textInput input', function () {
+            $('#claimid').val($('#new_claimType').val());
+        });
+
+        $('#new_inscomp').on('change textInput input', function () {
+            $('#inscompid').val($('#new_inscomp').val());
+        });
+</script>
 
 <script>
 //according menu
 
 $(document).ready(function()
 {
+    $('#rep').hide(200);
     //Add Inactive Class To All Accordion Headers
     $('.accordion-header').toggleClass('inactive-header');
     
@@ -567,6 +292,75 @@ $(document).ready(function()
     });
     
     return false;
+});
+
+$.validator.addMethod("cpValidator", function(value, element) {
+    return this.optional(element) || /^((\+63)|0)\d{10}$/i.test(value);
+ }, "Invalid Cellphone Format");
+$.validator.addMethod("email", function(value, element) {
+    return this.optional(element) || /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i.test(value);
+ }, "Invalid Email Address Format");
+$.validator.addMethod("alphanumeric", function(value, element) {
+    return this.optional(element) || /^[A-Za-z][A-Za-z0-9 '-.]*$/i.test(value);
+ }, "This field must contain only letters, numbers, dashes, space, apostrophe or dot.");
+$.validator.addMethod("alpha", function(value, element) {
+    return this.optional(element) || /^[A-Za-z][A-Za-z '-.]*$/i.test(value);
+ }, "This field must contain only letters, space, dash, apostrophe or dot.");
+$.validator.addMethod("blcknumber", function(value, element) {
+    return this.optional(element) || /^[A-Za-z0-9][A-Za-z0-9 '-.]*$/i.test(value);
+ }, "This field must contain only letters, numbers, space, dash, apostrophe or dot.");
+
+
+// Wait for the DOM to be ready
+$(function() {
+  // Initialize form validation on the registration form.
+  // It has the name attribute "registration"
+  $("form[name='add']").validate({
+    // Specify validation rules
+    rules: {
+      // The key name on the left side is the name attribute
+      // of an input field. Validation rules are defined
+      // on the right side
+      new_inscomp:{
+        required: true,
+      },
+      new_policyno:{
+        required: true,
+      },
+      new_lossDate:{
+        required: true,
+      },
+      new_lossTime:{
+        required: true,
+      },
+      new_claimType:{
+        required: true,
+      },
+      new_lossPlace:{
+        required: true,
+      },
+      new_descrip:{
+        required: true,
+      },
+      new_repCpnum:{
+        cpValidator: true
+      },
+      new_repCpnum2:{
+        cpValidator: true
+      },
+      new_repTel:{
+        maxlength: 7
+      },
+      new_repEmail:{
+        email: true
+      }
+    },
+    // Make sure the form is submitted to the destination defined
+    // in the "action" attribute of the form when valid
+    submitHandler: function(form) {
+      form.submit();
+    }
+  });
 });
 </script>
 @endsection

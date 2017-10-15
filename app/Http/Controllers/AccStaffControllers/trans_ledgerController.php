@@ -47,6 +47,8 @@ use Alert;
 
 use Redirect;
 
+use Session;
+
 class trans_ledgerController extends Controller
 {
 	public function __construct(LedgerConnection $ledger)
@@ -107,7 +109,7 @@ class trans_ledgerController extends Controller
    		$this->le->income = $req->inc;
    		$this->le->commission = $req->comm;
    		$this->le->created_at = $mytime;
-
+      $this->le->employee_info_ID = Session::get('id');
    		try
     	{
     		$this->le->save();

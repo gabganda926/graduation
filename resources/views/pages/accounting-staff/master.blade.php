@@ -109,7 +109,7 @@
             <img src="{{ URL::asset('images/logo.png') }}" width="48" height="48" alt="Compreline" style="float:left" />
                 <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
                 <a href="javascript:void(0);" class="bars"></a>
-                <a class="navbar-brand" href="/admin/dashboard"><b>COMPRELINE | INSURANCE</b></a>
+                <a class="navbar-brand" href="/accounting-staff/dashboard"><b>COMPRELINE | INSURANCE</b></a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -130,7 +130,15 @@
                     <img id="userimg" src="{{ URL::asset ('images/user.png') }}" width="55" height="55" alt="User" />
                 </div>
                 <div class="info-container">
-                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{Session::get('fname')}} {{Session::get('mname')}} {{Session::get('lname')}}
+                    <script>
+                        var comp = "{{ Session::get('pic')}}";
+                        if(comp != "")
+                        {
+                            var src = "/image/employee/{{ Session::get('pic')}}";
+                            $('#userimg').attr('src',src);
+                        }
+                    </script>
+                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{Session::get('fname')}} {{Session::get('mname')}} {{Session::get('lname')}}</div>
                     <div class="text" style="color: white;">Accounting Staff</div>
                     <div class="btn-group user-helper-dropdown">
                         <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
@@ -286,8 +294,6 @@
                 var src = "/image/employee/{{ Session::get('pic')}}";
                 $('#userimg').attr('src',src);
             }
-
-
         }
     </script>
 

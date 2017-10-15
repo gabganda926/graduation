@@ -624,6 +624,9 @@
                         </div>
                     </div>
                     <form name = "claimrequest" id = "claimrequest" action = "/admin/transaction/claim-create-request-walkin/submit" method = "POST" enctype="multipart/form-data">
+                    <div class="col-md-4" style = "display: none;">
+                        <input id = "empid" name = "empid" type="text" class="form-control" value = "{{ Session::get('id') }}">
+                     </div>
                      <div class="card" id="clDet">
                         <div class="header">
                         <h3 style="text-align: center;"><img src="{{ URL::asset ('images/icons/closed.png')}}" style="height: 50px; width: 50px;"> II. Details of Claim/Loss </h3>

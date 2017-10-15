@@ -122,14 +122,14 @@
     <!-- About Section -->
     <section class="success" id="about">
       <div class="container">
-        <h2 class="text-center">About</h2>
+        <h2 class="text-center">About Compreline</h2>
         <hr class="star-light">
         <div class="row">
           <div class="col-lg-4 ml-auto">
-            <p>Freelancer is a free bootstrap theme created by Start Bootstrap. The download includes the complete source files including HTML, CSS, and JavaScript as well as optional LESS stylesheets for easy customization.</p>
+            <p>Compreline Insurance Agency, is a non-life Insurance Agency established in 2015.</p>
           </div>
           <div class="col-lg-4 mr-auto">
-            <p>Whether you're a student looking to showcase your work, a professional looking to attract clients, or a graphic artist looking to share your projects, this template is the perfect starting point!</p>
+            <p>Non-Life Insurance Broker that combines products provided by the most respected insurance providers into a custom package that meets the client’s personal or business needs. </p>
           </div>
           <div class="col-lg-8 mx-auto text-center">
             <a href="/sign-in" class="btn btn-lg btn-outline">
@@ -197,8 +197,9 @@
           <div class="row">
             <div class="footer-col col-md-4">
               <h3>Location</h3>
-              <p>3481 Melrose Place
-                <br>Beverly Hills, CA 90210</p>
+              <p>1610, 3 Marikina-Infanta Highway,
+                <br>Pasig, Metro Manila</p>
+
             </div>
             <div class="footer-col col-md-4">
               <h3>Around the Web</h3>
@@ -269,18 +270,17 @@
             <div class="row">
               <div class="col-lg-8 mx-auto">
                 <div class="modal-body">
-                  <h2>Project Title</h2>
+                  <h2>Commonwealth Insurace Company</h2>
                   <hr class="star-primary">
                   <img class="img-fluid img-centered" src="img/portfolio/cabin.png" alt="">
-                  <p>Use this area of the page to describe your project. The icon above is part of a free icon set by
-                    <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
+                  <p>Commonwealth Insurance Company (CIC) was established in 1935 by Don Andres Soriano, who also founded San Miguel Brewery. Computed to be in its 7th decade, CIC is one of the most experienced insurers in the Philippines.</p>
                   <ul class="list-inline item-details">
-                    <li>Client:
+                    <li>Website:
                       <strong>
-                        <a href="http://startbootstrap.com">Start Bootstrap</a>
+                        <a href="http://cic.com.ph/">Commonwealth Insurance Company</a>
                       </strong>
                     </li>
-                    <li>Date:
+<!--                     <li>Date:
                       <strong>
                         <a href="http://startbootstrap.com">April 2014</a>
                       </strong>
@@ -289,7 +289,7 @@
                       <strong>
                         <a href="http://startbootstrap.com">Web Development</a>
                       </strong>
-                    </li>
+                    </li> -->
                   </ul>
                   <button class="btn btn-success" type="button" data-dismiss="modal">
                     <i class="fa fa-times"></i>
@@ -313,18 +313,17 @@
             <div class="row">
               <div class="col-lg-8 mx-auto">
                 <div class="modal-body">
-                  <h2>Project Title</h2>
+                  <h2>FPG Insurance Company</h2>
                   <hr class="star-primary">
                   <img class="img-fluid img-centered" src="img/portfolio/cake.png" alt="">
-                  <p>Use this area of the page to describe your project. The icon above is part of a free icon set by
-                    <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
+                  <p>Established in 1958 by the Zuellig Group of Companies, FPG Insurance, formerly known as Federal Phoenix Assurance Co., Inc. has built an enviable reputation for developing in-depth customer insights that support the creation of relevant and comprehensive commercial and individual insurance products and solutions.</p>
                   <ul class="list-inline item-details">
-                    <li>Client:
+                    <li>Website:
                       <strong>
-                        <a href="http://startbootstrap.com">Start Bootstrap</a>
+                        <a href="http://fpgins.com.ph/">FPG Insurace Company</a>
                       </strong>
                     </li>
-                    <li>Date:
+<!--                     <li>Date:
                       <strong>
                         <a href="http://startbootstrap.com">April 2014</a>
                       </strong>
@@ -333,7 +332,7 @@
                       <strong>
                         <a href="http://startbootstrap.com">Web Development</a>
                       </strong>
-                    </li>
+                    </li> -->
                   </ul>
                   <button class="btn btn-success" type="button" data-dismiss="modal">
                     <i class="fa fa-times"></i>
@@ -357,18 +356,18 @@
             <div class="row">
               <div class="col-lg-8 mx-auto">
                 <div class="modal-body">
-                  <h2>Project Title</h2>
+                  <h2>People's General Insurance</h2>
                   <hr class="star-primary">
                   <img class="img-fluid img-centered" src="img/portfolio/circus.png" alt="">
                   <p>Use this area of the page to describe your project. The icon above is part of a free icon set by
                     <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
                   <ul class="list-inline item-details">
-                    <li>Client:
+                    <li>Website:
                       <strong>
-                        <a href="http://startbootstrap.com">Start Bootstrap</a>
+                        <a href="http://ww12.peoplesgen.com.ph/">People's General Insurance</a>
                       </strong>
                     </li>
-                    <li>Date:
+<!--                     <li>Date:
                       <strong>
                         <a href="http://startbootstrap.com">April 2014</a>
                       </strong>
@@ -377,7 +376,7 @@
                       <strong>
                         <a href="http://startbootstrap.com">Web Development</a>
                       </strong>
-                    </li>
+                    </li> -->
                   </ul>
                   <button class="btn btn-success" type="button" data-dismiss="modal">
                     <i class="fa fa-times"></i>
@@ -401,18 +400,17 @@
             <div class="row">
               <div class="col-lg-8 mx-auto">
                 <div class="modal-body">
-                  <h2>Project Title</h2>
+                  <h2>Standard Insurance</h2>
                   <hr class="star-primary">
                   <img class="img-fluid img-centered" src="img/portfolio/game.png" alt="">
-                  <p>Use this area of the page to describe your project. The icon above is part of a free icon set by
-                    <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
+                  <p>One of the leading non-life insurance companies in the country today providing more than 55 years of service to the insuring public.</p>
                   <ul class="list-inline item-details">
-                    <li>Client:
+                    <li>Website:
                       <strong>
-                        <a href="http://startbootstrap.com">Start Bootstrap</a>
+                        <a href="http://startbootstrap.com">Standard Insurance</a>
                       </strong>
                     </li>
-                    <li>Date:
+<!--                     <li>Date:
                       <strong>
                         <a href="http://startbootstrap.com">April 2014</a>
                       </strong>
@@ -421,7 +419,7 @@
                       <strong>
                         <a href="http://startbootstrap.com">Web Development</a>
                       </strong>
-                    </li>
+                    </li> -->
                   </ul>
                   <button class="btn btn-success" type="button" data-dismiss="modal">
                     <i class="fa fa-times"></i>

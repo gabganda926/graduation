@@ -125,6 +125,37 @@
                 </tr>
             </tbody>
         </table>
+
+        <div style="position: absolute; bottom: 0px;">
+        <table width="100%">
+            <thead>
+                <tr>
+                    <th class="left1">Prepared by: </th>
+                    <th class="left1">Courier's Signature:</th>
+                    <th class="left1">Recipient's Signature:</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td height="50" valign="bottom">_______________________________</td>
+                    <td height="50" valign="bottom">_______________________________</td>
+                    <td height="50" valign="bottom">_______________________________</td>
+                </tr>
+                <tr>
+                    <td><b>{{Session::get('fname')}} {{Session::get('mname')}} {{Session::get('lname')}}</b></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>{{Session::get('role') }}</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
     </body>
 
 </html>

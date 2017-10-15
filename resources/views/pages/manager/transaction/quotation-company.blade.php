@@ -77,7 +77,7 @@
                                             <th>Total Premium</th>
                                             <th>Insurance Company</th>
                                             <th>Sales Agent</th>
-                                            <th>Sent by</th>
+                                            <th>Forwarded by</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -167,7 +167,11 @@
                                                 @endforeach
                                                 </td>
                                                 <td>
-                                                 {{$comp->comp_name}}
+                                                 @foreach($pinfo as $inf)
+                                                   @if($inf->pinfo_ID == $list->employee_info_ID)
+                                                    {{$inf->pinfo_last_name.", ".$inf->pinfo_first_name." ".$inf->pinfo_middle_name}}
+                                                   @endif
+                                                  @endforeach
                                                 </td>
                                                 <td><button type="button" class="btn bg-light-blue waves-effect" data-toggle="tooltip" data-placement="left" title="View details" onclick="
                                                 $('#vehicle_type').val('{{$comp->vehicle_type_ID}}');

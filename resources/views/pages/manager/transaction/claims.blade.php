@@ -81,7 +81,7 @@
                                         <th class="col-md-1">Representative of Policy Holder?</th>
                                         <th>Name</th>
                                         <th>Contact Details</th>
-                                        <th>Sent by</th>
+                                        <th>Forwarded by</th>
                                         <th>Date Received</th>
                                         <th class="col-md-1">Action</th>
                                     </tr>
@@ -155,7 +155,13 @@
                                                     @endif
                                                 @endforeach
                                             </td>
-                                        <td>Ma. Gabriella Tan Rola</td>
+                                        <td>
+                                            @foreach($pinfo as $info)
+                                                @if($claims->employee_info_ID == $info->pinfo_ID)
+                                                    {{ $info->pinfo_last_name}}, {{$info->pinfo_first_name}} {{$info->info_middle_name }}
+                                                @endif
+                                            @endforeach
+                                        </td>
                                         <td>
                                                    {{ \Carbon\Carbon::parse($claims->updated_at)->format("M-d-Y") }} {{ "(".\Carbon\Carbon::parse($claims->updated_at)->format("l, h:i:s A").")" }}
                                             </td>

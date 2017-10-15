@@ -50,6 +50,8 @@ use Alert;
 
 use Mail;
 
+use Session;
+
 class trans_quotationListController extends Controller
 {
 	public function __construct(clientSystemAccountConnection $csa, accListQuoteConnection $acq, clientNotificationConnection $notif, vMakeConnection $make, vModelConnection $model, vTypeConnection $type, addressConnection $add, personalInfoConnection $info, clientListConnection $lists, clientConnection $cli, inscompanyConnection $comp, contactPersonConnection $cPerson)
@@ -88,6 +90,7 @@ class trans_quotationListController extends Controller
     {
     	$quote = quotationListConnection::where('quote_ID', "=", $req->ID)->first();
     	$quote->quote_status = 5;
+        $quote->employee_info_ID = Session::get('id');
 
     	$quote->save();
     }
@@ -149,7 +152,7 @@ class trans_quotationListController extends Controller
     {
     	$quote = quotationListConnection::where('quote_ID', "=", $req->ID)->first();
     	$quote->quote_status = 6;
-
+        $quote->employee_info_ID = Session::get('id');
     	$quote->save();	
     	return $this->notify($req);
     }
@@ -290,6 +293,7 @@ class trans_quotationListController extends Controller
                     $this->model->vehicle_value = $id->vehicle_value;
                     \Log::info($id->vehicle_value);
                     $this->model->vehicle_year = $id->vehicle_year_model; 
+                    $this->model->vehicle_depreciation = 0;
                     if($id->specify_type)
                     {
                         $this->model->vehicle_type = $type;
@@ -326,6 +330,7 @@ class trans_quotationListController extends Controller
                     $this->model->vehicle_value = $id->vehicle_value;
                     \Log::info($id->vehicle_value);
                     $this->model->vehicle_year = $id->vehicle_year_model; 
+                    $this->model->vehicle_depreciation = 0;
                     if($id->specify_type)
                     {
                         $this->model->vehicle_type = $type;
@@ -635,6 +640,7 @@ class trans_quotationListController extends Controller
     {
         $quote = quotationListConnection::where('quote_ID', "=", $req->quoteid)->first();
         $quote->quote_status = $req->statval;
+        $quote->employee_info_ID = Session::get('id');
 
         $quote->save();
         alert()

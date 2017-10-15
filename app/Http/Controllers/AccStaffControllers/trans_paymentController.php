@@ -31,6 +31,8 @@ use Redirect;
 
 use Alert;
 
+use Session;
+
 class trans_paymentController extends Controller
 {
 	public function __construct(paymentsConnection $payments,paymentCheckConnection $cheque)
@@ -72,6 +74,7 @@ class trans_paymentController extends Controller
 		}
 		$pay->amount_paid = $req->amount_check;
 		$pay->paid_date = $req->remittance_date_check;
+        $pay->employee_info_ID = Session::get('id');
 
 	    try
 	    {
@@ -172,6 +175,7 @@ class trans_paymentController extends Controller
 		}
 		$pay->amount_paid = $req->amount_paid;
 		$pay->paid_date = $req->remittance_date;
+        $pay->employee_info_ID = Session::get('id');
 
 	    try
 	    {

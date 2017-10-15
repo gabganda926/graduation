@@ -329,11 +329,15 @@ Route::get('/admin/transaction/insurance-settings-company', function (){
 //Claims - walkin
 Route::get('/admin/transaction/claim-request-walkin', 'AdminControllers\trans_claimsController@claims_list')->middleware('employeeAuth');
 Route::post('/admin/transaction/claim-request-walkin/forward-manager', 'AdminControllers\trans_claimsController@forward_manager')->middleware('employeeAuth');
+Route::post('/admin/transaction/claim-request-walkin/reject-request', 'AdminControllers\trans_claimsController@reject_request')->middleware('employeeAuth');
 
 //Claims - online
-Route::get('/admin/transaction/claim-request-online', function (){
-   return view('pages.admin.transaction.claim-request-online');
-})->middleware('employeeAuth');
+Route::get('/admin/transaction/claim-request-online', 'AdminControllers\trans_claimsOnlineController@index')->middleware('employeeAuth');
+Route::post('/admin/transaction/claim-request-online/forward-claim', 'AdminControllers\trans_claimsOnlineController@forward_claim')->middleware('employeeAuth');
+Route::post('/admin/transaction/claim-request-online/reject-request', 'AdminControllers\trans_claimsOnlineController@reject_request')->middleware('employeeAuth');
+
+//Claims - rejected lists
+Route::get('/admin/transaction/claim-rejected', 'AdminControllers\trans_claimsRejectedController@index')->middleware('employeeAuth');
 
 //Claims - CREATE REQ walkin
 Route::get('/admin/transaction/claim-create-request-walkin', 'AdminControllers\trans_claimsController@index')->middleware('employeeAuth');
@@ -344,9 +348,7 @@ Route::get('/admin/transaction/claim-details-walkin', 'AdminControllers\trans_cl
 Route::post('/admin/transaction/claim-details-walkin/submit', 'AdminControllers\trans_claimsController@update_claim_details')->middleware('employeeAuth');
 
 //Claims details online
-Route::get('/admin/transaction/claim-details-online', function (){
-   return view('pages.admin.transaction.claim-details-online');
-})->middleware('employeeAuth');
+Route::get('/admin/transaction/claim-details-online', 'AdminControllers\trans_claimsOnlineController@view_claim_details')->middleware('employeeAuth');
 
 
 //Complaint - online
@@ -646,7 +648,7 @@ Route::get('/accounting-staff/transaction/quotation-company-details', 'AccStaffC
 
 Route::post('/accounting-staff/transaction/quotation-list/forward-manager', 'AccStaffControllers\trans_quotationListController@forward_manager')->middleware('employeeAuth');
 
-Route::post('/accounting-staff/transaction/quotation-list/forward-client', 'AccStaffControllers\trans_quotationListController@forward_client')->middleware('employeeAuth');
+Route::post('/accounting-staff/transaction/quotation-list/forward-client', 'AccStaffControllers\trans_quotationListController@forward_client');
 
 Route::post('/accounting-staff/transaction/quotation-list/insure-client', 'AccStaffControllers\trans_quotationListController@insure_client')->middleware('employeeAuth');
 
@@ -742,9 +744,7 @@ Route::get('/manager/transaction/payment-home', function (){
 })->middleware('employeeAuth');
 
 //payment-list
-Route::get('/manager/transaction/payment-list', function (){
-   return view('pages.manager.transaction.payment-list');   
-})->middleware('employeeAuth');
+Route::get('/manager/transaction/payment-list', 'ManagerControllers\trans_paymentListController@index')->middleware('employeeAuth');
 
 //Claims - walkin
 Route::get('/manager/transaction/claims', 'ManagerControllers\walkin_claimApprovalController@claims_list')->middleware('employeeAuth');
@@ -847,9 +847,8 @@ Route::get('/quotation', function (){
 });
 
 //CLAIMS
-Route::get('/claims/sign-in', function (){
-   return view('pages.webpage.not-signed-in.claims');
-});
+Route::get('/claims/sign-in', 'WebControllers\notSignedIn_claimsController@index');
+Route::post('/claims/sign-in/send', 'WebControllers\notSignedIn_claimsController@new_claim');
 
 //CLAIMS
 Route::get('/claim/requirements', function (){

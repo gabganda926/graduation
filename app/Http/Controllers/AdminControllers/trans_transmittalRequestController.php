@@ -23,6 +23,8 @@ use App\transmittalProccessConnection;
 
 use App\transmitDocumentsConnection;
 
+use Session;
+
 class trans_transmittalRequestController extends Controller
 {
     public function index()
@@ -48,7 +50,7 @@ class trans_transmittalRequestController extends Controller
     {
       $data = transmittalRequestConnection::where('req_ID', '=', str_pad($req->ID,11, "0", STR_PAD_LEFT))->first();
       $data->status = 6;
-
+      $data->employee_info_ID = Session::get('id');
       $data->save();
     }
 
@@ -56,7 +58,7 @@ class trans_transmittalRequestController extends Controller
     {
     	$data = transmittalRequestConnection::where('req_ID', '=', str_pad($req->ID,11, "0", STR_PAD_LEFT))->first();
     	$data->status = 2;
-
+      $data->employee_info_ID = Session::get('id');
     	$data->save();
     }
 
