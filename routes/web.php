@@ -28,19 +28,16 @@ Route::get('/admin/transaction/insurance-settings-company', function (){
 })->middleware('employeeAuth');
 
 //DASHBOARD
-Route::get('/admin/dashboard', function (){
-   return view('pages.admin.dashboard');
-})->middleware('employeeAuth');
+Route::get('/admin/dashboard','AdminControllers\dashboardController@index')->middleware('employeeAuth');
+Route::get('/admin/profile','AdminControllers\dashboardController@view_profile')->middleware('employeeAuth');
 
 //DASHBOARD - Accounting Staff
-Route::get('/accounting-staff/dashboard', function (){
-   return view('pages.accounting-staff.cimis-accounting-staff');
-})->middleware('employeeAuth');
+Route::get('/accounting-staff/dashboard', 'AccStaffControllers\dashboardController@index')->middleware('employeeAuth');
+Route::get('/accounting-staff/profile', 'AccStaffControllers\dashboardController@view_profile')->middleware('employeeAuth');
 
 //DASHBOARD - MANAGER
-Route::get('/manager/dashboard', function (){
-   return view('pages.manager.cimis-manager');
-})->middleware('employeeAuth');
+Route::get('/manager/dashboard', 'ManagerControllers\dashboardController@index')->middleware('employeeAuth');
+Route::get('/manager/profile', 'ManagerControllers\dashboardController@view_profile')->middleware('employeeAuth');
 
 //Logins
 // Route::get('/sign-in/emp', 'SignInController@index');
@@ -433,21 +430,22 @@ Route::get('/admin/transaction/transmittal-auto-reply', function (){
 })->middleware('employeeAuth');
 
 //QUERIES
-Route::get('/admin/queries/most-active-company-client', 'AdminControllers\z_Queries_activeCompanyClientController@index')->middleware('employeeAuth');
 
-Route::get('/admin/queries/most-active-individual-client', 'AdminControllers\z_Queries_activeIndividualClientController@index')->middleware('employeeAuth');
+Route::get('/admin/queries/claim-type', 'AdminControllers\z_Queries_claimTypeController@index')->middleware('employeeAuth');
 
-Route::get('/admin/queries/complaint-insurance', 'AdminControllers\z_Queries_complaintInsuranceController@index')->middleware('employeeAuth');
+Route::get('/admin/queries/claim-company', 'AdminControllers\z_Queries_claimCompanyController@index')->middleware('employeeAuth');
 
 Route::get('/admin/queries/complaint-type', 'AdminControllers\z_Queries_complaintTypeController@index')->middleware('employeeAuth');
 
 Route::get('/admin/queries/top-company-client', 'AdminControllers\z_Queries_topCompanyClientController@index')->middleware('employeeAuth');
 
+Route::get('/admin/queries/top-client-type', 'AdminControllers\z_Queries_topClientTypeController@index')->middleware('employeeAuth');
+
 Route::get('/admin/queries/top-individual-client', 'AdminControllers\z_Queries_topIndividualClientController@index')->middleware('employeeAuth');
 
 Route::get('/admin/queries/top-insurance-company', 'AdminControllers\z_Queries_topInsuranceCompanyController@index')->middleware('employeeAuth');
 
-Route::get('/admin/queries/top-insured-vehicle', 'AdminControllers\z_Queries_topInsuredVehicleController@index')->middleware('employeeAuth');
+Route::get('/admin/queries/transmittal', 'AdminControllers\z_Queries_topTransmittalCourierController@index')->middleware('employeeAuth');
 
 Route::get('/admin/queries/top-sales-agent', 'AdminControllers\z_Queries_topSalesAgentController@index')->middleware('employeeAuth');
 
@@ -467,8 +465,6 @@ Route::get('/admin/reports/sales/overall', 'AdminControllers\reports_SalesByPaym
 Route::get('/admin/reports/sales/count', 'AdminControllers\reports_SalesByNumberOfPaymentsController@index')->middleware('employeeAuth');
 
 Route::get('/admin/reports/sales/insurance/company', 'AdminControllers\reports_SalesByInsuranceCompanyController@index')->middleware('employeeAuth');
-
-Route::get('/admin/reports/sales/agency', 'AdminControllers\reports_SalesByAgencyController@index')->middleware('employeeAuth');
 
 //UTILITIES
 Route::get('/admin/utilities/archives', 'AdminControllers\z_Utilities_ArchivesController@index')->middleware('employeeAuth');
@@ -563,14 +559,14 @@ Route::post('/admin/utilities/tax/save', 'AdminControllers\z_Utilities_TaxSettin
 //utilities-premium
 Route::get('/admin/utilities/premium', 'AdminControllers\z_Utilities_ComputationSettingsController@index')->middleware('employeeAuth');
 Route::post('/admin/utilities/premium/save', 'AdminControllers\z_Utilities_ComputationSettingsController@update_value')->middleware('employeeAuth');
+
+//utilities-webcontent
+Route::get('/admin/utilities/templates', 'AdminControllers\z_Utilities_TemplatesController@index')->middleware('employeeAuth');
+Route::get('/admin/utilities/carousel', 'AdminControllers\z_Utilities_TemplatesController@carousel')->middleware('employeeAuth');
+Route::post('/admin/utilities/carousel/save', 'AdminControllers\z_Utilities_TemplatesController@carousel_save')->middleware('employeeAuth');
 //Admin Routes End Point//
 
 //Accounting Staff Routes Start Point//
-
-//Dashboard
-Route::get('/accounting-staff/dashboard', function (){
-   return view('pages.accounting-staff.cimis-accounting-staff');
-})->middleware('employeeAuth');
 
 //TRANSACTIONS/////////////////////////////////////////
 //trans-client-ind
@@ -672,15 +668,14 @@ Route::get('/accounting-staff/transaction/payment-request-details', function (){
    return view('pages.accounting-staff.transaction.payment-request-details');
 })->middleware('employeeAuth');
 
-//PAYMENT-VIEW online
-Route::get('/accounting-staff/transaction/payment-view', function (){
-   return view('pages.accounting-staff.transaction.payment-view');
-})->middleware('employeeAuth');
-
 //PAYMENT-ONLINE
-Route::get('/accounting-staff/transaction/payment-online', function (){
-   return view('pages.accounting-staff.transaction.payment-online');
-})->middleware('employeeAuth');
+Route::get('/accounting-staff/transaction/payment-online', 'AccStaffControllers\trans_paymentOnlineController@index')->middleware('paymentAuth');
+
+Route::post('/accounting-staff/transaction/payment-online/view', 'AccStaffControllers\trans_paymentOnlineController@view')->middleware('paymentAuth');
+
+Route::post('/accounting-staff/transaction/payment-online/accept', 'AccStaffControllers\trans_paymentOnlineController@accept')->middleware('paymentAuth');
+
+Route::post('/accounting-staff/transaction/payment-online/reject', 'AccStaffControllers\trans_paymentOnlineController@reject')->middleware('paymentAuth');
 
 //PAYMENT-ONLINE auto reply
 Route::get('/accounting-staff/transaction/payment-online-auto-reply', function (){
@@ -816,18 +811,14 @@ Route::get('/pdf/transmittal-form/{transmitClaim_ID}', 'ManagerControllers\trans
 //transmit to claim
 Route::get('/pdf/transmittal-form-pdf/{req_ID}', 'AdminControllers\trans_transmittedController@generateForm')->middleware('employeeAuth');
 
-//insurance forms
-Route::get('/pdf/insurance/form/fpg/', 'AdminControllers\trans_insIndividualController@generateFormFPG')->middleware('employeeAuth');
+Route::get('/pdf/insurance/form/individual', 'AdminControllers\trans_insIndividualController@generateFormIndividual')->middleware('employeeAuth');
 
-Route::get('/pdf/insurance/form/commonwealth/', 'AdminControllers\trans_insIndividualController@generateFormCommonwealth')->middleware('employeeAuth');
-
-Route::get('/pdf/insurance/form/standard/', 'AdminControllers\trans_insIndividualController@generateFormStandard')->middleware('employeeAuth');
-
-Route::get('/pdf/insurance/form/pgi/', 'AdminControllers\trans_insIndividualController@generateFormPGI')->middleware('employeeAuth');
+Route::get('/pdf/insurance/form/company', 'AdminControllers\trans_insCompanyController@generateFormCompany')->middleware('employeeAuth');
 
 //REPORTS
 Route::get('/pdf/reports/sales/by/payment', 'AdminControllers\reports_SalesByPaymentController@generateForm')->middleware('employeeAuth');
 Route::get('/pdf/reports/sales/by/count', 'AdminControllers\reports_SalesByNumberOfPaymentsController@generateForm')->middleware('employeeAuth');
+Route::get('/pdf/reports/sales/by/company', 'AdminControllers\reports_SalesByInsuranceCompanyController@generateForm')->middleware('employeeAuth');
 
 
 //////////////WEB PAGE///////////////////
@@ -886,14 +877,8 @@ Route::post('/user/quotation/individual', 'WebControllers\onlineQuotationControl
 Route::post('/user/quotation/company', 'WebControllers\onlineQuotationController@add_quote_comp')->middleware('clientAuth');
 
 //CLAIMS
-Route::get('/user/claims', function (){
-   return view('pages.webpage.sign-in.claims');
-})->middleware('clientAuth');
-
-//CLAIMS
-Route::get('/user/claim/requirements', function (){
-   return view('pages.webpage.sign-in.claim-requirements');
-})->middleware('clientAuth');
+Route::get('/user/claims', 'WebControllers\SignedIn_claimsController@index');
+Route::post('/user/claims/send', 'WebControllers\SignedIn_claimsController@new_claim');
 
 //TRANSMITTAL
 Route::get('/user/transmittal/', 'WebControllers\transmittalRequestController@index')->middleware('clientAuth');

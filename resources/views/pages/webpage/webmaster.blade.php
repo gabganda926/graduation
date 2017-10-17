@@ -130,13 +130,6 @@
     <div class="top_bg">
         <div class="container">
             <div class="header_top-sec">
-                <div class="top_right">
-                    <ul>
-                        <li><a href="#">help</a></li>|
-                        <li><a href="contact.html">Contact</a></li>|
-                        
-                    </ul>
-                </div>
                 <div class="top_left">
                     <ul>
                         <li class="top_link"><a id = 'client_name'>Welcome!, {{Session::get('username')}}</a></li>|                  
@@ -152,8 +145,6 @@
             </div>
         </div>
     </div><br/>
-         
-    <!------>
     <div class="mega_nav">
          <div class="container">
              <div class="menu_sec">
@@ -174,36 +165,8 @@
 </nav>
 
 @yield('body')
-<section>
-<div class="footer-content">
-     <div class="container">
-         <div class="ftr-grids">
-             <div class="col-md-3 ftr-grid">
-                 <h4>About Us</h4>
-                 <ul>
-                     <li><a href="#">Who We Are</a></li>
-                     <li><a href="contact.html">Contact Us</a></li>
-                     <li><a href="#">Our Sites</a></li>
-                     <li><a href="#">In The News</a></li>
-                     <li><a href="#">Team</a></li>               
-                 </ul>
-             </div>
-             <div class="col-md-3 ftr-grid">
-                 <h4>Customer service</h4>
-                 <ul>
-                     <li><a href="#">FAQ</a></li>
-                     <li><a href="#">Transmittal of Documents</a></li>
-                     <li><a href="#">Cancellation</a></li>
-                     <li><a href="#">Claims</a></li>
-                     <li><a href="#">Quotation Guides</a></li>                  
-                 </ul>
-             </div>
-             <div class="clearfix"></div>
-         </div>
-     </div>
-</div>
-<!---->
-<div class="footer">
+
+    <div class="footer">
      <div class="container">
          <div class="store">
              <ul>
@@ -218,9 +181,6 @@
          </div>          
          </div>
      </div>
-</div>
-<!---->
-</section>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
     <!-- Sweet Alert Plugin Js -->

@@ -92,9 +92,7 @@
                                      @endforeach
 
                                      $('.indi').html('' + count);
-                                    </script></span></button>
-                                        
-                                        
+                                    </script></span></button>     
                                 </div>
                             </div>
                             

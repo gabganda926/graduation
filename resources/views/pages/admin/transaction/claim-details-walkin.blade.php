@@ -1279,7 +1279,7 @@
             @foreach($cliacc as $ins)
                 @if($creq->account_ID == $ins->account_ID)
                     $('#c_pno').val('{{$ins->policy_number}}');
-                    $('#date_incident').val('{{\Carbon\Carbon::parse($creq->lossDate)->format("l, M-d-Y")}}');
+                    $('#date_incident').val('{{\Carbon\Carbon::parse($creq->lossDate)->format("M-d-Y")}}');
                     $('#time_incident').val('{{\Carbon\Carbon::parse($creq->lossDate)->format("h:i:s A")}}');
                     $('#place_incident').val('{{$creq->placeOfLoss}}');
                     $('#desc_incident').val('{{$creq->description}}');

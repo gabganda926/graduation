@@ -649,7 +649,7 @@
                                         <div class="form-line">
                                             <label><small>Date of Loss:</small></label>
                                             <div class="form-row show-inputbtns">
-                                                    <input id = "apinfo_bday" name = "apinfo_bday" type="text" data-date-inline-picker="false" data-date-open-on-focus="true" class="form-control" readonly="true" value="{{ \Carbon\Carbon::parse($creq->web_created_at)->format('M-d-Y') }}" />
+                                                    <input id = "apinfo_bday" name = "apinfo_bday" type="text" data-date-inline-picker="false" data-date-open-on-focus="true" class="form-control" readonly="true" value="{{ \Carbon\Carbon::parse($creq->web_lossDate)->format('M-d-Y') }}" />
                                             </div>
                                         </div>
                                     </div>
@@ -660,7 +660,7 @@
                                         <div class="form-line">
                                             <label><small>Time of Loss:</small></label>
                                             <div class="form-row show-inputbtns">
-                                                    <input id = "apinfo_bday" name = "apinfo_bday" type="text" data-date-inline-picker="false" data-date-open-on-focus="true" class="form-control" readonly="true" value="{{ \Carbon\Carbon::parse($creq->web_lossDat)->format('h:i:s A') }}" />
+                                                    <input id = "apinfo_bday" name = "apinfo_bday" type="text" data-date-inline-picker="false" data-date-open-on-focus="true" class="form-control" readonly="true" value="{{ \Carbon\Carbon::parse($creq->web_lossDate)->format('h:i:s A') }}" />
                                             </div>
                                         </div>
                                     </div>

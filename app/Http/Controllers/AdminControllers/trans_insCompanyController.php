@@ -47,6 +47,8 @@ use Redirect;
 
 use Alert;
 
+use PDF;
+
 class trans_insCompanyController extends Controller
 {
   public function index()
@@ -85,4 +87,32 @@ class trans_insCompanyController extends Controller
     ->with('pInfo',personalInfoConnection::all())
     ->with('add',addressConnection::all());
   }
+
+  public function generateFormCompany(Request $req) 
+    {
+        $client = inscompanyConnection::where('comp_ID', $req->id1)->first();
+        $contact=contactPersonConnection::all();
+        $payments = paymentConnection::all();
+        $paydetails = paymentDetailConnection::where('payment_ID', $req->pay_id1)->first();
+        $clist= clientListConnection::all();
+        $sales=salesAgentConnection::all();
+        $pInfo=personalInfoConnection::all();
+        $insaccount=clientAccountsConnection::where('account_ID',$req->acc_id1)->first();
+        $inscomp=inscompanyConnection::all();
+        $sales=salesAgentConnection::all();
+        $vmod=vModelConnection::all();
+        $vmake=vMakeConnection::all();
+        $vtype=vTypeConnection::all();
+        $ppa=premiumPAConnection::all();
+        $pdg=premiumDGConnection::all();
+        $pInfo=personalInfoConnection::all();
+        $add=addressConnection::all();
+
+        $pdf = PDF::loadView('pages.pdf.form_company',
+                compact('client', 'contact', 'payments', 'paydetails', 'clist', 'sales', 'pInfo', 'insaccount', 'inscomp', 'sales', 'vmod', 'vmake', 'vtype', 'ppa', 'pdg', 'pInfo', 'add'))
+            ->setPaper(array(0, 0, 695, 700), 'portrait');
+
+        return $pdf->stream();
+    }//generates the pdf
+
 }

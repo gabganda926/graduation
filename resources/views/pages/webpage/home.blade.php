@@ -64,19 +64,19 @@
                  <h3><br/>OUR TRUSTED PARTNERS</h3>
                  <div class="seller-grids">
                      <div class="col-md-3 seller-grid">
-                         <a href="products.html"><img src="{{ URL::asset('web/images/standard.jpg') }}" alt=""/></a>
+                         <a href="/home"><img src="{{ URL::asset('web/images/standard.jpg') }}" alt=""/></a>
                          <h4><a href="products.html">Standard Insurance</a></h4>
                      </div>
                      <div class="col-md-3 seller-grid">
-                         <a href="products.html"><img src="{{ URL::asset('web/images/peoples-general.jpg') }}" alt=""/></a>
+                         <a href="/home"><img src="{{ URL::asset('web/images/peoples-general.jpg') }}" alt=""/></a>
                          <h4><a href="products.html">People's General Insurance Corporation</a></h4>
                      </div>
                      <div class="col-md-3 seller-grid">
-                         <a href="products.html"><img src="{{ URL::asset('web/images/fpg.png') }}" alt=""/></a>
+                         <a href="/home"><img src="{{ URL::asset('web/images/fpg.png') }}" alt=""/></a>
                          <h4><a href="products.html">FPG Insurance</a></h4>
                      </div>
                      <div class="col-md-3 seller-grid">
-                         <a href="products.html"><img src="{{ URL::asset('web/images/commonwealth.jpg') }}" alt=""/></a>
+                         <a href="/home"><img src="{{ URL::asset('web/images/commonwealth.jpg') }}" alt=""/></a>
                          <h4><a href="products.html">Commonwealth Insruance Company </a></h4>
                      </div>
                      <div class="clearfix"></div>

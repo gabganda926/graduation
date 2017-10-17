@@ -407,7 +407,7 @@ CREATE TABLE tbl_quotation
 	del_flag INT NOT NULL,
 	created_at datetime NOT NULL,
 	updated_at datetime NOT NULL,
-	employee_info_ID,
+	employee_info_ID INT,
 	FOREIGN KEY (employee_info_ID) REFERENCES tbl_personal_info(pinfo_ID),
 );
 
@@ -691,7 +691,7 @@ CREATE TABLE tbl_web_claimRequest
 	web_created_at datetime NOT NULL,
 	web_updated_at datetime NOT NULL,
 	FOREIGN KEY (web_claimType_ID) REFERENCES tbl_claim_types(claimType_ID),
-	FOREIGN KEY (web_notifier_ID) REFERENCES tbl_web_claimNotifiedByRepresentative(notifier_ID),
+	FOREIGN KEY (web_notifier_ID) REFERENCES tbl_web_claimNotifiedByRepresentative(web_notifier_ID),
 	FOREIGN KEY (web_inscompany) REFERENCES tbl_company_info(comp_ID)
 );
 

@@ -18,6 +18,8 @@ use Alert;
 
 use Redirect;
 
+use DateTime;
+
 class notSignedIn_claimsController extends Controller
 {
 	public function __construct(web_claimRequestConnection $claims, web_claimNotifiedByConnection $repre)
@@ -140,7 +142,9 @@ class notSignedIn_claimsController extends Controller
       $claims = claimsTypeConnection::where('claimType_ID', "=", $req->new_claimType)->first();
       $mytime = $req->time;
       $this->claimreq->web_claimType_ID = $claims->claimType_ID;
-      $this->claimreq->web_lossDate = $req->new_lossDate;
+      $date = $req->new_lossDate . ' ' .$req->new_lossTime;
+      $newdate = date("Y-m-d H:i:s",strtotime($date));
+      $this->claimreq->web_lossDate = $newdate;
       $this->claimreq->web_policyno = $req->new_policyno;
       $this->claimreq->web_inscompany = $inscompid->comp_ID;
       $this->claimreq->web_placeOfLoss = $req->new_lossPlace;
@@ -159,7 +163,9 @@ class notSignedIn_claimsController extends Controller
       $claims = claimsTypeConnection::where('claimType_ID', "=", $req->new_claimType)->first();
       $mytime = $req->time;
       $this->claimreq->web_claimType_ID = $claims->claimType_ID;
-      $this->claimreq->web_lossDate = $req->new_lossDate;
+      $date = $req->new_lossDate . ' ' .$req->new_lossTime;
+      $newdate = date("Y-m-d H:i:s",strtotime($date));
+      $this->claimreq->web_lossDate = $newdate;
       $this->claimreq->web_policyno = $req->new_policyno;
       $this->claimreq->web_inscompany = $inscompid->comp_ID;
       $this->claimreq->web_placeOfLoss = $req->new_lossPlace;

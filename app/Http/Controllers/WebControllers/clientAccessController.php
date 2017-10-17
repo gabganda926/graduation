@@ -46,7 +46,7 @@ class clientAccessController extends Controller
 
     public function index() 
     {
-        $account = AccountsConnection::where('user_name','=','admin')->first();
+        $account = employeeConnection::where('emp_role_ID','=','1')->first();
         if($account == null)
         {
             $this->add_employee();

@@ -7,6 +7,20 @@
 @section('transOnlinePayment','active')
 
 @section('body')
+<script>
+    function numberWithCommas(x) {
+        x = (x * 100)/100; 
+        x = x + '';
+        num = x.split('.');
+        variable = num[0].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        output = variable + "." + num[1];
+        if (!num[1])
+        {
+            output = variable;
+        }
+        return output;
+    }
+</script>
 
     <section class="content">
     <h2 style="text-align: center"> Welcome to <b style="color: orange;"> i-Insure </b><br/>
@@ -76,23 +90,29 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>January 18, 2017 11:09:20 PM</td>
-                                        <td>2014-MCAR-00</td>
-                                        <td>Rola, Ma. Gabriella Tan</td>
-                                        <td>23894938274</td>
-                                        <td>Php 9,876.12</td>
-                                        <td><button type="button" class="btn bg-blue waves-effect" data-toggle="modal" data-target="#attachedImage">View
+                                @foreach($remitted as $rem)
+                                <tr>
+                                    <td>{{\Carbon\Carbon::parse($rem->remittance_date)->format("F d, Y g:i:s A")}}</td>
+                                    <td>{{$rem->payment_details->payment_details->payment_details->insurance->policy_number}}</td>
+                                    <td>{{$rem->payment_details->payment_details->payment_details->insurance->client->individual->details->pinfo_last_name.", ".$rem->payment_details->payment_details->payment_details->insurance->client->individual->details->pinfo_first_name." ".$rem->payment_details->payment_details->payment_details->insurance->client->individual->details->pinfo_middle_name}}{{$rem->payment_details->payment_details->payment_details->insurance->client->company->comp_name or ""}}</td>
+                                    <td>{{str_pad($rem->pay_ID,11,"0",STR_PAD_LEFT)}}</td>
+                                    <td>
+                                        <script>
+                                            var data = numberWithCommas({{ $rem->amount_paid }}); document.write("₱ " + data);
+                                        </script>
+                                    </td>
+                                    <td><button type="button" class="btn bg-blue waves-effect" data-toggle="modal" data-target="#attachedImage" onclick = "$('#slip').attr('src','/image/depositslip/{{$rem->deposit_file}}');">View
+                                    </button></td>
+                                    <td><button form="view" type="button" class="btn bg-light-blue waves-effect view" data-toggle="tooltip" data-placement="left" title="View details" data-id="{{$rem->payment_ID}}"><i class="material-icons">remove_red_eye</i>
+                                                    </button>
+                                        <button type="button" class="btn bg-green waves-effect accept"  style="position: right;"  data-toggle="tooltip" data-placement="left" title="Add this payment" data-id="{{$rem->payment_ID}}">
+                                        <i class="material-icons">thumb_up</i><span style="font-size: 15px;"></span>
+                                        </button>
+                                        <button type="button" class="btn bg-red waves-effect reject" style="position: right;"  data-toggle="tooltip" data-placement="left" title="Reject" data-id="{{$rem->payment_ID}}">
+                                        <i class="material-icons">thumb_down</i><span style="font-size: 15px;"></span>
                                         </button></td>
-                                        <td><button type="button" class="btn bg-light-blue waves-effect" onclick="window.document.location='{{ URL::asset('/accounting-staff/transaction/payment-request-details') }}';" data-toggle="tooltip" data-placement="left" title="View details"><i class="material-icons">remove_red_eye</i>
-                                                        </button>
-                                            <button type="button" class="btn bg-green waves-effect" onclick="window.document.location='{{ URL::asset('/accounting-staff/transaction/payment-view') }}';" style="position: right;"  data-toggle="tooltip" data-placement="left" title="Add this payment">
-                                            <i class="material-icons">thumb_up</i><span style="font-size: 15px;"></span>
-                                            </button>
-                                            <button type="button" class="btn bg-red waves-effect" onclick="window.document.location='{{ URL::asset('') }}';" style="position: right;"  data-toggle="tooltip" data-placement="left" title="Reject">
-                                            <i class="material-icons">thumb_down</i><span style="font-size: 15px;"></span>
-                                            </button></td>
-                                    </tr>
+                                </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                             </div>
@@ -111,7 +131,7 @@
                             </h4>
                         </div><br/>
                         <div class="modal-body">
-                            <img src="{!! '/image/'.'default-image.png' !!}" onerror="this.onerror=null;this.src='/image/default-image.png';" style="border:1px solid black;width:780px;height:450px;">
+                            <img id = "slip" src="{!! '/image/'.'default-image.png' !!}" onerror="this.onerror=null;this.src='/image/default-image.png';" style="border:1px solid black;width:100%;height:450px;">
                         </div>
                         <div class="modal-footer js-sweetalert">
                             <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
@@ -122,4 +142,51 @@
             <!-- #END# VIEW INST MODAL -->
     </section>
 
+    <form id = "view" action="/accounting-staff/transaction/payment-online/view" method="POST" style="display: none;">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <input type="text" id="id" name="id" style="display: none;">
+    </form>
+
+    <script>
+        $('.view').on('click', function(){
+            $('#id').val($(this).data('id'));
+            $('#view').submit();
+        });
+
+        $('.accept').on('click', function(){
+            var id = $(this).data('id');
+          $.ajax({
+              type: 'POST',
+              url: '/accounting-staff/transaction/payment-online/accept',
+              data: {id:id},
+              success:function(xhr){
+                  console.log('success');
+                  console.log(xhr.responseText);
+                  window.location.reload();
+              },
+                error:function(xhr, ajaxOptions, thrownError,data){
+                  console.log(xhr.status);
+                  console.log(xhr.responseText);
+              }
+          });
+        });
+
+        $('.reject').on('click', function(){
+            var id = $(this).data('id');
+          $.ajax({
+              type: 'POST',
+              url: '/accounting-staff/transaction/payment-online/reject',
+              data: {id:id},
+              success:function(xhr){
+                  console.log('success');
+                  console.log(xhr.responseText);
+                  window.location.reload();
+              },
+                error:function(xhr, ajaxOptions, thrownError,data){
+                  console.log(xhr.status);
+                  console.log(xhr.responseText);
+              }
+          });
+        });
+    </script>
 @endsection

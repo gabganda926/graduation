@@ -125,20 +125,20 @@
         <!-- Left Sidebar -->
         <aside id="leftsidebar" class="sidebar">
             <!-- User Info -->
-            <div class="user-info">
+            <div class="user-info" style="text-align: center;">
                 <div class="image">
-                    <img id="userimg" src="{{ URL::asset ('images/user.png') }}" width="55" height="55" alt="User" />
+                    <img id="userimg" src="/image/employee/{{ Session::get('pic')}}" width="150" height="150" alt="User" />
                 </div>
                 <div class="info-container">
                     <script>
                         var comp = "{{ Session::get('pic')}}";
-                        if(comp != "")
+                        if(comp == "")
                         {
-                            var src = "/image/employee/{{ Session::get('pic')}}";
+                            var src = "{{ URL::asset ('images/user.png') }}";
                             $('#userimg').attr('src',src);
                         }
                     </script>
-                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{Session::get('fname')}} {{Session::get('mname')}} {{Session::get('lname')}}</div>
+                    <div class="text" style="color: white;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{Session::get('fname')}} {{Session::get('mname')}} {{Session::get('lname')}}</div>
                     <div class="text" style="color: white;">Accounting Staff</div>
                     <div class="btn-group user-helper-dropdown">
                         <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
@@ -289,9 +289,9 @@
     <script>
         window.onload = function(){
             var comp = "{{ Session::get('pic')}}";
-            if(comp != null)
+            if(comp == "")
             {
-                var src = "/image/employee/{{ Session::get('pic')}}";
+                var src = "{{ URL::asset ('images/user.png') }}";
                 $('#userimg').attr('src',src);
             }
         }

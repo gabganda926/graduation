@@ -89,34 +89,28 @@ class trans_insIndividualController extends Controller
     ->with('add',addressConnection::all());
   }
 
-  public function generateFormFPG(Request $request) 
+    public function generateFormIndividual(Request $req) 
     {
-        $pdf = PDF::loadView('pages.pdf.form_fpg')
-            ->setPaper('Letter');
+        $client = clientConnection::where('client_ID', $req->id1)->first();
+        $payments = paymentConnection::all();
+        $paydetails = paymentDetailConnection::where('payment_ID', $req->pay_id1)->first();
+        $clist= clientListConnection::all();
+        $sales=salesAgentConnection::all();
+        $pInfo=personalInfoConnection::all();
+        $insaccount=clientAccountsConnection::where('account_ID',$req->acc_id1)->first();
+        $inscomp=inscompanyConnection::all();
+        $sales=salesAgentConnection::all();
+        $vmod=vModelConnection::all();
+        $vmake=vMakeConnection::all();
+        $vtype=vTypeConnection::all();
+        $ppa=premiumPAConnection::all();
+        $pdg=premiumDGConnection::all();
+        $pInfo=personalInfoConnection::all();
+        $add=addressConnection::all();
 
-        return $pdf->stream();
-    }//generates the pdf
-
-    public function generateFormCommonwealth(Request $request) 
-    {
-        $pdf = PDF::loadView('pages.pdf.form_commonwealth')
-            ->setPaper('Letter');
-
-        return $pdf->stream();
-    }//generates the pdf
-
-    public function generateFormStandard(Request $request) 
-    {
-        $pdf = PDF::loadView('pages.pdf.form_standard')
-            ->setPaper('Letter');
-
-        return $pdf->stream();
-    }//generates the pdf
-
-    public function generateFormPGI(Request $request) 
-    {
-        $pdf = PDF::loadView('pages.pdf.form_pgi')
-            ->setPaper('Letter');
+        $pdf = PDF::loadView('pages.pdf.form_individual',
+                compact('client', 'payments', 'paydetails', 'clist', 'sales', 'pInfo', 'insaccount', 'inscomp', 'sales', 'vmod', 'vmake', 'vtype', 'ppa', 'pdg', 'pInfo', 'add'))
+            ->setPaper(array(0, 0, 695, 700), 'portrait');
 
         return $pdf->stream();
     }//generates the pdf

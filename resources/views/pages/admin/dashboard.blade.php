@@ -14,37 +14,67 @@
             <!-- Widgets -->
             <div class="row clearfix">
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                    <div class="info-box-4 hover-zoom-effect animated bounceInDown active" onclick="window.document.location='/admin/transaction/insurance';" style="cursor: pointer;">
+                    <div class="info-box-4 hover-zoom-effect animated bounceInDown active" onclick="window.document.location='/admin/transaction/transmittal-request';" style="cursor: pointer;">
                         <div class="icon">
                             <i class="material-icons col-red">account_box</i>
                         </div>
                         <div class="content">
-                            <div class="text">ACTIVE INSURANCE ACCOUNTS</div>
-                            <div class="number count-to" data-from="0" data-to="129" data-speed="15" data-fresh-interval="20"></div>
+                            <div class="text">TRANSMITTAL REQUESTS</div>
+                            <div class="number count-to transreq" data-from="0" data-to="129" data-speed="15" data-fresh-interval="20">
+                                <script type="text/javascript"> 
+                                    var count=0;
+                                    @foreach($request as $req)
+                                     @if($req->status == 0)
+                                        count += 1;
+                                        @endif
+                                     @endforeach
+                                     $('.transreq').html('' + count);
+                                    </script>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                    <div class="info-box-4 hover-zoom-effect animated bounceInDown" onclick="window.document.location='/admin/transaction/claim-request';" style="cursor: pointer;">
+                    <div class="info-box-4 hover-zoom-effect animated bounceInDown" onclick="window.document.location='/admin/transaction/claim-request-online';" style="cursor: pointer;">
                         <div class="icon">
                             <i class="material-icons col-red">new_releases</i>
                         </div>
                         <div class="content">
                             <div class="text">CLAIMS REQUESTS</div>
-                            <div class="number count-to" data-from="0" data-to="15" data-speed="15" data-fresh-interval="20"></div>
+                            <div class="number count-to claimreq" data-from="0" data-to="15" data-speed="15" data-fresh-interval="20">
+                                <script type="text/javascript"> 
+                                    var count=0;
+                                    @foreach ($crequest as $creq)
+                                        @if($creq->web_status == 0)
+                                        count += 1;
+                                        @endif
+                                     @endforeach
+                                     $('.claimreq').html('' + count);
+                                    </script>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                    <div class="info-box-4 hover-zoom-effect animated bounceInDown" onclick="window.document.location='/admin/transaction/complaint';" style="cursor: pointer;">
+                    <div class="info-box-4 hover-zoom-effect animated bounceInDown" onclick="window.document.location='/admin/transaction/complaint-pending';" style="cursor: pointer;">
                         <div class="icon">
                             <i class="material-icons col-red">av_timer</i>
                         </div>
                         <div class="content">
                             <div class="text">PENDING COMPLAINTS</div>
-                            <div class="number count-to" data-from="0" data-to="125" data-speed="15" data-fresh-interval="20"></div>
+                            <div class="number count-to compreq" data-from="0" data-to="125" data-speed="15" data-fresh-interval="20">
+                                <script type="text/javascript"> 
+                                    var count=0;
+                                    @foreach($complaints as $comp)
+                                     @if($comp->status == 0)
+                                        count += 1;
+                                        @endif
+                                     @endforeach
+                                     $('.compreq').html('' + count);
+                                    </script>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -54,142 +84,76 @@
             <div class="row clearfix">
                 <!-- Task Info -->
                 <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                    <div class="card animated bounceInUp" onclick="window.document.location='/admin/transaction/transmittal';" style="cursor: pointer;">
+                    <div class="card animated bounceInUp" style="cursor: pointer;">
                         <div class="header">
-                            <h2>TRANSMITTAL INFO</h2>
+                            <h3 style="text-align: center;">INSURANCE ACCOUNTS</h3>
                         </div>
                         <div class="body">
-                            <div class="table-responsive">
-                                <table class="table table-hover dashboard-task-infos">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Task</th>
-                                            <th>Status</th>
-                                            <th>Care of</th>
-                                            <th>Progress</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Send Documents</td>
-                                            <td><span class="label bg-green">Doing</span></td>
-                                            <td>Ma. Gabriella Rola</td>
-                                            <td>
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-green" role="progressbar" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100" style="width: 62%"></div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Compile Documents</td>
-                                            <td><span class="label bg-blue">To Do</span></td>
-                                            <td>Gerald Bukid</td>
-                                            <td>
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-blue" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%"></div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Collect Documents</td>
-                                            <td><span class="label bg-light-blue">On Hold</span></td>
-                                            <td>Marynel Avellaneda</td>
-                                            <td>
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-light-blue" role="progressbar" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100" style="width: 72%"></div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>Access Client's Account</td>
-                                            <td><span class="label bg-orange">Waiting Approval</span></td>
-                                            <td>Roy Christian Pery</td>
-                                            <td>
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-orange" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" style="width: 95%"></div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>5</td>
-                                            <td>Send Documents</td>
-                                            <td>
-                                                <span class="label bg-red">Suspended</span>
-                                            </td>
-                                            <td>Lyndan Pol Dela Cruz</td>
-                                            <td>
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-red" role="progressbar" aria-valuenow="87" aria-valuemin="0" aria-valuemax="100" style="width: 87%"></div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>6</td>
-                                            <td>Send Documents</td>
-                                            <td>
-                                                <span class="label bg-red">Suspended</span>
-                                            </td>
-                                            <td>Egai Franco</td>
-                                            <td>
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-red" role="progressbar" aria-valuenow="87" aria-valuemin="0" aria-valuemax="100" style="width: 87%"></div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <div class="row clearfix">
+                                <div class="col-md-12">
+                                    <button type="button" class="btn btn-default btn-lg btn-block waves-effect" style="border: 2px solid #102027;color: #102027; padding: 1em; font-size: 20px;" data-toggle="tooltip" data-placement="bottom" title="View list of insurance accounts of individual clients." onclick="window.document.location='{{ URL::asset('/admin/transaction/insurance-individual') }}';"><img src="{{ URL::asset ('images/icons/insurance-individual.png')}}" style="height: 50px; width: 50px;"> INDIVIDUAL <span class="label bg-green indi">
+                                    <script type="text/javascript"> 
+                                    var count=0;
+                                    @foreach($clist as $list)
+                                    @foreach($client as $cli)
+                                     @if($list->client_ID == $cli->client_ID)
+                                      @if($list->del_flag == 0)
+                                       @foreach($insaccount as $iacc)
+                                        @if($cli->client_ID == $iacc->client_ID)
+                                         @foreach($pInfo as $info)
+                                          @if($cli->personal_info_ID == $info->pinfo_ID)
+                                                count += 1;
+                                            @endif
+                                         @endforeach
+                                        @endif
+                                       @endforeach
+                                      @endif
+                                     @endif
+                                    @endforeach
+                                   @endforeach
+                                            
+
+                                     $('.indi').html('' + count);
+                                    </script></span></button>     
+                                </div>
+                            </div>
+                            
+                            <div class="row clearfix">
+                                <div class="col-md-12">
+                                    <button type="button" class="btn btn-default btn-lg btn-block waves-effect" style="border: 2px solid #102027;color: #102027; padding: 1em; font-size: 20px;" data-toggle="tooltip" data-placement="bottom" title="View list of insurance accounts of company clients." onclick="window.document.location='{{ URL::asset('/admin/transaction/insurance-company') }}';"><img src="{{ URL::asset ('images/icons/insurance-company.png')}}" style="height: 50px; width: 50px;"> COMPANY <span class="label bg-green comp">
+                                     <script type="text/javascript"> 
+                                    var count1=0;
+                                    @foreach($clist as $list)
+                                    @foreach($inscomp as $ccompany)
+                                     @if($list->client_ID == $ccompany->comp_ID)
+                                      @if($list->del_flag == 0)
+                                       @if($ccompany->comp_type == 1)
+                                        @foreach($insaccount as $iacc)
+                                         @if($ccompany->comp_ID == $iacc->client_ID)
+                                          @foreach($contact as $cnt)
+                                           @if($ccompany->comp_cperson_ID == $cnt->cPerson_ID)
+                                            @foreach($pInfo as $info)
+                                             @if($cnt->personal_info_ID == $info->pinfo_ID)
+                                                    count1 += 1;
+                                            @endif
+                                        @endforeach
+                                       @endif
+                                      @endforeach
+                                     @endif
+                                    @endforeach
+                                   @endif
+                                  @endif
+                                 @endif
+                                @endforeach
+                               @endforeach
+                                     $('.comp').html('' + count1);
+                                    </script></span></button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- #END# Task Info -->
-
-                <!-- EXPIRING ACCOUNTS -->
-                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                    <div class="card animated bounceInUp" onclick="window.document.location='/admin/transaction/insurance-expiring-accounts';" style="cursor: pointer;">
-                        <div class="body bg-white">
-                            <div class="font-bold m-b--35">EXPIRING ACCOUNTS</div>
-                            <ul class="dashboard-stat-list">
-                                <li>
-                                <small>01/23/2017</small><br/>
-                                    <b>MCAR No. 052440</b>
-                                    <span class="pull-right">2 days left</span>
-                                </li>
-                                <li>
-                                <small>01/26/2017</small><br/>
-                                    <b>PC1334408</b>
-                                    <span class="pull-right">5 days left </span>
-                                </li>
-                                <li>
-                                <small>01/26/2017</small><br/>
-                                    <b>QC-PMM-100205456</b>
-                                    <span class="pull-right">5 days left </span>
-                                </li>
-                                <li>
-                                <small>01/26/2017</small><br/>
-                                    <b>AIS-CV-2016-00003158</b>
-                                    <span class="pull-right">5 days left </span>
-                                </li>
-                                <li>
-                                <small>01/28/2017</small><br/>
-                                    <b>QC-PMM-001935287</b>
-                                    <span class="pull-right">7 days left </span>
-                                </li>
-                                <li>
-                                <small>01/29/2017</small><br/>
-                                    <b>PC7228396</b>
-                                    <span class="pull-right">8 days left </span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- #END# EXPIRING ACCOUNTS -->
             </div>
         </div>
     </section>

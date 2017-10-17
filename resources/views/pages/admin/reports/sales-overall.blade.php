@@ -364,7 +364,6 @@
 					                                                                        @foreach($pinfo as $pInfo)
 					                                                                            @if($client->personal_info_ID == $pInfo->pinfo_ID)
 					                                                                            {{ $pInfo->pinfo_last_name}}, {{$pInfo->pinfo_first_name}} {{$pInfo->pinfo_middle_name }}
-					                                                                            <script> var pi_id = "pi = " + {{ $pInfo->pinfo_ID }}; console.log(pi_id); </script>
 					                                                                            @endif
 					                                                                        @endforeach
 					                                                                    @endif
@@ -376,7 +375,6 @@
 					                                                                @foreach($company as $comp)
 					                                                                    @if($clients->client_ID == $comp->comp_ID)
 					                                                                        {{ $comp->comp_name }}
-					                                                                        <script> var pi_id = "pi = " + {{ $pInfo->pinfo_ID }}; console.log(pi_id); </script>
 					                                                                    @endif
 					                                                                @endforeach
 					                                                            @endif
@@ -589,7 +587,7 @@
 			var st = '';
 			var en = '';
 			st = $('#ch_d_startdate').val();
-			en = $('#ch_d_enddate').val();
+			en = $('#ch_d_enddate').val() + ' 23:59:59.000';
 			var total = 0;
 			var additional = '';
 			@foreach($plist as $list)
@@ -613,7 +611,7 @@
 			var st = '';
 			var en = '';
 			st = $('#ch_d_startdate').val();
-			en = $('#ch_d_enddate').val();
+			en = $('#ch_d_enddate').val()  + ' 23:59:59.000';
 			var total = 0;
 			var additional = '';
 			@foreach($plist as $list)
@@ -643,7 +641,7 @@
 		    	var a = 0;
 			    var i = 0;
 			   	st = $('#daily_start').val();
-			    en = $('#daily_end').val();
+			    en = $('#daily_end').val()  + ' 23:59:59.000';
 			    var labels = [],data=[];
 			    @foreach($plist as $list1)
 			    	if('{{$list1->paid_date}}' >= st && '{{$list1->paid_date}}' <= en)

@@ -43,7 +43,9 @@
                                             @foreach($com as $company)
                                              @if($company->del_flag == 0)
                                               @if($company->company_type == 0)
+                                              @if($company->comp_ID < 5)
                                                 <option value = "{{ $company->comp_ID }}">{{ $company->comp_name }}</option>
+                                              @endif
                                               @endif
                                              @endif
                                             @endforeach

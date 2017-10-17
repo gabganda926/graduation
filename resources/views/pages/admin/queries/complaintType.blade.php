@@ -1,6 +1,6 @@
 @extends('pages.admin.master')
 
-@section('title','Vehicle Make - Maintenance | i-Insure')
+@section('title','Complaints - Complaint Status | Queries | i-Insure')
 
 @section('queries','active')
 
@@ -14,29 +14,64 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
-                            <h2><b>
-                                COMPLAINTS - COMPLAINT TYPE
+                            <h2 style="text-align: center"><b>
+                                COMPLAINTS - COMPLAINT STATUS
                             </b></h2>
                         </div>
                         <div class="body">
-                            <h2 align="center">List of Complaint Types with Most Issues Reported</h2><br/>
-                                <table class="table table-bordered table-striped dataTable js-basic-example animated lightSpeedIn active">
+                            <h2 align="center">List of Complaint Status with Most Issues Reported</h2><br/>
+                                <table id="ex" class="table table-bordered table-striped dataTable js-basic-example animated lightSpeedIn active">
                                     <thead>
                                         <tr class="bg-teal">
-                                            <th>Name of Complaint Type</th>
+                                            <th>Name of Complaint Status</th>
                                             <th class="col-md-2">Number of reports</th>
-                                            <th class="col-md-1">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     <tr>
-                                      <td>SYSTEM BUG</td>
-                                      <td>421</td>
-                                      <td><button type="button" class="btn bg-light-blue waves-effect" data-toggle="modal" data-target="#largeModal">
-                                                <i class="material-icons">remove_red_eye</i>
-                                                <span>View</span>
-                                            </button>
-                                        </td>
+                                      <td>High</td>
+                                      <td>
+                                          <script type="text/javascript">
+                                            var count = 0;
+                                              @foreach($complaints as $c)
+                                                  @if($c->status ==0)
+                                                    count+=1;
+                                                  @endif
+                                              @endforeach
+
+                                              document.write('<b>' +count+ '</b>');
+                                          </script>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>Medium</td>
+                                      <td>
+                                          <script type="text/javascript">
+                                            var count = 0;
+                                              @foreach($complaints as $c)
+                                                  @if($c->status ==1)
+                                                    count+=1;
+                                                  @endif
+                                              @endforeach
+
+                                              document.write('<b>' +count+ '</b>');
+                                          </script>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>Low</td>
+                                      <td>
+                                          <script type="text/javascript">
+                                            var count = 0;
+                                              @foreach($complaints as $c)
+                                                  @if($c->status ==2)
+                                                    count+=1;
+                                                  @endif
+                                              @endforeach
+
+                                              document.write('<b>' +count+ '</b>');
+                                          </script>
+                                      </td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -45,49 +80,11 @@
                 </div>
             </div>
             <!-- #END# Exportable Table -->
-
-    <!-- View INST MODAL-->
-              <div class="modal fade" id="largeModal" tabindex="-1" role="dialog">
-                <div class="modal-dialog modal-lg animated zoomInRight active" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header modal-header-view-list">
-                            <h4><br/>LIST OF COMPLAINTS
-                            </h4>
-                        </div><br/>
-                        </button>
-                        <div class="modal-body">
-                            <form id="vmodel_view" method="POST">
-                              <table id = "view_list" class="table table-bordered table-striped table-hover dataTable js-basic-example">
-                                <thead>
-                                    <tr>
-                                        <th>Complaint Number</th>
-                                        <th>Complaint Title</th>
-                                        <th>Date Sent</th>
-                                        <th>Sender</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>COMP-018272</td>
-                                        <td>My quotation is not sending</td>
-                                        <td>May 09, 2016 (Thursday, 10:09PM)</td>
-                                        <td>Rola, Ma. Gabriella Tan</td>
-                                        <td><button type="button" class="btn bg-green waves-effect right" style="position: right;" onclick="window.document.location='/admin/transaction/adm/complaint-info';" data-toggle="tooltip" data-placement="bottom" title="View complaint details">
-                                            <i class="material-icons">description</i><span style="font-size: 15px;"></span>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                                <br/><br/><br/>
-                            </form>
-                        </div>
-                        <div class="modal-footer js-sweetalert">
-                            <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- #END# VIEW INST MODAL -->
+        </div>
+    </section>
+    <script>
+        $('#ex').DataTable( {
+            "order": [[ 1, "desc" ]]
+        } );
+    </script>
 @endsection

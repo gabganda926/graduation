@@ -67,7 +67,7 @@
                         </div>
                         <div class="row">
                             <div class="col-xs-6">
-                                <br/><label><small>Payment for Check Number: </small></label>
+                                <br/><label><small>Payment for BOP Number: </small></label>
                                 <input type="text" id="check_number" name="check_number" style="width: 95%">
                             </div>
                             <div class="col-xs-6">
@@ -173,7 +173,7 @@
                     <div class="panel-body">
                         <h3 style="text-align: center;"><b> <img src="{{ URL::asset ('images/icons/view-bill.png')}}" style="height: 50px; width: 50px;"> REMITTED PAYMENTS</b></h3><br/><br/>
                         <div class="table-responsive">
-                        <table class="table">
+                        <table class="table" id = "remitted">
                             <thead>
                               <tr>
                                 <th>BOP No.</th>
@@ -186,15 +186,6 @@
                               </tr>
                             </thead>
                             <tbody>      
-                              <tr class="success">
-                                <td>12232</td>
-                                <td>Banco De Oro - Antipolo City</td>
-                                <td>July 4, 2017</td>
-                                <td>Php 7,000.50</td>
-                                <td>Php 7,000.50</td>
-                                <td>July 1, 2017 11:09:10 PM</td>
-                                <td><button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#viewFile">View</button></td>
-                              </tr>
                             </tbody>
                           </table>
                           </div>
@@ -213,7 +204,9 @@
                             <h3 class="modal-title">Deposit Slip</h3>
                         </div>
                         <div class="modal-body">
-                            IMAGE HERE
+                            <div class="fallback">
+                                <img id="addImg" src="{{ URL::asset('image/default-image.png') }}" alt="your image" style="width:100%;height:400px; border-style: solid; border-width: 2px;">
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn" data-dismiss="modal">CLOSE</button>
@@ -304,11 +297,22 @@
         @endif
        @endforeach
 
+
+      $('#remitted tbody tr').remove();
+
+      @foreach($remitted as $rem)
+       @if($rem->payment_details->payment_details->payment_details->insurance->acclist->account_ID == Session::get('accountID'))
+        $('#remitted tbody').append('<tr class="success"><td>{{str_pad($rem->payment_ID,5,"0",STR_PAD_LEFT)}}</td><td>{{$rem->payment_details->payment_details->payment_details->bank->bank_name}}</td><td>{{\Carbon\Carbon::parse($rem->payment_details->due_date)->format("F d, Y")}}</td><td>₱ '+numberWithCommas('{{$rem->payment_details->amount}}')+'</td><td>₱ '+numberWithCommas('{{$rem->amount_paid}}')+'</td><td>{{\Carbon\Carbon::parse($rem->remittance_date)->format("F d, Y g:i:s A")}}</td><td><button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#viewFile" onClick="$(\'#addImg\').attr(\'src\',\'/image/depositslip/{{$rem->deposit_file}}\');">View</button></td></tr>');
+        @endif
+      @endforeach
+
         $('#check_number').on('change textInput input', function(){
             var num = $(this).val();
             var found = 0;
             @foreach($account->payment_details->check_voucher->payments as $pay)
              @if($pay->status == 1)
+             @foreach($remitted as $rem)
+             @if($rem->pay_ID != $pay->payment_ID)
              if(num == '{{$pay->payment_ID}}')
              {
                 $('#amount_due').val("₱ "+numberWithCommas("{{$pay->amount}}"));
@@ -317,6 +321,8 @@
                 $('#amount_paid').css({cursor: ""});
                 found = 1;
              }
+             @endif
+             @endforeach
              @endif
             @endforeach
             if(found == 0)

@@ -14,7 +14,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
-                            <h2><b>
+                            <h2 style="text-align: center"><b>
                                 TOP INSURANCE COMPANY
                             </b></h2>
                         </div>

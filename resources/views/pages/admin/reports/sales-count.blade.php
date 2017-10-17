@@ -470,8 +470,12 @@
 			$("#tb_daily td").parent().remove();
 			var st = '';
 			var en = '';
+			var newdate_s = '';
+			var newdate_e = '';
 			st = $('#ch_d_startdate').val();
-			en = $('#ch_d_enddate').val();
+
+			en = $('#ch_d_enddate').val() + ' 23:59:59.000';
+
 			var total = 0;
 			var additional = '';
 			var data = 0;
@@ -484,7 +488,7 @@
 			    	total += 1;
 		    	}
 		    @endforeach
-		    var additional = '<tr><td>Total Number: </td><td><b>₱' + total + '</b></td></tr>'
+		    var additional = '<tr><td>Total Number: </td><td><b>' + total + '</b></td></tr>'
 		    $('#tb_daily tbody').append(additional);
 		});
 
@@ -492,8 +496,12 @@
 			$("#tb_daily td").parent().remove();
 			var st = '';
 			var en = '';
+			var newdate_s = '';
+			var newdate_e = '';
 			st = $('#ch_d_startdate').val();
-			en = $('#ch_d_enddate').val();
+
+			en = $('#ch_d_enddate').val() + ' 23:59:59.000';
+
 			var total = 0;
 			var additional = '';
 			var data = 0;
@@ -520,7 +528,7 @@
 		    	var a = 0;
 			    var i = 0;
 			   	st = $('#daily_start').val();
-			    en = $('#daily_end').val();
+			    en = $('#daily_end').val()  + ' 23:59:59.000';
 			    var labels = [],data=[];
 			    @foreach($day as $list1)
 			    	if('{{$list1->Day}}' >= st && '{{$list1->Day}}' <= en)

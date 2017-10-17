@@ -14,23 +14,23 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
-                            <h2><b>
+                            <h2 style="text-align: center"><b>
                                 TOP COMPANY CLIENT
                             </b></h2>
                         </div>
                         <div class="body">
-                            <h2 align="center">List of Active Loyal Clients (Company)</h2><br/>
+                            <h2 align="center">List of Clients with Most Renewals(Company)</h2><br/>
                                 <table class="table table-bordered table-striped dataTable js-basic-example animated lightSpeedIn active">
                                     <thead>
                                         <tr class="bg-teal">
                                             <th>Name of Company</th>
-                                            <th>Number of days active</th>
+                                            <th>Number of Renewals</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     <tr>
                                       <td>Toyota</td>
-                                      <td>456 days (0 years, 0 months, 0 days)</td>
+                                      <td>1</td>
                                     </tr>
                                     </tbody>
                                 </table>

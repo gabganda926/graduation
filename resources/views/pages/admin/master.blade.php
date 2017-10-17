@@ -110,13 +110,6 @@
                 <a href="javascript:void(0);" class="bars"></a>
                 <a class="navbar-brand" href="/admin/dashboard"><b>COMPRELINE | INSURANCE</b></a>
             </div>
-            <div class="collapse navbar-collapse" id="navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <!-- Call Search -->
-                    <li><a href="javascript:void(0);" class="js-search" data-close="true"><i class="material-icons">search</i></a></li>
-                    <!-- #END# Call Search -->
-                </ul>
-            </div>
         </div>
     </nav>
     <!-- #Top Bar -->
@@ -124,25 +117,25 @@
         <!-- Left Sidebar -->
         <aside id="leftsidebar" class="sidebar">
             <!-- User Info -->
-            <div class="user-info">
+            <div class="user-info" style="text-align: center;">
                 <div class="image">
-                    <img id="userimg" src="{{ URL::asset ('images/user.png') }}" width="55" height="55" alt="User" />
+                    <img id="userimg" src="/image/employee/{{ Session::get('pic')}}" width="150" height="150" alt="User" />
                 </div>
                 <div class="info-container">
                     <script>
                         var comp = "{{ Session::get('pic')}}";
-                        if(comp != "")
+                        if(comp == "")
                         {
-                            var src = "/image/employee/{{ Session::get('pic')}}";
+                            var src = "{{ URL::asset ('images/user.png') }}";
                             $('#userimg').attr('src',src);
                         }
                     </script>
-                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{Session::get('fname')}} {{Session::get('mname')}} {{Session::get('lname')}}</div>
+                    <div class="text" style="color: white;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{Session::get('fname')}} {{Session::get('mname')}} {{Session::get('lname')}}</div>
                     <div class="text" style="color: white;">Administrator</div>
                     <div class="btn-group user-helper-dropdown">
                         <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                         <ul class="dropdown-menu pull-right">
-                            <li><a href="javascript:void(0);"><i class="material-icons">person</i>My Account</a></li>
+                            <li><a href="/admin/profile"><i class="material-icons">person</i>My Account</a></li>
                             <li role="seperator" class="divider"></li>
                             <li><a href="/user/logout"><i class="material-icons">input</i>Sign Out</a></li>
                         </ul>
@@ -385,34 +378,46 @@
                                     <span>TOP COMPANY CLIENTS</span>
                                 </a>
                             </li>
-                            <li class = "@yield('topIns')">
-                                <a href="/admin/queries/top-insurance-company">
-                                    <i class="material-icons">radio_button_checked</i>
-                                    <span>TOP INSURANCE COMPANY</span>
-                                </a>
-                            </li>
                             <li class = "@yield('topAgent')">
                                 <a href="/admin/queries/top-sales-agent">
                                     <i class="material-icons">radio_button_checked</i>
                                     <span>TOP SALES AGENT</span>
                                 </a>
                             </li>
-                            <li class = "@yield('compIns')">
-                                <a href="/admin/queries/complaint-insurance">
+                            <li class = "@yield('topIns')">
+                                <a href="/admin/queries/top-insurance-company">
                                     <i class="material-icons">radio_button_checked</i>
-                                    <span>EXPIRING ACCOUNTS</span>
+                                    <span>INSURANCE ACCOUNTS - TOP INSURANCE COMPANY</span>
+                                </a>
+                            </li>
+                            <li class = "@yield('topCli')">
+                                <a href="/admin/queries/top-client-type">
+                                    <i class="material-icons">radio_button_checked</i>
+                                    <span>INSURANCE ACCOUNTS - TOP CLIENT TYPE</span>
+                                </a>
+                            </li>
+                            <li class = "@yield('claimType')">
+                                <a href="/admin/queries/claim-type">
+                                    <i class="material-icons">radio_button_checked</i>
+                                    <span>CLAIMS - TOP CLAIM TYPE</span>
+                                </a>
+                            </li>
+                            <li class = "@yield('claimCompany')">
+                                <a href="/admin/queries/claim-company">
+                                    <i class="material-icons">radio_button_checked</i>
+                                    <span>CLAIMS - TOP INSURANCE COMPANY</span>
                                 </a>
                             </li>
                             <li class = "@yield('compType')">
                                 <a href="/admin/queries/complaint-type">
                                     <i class="material-icons">radio_button_checked</i>
-                                    <span>CLAIMS - CLAIM TYPE</span>
+                                    <span>COMPLAINTS - TOP COMPLAINT STATUS</span>
                                 </a>
                             </li>
-                            <li class = "@yield('compType')">
-                                <a href="/admin/queries/complaint-type">
+                            <li class = "@yield('transCourier')">
+                                <a href="/admin/queries/transmittal">
                                     <i class="material-icons">radio_button_checked</i>
-                                    <span>COMPLAINTS - COMPLAINT TYPE</span>
+                                    <span>TRANSMITTAL - TOP COURIER</span>
                                 </a>
                             </li>
                         </ul>
@@ -447,14 +452,15 @@
 
                                     <li class = "@yield('salesIns')">
                                         <a href="/admin/reports/sales/insurance/company">
-                                            <span>Sales Report - By Insurance Company's Sales</span></a>
-                                    </li>
-
-                                    <li class = "@yield('salesAgency')">
-                                        <a href="/admin/reports/sales/agency">
-                                            <span>Sales Report - By Agency's Sales</span></a>
+                                            <span>Sales Report - By Insurance Company</span></a>
                                     </li>
                                 </ul> 
+                            </li>
+                            <li class = "@yield('reportBilling')">
+                                <a href="/admin/reports/billing">
+                                    <i class="material-icons">multiline_chart</i>
+                                    <span>BILLING REPORT</span>
+                                </a>
                             </li>
                             <li class = "@yield('reportClient')">
                                 <a href="javascript:void(0);" class="menu-toggle">
@@ -552,9 +558,9 @@
     <script>
         window.onload = function(){
             var comp = "{{ Session::get('pic')}}";
-            if(comp != "")
+            if(comp == "")
             {
-                var src = "/image/employee/{{ Session::get('pic')}}";
+                var src = "{{ URL::asset ('images/user.png') }}";
                 $('#userimg').attr('src',src);
             }
         }

@@ -87,11 +87,11 @@
 </div>
 </section>
 
-<script type="text/javascript">
+<script>
 
   window.onload = function() {
     @foreach($notification as $notif)
-     @if($notif->Account_ID == Session::get('AccountID'))
+       @if($notif->account_ID == Session::get('accountID'))
           document.getElementById('{{$notif->notification_ID}}').style.display = 'none';
      @endif
     @endforeach

@@ -640,7 +640,7 @@
                                         <div class="form-line">
                                             <label><small>Date of Incident:</small></label>
                                             <div class="form-row show-inputbtns">
-                                                    <input id = "date_incident" name = "date_incident" type="date" data-date-inline-picker="false" data-date-open-on-focus="true" class="form-control" />
+                                                    <input id = "date_incident" name = "date_incident" type="date" data-date-inline-picker="false" data-date-open-on-focus="true" class="form-control" required/>
                                         </div>
                                         </div>
                                     </div>
@@ -651,7 +651,7 @@
                                         <div class="form-line">
                                             <label><small>Time of Incident:</small></label>
                                             <div class="form-row show-inputbtns">
-                                                    <input id = "time_incident" name = "time_incident" type="time" data-date-inline-picker="false" data-date-open-on-focus="true" class="form-control" />
+                                                    <input id = "time_incident" name = "time_incident" type="time" data-date-inline-picker="false" data-date-open-on-focus="true" class="form-control" required />
                                             </div>
                                         </div>
                                     </div>
@@ -663,7 +663,7 @@
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <label><small>Place of Incident:</small></label>
-                                            <input id = "place_incident" name = "place_incident" type="text" class="form-control">
+                                            <input id = "place_incident" name = "place_incident" type="text" class="form-control" required>
                                         </div>
                                     </div>
                                 </div>
@@ -674,7 +674,7 @@
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                               <label><small>Brief Description of the Circumstances of the Incident:</small></label>
-                                              <textarea id = "desc_incident" name = "desc_incident" rows="6" class="form-control no-resize auto-growth"></textarea>
+                                              <textarea id = "desc_incident" name = "desc_incident" rows="6" class="form-control no-resize auto-growth" required></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -760,7 +760,7 @@
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <label><small>Name:</small></label>
-                                            <input id = "rep_name" name = "rep_name" type="text" class="form-control">
+                                            <input id = "rep_name" name = "rep_name" type="text" class="form-control" required>
                                         </div>
                                     </div>
                                 </div>
@@ -769,7 +769,7 @@
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <label><small>Relation to Policyholder:</small></label>
-                                            <input id = "rep_rel" name = "rep_rel" type="text" class="form-control">
+                                            <input id = "rep_rel" name = "rep_rel" type="text" class="form-control" required>
                                         </div>
                                     </div>
                                 </div>
@@ -788,7 +788,7 @@
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                             <label><small>-</small></label>
-                                            <input id = "rep_cpno" name = "rep_cpno" type="text" class="form-control" placeholder="Cellphone Number">
+                                            <input id = "rep_cpno" name = "rep_cpno" type="text" class="form-control" placeholder="Cellphone Number" required>
                                         </div>
                                     </div>
                                 </div>
@@ -808,7 +808,7 @@
                                     <div class="form-group form-float">
                                         <div class="form-line">
                                         <label><small>-</small></label>
-                                            <input id = "rep_email" name = "rep_email" type="email" class="form-control" placeholder="Email">
+                                            <input id = "rep_email" name = "rep_email" type="email" class="form-control" placeholder="Email" required>
                                         </div>
                                     </div>
                                 </div>
@@ -981,6 +981,95 @@
                 </div>
             </div>
             <!-- #END# ADD INST MODAL -->
+
+
+    <script>
+    $.validator.addMethod("cpValidator", function(value, element) {
+        return this.optional(element) || /^((\+63)|0)\d{10}$/i.test(value);
+     }, "Invalid Cellphone Format");
+    $.validator.addMethod("email", function(value, element) {
+        return this.optional(element) || /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i.test(value);
+     }, "Invalid Email Address Format");
+    $.validator.addMethod("alphanumeric", function(value, element) {
+        return this.optional(element) || /^[A-Za-z][A-Za-z0-9 '-.]*$/i.test(value);
+     }, "This field must contain only letters, numbers, dashes, space, apostrophe or dot.");
+    $.validator.addMethod("alpha", function(value, element) {
+        return this.optional(element) || /^[A-Za-z][A-Za-z '-.]*$/i.test(value);
+     }, "This field must contain only letters, space, dash, apostrophe or dot.");
+    $.validator.addMethod("blcknumber", function(value, element) {
+        return this.optional(element) || /^[A-Za-z0-9][A-Za-z0-9 '-.]*$/i.test(value);
+     }, "This field must contain only letters, numbers, space, dash, apostrophe or dot.");
+
+    // Wait for the DOM to be ready
+        $(function() {
+          // Initialize form validation on the registration form.
+          // It has the name attribute "registration"
+          $("form[name='claimrequest']").validate({
+            // Specify validation rules
+            rules: {
+              // The key name on the left side is the name attribute
+              // of an input field. Validation rules are defined
+              // on the right side
+              date_incident:
+              {
+                required: true
+              },
+              time_incident:
+              {
+                required: true
+              },
+              place_incident:
+              {
+                  alphanumeric: true,
+                  maxlength: 80
+              },
+              desc_incident:
+              {
+                alphanumeric: true,
+                  maxlength: 7900
+              },
+              rep_name:
+              {
+                alpha: true,
+                maxlength: 200
+              },
+              rep_rel:
+              {
+                alpha: true,
+                maxlength: 50
+              },
+              rep_telno:
+              {
+                digits: true,
+                minlength: 7,
+                maxlength: 7
+              },
+              rep_email:
+              {
+                email: true,
+                maxlength: 50
+              },
+              rep_cpno:
+              {
+                cpValidator: true
+              },
+              rep_cpno_1:
+              {
+                cpValidator: true
+              }
+            },
+            // Specify validation error messages
+            messages: {
+
+            },
+            // Make sure the form is submitted to the destination defined
+            // in the "action" attribute of the form when valid
+            submitHandler: function(form) {
+              form.submit();
+            }
+          });
+        });
+    </script>
 
     <script type="text/javascript">
         window.onload = function() {
@@ -1441,37 +1530,6 @@
             @endforeach
         }
 
-        // function buttonAddMoreButton3(){
-        //     $(".add-more").click(function(e){
-        //         e.preventDefault();
-        //         $('#button3').show(800);
-                
-        //             $('.remove-me').click(function(e){
-        //                 e.preventDefault();
-        //                 $('#button3').hide(800);
-        //             });
-        //     });  
-        // }
-
-        // function buttonAddMoreButton4(){
-        //     $(".add-more").click(function(e){
-        //         e.preventDefault();
-        //         $('#button4').show(800);
-                
-        //             $('.remove-me').click(function(e){
-        //                 e.preventDefault();
-        //                 $('#button4').hide(800);
-        //             });
-        //     });  
-        // }
-
-        // function buttonAddMoreButton5(){
-        //     $('.remove-me').click(function(e){
-        //         e.preventDefault();
-        //         $('#button5').hide(800);
-        //     }); 
-        // }
-
         var count1 = 0;
         var count2=0;
         var count3=0;
@@ -1791,94 +1849,6 @@
         });
 
         $('#ugh').modal({backdrop: 'static', keyboard: false})  
-    </script>
-
-    <script>
-    $.validator.addMethod("cpValidator", function(value, element) {
-        return this.optional(element) || /^((\+63)|0)\d{10}$/i.test(value);
-     }, "Invalid Cellphone Format");
-    $.validator.addMethod("email", function(value, element) {
-        return this.optional(element) || /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i.test(value);
-     }, "Invalid Email Address Format");
-    $.validator.addMethod("alphanumeric", function(value, element) {
-        return this.optional(element) || /^[A-Za-z][A-Za-z0-9 '-.]*$/i.test(value);
-     }, "This field must contain only letters, numbers, dashes, space, apostrophe or dot.");
-    $.validator.addMethod("alpha", function(value, element) {
-        return this.optional(element) || /^[A-Za-z][A-Za-z '-.]*$/i.test(value);
-     }, "This field must contain only letters, space, dash, apostrophe or dot.");
-    $.validator.addMethod("blcknumber", function(value, element) {
-        return this.optional(element) || /^[A-Za-z0-9][A-Za-z0-9 '-.]*$/i.test(value);
-     }, "This field must contain only letters, numbers, space, dash, apostrophe or dot.");
-
-    // Wait for the DOM to be ready
-        $(function() {
-          // Initialize form validation on the registration form.
-          // It has the name attribute "registration"
-          $("form[name='claimrequest']").validate({
-            // Specify validation rules
-            rules: {
-              // The key name on the left side is the name attribute
-              // of an input field. Validation rules are defined
-              // on the right side
-              date_incident:
-              {
-                required: true
-              },
-              time_incident:
-              {
-                required: true
-              },
-              place_incident:
-              {
-                  alphanumeric: true,
-                  maxlength: 80
-              },
-              desc_incident:
-              {
-                alphanumeric: true,
-                  maxlength: 7900
-              },
-              rep_name:
-              {
-                alpha: true,
-                maxlength: 200
-              },
-              rep_rel:
-              {
-                alpha: true,
-                maxlength: 50
-              },
-              rep_telno:
-              {
-                digits: true,
-                minlength: 7,
-                maxlength: 7
-              },
-              rep_email:
-              {
-                email: true,
-                maxlength: 50
-              },
-              rep_cpno:
-              {
-                cpValidator: true
-              },
-              rep_cpno_1:
-              {
-                cpValidator: true
-              }
-            },
-            // Specify validation error messages
-            messages: {
-
-            },
-            // Make sure the form is submitted to the destination defined
-            // in the "action" attribute of the form when valid
-            submitHandler: function(form) {
-              form.submit();
-            }
-          });
-        });
     </script>
 
 @endsection

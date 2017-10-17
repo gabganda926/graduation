@@ -98,8 +98,12 @@ class reports_SalesByPaymentController extends Controller
     	$company = inscompanyConnection::all();
     	$pdet = paymentDetailConnection::all();
     	$cvouch = checkVoucherConnection::all();
-    	$date_start = $req->date_start;
-    	$date_end = $req->date_end;
+    	$icomp = inscompanyConnection::where('comp_ID', "=", $req->inscomp)->first();
+        $date_start = $req->date_start;
+
+        $date_e = $req->date_end . ' 23:59:59.000';
+        $newdate_e = date("Y-m-d H:i:s",strtotime($date_e));
+        $date_end = $newdate_e;
 
         $pdf = PDF::loadView('pages.pdf.reports-sales-by-payment',
         		compact('plist', 'cliacc', 'clist', 'cli', 'pinfo', 'company', 'pdet', 'date_start', 'date_end', 'cvouch'))

@@ -11,19 +11,19 @@
              <div class="container">
                  <div class="slider">
                         <ul class="rslides" id="slider1">
-                          <li><img src="{{ URL::asset('web/images/banner2.jpg') }}" alt="">
+                          <li><img src="{{ URL::asset('web/images/banner2.jpg') }}" style="height: 700px;" alt="">
                                 <div class="carousel-caption d-none d-md-block">
                                     <h3>...</h3>
                                     <p>...</p>
                                 </div>
                             </li>
-                          <li><img src="{{ URL::asset('web/images/banner1.jpg') }}" alt="">
+                          <li><img src="{{ URL::asset('web/images/banner1.jpg') }}" style="height: 700px;" alt="">
                                 <div class="carousel-caption d-none d-md-block">
                                     <h3>...</h3>
                                     <p>...</p>
                                 </div>
                             </li>
-                          <li><img src="{{ URL::asset('web/images/banner3.jpg') }}" alt="">
+                          <li><img src="{{ URL::asset('web/images/banner3.jpg') }}" style="height: 700px;" alt="">
                                 <div class="carousel-caption d-none d-md-block">
                                     <h3>...</h3>
                                     <p>...</p>
@@ -34,23 +34,32 @@
              </div>
         </div>
         <!---->
-        <div class="bottom_content">
+        <div class="top-sellers" style="background-color: #424242; color: white">
              <div class="container">
-                 <div class="sofas">
-                     <div class="col-md-6 sofa-grid sofs">
-                         <img src="{{ URL::asset('web/images/t1.jpg') }}" height="200" alt=""/>
-                         <h3>COMMERCIAL VEHICLE</h3>
-                         <h4><a href="products.html">VIEW PREMIUMS - CV</a></h4>
+                 <div class="seller-grids">
+                     <div class="col-md-4 seller-grid">
+                         <a href="/home"><img src="{{ URL::asset('web/images/standard.jpg') }}" style="height: 250px; width: 250px;" alt=""/></a>
                      </div>
-                     <div class="col-md-6 sofa-grid">
-                         <img src="{{ URL::asset('web/images/t2.jpg') }}" height="200" alt=""/>
-                         <h3>PRIVATE CAR</h3>
-                         <h4><a href="products.html">VIEW PREMIUMS - PC</a></h4>
+                     <div class="col-md-8 seller-grid">
+                        <br/><br/><br/>
+                         <b>Accidents, vehicle theft and breakdowns can happen when you least expect it. How would you afford the costs of replacing or repairing your car, or pay for the damage to someone else's vehicle? A Car Insurance policy could assist with paying these costs. If you're looking for cheap Car Insurance, our comparison tool will help you find quotes at premiums that suit your needs and your budget.</b><br/><br/>
+                          <a href="/user/quotation" style="color: white" type="button" class="btn btn-lg btn-success">Get a quote now!</a>
+                     </div>
+                     <div class="clearfix"></div>
+                 </div>
+                 <div class="seller-grids">
+                     <div class="col-md-8 seller-grid">
+                        <br/><br/><br/><br/>
+                         <b>If you drive, chances are that you will eventually be in an accident or have another incident that damages your car. You will need to follow certain steps to file a claim with your car insurance company to get reimbursement.</b><br/><br/>
+                          <a href="/user/claims" type="button" style="color: white" class="btn btn-lg btn-warning">File a claim</a>
+                     </div>
+                     <div class="col-md-4 seller-grid">
+                         <a href="/home"><img src="{{ URL::asset('web/images/standard.jpg') }}" style="height: 250px; width: 250px;" alt=""/></a>
                      </div>
                      <div class="clearfix"></div>
                  </div>
              </div>
-        </div>
+         </div>
         
         <!---->
         <div class="top-sellers">
@@ -58,20 +67,20 @@
                  <h3><br/>OUR TRUSTED PARTNERS</h3>
                  <div class="seller-grids">
                      <div class="col-md-3 seller-grid">
-                         <a href="products.html"><img src="{{ URL::asset('web/images/standard.jpg') }}" alt=""/></a>
-                         <h4><a href="products.html">Standard Insurance</a></h4>
+                         <a href="/home"><img src="{{ URL::asset('web/images/standard.jpg') }}" alt=""/></a>
+                         <h4><a href="/home">Standard Insurance</a></h4>
                      </div>
                      <div class="col-md-3 seller-grid">
-                         <a href="products.html"><img src="{{ URL::asset('web/images/peoples-general.jpg') }}" alt=""/></a>
-                         <h4><a href="products.html">People's General Insurance Corporation</a></h4>
+                         <a href="/home"><img src="{{ URL::asset('web/images/peoples-general.jpg') }}" alt=""/></a>
+                         <h4><a href="/home">People's General Insurance Corporation</a></h4>
                      </div>
                      <div class="col-md-3 seller-grid">
-                         <a href="products.html"><img src="{{ URL::asset('web/images/fpg.png') }}" alt=""/></a>
-                         <h4><a href="products.html">FPG Insurance</a></h4>
+                         <a href="/home"><img src="{{ URL::asset('web/images/fpg.png') }}" alt=""/></a>
+                         <h4><a href="/home">FPG Insurance</a></h4>
                      </div>
                      <div class="col-md-3 seller-grid">
-                         <a href="products.html"><img src="{{ URL::asset('web/images/commonwealth.jpg') }}" alt=""/></a>
-                         <h4><a href="products.html">Commonwealth Insruance Company </a></h4>
+                         <a href="/home"><img src="{{ URL::asset('web/images/commonwealth.jpg') }}" alt=""/></a>
+                         <h4><a href="/home">Commonwealth Insruance Company </a></h4>
                      </div>
                      <div class="clearfix"></div>
                  </div>

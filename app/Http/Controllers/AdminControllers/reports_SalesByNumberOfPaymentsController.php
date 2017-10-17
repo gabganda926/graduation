@@ -98,12 +98,16 @@ class reports_SalesByNumberOfPaymentsController extends Controller
     			->groupBy(DB::raw("cast(paid_date AS DATE)"))
     			->get()
     			->toArray();
-    	$date_start = $req->date_start;
-    	$date_end = $req->date_end;
+    	$icomp = inscompanyConnection::where('comp_ID', "=", $req->inscomp)->first();
+        $date_start = $req->date_start;
+
+        $date_e = $req->date_end . ' 23:59:59.000';
+        $newdate_e = date("Y-m-d H:i:s",strtotime($date_e));
+        $date_end = $newdate_e;
 
         $pdf = PDF::loadView('pages.pdf.reports-sales-by-count',
         		compact('day', 'date_start', 'date_end'))
-            ->setPaper(array(0, 0, 695, 500), 'portrait');
+            ->setPaper(array(0, 0, 695, 700), 'portrait');
 
         return $pdf->stream();
     }//generates the pdf

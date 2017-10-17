@@ -89,6 +89,7 @@
                                         @foreach($qlist as $list)
                                          @foreach($qindi as $indi)
                                           @if($list->del_flag == 0)
+                                          @if($list->quote_status != 8)
                                           @if($list->quote_ID == $indi->quote_indi_ID)
                                           <!-- Computation -->
                                           <div style = "display:none;">
@@ -154,8 +155,6 @@
                                                      <span class="label bg-orange">pending - client</span>
                                                     @elseif($list->quote_status == 7)
                                                      <span class="label bg-red">rejected - client</span>
-                                                    @elseif($list->quote_status == 8)
-                                                     <span class="label bg-green">Insured Client</span>
                                                     @endif
                                                     <div id = "div_{{ $list->quote_ID }}" class = "div_{{ $list->quote_ID }}">
                                                             <select name = "sel_{{ $list->quote_ID }}" id = "sel_{{ $list->quote_ID }}" class="form-control show-tick">
@@ -273,6 +272,7 @@
                                             </tr>
                                           @endif
                                           @endif
+                                          @endif
                                          @endforeach
                                         @endforeach
                                             </tbody>
@@ -300,6 +300,7 @@
                                         @foreach($qlist as $list)
                                          @foreach($qcomp as $comp)
                                           @if($list->del_flag == 0)
+                                          @if($list->quote_status != 8)
                                           @if($list->quote_ID == $comp->quote_comp_ID)
                                           <!-- Computation -->
                                           <div style = "display:none;">
@@ -364,8 +365,6 @@
                                                      <span class="label bg-orange">pending - client</span>
                                                     @elseif($list->quote_status == 7)
                                                      <span class="label bg-red">rejected - client</span>
-                                                    @elseif($list->quote_status == 8)
-                                                     <span class="label bg-green">Insured Client</span>
                                                     @endif
                                                     <div id = "div_{{ $list->quote_ID }}" class = "div_{{ $list->quote_ID }}">
                                                             <select name = "sel_{{ $list->quote_ID }}" id = "sel_{{ $list->quote_ID }}" class="form-control show-tick">
@@ -484,6 +483,7 @@
                                                 @endif
                                                 </td>
                                               </tr>
+                                              @endif
                                               @endif
                                               @endif
                                              @endforeach
@@ -760,6 +760,7 @@
         @foreach($qlist as $lis)
          @foreach($qindi as $ind)
           @if($lis->del_flag == 0)
+        @if($lis->quote_status != 8)
           @if($lis->quote_ID == $ind->quote_indi_ID)
                 $('#sel_{{ $lis->quote_ID }}').on('change textInput input', function () {
                     var d = $('#sel_{{ $lis->quote_ID }} option:selected').val();
@@ -768,12 +769,14 @@
                 });
             @endif
             @endif
+            @endif
         @endforeach
         @endforeach
 
         @foreach($qlist as $lis1)
              @foreach($qcomp as $com1)
               @if($lis1->del_flag == 0)
+              @if($lis1->quote_status != 8)
               @if($lis1->quote_ID == $com1->quote_comp_ID)
                 $('#sel_{{ $lis1->quote_ID }}').on('change textInput input', function () {
                     var d = $('#sel_{{ $lis1->quote_ID }} option:selected').val();
@@ -782,17 +785,20 @@
                 });
             @endif
             @endif
+            @endif
         @endforeach
         @endforeach
 
         window.onload = function(){
             @foreach($qlist as $li)
              @foreach($qindi as $in)
+             @if($li->quote_status != 8)
               @if($li->del_flag == 0)
               @if($li->quote_ID == $in->quote_indi_ID)
                     document.getElementById("div_{{ $li->quote_ID }}").style.display = 'none';
                     document.getElementById("btn_{{ $li->quote_ID }}").style.display = 'none';
                     document.getElementById("btnC_{{ $li->quote_ID }}").style.display = 'none';
+                @endif
                 @endif
                 @endif
             @endforeach
@@ -801,10 +807,12 @@
             @foreach($qlist as $li1)
              @foreach($qcomp as $com)
               @if($li1->del_flag == 0)
+              @if($li1->quote_status != 8)
               @if($li1->quote_ID == $com->quote_comp_ID)
                     document.getElementById("div_{{ $li1->quote_ID }}").style.display = 'none';
                     document.getElementById("btn_{{ $li1->quote_ID }}").style.display = 'none';
                     document.getElementById("btnC_{{ $li1->quote_ID }}").style.display = 'none';
+                @endif
                 @endif
                 @endif
             @endforeach

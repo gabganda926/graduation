@@ -216,7 +216,9 @@ class trans_claimsController extends Controller
       $iid = $req->insid;
       $this->claimreq->claimType_ID = $cid;
       $this->claimreq->account_ID = $iid;
-      $this->claimreq->lossDate = $req->date_incident;
+      $date = $req->date_incident . ' ' .$req->time_incident;
+      $newdate = date("Y-m-d H:i:s",strtotime($date));
+      $this->claimreq->lossDate = $newdate;
       $this->claimreq->placeOfLoss = $req->place_incident;
       $this->claimreq->description = $req->desc_incident;
       $this->claimreq->notifiedByType = 1;
@@ -235,7 +237,9 @@ class trans_claimsController extends Controller
       $iid = $req->insid;
       $this->claimreq->claimType_ID = $cid;
       $this->claimreq->account_ID = $iid;
-      $this->claimreq->lossDate = $req->date_incident;
+      $date = $req->date_incident . ' ' .$req->time_incident;
+      $newdate = date("Y-m-d H:i:s",strtotime($date));
+      $this->claimreq->lossDate = $newdate;
       $this->claimreq->placeOfLoss = $req->place_incident;
       $this->claimreq->description = $req->desc_incident;
       $this->claimreq->notifiedByType = 2;

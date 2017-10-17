@@ -106,8 +106,8 @@ class trans_ledgerController extends Controller
    		$this->le->account_ID = (int)$insId->account_ID;
    		$this->le->payment_ID = (int)$pId->payment_ID;
    		$this->le->remarks = $req->remarks;
-   		$this->le->income = $req->inc;
-   		$this->le->commission = $req->comm;
+   		$this->le->income = 3000;
+   		$this->le->commission = 2000;
    		$this->le->created_at = $mytime;
       $this->le->employee_info_ID = Session::get('id');
    		try

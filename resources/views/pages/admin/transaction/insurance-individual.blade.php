@@ -112,6 +112,19 @@
                                  <input id = "pay_id" name = "pay_id" type="text" class="form-control">
                              </div>
                         </form>
+                        <form id = "gen_indi" action = "/pdf/insurance/form/individual" method = "GET" style = "display: none;">
+                              <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                              <div class="col-md-4" style = "display: none;">
+                                 <input id = "id1" name = "id1" type="text" class="form-control">
+                                 <input id = "datengayon1" name = "datengayon1" type="datetime" class="form-control" >
+                             </div>
+                              <div class="col-md-4" style = "display: none;">
+                                 <input id = "acc_id1" name = "acc_id1" type="text" class="form-control">
+                             </div>
+                              <div class="col-md-4" style = "display: none;">
+                                 <input id = "pay_id1" name = "pay_id1" type="text" class="form-control">
+                             </div>
+                        </form>
                         <div class="divider" style="margin-bottom:20px;"></div>
                         </div>
                         <div class="body">
@@ -183,33 +196,10 @@
                                                    <button form = "display" type="submit" class="btn bg-light-blue waves-effect" data-id = "{{ $cli->client_ID }}" data-acc = "{{$iacc->account_ID}}" data-pay = "{{$bpay->payment_ID}}" onclick="
                                                     $('#id').val($(this).data('id')); $('#acc_id').val($(this).data('acc')); $('#pay_id').val($(this).data('pay'));" data-toggle="tooltip" data-placement="left" title="View account details."><i class="material-icons">remove_red_eye</i>
                                                     </button>
-                                                    @foreach($inscomp as $icomp)
-                                                     @if($icomp->comp_ID == $iacc->insurance_company)
-                                                       @if($icomp->comp_ID == 1) <!-- FPG -->
-                                                        <button type="button" id="gen"  class="btn bg-orange waves-effect" style="position: right;" data-toggle="tooltip" data-placement="left" title="Generate Form" onclick="window.open('{{ URL ('/pdf/insurance/form/fpg/') }} ')">
-                                                          <i class="material-icons">picture_as_pdf</i><span style="font-size: 15px;"></span>
-                                                          </button>
-                                                       @endif
-
-                                                       @if($icomp->comp_ID == 2) <!-- COMMONWEALTH -->
-                                                        <button type="button" id="gen"  class="btn bg-orange waves-effect" style="position: right;" data-toggle="tooltip" data-placement="left" title="Generate Form" onclick="window.open('{{ URL ('/pdf/insurance/form/commonwealth/') }} ')">
-                                                          <i class="material-icons">picture_as_pdf</i><span style="font-size: 15px;"></span>
-                                                          </button>
-                                                       @endif
-
-                                                       @if($icomp->comp_ID == 3) <!-- STANDARD -->
-                                                        <button type="button" id="gen"  class="btn bg-orange waves-effect" style="position: right;" data-toggle="tooltip" data-placement="left" title="Generate Form" onclick="window.open('{{ URL ('/pdf/insurance/form/standard/') }} ')">
-                                                          <i class="material-icons">picture_as_pdf</i><span style="font-size: 15px;"></span>
-                                                          </button>
-                                                       @endif
-
-                                                       @if($icomp->comp_ID == 4) <!-- PGI -->
-                                                        <button type="button" id="gen"  class="btn bg-orange waves-effect" style="position: right;" data-toggle="tooltip" data-placement="left" title="Generate Form" onclick="window.open('{{ URL ('/pdf/insurance/form/pgi/') }} ')">
-                                                          <i class="material-icons">picture_as_pdf</i><span style="font-size: 15px;"></span>
-                                                          </button>
-                                                       @endif
-                                                     @endif
-                                                    @endforeach
+                                                      <button form = "gen_indi" type="submit"  class="btn bg-orange waves-effect" style="position: right;" data-toggle="tooltip" data-placement="left" title="Generate Form" data-id = "{{ $cli->client_ID }}" data-acc = "{{$iacc->account_ID}}" data-pay = "{{$bpay->payment_ID}}" onclick="
+                                                  $('#id1').val($(this).data('id')); $('#acc_id1').val($(this).data('acc')); $('#pay_id1').val($(this).data('pay'));">
+                                                        <i class="material-icons">picture_as_pdf</i><span style="font-size: 15px;"></span>
+                                                        </button>
                                                    @endif
                                                   @endforeach
                                                 </td>
